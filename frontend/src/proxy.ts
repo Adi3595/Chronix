@@ -16,7 +16,7 @@ interface RateLimitTracker {
 // In-memory store mapping IP addresses to their request trackers
 const ipTracker = new Map<string, RateLimitTracker>();
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // Retrieve the client IP (Render uses x-forwarded-for)
   const ip = request.ip || request.headers.get('x-forwarded-for') || '127.0.0.1';
   const now = Date.now();
