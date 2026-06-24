@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+sqlalchemy
+aiosqlite
+pydantic
+pydantic-settings
+firebase-admin
+google-generativeai
+python-dotenv
+alembic
