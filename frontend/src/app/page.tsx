@@ -216,19 +216,34 @@ void main() {
 
       {/* HERO SECTION */}
       <section className="relative min-h-[100vh] flex items-center pt-24 overflow-hidden">
-        {/* WebGL Background */}
-        <div className="absolute inset-0 w-full h-full opacity-50 mix-blend-multiply pointer-events-none" style={{ display: "block" }}>
+        {/* Layer 1: WebGL Background (z-0) */}
+        <div className="absolute inset-0 w-full h-full opacity-50 mix-blend-multiply pointer-events-none z-0" style={{ display: "block" }}>
           <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
         </div>
 
-        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
+        {/* Layer 2: ThreeJS 3D Scene (z-10) */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.8 }} 
+          animate={{ opacity: 1, scale: 1 }} 
+          transition={{ duration: 1.5, ease: "easeOut" }} 
+          className="absolute inset-0 w-full h-full pointer-events-none z-10" 
+          style={{ display: "block" }}
+        >
+          {/* Shift the 3D object slightly to the right to balance the text on the left */}
+          <div className="w-full h-full transform translate-x-[20%] md:translate-x-[25%] translate-y-[5%]">
+            <div ref={threeRef} style={{ width: "100%", height: "100%" }}></div>
+          </div>
+        </motion.div>
+
+        {/* Layer 3: Typography & UI Cards (z-20) */}
+        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-20 pointer-events-auto">
           {/* Typography & CTA */}
           <motion.div 
             style={{ y: heroY, opacity }}
-            className="lg:col-span-6 flex flex-col justify-center"
+            className="lg:col-span-6 flex flex-col justify-center pointer-events-none"
           >
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, ease: "easeOut" }}>
-              <h1 className="font-display-lg font-serif text-[56px] md:text-[80px] leading-[1.05] font-semibold text-on-surface mb-6 tracking-tight">
+              <h1 className="font-display-lg font-serif text-[56px] md:text-[80px] leading-[1.05] font-semibold text-on-surface mb-6 tracking-tight drop-shadow-sm">
                 Execution<br />
                 <span className="text-primary relative inline-block">
                   Without Chaos
@@ -237,15 +252,15 @@ void main() {
               </h1>
             </motion.div>
             
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.4, ease: "easeOut" }} className="font-body-lg text-[18px] md:text-[22px] text-on-surface-variant mb-10 max-w-lg leading-relaxed">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.4, ease: "easeOut" }} className="font-body-lg text-[18px] md:text-[22px] text-on-surface-variant mb-10 max-w-lg leading-relaxed drop-shadow-sm">
               Chronix transforms goals, deadlines, and responsibilities into clear, autonomous execution paths. Predict risks. Maintain momentum. Finish what matters.
             </motion.p>
             
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.8, ease: "easeOut" }} className="flex flex-wrap items-center gap-4 mb-12">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.8, ease: "easeOut" }} className="flex flex-wrap items-center gap-4 mb-12 pointer-events-auto">
               <Link href="/signup" className="bg-primary text-on-primary px-8 py-4 rounded-xl font-mono-label text-[14px] font-mono hover:opacity-90 transition-all shadow-[0_8px_30px_rgba(46,125,50,0.2)] hover:shadow-[0_8px_30px_rgba(46,125,50,0.4)] hover:-translate-y-0.5">
                 Start Planning Free
               </Link>
-              <button className="bg-transparent border-2 border-outline-variant text-on-surface px-8 py-4 rounded-xl font-mono-label text-[14px] font-mono hover:bg-surface-container transition-colors flex items-center gap-2">
+              <button className="bg-transparent border-2 border-outline-variant bg-white/20 backdrop-blur-sm text-on-surface px-8 py-4 rounded-xl font-mono-label text-[14px] font-mono hover:bg-surface-container transition-colors flex items-center gap-2">
                 <span className="material-symbols-outlined text-[18px]">play_circle</span> Watch Demo
               </button>
             </motion.div>
@@ -262,12 +277,7 @@ void main() {
           </motion.div>
 
           {/* Visuals & Overlays */}
-          <div className="lg:col-span-6 relative flex justify-end items-center h-[600px]">
-            {/* ThreeJS Container */}
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut" }} className="absolute inset-0 w-[120%] h-[120%] -right-[10%] -top-[10%] pointer-events-none" style={{ display: "block" }}>
-              <div ref={threeRef} style={{ width: "100%", height: "100%" }}></div>
-            </motion.div>
-
+          <div className="lg:col-span-6 relative flex justify-end items-center h-[600px] pointer-events-auto">
             <div className="relative z-20 w-full max-w-md flex flex-col gap-6">
               {/* Overlay Card 1: 3D Tilt Effect */}
               <motion.div 
