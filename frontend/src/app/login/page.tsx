@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function LoginPage() {
-  const { user, loading } = useAuth();
+  const { user, loading, login } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -23,7 +23,10 @@ export default function LoginPage() {
         {loading ? (
           <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin mx-auto"></div>
         ) : (
-          <button className="w-full bg-primary-container text-on-primary py-3 rounded-lg font-mono-label font-bold tracking-widest hover:opacity-90 transition-opacity">
+          <button 
+            onClick={() => login()}
+            className="w-full bg-primary-container text-on-primary py-3 rounded-lg font-mono-label font-bold tracking-widest hover:opacity-90 transition-opacity"
+          >
             ACCESS TERMINAL
           </button>
         )}
