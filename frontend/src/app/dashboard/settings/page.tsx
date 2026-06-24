@@ -13,7 +13,7 @@ export default async function SettingsPage() {
   });
 
   if (!user) {
-    user = { id: userId, name: "A. Executive", email: "admin@chronix.os", createdAt: new Date(), updatedAt: new Date() };
+    user = { id: userId, name: "A. Executive", email: "admin@chronix.os", momentumScore: 87, createdAt: new Date(), updatedAt: new Date() };
   }
 
   return <SettingsClient user={user} />;
