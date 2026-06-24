@@ -10,7 +10,7 @@ export default async function AnalyticsPage() {
 
   let user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) {
-    user = { id: userId, name: "A. Executive", email: "admin@chronix.os", createdAt: new Date(), updatedAt: new Date() };
+    user = { id: userId, name: "A. Executive", email: "admin@chronix.os", momentumScore: 87, createdAt: new Date(), updatedAt: new Date() };
   }
 
   // Fetch recent tasks for velocity metrics
