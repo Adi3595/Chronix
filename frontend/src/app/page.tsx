@@ -7,7 +7,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function LandingPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const threeRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -100,100 +99,6 @@ void main() {
 
   return (
     <div className="text-on-surface antialiased selection:bg-primary-container selection:text-on-primary bg-background min-h-screen overflow-x-hidden">
-      <Script 
-        src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js" 
-        onLoad={() => {
-          const container = threeRef.current;
-          if(!container) return;
-          // @ts-ignore
-          if(typeof window.THREE === 'undefined') return;
-          // @ts-ignore
-          const THREE = window.THREE;
-          
-          const width = container.clientWidth || window.innerWidth;
-          const height = container.clientHeight || window.innerHeight;
-
-          const scene = new THREE.Scene();
-          const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-          const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-
-          renderer.setSize(width, height);
-          renderer.setPixelRatio(window.devicePixelRatio);
-          container.appendChild(renderer.domElement);
-
-          const group = new THREE.Group();
-          scene.add(group);
-
-          // Advanced 3D Icosahedron
-          const geometry = new THREE.IcosahedronGeometry(2.5, 1);
-          const material = new THREE.MeshPhongMaterial({ 
-              color: 0x2E7D32, 
-              wireframe: true,
-              transparent: true, 
-              opacity: 0.3,
-              shininess: 100
-          });
-          const mesh = new THREE.Mesh(geometry, material);
-          group.add(mesh);
-
-          // Particles orbiting
-          const particleGeo = new THREE.BufferGeometry();
-          const particleCount = 100;
-          const posArray = new Float32Array(particleCount * 3);
-          for(let i=0; i < particleCount * 3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 10;
-          }
-          particleGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-          const particleMat = new THREE.PointsMaterial({
-            size: 0.05,
-            color: 0x2E7D32,
-            transparent: true,
-            opacity: 0.8
-          });
-          const particlesMesh = new THREE.Points(particleGeo, particleMat);
-          group.add(particlesMesh);
-
-          const coreGeo = new THREE.SphereGeometry(0.8, 32, 32);
-          const coreMat = new THREE.MeshPhongMaterial({ color: 0x1B5E20, emissive: 0x1B5E20, emissiveIntensity: 0.8 });
-          const core = new THREE.Mesh(coreGeo, coreMat);
-          group.add(core);
-
-          const light = new THREE.PointLight(0xffffff, 1, 100);
-          light.position.set(10, 10, 10);
-          scene.add(light);
-          const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-          scene.add(ambientLight);
-
-          camera.position.z = 7;
-
-          let mouseX = 0;
-          let mouseY = 0;
-
-          document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-          });
-
-          const animate = () => {
-              requestAnimationFrame(animate);
-              // Smooth rotation towards mouse
-              group.rotation.y += 0.003;
-              group.rotation.x += 0.002;
-              
-              mesh.rotation.x += (mouseY * 0.5 - mesh.rotation.x) * 0.05;
-              mesh.rotation.y += (mouseX * 0.5 - mesh.rotation.y) * 0.05;
-
-              particlesMesh.rotation.y -= 0.001;
-
-              const scale = 1 + Math.sin(Date.now() * 0.002) * 0.05;
-              core.scale.set(scale, scale, scale);
-              
-              renderer.render(scene, camera);
-          };
-
-          animate();
-        }}
-      />
 
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md transition-all duration-200 border-b border-outline-variant/20">
@@ -263,10 +168,6 @@ void main() {
 
           {/* Visuals & Overlays */}
           <div className="lg:col-span-6 relative flex justify-end items-center h-[600px] pointer-events-auto">
-            {/* ThreeJS Container restored to original spot */}
-            <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1.5, ease: "easeOut" }} className="absolute inset-0 w-[120%] h-[120%] -right-[10%] -top-[10%] pointer-events-none" style={{ display: "block" }}>
-              <div ref={threeRef} style={{ width: "100%", height: "100%" }}></div>
-            </motion.div>
 
             <div className="relative z-20 w-full max-w-md flex flex-col gap-6">
               {/* Overlay Card 1: 3D Tilt Effect */}
