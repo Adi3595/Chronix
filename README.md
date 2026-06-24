@@ -8,6 +8,7 @@
     <a href="#-overview"><img src="https://img.shields.io/badge/Overview-Explore-blue?style=for-the-badge&logo=explore" alt="Overview" /></a>
     <a href="#-the-6-agent-neural-suite"><img src="https://img.shields.io/badge/Agents-View_AI-purple?style=for-the-badge&logo=robot" alt="Agents" /></a>
     <a href="#-tech-stack"><img src="https://img.shields.io/badge/Tech-Stack-green?style=for-the-badge&logo=react" alt="Tech Stack" /></a>
+    <a href="#-features"><img src="https://img.shields.io/badge/Features-Check-red?style=for-the-badge&logo=sparkles" alt="Features" /></a>
     <a href="#-quick-start"><img src="https://img.shields.io/badge/Quick-Start-orange?style=for-the-badge&logo=rocket" alt="Quick Start" /></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-black?style=for-the-badge" alt="License" /></a>
   </p>
@@ -31,6 +32,19 @@ Most task managers expect you to do all the micro-management. Chronix OS inverts
 
 ---
 
+## 🚀 Key Features
+
+- **Advanced 3D Landing Page:** Immersive WebGL Three.js interactive scenes powered by Framer Motion cinematic scroll animations.
+- **Firebase Authentication:** Secure login and sign-up flows fully integrated with Firebase Auth. 
+- **Dynamic Database Syncing:** User accounts automatically mirror from Firebase into a Prisma SQLite database via Next.js Server Actions.
+- **The Execution Matrix:** Prioritize tasks seamlessly with the auto-sorted matrix and Kanban view.
+- **Future Self Simulator:** Set ambitious deadlines and visualize the butterfly effect of your choices today on your future goals.
+- **Agent Command Center:** A live telemetry feed tracking what your AI agents are doing in real-time.
+- **Settings & Autonomy Controls:** Dial the autonomy of your agents up or down depending on your comfort level.
+- **Pricing Tiers:** Scalable solutions designed for independent doers up to massive Enterprise teams.
+
+---
+
 ## 🤖 The 6-Agent Neural Suite
 Our custom-built intelligent agents manage your workflow autonomously behind the scenes.
 
@@ -51,27 +65,22 @@ The agents operate using Next.js Server Actions and Prisma to log real-time acti
 
 ---
 
-## 🚀 Key Features
-
-- 🟢 **Execution Matrix:** Prioritize tasks seamlessly with the auto-sorted matrix and Kanban view.
-- 🔮 **Future Self Simulator:** Set ambitious deadlines and visualize the butterfly effect of your choices today on your future goals.
-- 📡 **Agent Command Center:** A live telemetry feed tracking what your AI agents are doing in real-time.
-- ⚙️ **Settings & Autonomy Controls:** Dial the autonomy of your agents up or down depending on your comfort level.
-
----
-
 ## 🛠 Tech Stack
 
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue)
+![Three.js](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)
 ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
 - **Framework:** Next.js 16 (App Router, Server Actions)
+- **Authentication:** Firebase Auth
 - **Database:** Prisma ORM with SQLite (Local Development)
 - **Styling:** Tailwind CSS + Framer Motion (Glassmorphism & Micro-animations)
+- **3D Graphics:** WebGL + Three.js
 - **Typography:** Geist Sans/Mono + Source Serif 4 (Premium aesthetic)
 
 ---
@@ -91,19 +100,31 @@ Want to run Chronix OS locally? Just follow these steps:
    npm install
    ```
 
-3. **Initialize the database**
+3. **Configure Environment Variables**
+   Create a `.env` file in the `frontend` directory and add your Firebase Config:
+   ```env
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   ```
+   *(Note: If you leave these blank, the app will gracefully fallback to a mock "Executive User" profile so you can still test the UI!)*
+
+4. **Initialize the database**
    ```bash
    npx prisma generate
    npx prisma db push
    ```
 
-4. **Start the development server**
+5. **Start the development server**
    ```bash
    npm run dev --webpack
    ```
 
 > [!TIP]
-> **Accessing the app:** Visit `http://localhost:3000` to access the terminal.
+> **Accessing the app:** Visit `http://localhost:3000` to interact with the 3D WebGL landing page and access the terminal.
 
 ---
 
