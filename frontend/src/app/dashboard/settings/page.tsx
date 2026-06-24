@@ -3,12 +3,12 @@ import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
 
 export default async function SettingsPage() {
-  const user = await prisma.user.findUnique({
+  let user = await prisma.user.findUnique({
     where: { id: "demo-user-123" }
   });
 
   if (!user) {
-    redirect("/login");
+    user = { id: "demo-user-123", name: "A. Executive", email: "admin@chronix.os", createdAt: new Date(), updatedAt: new Date() };
   }
 
   return <SettingsClient user={user} />;

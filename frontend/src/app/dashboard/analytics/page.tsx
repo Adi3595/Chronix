@@ -5,9 +5,9 @@ import AnalyticsClient from "./AnalyticsClient";
 export default async function AnalyticsPage() {
   const userId = "demo-user-123";
 
-  const user = await prisma.user.findUnique({ where: { id: userId } });
+  let user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) {
-    redirect("/login");
+    user = { id: userId, name: "A. Executive", email: "admin@chronix.os", createdAt: new Date(), updatedAt: new Date() };
   }
 
   // Fetch recent tasks for velocity metrics
