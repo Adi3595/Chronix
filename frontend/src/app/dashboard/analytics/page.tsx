@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import AnalyticsClient from "./AnalyticsClient";
-
 import { cookies } from "next/headers";
+
+export const dynamic = 'force-dynamic';
 
 export default async function AnalyticsPage() {
   const cookieStore = await cookies();

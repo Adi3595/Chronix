@@ -1,8 +1,9 @@
 import SettingsClient from "./SettingsClient";
 import { prisma } from "@/lib/db";
 import { redirect } from "next/navigation";
-
 import { cookies } from "next/headers";
+
+export const dynamic = 'force-dynamic';
 
 export default async function SettingsPage() {
   const cookieStore = await cookies();

@@ -1,6 +1,8 @@
 import CalendarClient from "./CalendarClient";
 import { prisma } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+
 export default async function CalendarPage() {
   const userId = "demo-user-123";
 

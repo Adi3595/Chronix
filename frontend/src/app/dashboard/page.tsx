@@ -1,7 +1,8 @@
 import DashboardClient from "./DashboardClient";
 import { prisma } from "@/lib/db";
-
 import { cookies } from "next/headers";
+
+export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
   const cookieStore = await cookies();

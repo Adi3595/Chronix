@@ -1,6 +1,8 @@
 import FutureSelfClient from "./FutureSelfClient";
 import { prisma } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+
 export default async function FutureSelfPage() {
   const userId = "demo-user-123";
 
