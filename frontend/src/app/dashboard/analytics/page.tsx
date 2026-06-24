@@ -5,7 +5,7 @@ import AnalyticsClient from "./AnalyticsClient";
 import { cookies } from "next/headers";
 
 export default async function AnalyticsPage() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const userId = cookieStore.get("chronix-uid")?.value || "demo-user-123";
 
   let user = await prisma.user.findUnique({ where: { id: userId } });

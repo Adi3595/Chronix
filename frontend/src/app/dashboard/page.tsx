@@ -4,7 +4,7 @@ import { prisma } from "@/lib/db";
 import { cookies } from "next/headers";
 
 export default async function DashboardPage() {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const userId = cookieStore.get("chronix-uid")?.value || "demo-user-123";
 
   // Fetch data in parallel
