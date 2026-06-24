@@ -18,7 +18,7 @@ const ipTracker = new Map<string, RateLimitTracker>();
 
 export function proxy(request: NextRequest) {
   // Retrieve the client IP (Render uses x-forwarded-for)
-  const ip = request.ip || request.headers.get('x-forwarded-for') || '127.0.0.1';
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || '127.0.0.1';
   const now = Date.now();
 
   let tracker = ipTracker.get(ip);
