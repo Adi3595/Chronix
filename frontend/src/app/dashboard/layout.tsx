@@ -16,9 +16,9 @@ export default function DashboardLayout({
         <div className="mb-8 px-4">
           <div className="flex items-center gap-3 mb-2">
             <img
-              alt="User Profile"
-              className="w-10 h-10 rounded-full object-cover border border-outline-variant"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ra48ArBG32KGJ3FgD64JQx1TJPGZyCB7yCxJ4UaNBtkTGzrF7kutaH-ddtpMNfUeVB7JlVM9PxXy6jhyhV-L1sMfRO__zrHHa5MAv4doHXdeQD2OreYm0bgj4q-WIZQNw6596CdNNOUS4F5ycT1XVLzxXYr4BhbKD_KtLGasSRsSWEo2ugnj_NyF9IcYRBog-nig4k2Z07AsHbT-ItihTCurSoNou3Gak2J8fWIOB_74HGVWX2nwBQmGhu6tkXdi5dq8tzOo3GM"
+              alt="Chronix OS Logo"
+              className="w-10 h-10 object-contain"
+              src="/icon.svg"
             />
             <div>
               <h1 className="font-headline-md text-[24px] font-serif text-primary truncate">
