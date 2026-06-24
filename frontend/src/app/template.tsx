@@ -10,24 +10,24 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <div key={pathname}>
       {/* The Page Transition Curtain */}
       <motion.div
-        className="fixed inset-0 z-[9999] bg-surface-container-lowest flex items-center justify-center pointer-events-none border-b border-primary/20"
-        initial={{ y: "0%" }}
-        animate={{ y: "-100%" }}
-        transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.6 }}
+        className="fixed inset-0 z-[9999] bg-surface-container-lowest flex items-center justify-center pointer-events-none"
+        initial={{ opacity: 1, filter: "blur(0px)" }}
+        animate={{ opacity: 0, filter: "blur(10px)", scale: 1.05 }}
+        transition={{ duration: 0.8, ease: "easeInOut", delay: 0.5 }}
       >
         {/* The X Logo Animation */}
         <motion.div
           initial={{ scale: 0.5, opacity: 0, rotate: -90 }}
           animate={{ scale: 1, opacity: 1, rotate: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="flex flex-col items-center gap-4"
+          className="flex flex-col items-center gap-6"
         >
-          <img src="/icon.svg" alt="Chronix OS Loading" className="w-24 h-24 drop-shadow-xl" />
+          <img src="/icon.svg" alt="Chronix OS Loading" className="w-48 h-48 drop-shadow-2xl" />
           <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.3 }}
-            className="font-mono-label text-[12px] text-on-surface-variant tracking-widest uppercase font-bold"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
+            className="font-mono-label text-[14px] text-on-surface-variant tracking-[0.2em] uppercase font-bold"
           >
             Initializing
           </motion.div>
@@ -36,9 +36,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
 
       {/* The Next Page Content Entrance */}
       <motion.div
-        initial={{ opacity: 0, filter: "blur(4px)" }}
-        animate={{ opacity: 1, filter: "blur(0px)" }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+        initial={{ opacity: 0, filter: "blur(8px)", scale: 0.98 }}
+        animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
       >
         {children}
       </motion.div>

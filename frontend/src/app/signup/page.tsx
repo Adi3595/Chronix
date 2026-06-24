@@ -4,7 +4,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { syncUser } from "@/app/actions/user-actions";
 
@@ -52,6 +52,32 @@ export default function SignupPage() {
       }
     } catch (err: any) {
       setError(err.message || "Failed to create account. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    setIsSubmitting(true);
+    setError("");
+    
+    try {
+      if (auth) {
+        const provider = new GoogleAuthProvider();
+        const userCredential = await signInWithPopup(auth, provider);
+        const user = userCredential.user;
+        
+        // Sync user to Prisma database
+        await syncUser(user.uid, user.email || "", user.displayName || "Google User");
+        
+        document.cookie = `chronix-uid=${user.uid}; path=/; max-age=86400;`;
+        router.push("/dashboard");
+      } else {
+        login();
+        document.cookie = `chronix-uid=demo-user-123; path=/; max-age=86400;`;
+      }
+    } catch (err: any) {
+      setError(err.message || "Failed to sign up with Google.");
     } finally {
       setIsSubmitting(false);
     }
@@ -130,8 +156,24 @@ export default function SignupPage() {
                 "CREATE TERMINAL"
               )}
             </button>
+
+            <div className="flex items-center gap-4 my-2">
+              <div className="h-[1px] bg-outline-variant/30 flex-1"></div>
+              <span className="text-on-surface-variant text-xs font-mono uppercase tracking-widest">OR</span>
+              <div className="h-[1px] bg-outline-variant/30 flex-1"></div>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleGoogleSignup}
+              disabled={isSubmitting}
+              className="w-full bg-transparent border-2 border-outline-variant/50 text-on-surface py-3 rounded-xl font-mono-label font-bold hover:bg-surface-container transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center h-12 gap-2"
+            >
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
+              CONTINUE WITH GOOGLE
+            </button>
             
-            <div className="text-center mt-6">
+            <div className="text-center mt-4">
               <p className="text-sm text-on-surface-variant">
                 Already have an execution profile?{" "}
                 <Link href="/login" className="text-primary font-bold hover:underline">
