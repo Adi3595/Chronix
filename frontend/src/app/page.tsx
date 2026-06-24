@@ -496,9 +496,10 @@ void main() {
           <div className="font-body-md text-[13px] text-on-surface-variant">
             © 2026 Chronix Productivity OS. Swiss Engineered Focus.
           </div>
-          <div className="flex gap-4 text-on-surface-variant">
-            {/* Social Icons Placeholder */}
-            <a href="#" className="hover:text-primary transition-colors"><span className="material-symbols-outlined text-[20px]">language</span></a>
+          <div className="flex gap-6 text-on-surface-variant font-mono-label text-[13px] font-mono uppercase tracking-widest">
+            <a href="https://twitter.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">X (Twitter)</a>
+            <a href="https://instagram.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Instagram</a>
+            <a href="https://linkedin.com/company/chronixos" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">LinkedIn</a>
           </div>
         </div>
       </footer>
