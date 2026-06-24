@@ -36,7 +36,7 @@ Most task managers expect you to do all the micro-management. Chronix OS inverts
 
 - **Advanced Landing Page:** Immersive WebGL interactive background with Framer Motion cinematic scroll animations.
 - **Firebase Authentication:** Secure login and sign-up flows fully integrated with Firebase Auth. 
-- **Dynamic Database Syncing:** User accounts automatically mirror from Firebase into a Prisma SQLite database via Next.js Server Actions.
+- **Dynamic Database Syncing:** User accounts automatically mirror from Firebase into a Prisma PostgreSQL database via Next.js Server Actions.
 - **The Execution Matrix:** Prioritize tasks seamlessly with the auto-sorted matrix and Kanban view.
 - **Future Self Simulator:** Set ambitious deadlines and visualize the butterfly effect of your choices today on your future goals.
 - **Agent Command Center:** A live telemetry feed tracking what your AI agents are doing in real-time.
@@ -73,11 +73,12 @@ The agents operate using Next.js Server Actions and Prisma to log real-time acti
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue)
-![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
 
 - **Framework:** Next.js 16 (App Router, Server Actions)
 - **Authentication:** Firebase Auth
-- **Database:** Prisma ORM with SQLite (Local Development)
+- **Database:** Prisma ORM with PostgreSQL (Serverless/Managed)
+- **Authentication:** Firebase Auth (Email/Password & Google OAuth)
 - **Styling:** Tailwind CSS + Framer Motion (Glassmorphism & Micro-animations)
 - **Graphics:** Custom WebGL Shaders
 - **Typography:** Geist Sans/Mono + Source Serif 4 (Premium aesthetic)

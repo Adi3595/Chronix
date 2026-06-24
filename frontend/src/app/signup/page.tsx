@@ -37,7 +37,7 @@ export default function SignupPage() {
         // Update Firebase profile with name
         await updateProfile(newUser, { displayName: name });
         
-        // Sync user to Prisma SQLite database
+        // Sync user to Prisma database
         const syncRes = await syncUser(newUser.uid, email, name);
         if (!syncRes.success) {
           console.error("Failed to sync user to database:", syncRes.error);
