@@ -1,101 +1,64 @@
 <div align="center">
-  <img src="./frontend/public/icon.svg" alt="Chronix Logo" width="120" />
+  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ra48ArBG32KGJ3FgD64JQx1TJPGZyCB7yCxJ4UaNBtkTGzrF7kutaH-ddtpMNfUeVB7JlVM9PxXy6jhyhV-L1sMfRO__zrHHa5MAv4doHXdeQD2OreYm0bgj4q-WIZQNw6596CdNNOUS4F5ycT1XVLzxXYr4BhbKD_KtLGasSRsSWEo2ugnj_NyF9IcYRBog-nig4k2Z07AsHbT-ItihTCurSoNou3Gak2J8fWIOB_74HGVWX2nwBQmGhu6tkXdi5dq8tzOo3GM" alt="Chronix OS Logo" width="120" height="120">
+  <br/>
   <h1>Chronix OS</h1>
-  <p><strong>Execution without chaos.</strong></p>
-  <p>An autonomous productivity orchestration platform that helps users avoid missed deadlines using a collaborative AI neural suite.</p>
-
-  [![Next.js](https://img.shields.io/badge/Next.js-16.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-  [![Prisma](https://img.shields.io/badge/Prisma-6.4-1B222D?style=for-the-badge&logo=prisma)](https://prisma.io/)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-  [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+  <p><strong>Execution Without Chaos.</strong> A premium autonomous executive productivity suite powered by an interconnected neural suite of AI agents.</p>
 </div>
 
-<hr />
-
-## 🌟 The Vision
-
-Chronix isn't just a task manager—it's an operating system for your ambition. By utilizing a suite of specialized digital agents, Chronix dynamically orchestrates your schedule, protects your deep work, and auto-corrects your trajectory when deadlines are at risk.
-
 ---
 
-## 🤖 The Neural Suite (Active Agents)
+## ⚡ Overview
+Chronix OS transforms goals, deadlines, and responsibilities into clear, autonomous execution paths. It actively manages your workload via a 6-agent Neural Suite, preventing burnout and context switching through smart rescheduling, momentum calculation, and real-time telemetry.
 
-Chronix employs a network of specific agents, each dedicated to a unique vector of your productivity.
+![Chronix OS Dashboard Overview](https://chronix.os/og-image.jpg)
 
-| Agent | Status | Directive | Functionality |
-| :--- | :---: | :--- | :--- |
-| **Atlas (A-01)** | 🟢 **LIVE** | Strategic Core | Automatically breaks down high-level goals into actionable, prioritized sub-tasks and syncs them to your database. |
-| **Rescue (A-05)** | 🟢 **LIVE** | Recovery & Triage | Activated during emergencies (Rescue Mode) to automatically defer non-essential tasks 7 days into the future, protecting your critical path. |
-| **Orbit (A-02)** | 🟡 *Standby* | Automation | Monitors daily cross-platform syncs and filters incoming communications during Focus Blocks. |
-| **Sentinel (A-03)**| 🟡 *Standby* | Risk Monitor | Scans your upcoming calendar for bottleneck risks and missing dependencies. |
-| **Pulse (A-04)** | 🟡 *Standby* | Analytics | Tracks user engagement and calculates the Momentum Score baseline. |
-| **Echo (A-06)** | 🟡 *Standby* | Synthesis | Drafts end-of-week stakeholder updates based on completed tasks. |
+## 🤖 The 6-Agent Neural Suite
+Our custom-built intelligent agents manage your workflow autonomously behind the scenes.
 
-> **Note:** Atlas and Rescue are fully wired end-to-end with the Prisma backend! The others are currently tracking telemetry but awaiting their dedicated interactive action triggers.
+1. **Atlas (A-01 | Strategic Core):** Automatically deconstructs massive goals into step-by-step actionable tasks.
+2. **Orbit (A-02 | Integrations):** Synchronizes external platforms (Google Calendar, Slack, GitHub) and detects scheduling conflicts.
+3. **Sentinel (A-03 | Risk Monitor):** Scans for impending bottlenecks in your Task Matrix and smartly suggests deferring non-essential work to tomorrow.
+4. **Pulse (A-04 | Momentum):** Dynamically calculates your productivity velocity score based on completion rates.
+5. **Rescue (A-05 | Recovery):** Steps in when you're overwhelmed, freezing overdue tasks and enforcing deep work.
+6. **Echo (A-06 | Synthesis):** Automatically synthesizes your weekly accomplishments into an executive briefing report.
 
----
+## 🚀 Features
+- **Execution Matrix:** Prioritize tasks seamlessly with the auto-sorted matrix and Kanban view.
+- **Future Self Simulator:** Set ambitious deadlines and visualize the butterfly effect of your choices today on your future goals.
+- **Agent Command Center:** A live telemetry feed tracking what your AI agents are doing in real-time.
+- **Settings & Autonomy Controls:** Dial the autonomy of your agents up or down depending on your comfort level.
 
-## 🏗️ Architecture
+## 🛠 Tech Stack
+- **Framework:** Next.js 15 (App Router, Server Actions)
+- **Database:** Prisma ORM with SQLite (Local Development)
+- **Styling:** Tailwind CSS + Framer Motion (Glassmorphism & Micro-animations)
+- **Typography:** Geist Sans/Mono + Source Serif 4 (Premium aesthetic)
 
-Chronix operates on a bleeding-edge Client-Server Hybrid architecture built entirely within Next.js. 
+## 📦 Local Development
 
-```mermaid
-graph TD
-    User([User / Browser]) --> UI[Next.js App Router UI]
-    
-    subgraph Frontend [Next.js Environment]
-        UI --> |Triggers| Actions[Server Actions]
-        UI --> |Reads| Page[Server Components]
-    end
-    
-    subgraph Backend [Data Layer]
-        Actions --> |Mutates| Prisma[(Prisma SQLite DB)]
-        Prisma --> |Provides Data| Page
-    end
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Adi3595/Chronix.git
+   cd Chronix/frontend
+   ```
 
-    subgraph Agents [Autonomous Suite]
-        Actions -.-> Atlas[Atlas AI Planner]
-        Actions -.-> Rescue[Rescue Mode Script]
-    end
-```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
----
+3. **Initialize the database**
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   ```
 
-## 🚀 Quick Start Guide
+4. **Start the development server**
+   ```bash
+   npm run dev
+   ```
 
-Ready to initialize the system? Follow these steps to get Chronix running locally.
+Visit `http://localhost:3000` to access the terminal.
 
-### 1. Install Dependencies
-Navigate into the frontend directory and install the Node modules.
-```bash
-cd frontend
-npm install
-```
-
-### 2. Database Initialization
-Chronix uses a local SQLite database for zero-config persistence. Generate the Prisma client and push the schema:
-```bash
-npx prisma generate
-npx prisma db push
-```
-
-### 3. Boot the Matrix
-Start the Turbopack-powered development server.
-```bash
-npm run dev
-```
-Open **[http://localhost:3000](http://localhost:3000)** in your browser.
-
----
-
-## 🎯 Interactive Features
-
-- [x] **Universal Auth:** Login via Firebase or instantly drop into the environment as a Demo User.
-- [x] **Momentum Tracking:** Complete tasks to instantly watch your Momentum Score increase in real-time.
-- [x] **Generative Planning:** Visit the `Goals` tab, type a massive ambition, and let Atlas generate your roadmap.
-- [x] **Panic Button:** Overwhelmed? Hit **Rescue Mode** in the Rescue Center to instantly clear your schedule of low-priority noise.
-- [x] **Future Projection:** The `Future Self` tab dynamically calculates your probability of long-term success based on your live completion metrics.
-
-<div align="center">
-  <p>Built with ❤️ during the Vibe2Ship Hackathon.</p>
-</div>
+## 🛡 License
+This project is licensed under the MIT License.

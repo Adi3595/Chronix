@@ -84,6 +84,40 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
               </div>
             </motion.div>
 
+            {/* Agent: Orbit */}
+            <motion.div variants={itemVariants} className="bg-surface-container-lowest shadow-[0px_4px_20px_rgba(0,0,0,0.03)] rounded-xl p-6 flex flex-col group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden border border-transparent hover:border-surface-variant">
+              <div className="flex justify-between items-start mb-6 relative z-10">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary border border-surface-container-highest">
+                    <span className="material-symbols-outlined text-[24px]">sync</span>
+                  </div>
+                  <div>
+                    <h3 className="font-headline-md font-serif text-on-surface text-[20px] leading-tight">Orbit</h3>
+                    <p className="font-mono-label font-mono text-[13px] text-on-surface-variant opacity-70">A-02 // Integrations</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-outline-variant"></span>
+                  <span className="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-widest font-semibold">Idle</span>
+                </div>
+              </div>
+              <div className="space-y-4 relative z-10 flex-1 flex flex-col justify-between">
+                <div>
+                  <p className="font-label-sm text-[12px] text-on-surface-variant mb-1 uppercase tracking-wider font-semibold">Current Mission</p>
+                  <p className="font-body-md text-[15px] text-on-surface opacity-70">Awaiting Sync Cycle</p>
+                </div>
+                <button 
+                  onClick={async () => {
+                    const { triggerOrbitSync } = await import("@/app/actions/orbit-actions");
+                    await triggerOrbitSync("demo-user-123");
+                  }}
+                  className="mt-4 text-primary font-mono-label text-[12px] flex items-center gap-1 hover:underline"
+                >
+                  <span className="material-symbols-outlined text-[14px]">bolt</span> Force Sync
+                </button>
+              </div>
+            </motion.div>
+
             {/* Agent: Rescue */}
             <motion.div variants={itemVariants} className="bg-surface-container-lowest shadow-[0px_4px_20px_rgba(0,0,0,0.03)] rounded-xl p-6 flex flex-col group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden border border-transparent hover:border-surface-variant">
               <div className="flex justify-between items-start mb-6 relative z-10">

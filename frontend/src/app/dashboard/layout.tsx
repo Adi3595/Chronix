@@ -1,6 +1,7 @@
 import LogoutButton from "@/components/LogoutButton";
 import Link from "next/link";
 import React from "react";
+import SidebarNav from "@/components/SidebarNav";
 
 export default function DashboardLayout({
   children,
@@ -32,47 +33,17 @@ export default function DashboardLayout({
 
         {/* CTA */}
         <div className="px-2 mb-6">
-          <button className="w-full bg-primary-container text-on-primary py-3 rounded-lg font-mono-label text-[13px] font-mono hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-[0px_4px_20px_rgba(0,0,0,0.03)]">
+          <Link href="/dashboard/tasks" className="w-full bg-primary-container text-on-primary py-3 rounded-lg font-mono-label text-[13px] font-mono hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-[0px_4px_20px_rgba(0,0,0,0.03)]">
             <span className="material-symbols-outlined" style={{ fontSize: "18px" }}>
               add
             </span>
             New Entry
-          </button>
+          </Link>
         </div>
 
         {/* Main Navigation */}
         <div className="flex-1 overflow-y-auto">
-          <ul className="space-y-1">
-            <li>
-              <Link
-                href="/dashboard"
-                className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:text-primary font-mono-label text-[13px] hover:bg-surface-container transition-colors duration-200"
-              >
-                <span className="material-symbols-outlined">dashboard</span>
-                Dashboard
-              </Link>
-            </li>
-            {[
-              { icon: "target", label: "Goals", href: "/dashboard/goals" },
-              { icon: "check_circle", label: "Tasks", href: "/dashboard/tasks" },
-              { icon: "calendar_today", label: "Calendar", href: "/dashboard/calendar" },
-              { icon: "auto_awesome", label: "Future Self", href: "/dashboard/future-self" },
-              { icon: "emergency", label: "Rescue Center", href: "/dashboard/rescue-center" },
-              { icon: "insights", label: "Analytics", href: "/dashboard/analytics" },
-              { icon: "smart_toy", label: "Agent Hub", href: "/dashboard/agent-hub" },
-              { icon: "settings", label: "Settings", href: "/dashboard/settings" },
-            ].map((tab, idx) => (
-              <li key={idx}>
-                <Link
-                  href={tab.href}
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-[13px] hover:bg-surface-container hover:text-primary transition-colors duration-200"
-                >
-                  <span className="material-symbols-outlined">{tab.icon}</span>
-                  {tab.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <SidebarNav />
         </div>
 
         {/* Footer Navigation */}

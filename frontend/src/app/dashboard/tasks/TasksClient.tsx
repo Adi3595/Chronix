@@ -45,7 +45,7 @@ export default function TasksClient({ initialTasks }: { initialTasks: any[] }) {
 
       <div className="pb-12 max-w-[1440px] mx-auto">
         {/* Page Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-6">
           <div>
             <h2 className="font-display-lg font-serif text-[48px] text-on-surface">Execution Matrix</h2>
             <p className="font-body-md text-[15px] text-on-surface-variant mt-2 max-w-2xl">
@@ -63,6 +63,42 @@ export default function TasksClient({ initialTasks }: { initialTasks: any[] }) {
             </button>
           </div>
         </div>
+
+        {/* Sentinel Suggestion */}
+        {highPriority.length > 0 && (
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-secondary-container rounded-xl p-6 mb-12 shadow-sm border border-secondary-fixed-dim relative overflow-hidden group transition-all"
+          >
+            <div className="absolute -right-12 -top-12 opacity-10 pointer-events-none">
+              <span className="material-symbols-outlined text-[120px]">smart_toy</span>
+            </div>
+            <div className="flex items-start space-x-4 relative z-10">
+              <div className="bg-secondary-fixed text-on-secondary-fixed p-3 rounded-full flex-shrink-0">
+                <span className="material-symbols-outlined">lightbulb</span>
+              </div>
+              <div>
+                <h4 className="font-mono-label text-[13px] text-on-secondary-container uppercase tracking-wider mb-1">Sentinel Suggestion</h4>
+                <p className="font-body-lg text-[18px] text-on-surface mb-3">
+                  Consider deferring <strong>"{highPriority[0].title}"</strong>. Your calendar shows continuous context switching today.
+                </p>
+                <div className="flex space-x-4">
+                  <button 
+                    onClick={async () => {
+                      const { acceptSentinelSuggestion } = await import("@/app/actions/sentinel-actions");
+                      await acceptSentinelSuggestion(highPriority[0].id, highPriority[0].userId);
+                    }}
+                    className="text-primary font-label-sm text-[12px] font-bold hover:underline"
+                  >
+                    Accept & Move
+                  </button>
+                  <button className="text-on-surface-variant font-label-sm text-[12px] font-bold hover:underline">Dismiss</button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
         {/* Add Task Form inline */}
         {isAdding && (
