@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chronix OS - Future Self Simulator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Ambient subtle shadow for cards */
+        .ambient-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#beefbf",
+                        "on-secondary-fixed": "#002109",
+                        "on-primary-fixed": "#002204",
+                        "on-tertiary-container": "#ffedf0",
+                        "surface-container": "#ebefe5",
+                        "on-secondary-container": "#436e48",
+                        "inverse-on-surface": "#eef2e8",
+                        "secondary-fixed-dim": "#a3d2a5",
+                        "on-tertiary-fixed-variant": "#7f2448",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#a3f69c",
+                        "outline": "#707a6c",
+                        "inverse-primary": "#88d982",
+                        "inverse-surface": "#2d322b",
+                        "error": "#ba1a1a",
+                        "tertiary": "#923357",
+                        "surface": "#f7fbf0",
+                        "on-surface-variant": "#40493d",
+                        "on-tertiary-fixed": "#3f001c",
+                        "tertiary-fixed": "#ffd9e2",
+                        "surface-variant": "#e0e4da",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "on-secondary-fixed-variant": "#254f2d",
+                        "surface-dim": "#d7dbd2",
+                        "surface-container-low": "#f1f5eb",
+                        "surface-bright": "#f7fbf0",
+                        "tertiary-container": "#b14b6f",
+                        "primary-fixed-dim": "#88d982",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "background": "#f7fbf0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#1b6d24",
+                        "secondary-fixed": "#beefbf",
+                        "primary-container": "#2e7d32",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e5eadf",
+                        "surface-container-highest": "#e0e4da",
+                        "outline-variant": "#bfcaba",
+                        "on-surface": "#181d17",
+                        "secondary": "#3d6843",
+                        "on-primary-fixed-variant": "#005312",
+                        "on-primary-container": "#cbffc2",
+                        "primary": "#0d631b",
+                        "on-background": "#181d17",
+                        "on-tertiary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "unit": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Geist"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "mono-label": ["Geist"],
+                        "display-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["Geist"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "label-sm": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "mono-label": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["15px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar (Shared Component) -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface border-r border-surface-variant flex flex-col py-margin-desktop px-6 overflow-y-auto z-50">
+<!-- Brand -->
+<div class="mb-12">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Chronix OS</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-1">Executive Suite</p>
+</div>
+<!-- CTA -->
+<button class="mb-8 w-full py-3 px-4 rounded-lg bg-primary-container text-on-primary-container font-mono-label text-mono-label flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+            New Entry
+        </button>
+<!-- Navigation Links -->
+<ul class="space-y-2 flex-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">emoji_events</span>
+                    Goals
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">task_alt</span>
+                    Tasks
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">calendar_today</span>
+                    Calendar
+                </a>
+</li>
+<!-- Active State -->
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-primary dark:text-inverse-primary font-bold bg-surface-container-low transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">timeline</span>
+                    Simulator
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">emergency</span>
+                    Rescue
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">monitoring</span>
+                    Analytics
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">smart_toy</span>
+                    Agents
+                </a>
+</li>
+<li class="mt-auto pt-8">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
+                    Notifications
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<!-- User Avatar Placeholder (Bottom of nav) -->
+<div class="mt-6 flex items-center gap-3 px-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small, professional portrait photograph of an executive user, neutral background, warm lighting, suitable for a minimalist dashboard avatar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfwXQGPAi7qJ3XqoBPQnrdxkQ4vcIJwF4NN_ixbLkOcanxCIpk9s9XpJYxjZempzCwBsBYLZfPxYR8vJZCIwjoK6TioFu40G0uGkSg1-tYBeaPMmng-Cb7byfYVCf1S1U92UqQW0bO6YIUmipN6CpL7t3vEIb0USE6nnOukDvWAdTHnvrE03U8EbogWxJNGlwpC1Dc72ELNsyIdEjdYkJo4_dz2BmVfj9aa9PlJawc0zjIQ1u8q5cgmNkY1iJb8uNV20ISN5I8M9w"/>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface">User Profile</span>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<div class="flex-1 ml-64 flex flex-col h-full bg-background relative overflow-hidden">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center h-20 px-margin-desktop sticky top-0 z-40 bg-surface/80 backdrop-blur-md">
+<div>
+<!-- Spacer for grid alignment if needed, brand is in sidebar -->
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 p-2 rounded-full cursor-pointer transition-opacity duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 p-2 rounded-full cursor-pointer transition-opacity duration-200 flex items-center justify-center">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="bg-primary text-on-primary font-mono-label text-mono-label px-5 py-2.5 rounded-lg hover:opacity-90 transition-opacity flex items-center gap-2 shadow-sm">
+                    New Entry
+                </button>
+</div>
+</header>
+<!-- Main Scrollable Area -->
+<main class="flex-1 overflow-y-auto px-margin-desktop py-8 relative">
+<!-- Page Header -->
+<div class="mb-12 max-w-4xl">
+<h2 class="font-display-lg text-display-lg text-on-surface mb-4">Future Self Projection</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    Analyzing current momentum vectors against optimal lifecycle patterns. The simulation indicates a critical divergence point approaching in Q3.
+                </p>
+</div>
+<!-- Dashboard Grid (Swiss Asymmetrical) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter pb-section-gap">
+<!-- Main Visualization Panel (Spans 8 cols) -->
+<div class="xl:col-span-8 flex flex-col gap-gutter">
+<!-- Generative Texture Card holding the paths -->
+<div class="relative w-full h-[600px] bg-surface-container-lowest rounded-xl ambient-shadow overflow-hidden flex flex-col">
+<!-- Generative Background Image via Placeholder -->
+<div class="absolute inset-0 bg-cover bg-center opacity-40 z-0" data-alt="A highly abstract, light-mode generative art background texture. It features smooth, flowing topographical contour lines in very subtle, pale warm-white and soft sage-green tones (#F4F5EF and #ebefe5). The aesthetic is 'quiet luxury' and data-driven, looking like an elegant, faded map of abstract data flows. No harsh lines or dark colors." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDH6V80khJlEcKDlz9WYosWTfId3ZB9-IuMTz0vqqYUPMG8aPjQXcsAv2y-thLcaqk_5VK-uO0AQL68wPu14Wc4WhQKqG_CzGfIXbxRuTxle8igYO_5eAvrstkpef_xky_JfAD1lvCAKWUTX-P19f8VXuWL3HTH6TZK9dBVazEDuXyuX71rAoeKLbpgBgRQgLMAX3sMUcp-YF7l1BEA83JgYe_ESvq3nreeyvXKKBHRdctQibAuzyaTcAhveW_ysl86if4QxMq-in4')"></div>
+<!-- Card Header -->
+<div class="relative z-10 p-8 flex justify-between items-center border-b border-surface-variant/50 bg-white/50 backdrop-blur-sm">
+<h3 class="font-headline-md text-headline-md text-on-surface">Trajectory Analysis</h3>
+<span class="font-mono-label text-mono-label text-on-surface-variant tracking-widest uppercase">Delta: +24%</span>
+</div>
+<!-- Simulation Canvas -->
+<div class="relative flex-1 p-8 z-10 flex">
+<!-- Origin Point -->
+<div class="absolute left-8 bottom-1/2 translate-y-1/2 flex items-center gap-3">
+<div class="w-4 h-4 rounded-full bg-on-surface border-4 border-surface-container-lowest shadow-sm z-20"></div>
+<span class="font-mono-label text-mono-label text-on-surface">Present</span>
+</div>
+<!-- Lines holding the "Paths" (Simulated with SVG for precise curve in standard layout) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Current Trajectory Line (Muted, straightish) -->
+<path d="M 10 50 C 40 50, 60 70, 90 75" fill="none" stroke="#bfcaba" stroke-dasharray="2,2" stroke-width="0.5"></path>
+<!-- Optimized Path Line (Vibrant, curving up) -->
+<path d="M 10 50 C 40 50, 50 20, 90 15" fill="none" stroke="#0d631b" stroke-width="1.5"></path>
+</svg>
+<!-- Path Endpoints / Markers -->
+<!-- Optimized Point -->
+<div class="absolute right-12 top-[12%] flex flex-col items-end">
+<div class="bg-surface-container-lowest ambient-shadow p-4 rounded-lg border border-primary/10 backdrop-blur-md min-w-[200px]">
+<div class="flex items-center gap-2 mb-2 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Optimized Path</span>
+</div>
+<div class="font-display-lg-mobile text-display-lg-mobile text-on-surface">92<span class="text-headline-md text-on-surface-variant">%</span></div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 text-sm">Success Probability</p>
+</div>
+<div class="w-3 h-3 rounded-full bg-primary mt-2 mr-6 shadow-[0_0_10px_rgba(13,99,27,0.5)]"></div>
+</div>
+<!-- Current Trajectory Point -->
+<div class="absolute right-12 bottom-[20%] flex flex-col items-end">
+<div class="bg-surface-container-lowest ambient-shadow p-4 rounded-lg border border-outline-variant/30 backdrop-blur-md min-w-[200px] opacity-80">
+<div class="flex items-center gap-2 mb-2 text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-size: 18px;">trending_flat</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider">Current Trajectory</span>
+</div>
+<div class="font-display-lg-mobile text-display-lg-mobile text-on-surface">68<span class="text-headline-md text-outline-variant">%</span></div>
+<p class="font-body-md text-body-md text-outline mt-1 text-sm">Success Probability</p>
+</div>
+<div class="w-3 h-3 rounded-full bg-outline-variant mt-2 mr-6"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Panel (Spans 4 cols) -->
+<div class="xl:col-span-4 flex flex-col gap-gutter">
+<!-- Life Stages Card -->
+<div class="bg-surface-container-lowest rounded-xl ambient-shadow p-8 flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-8">Life Stage Milestones</h3>
+<div class="relative border-l border-surface-variant ml-4 space-y-10 py-2">
+<!-- Stage 1 -->
+<div class="relative pl-8">
+<div class="absolute -left-[17px] top-0.5 w-8 h-8 rounded-full bg-primary-container flex items-center justify-center border-4 border-surface-container-lowest text-on-primary-container shadow-sm">
+<span class="material-symbols-outlined" style="font-size: 16px;">school</span>
+</div>
+<h4 class="font-mono-label text-mono-label text-on-surface mb-1">Q3 2024 · Skill Acquisition</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Complete advanced certification protocols to align with optimal trajectory.</p>
+</div>
+<!-- Stage 2 -->
+<div class="relative pl-8">
+<div class="absolute -left-[17px] top-0.5 w-8 h-8 rounded-full bg-surface-container flex items-center justify-center border-4 border-surface-container-lowest text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-size: 16px;">work</span>
+</div>
+<h4 class="font-mono-label text-mono-label text-on-surface mb-1">Q1 2025 · Career Pivot</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Transition to senior leadership tier; requires 15% increase in current task velocity.</p>
+</div>
+<!-- Stage 3 -->
+<div class="relative pl-8">
+<div class="absolute -left-[17px] top-0.5 w-8 h-8 rounded-full bg-surface-container flex items-center justify-center border-4 border-surface-container-lowest text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-size: 16px;">account_balance</span>
+</div>
+<h4 class="font-mono-label text-mono-label text-outline mb-1">2027 · Resource Consolidation</h4>
+<p class="font-body-md text-body-md text-outline-variant text-sm">Projected milestone based on compound optimization. Subject to variance.</p>
+</div>
+</div>
+</div>
+<!-- Action Card -->
+<div class="bg-surface-container-lowest rounded-xl ambient-shadow p-6 flex flex-col justify-center items-center text-center border border-primary/10">
+<span class="material-symbols-outlined text-primary mb-3" style="font-size: 32px;">tune</span>
+<h4 class="font-mono-label text-mono-label text-on-surface mb-2">Adjust Variables</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-4">Recalibrate input effort or time horizons to update projections.</p>
+<button class="w-full py-2.5 rounded border border-outline-variant text-on-surface font-label-sm text-label-sm hover:bg-surface-container-low transition-colors">
+                            Open Console
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

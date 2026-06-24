@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id            String         @id @default(cuid())
+  email         String         @unique
+  name          String?
+  momentumScore Int            @default(87) // Default starting score
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  goals         Goal[]
+  tasks         Task[]
+  agentActions  AgentAction[]
+}
+
+model Goal {
+  id            String   @id @default(cuid())
+  userId        String
+  title         String
+  targetDays    Int      @default(30)
+  currentDays   Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks         Task[]
+}
+
+model Task {
+  id            String   @id @default(cuid())
+  userId        String
+  goalId        String?
+  title         String
+  description   String?
+  priority      String   @default("Medium") // High, Medium, Low
+  isCompleted   Boolean  @default(false)
+  scheduledAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  goal          Goal?    @relation(fields: [goalId], references: [id], onDelete: SetNull)
+}
+
+model AgentAction {
+  id            String   @id @default(cuid())
+  userId        String
+  agentName     String   // Atlas, Orbit, Sentinel, Pulse, Echo, Rescue
+  actionType    String   // LOG, ALERT, OPTIMIZATION
+  logMessage    String
+  createdAt     DateTime @default(now())
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

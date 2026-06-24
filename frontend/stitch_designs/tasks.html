@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chronix OS - Tasks</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Source+Serif+4:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-container": "#beefbf",
+                      "on-secondary-fixed": "#002109",
+                      "on-primary-fixed": "#002204",
+                      "on-tertiary-container": "#ffedf0",
+                      "surface-container": "#ebefe5",
+                      "on-secondary-container": "#436e48",
+                      "inverse-on-surface": "#eef2e8",
+                      "secondary-fixed-dim": "#a3d2a5",
+                      "on-tertiary-fixed-variant": "#7f2448",
+                      "error-container": "#ffdad6",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed": "#a3f69c",
+                      "outline": "#707a6c",
+                      "inverse-primary": "#88d982",
+                      "inverse-surface": "#2d322b",
+                      "error": "#ba1a1a",
+                      "tertiary": "#923357",
+                      "surface": "#f7fbf0",
+                      "on-surface-variant": "#40493d",
+                      "on-tertiary-fixed": "#3f001c",
+                      "tertiary-fixed": "#ffd9e2",
+                      "surface-variant": "#e0e4da",
+                      "tertiary-fixed-dim": "#ffb1c7",
+                      "on-secondary-fixed-variant": "#254f2d",
+                      "surface-dim": "#d7dbd2",
+                      "surface-container-low": "#f1f5eb",
+                      "surface-bright": "#f7fbf0",
+                      "tertiary-container": "#b14b6f",
+                      "primary-fixed-dim": "#88d982",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "background": "#f7fbf0",
+                      "on-primary": "#ffffff",
+                      "surface-tint": "#1b6d24",
+                      "secondary-fixed": "#beefbf",
+                      "primary-container": "#2e7d32",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e5eadf",
+                      "surface-container-highest": "#e0e4da",
+                      "outline-variant": "#bfcaba",
+                      "on-surface": "#181d17",
+                      "secondary": "#3d6843",
+                      "on-primary-fixed-variant": "#005312",
+                      "on-primary-container": "#cbffc2",
+                      "primary": "#0d631b",
+                      "on-background": "#181d17",
+                      "on-tertiary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "section-gap": "80px",
+                      "unit": "4px",
+                      "margin-desktop": "40px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "\"Source Serif 4\""
+                      ],
+                      "mono-label": [
+                              "Geist"
+                      ],
+                      "display-lg-mobile": [
+                              "\"Source Serif 4\""
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "\"Source Serif 4\""
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "mono-label": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "15px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .ambient-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .smooth-transition {
+            transition: all 200ms ease-out;
+        }
+      </style>
+</head>
+<body class="bg-surface text-on-surface font-body-lg antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 py-margin-desktop px-6 overflow-y-auto bg-surface border-r border-surface-variant z-50">
+<div class="mb-12">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Chronix OS</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Executive Suite</p>
+</div>
+<div class="flex-grow space-y-2">
+<a class="flex items-center space-x-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center space-x-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">emoji_events</span>
+<span class="font-label-sm text-label-sm">Goals</span>
+</a>
+<a class="flex items-center space-x-4 p-3 rounded-lg text-primary font-bold bg-surface-container-low transition-all duration-200 ease-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<span class="font-label-sm text-label-sm">Tasks</span>
+</a>
+<a class="flex items-center space-x-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">calendar_today</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</a>
+<a class="flex items-center space-x-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">timeline</span>
+<span class="font-label-sm text-label-sm">Simulator</span>
+</a>
+<a class="flex items-center space-x-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">emergency</span>
+<span class="font-label-sm text-label-sm">Rescue</span>
+</a>
+<a class="flex items-center space-x-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">monitoring</span>
+<span class="font-label-sm text-label-sm">Analytics</span>
+</a>
+<a class="flex items-center space-x-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">smart_toy</span>
+<span class="font-label-sm text-label-sm">Agents</span>
+</a>
+<a class="flex items-center space-x-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">notifications</span>
+<span class="font-label-sm text-label-sm">Notifications</span>
+</a>
+<a class="flex items-center space-x-4 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</div>
+<div class="mt-auto pt-6 flex items-center justify-between">
+<button class="bg-primary-container text-on-primary-container font-label-sm text-label-sm py-3 px-4 rounded-lg w-full hover:opacity-90 smooth-transition flex justify-center items-center space-x-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>New Entry</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen pb-12">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-20 px-margin-desktop sticky top-0 z-40 bg-surface/80 backdrop-blur-md">
+<div></div> <!-- Spacer -->
+<div class="flex items-center space-x-6">
+<button class="text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 p-2 rounded-full cursor-pointer flex items-center justify-center">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="bg-primary-container text-on-primary-container font-label-sm text-label-sm py-2 px-4 rounded-full hover:opacity-90 smooth-transition">
+                    New Entry
+                </button>
+<button class="text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 p-2 rounded-full cursor-pointer flex items-center justify-center">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<div class="px-margin-desktop mt-8 max-w-container-max mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-section-gap gap-6">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface">Execution Matrix</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">High-impact tasks prioritized for unhurried focus.</p>
+</div>
+<div class="flex space-x-2 bg-surface-container-low p-1 rounded-lg">
+<button class="px-4 py-2 rounded-md bg-surface-container-lowest ambient-shadow font-label-sm text-label-sm text-primary smooth-transition flex items-center space-x-2">
+<span class="material-symbols-outlined text-[18px]">view_list</span>
+<span>Matrix</span>
+</button>
+<button class="px-4 py-2 rounded-md text-on-surface-variant hover:bg-surface-container-highest font-label-sm text-label-sm smooth-transition flex items-center space-x-2">
+<span class="material-symbols-outlined text-[18px]">view_kanban</span>
+<span>Kanban</span>
+</button>
+</div>
+</div>
+<!-- Smart Suggestion (Sentinel Agent) -->
+<div class="bg-secondary-container rounded-xl p-6 mb-12 ambient-shadow border border-secondary-fixed-dim relative overflow-hidden group cursor-pointer smooth-transition hover:shadow-lg">
+<div class="absolute -right-12 -top-12 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">smart_toy</span>
+</div>
+<div class="flex items-start space-x-4 relative z-10">
+<div class="bg-secondary-fixed text-on-secondary-fixed p-3 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined">lightbulb</span>
+</div>
+<div>
+<h4 class="font-mono-label text-mono-label text-on-secondary-container uppercase tracking-wider mb-1">Sentinel Suggestion</h4>
+<p class="font-body-lg text-body-lg text-on-surface mb-3">Consider moving <strong>"Finalize Q3 Strategy Deck"</strong> to tomorrow's Deep Work block. Your calendar shows continuous context switching today.</p>
+<div class="flex space-x-4">
+<button class="text-primary font-label-sm text-label-sm hover:underline">Accept &amp; Move</button>
+<button class="text-on-surface-variant font-label-sm text-label-sm hover:underline">Dismiss</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Matrix Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- High Impact / High Urgency -->
+<div class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center space-x-3 pb-2 border-b border-surface-variant">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span>Critical Leverage</span>
+</h3>
+<div class="bg-surface-container-lowest rounded-xl p-6 ambient-shadow smooth-transition hover:translate-y-[-2px] border border-transparent hover:border-outline-variant cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface group-hover:text-primary smooth-transition">Finalize Q3 Strategy Deck</h4>
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Due Today</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4">Incorporate final financial projections from Sarah. Ensure alignment with the new board directives regarding international expansion.</p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-surface-dim border-2 border-surface-container-lowest flex items-center justify-center text-xs font-medium">SA</div>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container border-2 border-surface-container-lowest flex items-center justify-center text-xs font-medium">ME</div>
+</div>
+<span class="font-mono-label text-mono-label text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-1">schedule</span> 45m
+                            </span>
+</div>
+</div>
+</div>
+<!-- High Impact / Low Urgency -->
+<div class="space-y-6">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center space-x-3 pb-2 border-b border-surface-variant">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span>Strategic Deep Work</span>
+</h3>
+<div class="bg-surface-container-lowest rounded-xl p-6 ambient-shadow smooth-transition hover:translate-y-[-2px] border border-transparent hover:border-outline-variant cursor-pointer group">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-body-lg text-body-lg font-medium text-on-surface group-hover:text-primary smooth-transition">Draft 2025 Vision Document</h4>
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider">Next Week</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4">Outline the key technological shifts expected in our sector and how Chronix OS will adapt to maintain market leadership.</p>
+<div class="flex items-center justify-between mt-auto">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container border-2 border-surface-container-lowest flex items-center justify-center text-xs font-medium">ME</div>
+</div>
+<span class="font-mono-label text-mono-label text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-1">schedule</span> 3h
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

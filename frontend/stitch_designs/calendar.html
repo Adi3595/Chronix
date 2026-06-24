@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chronix OS - Calendar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Source+Serif+4:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#beefbf",
+                    "on-secondary-fixed": "#002109",
+                    "on-primary-fixed": "#002204",
+                    "on-tertiary-container": "#ffedf0",
+                    "surface-container": "#ebefe5",
+                    "on-secondary-container": "#436e48",
+                    "inverse-on-surface": "#eef2e8",
+                    "secondary-fixed-dim": "#a3d2a5",
+                    "on-tertiary-fixed-variant": "#7f2448",
+                    "error-container": "#ffdad6",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed": "#a3f69c",
+                    "outline": "#707a6c",
+                    "inverse-primary": "#88d982",
+                    "inverse-surface": "#2d322b",
+                    "error": "#ba1a1a",
+                    "tertiary": "#923357",
+                    "surface": "#f7fbf0",
+                    "on-surface-variant": "#40493d",
+                    "on-tertiary-fixed": "#3f001c",
+                    "tertiary-fixed": "#ffd9e2",
+                    "surface-variant": "#e0e4da",
+                    "tertiary-fixed-dim": "#ffb1c7",
+                    "on-secondary-fixed-variant": "#254f2d",
+                    "surface-dim": "#d7dbd2",
+                    "surface-container-low": "#f1f5eb",
+                    "surface-bright": "#f7fbf0",
+                    "tertiary-container": "#b14b6f",
+                    "primary-fixed-dim": "#88d982",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "background": "#f7fbf0",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#1b6d24",
+                    "secondary-fixed": "#beefbf",
+                    "primary-container": "#2e7d32",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e5eadf",
+                    "surface-container-highest": "#e0e4da",
+                    "outline-variant": "#bfcaba",
+                    "on-surface": "#181d17",
+                    "secondary": "#3d6843",
+                    "on-primary-fixed-variant": "#005312",
+                    "on-primary-container": "#cbffc2",
+                    "primary": "#0d631b",
+                    "on-background": "#181d17",
+                    "on-tertiary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "section-gap": "80px",
+                    "unit": "4px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Geist"],
+                    "display-lg": ["\"Source Serif 4\""],
+                    "mono-label": ["Geist"],
+                    "display-lg-mobile": ["\"Source Serif 4\""],
+                    "body-md": ["Geist"],
+                    "headline-md": ["\"Source Serif 4\""],
+                    "label-sm": ["Geist"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "mono-label": ["13px", {"lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["15px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { background-color: #F4F5EF; }
+        .ambient-shadow { box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03); }
+        .focus-block-deep { background-color: rgba(46, 125, 50, 0.05); border-left: 2px solid #2E7D32; }
+        .focus-block-meeting { background-color: rgba(61, 104, 67, 0.05); border-left: 2px solid #3d6843; }
+        .focus-block-personal { background-color: #ffffff; border: 1px solid #E5E7EB; }
+        
+        .deadline-radar-red {
+            position: relative;
+        }
+        .deadline-radar-red::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            box-shadow: inset 0 0 15px rgba(186, 26, 26, 0.15);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        
+        .deadline-radar-yellow {
+            position: relative;
+        }
+        .deadline-radar-yellow::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            box-shadow: inset 0 0 15px rgba(200, 150, 0, 0.1);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d7dbd2; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bfcaba; 
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface antialiased bg-background">
+<!-- SideNavBar -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface flex-col py-margin-desktop px-6 overflow-y-auto z-50">
+<div class="mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">Chronix OS</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mt-1">Executive Suite</p>
+</div>
+<ul class="flex-1 space-y-2">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="emoji_events">emoji_events</span>
+                    Goals
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+                    Tasks
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-primary dark:text-inverse-primary font-bold hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                    Calendar
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="timeline">timeline</span>
+                    Simulator
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="emergency">emergency</span>
+                    Rescue
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+                    Analytics
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+                    Agents
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+                    Notifications
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-surface-variant hover:text-primary transition-colors hover:bg-surface-container dark:hover:bg-surface-container-highest transition-all duration-200 ease-out font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</li>
+</ul>
+<div class="mt-auto pt-6 border-t border-outline-variant/30">
+<button class="w-full bg-primary-container text-on-primary text-center py-3 rounded-lg font-mono-label text-mono-label hover:opacity-90 transition-opacity duration-200">
+                New Entry
+            </button>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="hidden md:flex justify-between items-center h-20 px-margin-desktop sticky top-0 z-40 bg-surface/80 backdrop-blur-md docked full-width top ml-64 border-none">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-md text-headline-md font-medium text-on-surface">Weekly Overview</h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest px-2 py-1 bg-surface-container rounded">Oct 24 - 30</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-full cursor-pointer transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-full cursor-pointer transition-opacity duration-200">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+<button class="bg-primary-container text-on-primary px-4 py-2 rounded-lg font-mono-label text-mono-label hover:opacity-90 transition-opacity duration-200">
+                New Entry
+            </button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="md:ml-64 p-margin-mobile md:p-margin-desktop pt-6 min-h-screen">
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-gutter max-w-container-max mx-auto">
+<!-- Calendar Canvas (3 columns) -->
+<div class="lg:col-span-3 bg-surface-container-lowest rounded-xl ambient-shadow p-6">
+<!-- Calendar Header / Controls -->
+<div class="flex justify-between items-center mb-8">
+<div class="flex gap-4">
+<button class="flex items-center justify-center w-8 h-8 rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="flex items-center justify-center w-8 h-8 rounded border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<button class="px-3 py-1 rounded border border-outline-variant text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container-low transition-colors">
+                            Today
+                        </button>
+</div>
+<div class="flex gap-2 bg-surface-container p-1 rounded-lg">
+<button class="px-4 py-1.5 rounded-md font-mono-label text-mono-label text-on-surface-variant hover:text-primary transition-colors">Day</button>
+<button class="px-4 py-1.5 rounded-md font-mono-label text-mono-label bg-surface-container-lowest text-primary shadow-sm">Week</button>
+<button class="px-4 py-1.5 rounded-md font-mono-label text-mono-label text-on-surface-variant hover:text-primary transition-colors">Month</button>
+</div>
+</div>
+<!-- The Grid -->
+<div class="relative overflow-x-auto pb-4">
+<div class="min-w-[800px]">
+<!-- Days Header -->
+<div class="grid grid-cols-8 gap-px bg-outline-variant/20 mb-4 rounded-t-lg overflow-hidden">
+<div class="bg-surface-container-lowest p-2"></div> <!-- Time column spacer -->
+<div class="bg-surface-container-lowest p-4 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block mb-1">Mon</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">24</span>
+</div>
+<div class="bg-surface-container-lowest p-4 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block mb-1">Tue</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">25</span>
+</div>
+<div class="bg-surface-container-lowest p-4 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block mb-1">Wed</span>
+<span class="font-body-md text-body-md font-medium text-primary bg-primary-container/10 w-8 h-8 rounded-full flex items-center justify-center mx-auto">26</span>
+</div>
+<div class="bg-surface-container-lowest p-4 text-center deadline-radar-red">
+<span class="font-label-sm text-label-sm text-error uppercase block mb-1">Thu</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">27</span>
+</div>
+<div class="bg-surface-container-lowest p-4 text-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block mb-1">Fri</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">28</span>
+</div>
+<div class="bg-surface-container-lowest p-4 text-center opacity-60">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block mb-1">Sat</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">29</span>
+</div>
+<div class="bg-surface-container-lowest p-4 text-center opacity-60">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase block mb-1">Sun</span>
+<span class="font-body-md text-body-md font-medium text-on-surface">30</span>
+</div>
+</div>
+<!-- Time Grid -->
+<div class="relative grid grid-cols-8 gap-px bg-outline-variant/10 rounded-b-lg border border-outline-variant/20">
+<!-- Time Labels Column -->
+<div class="col-span-1 bg-surface-container-lowest relative">
+<div class="h-24 border-b border-outline-variant/10 relative p-2 text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant relative -top-3">9 AM</span>
+</div>
+<div class="h-24 border-b border-outline-variant/10 relative p-2 text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant relative -top-3">10 AM</span>
+</div>
+<div class="h-24 border-b border-outline-variant/10 relative p-2 text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant relative -top-3">11 AM</span>
+</div>
+<div class="h-24 border-b border-outline-variant/10 relative p-2 text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant relative -top-3">12 PM</span>
+</div>
+<div class="h-24 border-b border-outline-variant/10 relative p-2 text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant relative -top-3">1 PM</span>
+</div>
+<div class="h-24 border-b border-outline-variant/10 relative p-2 text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant relative -top-3">2 PM</span>
+</div>
+<div class="h-24 border-b border-outline-variant/10 relative p-2 text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant relative -top-3">3 PM</span>
+</div>
+</div>
+<!-- Day Columns -->
+<!-- Monday -->
+<div class="col-span-1 bg-surface-container-lowest relative border-r border-outline-variant/10">
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<!-- Focus Block -->
+<div class="absolute top-[48px] left-1 right-1 h-[140px] focus-block-deep rounded p-2 shadow-sm z-10 transition-transform hover:scale-[1.02] cursor-pointer">
+<p class="font-mono-label text-mono-label text-primary">09:30 - 11:00</p>
+<p class="font-body-md text-body-md font-medium text-on-surface mt-1 leading-tight">Deep Work: Strategy Draft</p>
+<div class="mt-2 flex -space-x-2">
+<div class="w-6 h-6 rounded-full bg-surface-container border border-surface-container-lowest flex items-center justify-center">
+<span class="material-symbols-outlined text-[12px] text-primary">psychology</span>
+</div>
+</div>
+</div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+</div>
+<!-- Tuesday -->
+<div class="col-span-1 bg-surface-container-lowest relative border-r border-outline-variant/10">
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="absolute top-[96px] left-1 right-1 h-[90px] focus-block-meeting rounded p-2 shadow-sm z-10 transition-transform hover:scale-[1.02] cursor-pointer">
+<p class="font-mono-label text-mono-label text-secondary">10:00 - 11:00</p>
+<p class="font-body-md text-body-md font-medium text-on-surface mt-1 leading-tight">Board Prep</p>
+</div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="absolute top-[288px] left-1 right-1 h-[44px] focus-block-personal rounded p-2 shadow-sm z-10 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">restaurant</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Lunch</p>
+</div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+</div>
+<!-- Wednesday (Today) -->
+<div class="col-span-1 bg-surface-bright relative border-r border-outline-variant/10">
+<!-- Current Time Indicator -->
+<div class="absolute top-[210px] left-0 right-0 h-px bg-primary z-20 flex items-center">
+<div class="w-2 h-2 rounded-full bg-primary -ml-1"></div>
+</div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="absolute top-[120px] left-1 right-1 h-[168px] focus-block-deep rounded p-2 shadow-sm z-10 border border-primary/20">
+<div class="flex justify-between items-start">
+<p class="font-mono-label text-mono-label text-primary">10:15 - 12:00</p>
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+</div>
+<p class="font-body-md text-body-md font-medium text-on-surface mt-1 leading-tight">Focus: Q4 Architecture</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-2 line-clamp-2">No interruptions. Orbit is handling emails.</p>
+</div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="absolute top-[384px] left-1 right-1 h-[90px] focus-block-meeting rounded p-2 shadow-sm z-10 deadline-radar-yellow">
+<p class="font-mono-label text-mono-label text-secondary">13:00 - 14:00</p>
+<p class="font-body-md text-body-md font-medium text-on-surface mt-1 leading-tight">Sync: Design</p>
+</div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+</div>
+<!-- Thursday (Deadline) -->
+<div class="col-span-1 bg-error-container/10 relative border-r border-outline-variant/10 deadline-radar-red">
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="absolute top-[24px] left-1 right-1 h-[168px] bg-error-container/30 border-l-2 border-error rounded p-2 shadow-sm z-10">
+<div class="flex items-center gap-1 text-error mb-1">
+<span class="material-symbols-outlined text-sm">warning</span>
+<p class="font-label-sm text-label-sm uppercase tracking-wider">Deadline</p>
+</div>
+<p class="font-mono-label text-mono-label text-on-surface-variant">09:15 - 11:00</p>
+<p class="font-body-md text-body-md font-medium text-on-surface mt-1 leading-tight">Final Investor Pitch Submission</p>
+</div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+</div>
+<!-- Friday -->
+<div class="col-span-1 bg-surface-container-lowest relative border-r border-outline-variant/10">
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="absolute top-[480px] left-1 right-1 h-[90px] focus-block-personal rounded p-2 shadow-sm z-10 bg-surface-container-low border-dashed">
+<p class="font-mono-label text-mono-label text-on-surface-variant">14:00 - 15:00</p>
+<p class="font-body-md text-body-md font-medium text-on-surface mt-1 leading-tight italic text-on-surface-variant">Weekly Review</p>
+</div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+</div>
+<!-- Saturday -->
+<div class="col-span-1 bg-surface/50 relative border-r border-outline-variant/10">
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+</div>
+<!-- Sunday -->
+<div class="col-span-1 bg-surface/50 relative">
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+<div class="h-24 border-b border-outline-variant/10"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Agent Scheduling Sidebar (1 column) -->
+<div class="lg:col-span-1 flex flex-col gap-6">
+<!-- Agent Status Card -->
+<div class="bg-surface-container-lowest rounded-xl ambient-shadow p-6">
+<h3 class="font-headline-md text-[18px] font-medium text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">robot_2</span>
+                        Agent Optimizations
+                    </h3>
+<div class="space-y-4">
+<!-- Atlas -->
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center">
+<span class="font-mono-label text-[10px] font-bold">AT</span>
+</div>
+<span class="font-body-md text-[14px] font-medium text-on-surface">Atlas</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<p class="font-label-sm text-[11px] text-on-surface-variant leading-relaxed">
+                                Rescheduled 2 low-priority meetings to protect Thursday morning's pitch deadline block.
+                            </p>
+</div>
+<!-- Orbit -->
+<div class="p-3 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-tertiary-container text-on-tertiary flex items-center justify-center">
+<span class="font-mono-label text-[10px] font-bold">OR</span>
+</div>
+<span class="font-body-md text-[14px] font-medium text-on-surface">Orbit</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+</div>
+<p class="font-label-sm text-[11px] text-on-surface-variant leading-relaxed">
+                                Currently screening inbound comms during Focus Block. 1 urgent ping flagged for review.
+                            </p>
+</div>
+</div>
+<button class="w-full mt-4 py-2 border border-outline-variant rounded font-mono-label text-label-sm text-on-surface-variant hover:bg-surface-container transition-colors">
+                        Review Agent Actions
+                    </button>
+</div>
+<!-- Upcoming Mini-list -->
+<div class="bg-surface-container-lowest rounded-xl ambient-shadow p-6 flex-1">
+<h3 class="font-headline-md text-[18px] font-medium text-on-surface mb-4">Up Next</h3>
+<ul class="space-y-4">
+<li class="flex gap-3 items-start relative pl-4 border-l-2 border-primary">
+<div class="w-2 h-2 rounded-full bg-primary absolute -left-[5px] top-1.5 ring-4 ring-surface-container-lowest"></div>
+<div>
+<p class="font-mono-label text-[11px] text-primary">In 45 mins</p>
+<p class="font-body-md text-[14px] font-medium text-on-surface leading-tight mt-0.5">Sync: Design Team</p>
+</div>
+</li>
+<li class="flex gap-3 items-start relative pl-4 border-l-2 border-outline-variant/30">
+<div class="w-2 h-2 rounded-full bg-outline-variant absolute -left-[5px] top-1.5 ring-4 ring-surface-container-lowest"></div>
+<div>
+<p class="font-mono-label text-[11px] text-on-surface-variant">Tomorrow, 09:15</p>
+<p class="font-body-md text-[14px] font-medium text-on-surface leading-tight mt-0.5 text-error">Pitch Submission Deadline</p>
+</div>
+</li>
+<li class="flex gap-3 items-start relative pl-4 border-l-2 border-outline-variant/30">
+<div class="w-2 h-2 rounded-full bg-outline-variant absolute -left-[5px] top-1.5 ring-4 ring-surface-container-lowest"></div>
+<div>
+<p class="font-mono-label text-[11px] text-on-surface-variant">Friday, 14:00</p>
+<p class="font-body-md text-[14px] font-medium text-on-surface leading-tight mt-0.5 text-on-surface-variant">Weekly Review</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chronix OS - Agent Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@300,0,0,24&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-container": "#beefbf",
+                        "on-secondary-fixed": "#002109",
+                        "on-primary-fixed": "#002204",
+                        "on-tertiary-container": "#ffedf0",
+                        "surface-container": "#ebefe5",
+                        "on-secondary-container": "#436e48",
+                        "inverse-on-surface": "#eef2e8",
+                        "secondary-fixed-dim": "#a3d2a5",
+                        "on-tertiary-fixed-variant": "#7f2448",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#a3f69c",
+                        "outline": "#707a6c",
+                        "inverse-primary": "#88d982",
+                        "inverse-surface": "#2d322b",
+                        "error": "#ba1a1a",
+                        "tertiary": "#923357",
+                        "surface": "#f7fbf0",
+                        "on-surface-variant": "#40493d",
+                        "on-tertiary-fixed": "#3f001c",
+                        "tertiary-fixed": "#ffd9e2",
+                        "surface-variant": "#e0e4da",
+                        "tertiary-fixed-dim": "#ffb1c7",
+                        "on-secondary-fixed-variant": "#254f2d",
+                        "surface-dim": "#d7dbd2",
+                        "surface-container-low": "#f1f5eb",
+                        "surface-bright": "#f7fbf0",
+                        "tertiary-container": "#b14b6f",
+                        "primary-fixed-dim": "#88d982",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "background": "#f7fbf0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#1b6d24",
+                        "secondary-fixed": "#beefbf",
+                        "primary-container": "#2e7d32",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e5eadf",
+                        "surface-container-highest": "#e0e4da",
+                        "outline-variant": "#bfcaba",
+                        "on-surface": "#181d17",
+                        "secondary": "#3d6843",
+                        "on-primary-fixed-variant": "#005312",
+                        "on-primary-container": "#cbffc2",
+                        "primary": "#0d631b",
+                        "on-background": "#181d17",
+                        "on-tertiary": "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "container-max": "1440px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "unit": "4px",
+                        "margin-desktop": "40px"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Geist"],
+                        "display-lg": ["\"Source Serif 4\""],
+                        "mono-label": ["Geist"],
+                        "display-lg-mobile": ["\"Source Serif 4\""],
+                        "body-md": ["Geist"],
+                        "headline-md": ["\"Source Serif 4\""],
+                        "label-sm": ["Geist"]
+                    },
+                    fontSize: {
+                        "body-lg": ["18px", { lineHeight: "28px", letterSpacing: "0em", fontWeight: "400" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "600" }],
+                        "mono-label": ["13px", { lineHeight: "18px", letterSpacing: "-0.01em", fontWeight: "500" }],
+                        "display-lg-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "body-md": ["15px", { lineHeight: "24px", letterSpacing: "0em", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "500" }],
+                        "label-sm": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .ambient-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen antialiased flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (Shared Component) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface py-margin-desktop px-6 overflow-y-auto hide-scrollbar z-50 border-r border-surface-container-highest/30">
+<div class="mb-12">
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Chronix OS</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mt-1">Executive Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill transition-all">dashboard</span>
+<span class="font-body-md text-body-md font-medium">Dashboard</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill transition-all">emoji_events</span>
+<span class="font-body-md text-body-md font-medium">Goals</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill transition-all">task_alt</span>
+<span class="font-body-md text-body-md font-medium">Tasks</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill transition-all">calendar_today</span>
+<span class="font-body-md text-body-md font-medium">Calendar</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill transition-all">timeline</span>
+<span class="font-body-md text-body-md font-medium">Simulator</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill transition-all">emergency</span>
+<span class="font-body-md text-body-md font-medium">Rescue</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill transition-all">monitoring</span>
+<span class="font-body-md text-body-md font-medium">Analytics</span>
+</a>
+<!-- ACTIVE TAB -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-low text-primary font-bold relative group" href="#">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-6 bg-primary rounded-r-full"></div>
+<span class="material-symbols-outlined text-[20px] icon-fill">smart_toy</span>
+<span class="font-body-md text-body-md">Agents</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill transition-all">notifications</span>
+<span class="font-body-md text-body-md font-medium">Notifications</span>
+</a>
+<!-- Inactive -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container transition-all duration-200 ease-out group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:icon-fill transition-all">settings</span>
+<span class="font-body-md text-body-md font-medium">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen relative w-full">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center h-20 px-margin-desktop sticky top-0 z-40 bg-surface/80 backdrop-blur-md">
+<div class="flex-1"></div> <!-- Spacer for center alignment if needed, mostly pushing actions right -->
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200 flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="bg-primary-container text-on-primary-container px-5 py-2 rounded-lg font-label-sm text-label-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    New Entry
+                </button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200 flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-container-low overflow-hidden">
+<img alt="User Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="A professional headshot of a person looking directly at the camera, conveying a sense of competence and reliability suitable for an enterprise software dashboard profile picture. Soft, natural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD53TmNXfZ83PDpp5gQ8dou6_DPfNKABM9-sI9KSKXd0r_p79HSg3oL-4qsGxqH0LJp0annvsU3DcWv-tq_RFVkqdeM4HtL0Iu89zpcDU0OwMQIEm_xItVKIzc4MuTArca_99PZg5prqBVQ6be7qhB4BdRnHxm1JgvY2mh4v9-7Tdz5KQLlocs6l_t5udhC-oFLgqcif0m7UjW2bwD-qsL6IMz0M2r6RK_s5NXWKHrXo6vc-ta9rIH2UDPNH_NVRLWx4mRWsFDw1Rc"/>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="px-margin-desktop pb-section-gap pt-8 flex-1 max-w-container-max mx-auto w-full">
+<div class="mb-10 max-w-3xl">
+<h2 class="font-display-lg text-display-lg text-on-surface mb-3 tracking-tight">Agent Command Center</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Live orchestration and telemetry across your autonomous neural suite. Monitoring 6 active agents.</p>
+</div>
+<!-- Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left/Main: Agent Cards Grid (Col span 8) -->
+<div class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Agent: Sentinel (Highlighted State) -->
+<div class="bg-surface-container-lowest ambient-shadow rounded-xl p-6 flex flex-col group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden ring-1 ring-error-container/50">
+<div class="absolute top-0 right-0 w-32 h-32 bg-error/5 rounded-bl-full -mr-16 -mt-16 transition-transform group-hover:scale-110"></div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary border border-surface-container-highest">
+<span class="material-symbols-outlined text-[24px]">visibility</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px] leading-tight">Sentinel</h3>
+<p class="font-mono-label text-mono-label text-on-surface-variant opacity-70">A-03 // Risk Monitor</p>
+</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-error-container/30 text-error rounded-full border border-error/10">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-[10px]">Alert</span>
+</div>
+</div>
+<div class="space-y-4 relative z-10 flex-1">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Current Mission</p>
+<p class="font-body-md text-body-md text-on-surface">Codebase Integrity &amp; Security Scan</p>
+</div>
+<div class="pt-2 border-t border-surface-container-highest/50">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Recent Output</p>
+<p class="font-mono-label text-mono-label text-error bg-error-container/20 p-2 rounded-md">Risk detected in Sprint 4: Null ptr exception pattern.</p>
+</div>
+</div>
+</div>
+<!-- Agent: Atlas -->
+<div class="bg-surface-container-lowest ambient-shadow rounded-xl p-6 flex flex-col group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden border border-transparent hover:border-surface-variant">
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary border border-surface-container-highest">
+<span class="material-symbols-outlined text-[24px]">public</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px] leading-tight">Atlas</h3>
+<p class="font-mono-label text-mono-label text-on-surface-variant opacity-70">A-01 // Strategic Core</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Optimal</span>
+</div>
+</div>
+<div class="space-y-4 relative z-10 flex-1">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Current Mission</p>
+<p class="font-body-md text-body-md text-on-surface">Q3 Resource Modeling &amp; Allocation</p>
+</div>
+<div class="pt-2 border-t border-surface-container-highest/50">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Recent Output</p>
+<p class="font-mono-label text-mono-label text-on-surface">Resource map synced. +15% compute to Alpha.</p>
+</div>
+</div>
+</div>
+<!-- Agent: Orbit -->
+<div class="bg-surface-container-lowest ambient-shadow rounded-xl p-6 flex flex-col group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden border border-transparent hover:border-surface-variant">
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary border border-surface-container-highest">
+<span class="material-symbols-outlined text-[24px]">sync</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px] leading-tight">Orbit</h3>
+<p class="font-mono-label text-mono-label text-on-surface-variant opacity-70">A-02 // Automation</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Optimal</span>
+</div>
+</div>
+<div class="space-y-4 relative z-10 flex-1">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Current Mission</p>
+<p class="font-body-md text-body-md text-on-surface">Daily Cross-Platform Data Sync</p>
+</div>
+<div class="pt-2 border-t border-surface-container-highest/50">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Recent Output</p>
+<p class="font-mono-label text-mono-label text-on-surface">45 pipelines verified. 0 dropped packets.</p>
+</div>
+</div>
+</div>
+<!-- Agent: Pulse -->
+<div class="bg-surface-container-lowest ambient-shadow rounded-xl p-6 flex flex-col group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden border border-transparent hover:border-surface-variant">
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary border border-surface-container-highest">
+<span class="material-symbols-outlined text-[24px]">favorite</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px] leading-tight">Pulse</h3>
+<p class="font-mono-label text-mono-label text-on-surface-variant opacity-70">A-04 // Analytics</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Optimal</span>
+</div>
+</div>
+<div class="space-y-4 relative z-10 flex-1">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Current Mission</p>
+<p class="font-body-md text-body-md text-on-surface">User Engagement Vitals Tracking</p>
+</div>
+<div class="pt-2 border-t border-surface-container-highest/50">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Recent Output</p>
+<p class="font-mono-label text-mono-label text-on-surface">Dashboards refreshed. Engagement +2.4%.</p>
+</div>
+</div>
+</div>
+<!-- Agent: Rescue -->
+<div class="bg-surface-container-lowest ambient-shadow rounded-xl p-6 flex flex-col group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden border border-transparent hover:border-surface-variant">
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary border border-surface-container-highest opacity-70">
+<span class="material-symbols-outlined text-[24px]">medical_services</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px] leading-tight">Rescue</h3>
+<p class="font-mono-label text-mono-label text-on-surface-variant opacity-70">A-05 // Recovery</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Standby</span>
+</div>
+</div>
+<div class="space-y-4 relative z-10 flex-1">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Current Mission</p>
+<p class="font-body-md text-body-md text-on-surface opacity-70">Awaiting Incident Trigger</p>
+</div>
+<div class="pt-2 border-t border-surface-container-highest/50">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Recent Output</p>
+<p class="font-mono-label text-mono-label text-on-surface opacity-70">System diagnostics passed at 04:00z.</p>
+</div>
+</div>
+</div>
+<!-- Agent: Echo -->
+<div class="bg-surface-container-lowest ambient-shadow rounded-xl p-6 flex flex-col group hover:-translate-y-1 transition-transform duration-300 relative overflow-hidden border border-transparent hover:border-surface-variant">
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-surface flex items-center justify-center text-primary border border-surface-container-highest">
+<span class="material-symbols-outlined text-[24px]">forum</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px] leading-tight">Echo</h3>
+<p class="font-mono-label text-mono-label text-on-surface-variant opacity-70">A-06 // Comm Logs</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest text-[10px]">Optimal</span>
+</div>
+</div>
+<div class="space-y-4 relative z-10 flex-1">
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Current Mission</p>
+<p class="font-body-md text-body-md text-on-surface">Stakeholder Update Drafting</p>
+</div>
+<div class="pt-2 border-t border-surface-container-highest/50">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Recent Output</p>
+<p class="font-mono-label text-mono-label text-on-surface">Drafted weekly synthesis report v1.2.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Live Collaboration Log (Col span 4) -->
+<div class="lg:col-span-4">
+<div class="bg-surface-container-lowest ambient-shadow rounded-xl p-6 flex flex-col h-[calc(100vh-140px)] sticky top-28 border border-surface-container-highest/30">
+<div class="flex items-center justify-between mb-6 pb-4 border-b border-surface-container-highest/50">
+<h3 class="font-headline-md text-[18px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">dynamic_feed</span>
+                                Synergy Feed
+                            </h3>
+<span class="flex items-center gap-1.5 font-label-sm text-label-sm text-primary uppercase tracking-widest">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span> Live
+                            </span>
+</div>
+<div class="flex-1 overflow-y-auto hide-scrollbar space-y-6 pr-2">
+<!-- Log Item 1 -->
+<div class="relative pl-6 before:absolute before:left-1.5 before:top-2 before:bottom-[-24px] before:w-px before:bg-surface-container-highest last:before:hidden">
+<div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-error-container border-2 border-surface-container-lowest z-10"></div>
+<p class="font-label-sm text-[10px] text-on-surface-variant opacity-70 mb-1">Just Now</p>
+<div class="bg-surface rounded-lg p-3 border border-error-container/30">
+<p class="font-mono-label text-[12px] text-on-surface leading-snug"><span class="text-error font-semibold">Sentinel</span> isolated anomalous pattern in Sprint 4 branch.</p>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="relative pl-6 before:absolute before:left-1.5 before:top-2 before:bottom-[-24px] before:w-px before:bg-surface-container-highest last:before:hidden">
+<div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-primary-container border-2 border-surface-container-lowest z-10"></div>
+<p class="font-label-sm text-[10px] text-on-surface-variant opacity-70 mb-1">2 mins ago</p>
+<div class="bg-surface rounded-lg p-3 border border-surface-container-highest/50">
+<p class="font-mono-label text-[12px] text-on-surface leading-snug"><span class="text-primary font-semibold">Atlas</span> re-routing diagnostic bandwidth to assist Sentinel trace.</p>
+</div>
+</div>
+<!-- Log Item 3 -->
+<div class="relative pl-6 before:absolute before:left-1.5 before:top-2 before:bottom-[-24px] before:w-px before:bg-surface-container-highest last:before:hidden">
+<div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-surface-variant border-2 border-surface-container-lowest z-10"></div>
+<p class="font-label-sm text-[10px] text-on-surface-variant opacity-70 mb-1">14 mins ago</p>
+<div class="bg-surface rounded-lg p-3 border border-surface-container-highest/50">
+<p class="font-mono-label text-[12px] text-on-surface leading-snug"><span class="text-on-surface-variant font-semibold">Echo</span> parsed daily commits; 45 pipelines confirmed stable by <span class="text-on-surface-variant font-semibold">Orbit</span>.</p>
+</div>
+</div>
+<!-- Log Item 4 -->
+<div class="relative pl-6 before:absolute before:left-1.5 before:top-2 before:bottom-[-24px] before:w-px before:bg-surface-container-highest last:before:hidden">
+<div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-primary-container border-2 border-surface-container-lowest z-10"></div>
+<p class="font-label-sm text-[10px] text-on-surface-variant opacity-70 mb-1">1 hr ago</p>
+<div class="bg-surface rounded-lg p-3 border border-surface-container-highest/50">
+<p class="font-mono-label text-[12px] text-on-surface leading-snug"><span class="text-primary font-semibold">Pulse</span> detected minor latency in API gateway. Optimizing.</p>
+</div>
+</div>
+<!-- Log Item 5 -->
+<div class="relative pl-6 before:absolute before:left-1.5 before:top-2 before:bottom-[-24px] before:w-px before:bg-surface-container-highest last:before:hidden">
+<div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-surface-variant border-2 border-surface-container-lowest z-10"></div>
+<p class="font-label-sm text-[10px] text-on-surface-variant opacity-70 mb-1">3 hrs ago</p>
+<div class="bg-surface rounded-lg p-3 border border-surface-container-highest/50 opacity-60">
+<p class="font-mono-label text-[12px] text-on-surface leading-snug">System initialization sequence completed seamlessly.</p>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-surface-container-highest/50">
+<button class="w-full py-2 flex items-center justify-center gap-2 text-on-surface-variant hover:text-primary font-label-sm text-label-sm uppercase tracking-widest transition-colors">
+                                View Full Archive <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interaction for staggered entry animation of cards
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll('.grid > div > .bg-surface-container-lowest');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(10px)';
+                card.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 + (index * 75)); // Stagger effect
+            });
+        });
+    </script>
+</body></html>

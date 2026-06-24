@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chronix OS - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed-variant": "#254f2d",
+                      "secondary-container": "#beefbf",
+                      "primary": "#0d631b",
+                      "primary-fixed": "#a3f69c",
+                      "on-error": "#ffffff",
+                      "surface-container-low": "#f1f5eb",
+                      "on-tertiary-fixed": "#3f001c",
+                      "error-container": "#ffdad6",
+                      "on-background": "#181d17",
+                      "surface-variant": "#e0e4da",
+                      "error": "#ba1a1a",
+                      "on-secondary-fixed": "#002109",
+                      "on-tertiary-container": "#ffedf0",
+                      "inverse-on-surface": "#eef2e8",
+                      "on-primary-fixed": "#002204",
+                      "on-surface": "#181d17",
+                      "on-primary": "#ffffff",
+                      "on-secondary-container": "#436e48",
+                      "surface-tint": "#1b6d24",
+                      "inverse-surface": "#2d322b",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed-dim": "#88d982",
+                      "surface-container": "#ebefe5",
+                      "outline": "#707a6c",
+                      "tertiary-fixed-dim": "#ffb1c7",
+                      "surface-bright": "#f7fbf0",
+                      "tertiary-container": "#b14b6f",
+                      "secondary-fixed-dim": "#a3d2a5",
+                      "surface-container-highest": "#e0e4da",
+                      "background": "#f7fbf0",
+                      "tertiary-fixed": "#ffd9e2",
+                      "surface-container-high": "#e5eadf",
+                      "on-surface-variant": "#40493d",
+                      "secondary-fixed": "#beefbf",
+                      "on-primary-container": "#cbffc2",
+                      "surface": "#f7fbf0",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary": "#923357",
+                      "inverse-primary": "#88d982",
+                      "primary-container": "#2e7d32",
+                      "on-tertiary": "#ffffff",
+                      "surface-dim": "#d7dbd2",
+                      "on-primary-fixed-variant": "#005312",
+                      "on-tertiary-fixed-variant": "#7f2448",
+                      "outline-variant": "#bfcaba",
+                      "on-error-container": "#93000a",
+                      "secondary": "#3d6843"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "margin-desktop": "40px",
+                      "margin-mobile": "16px",
+                      "unit": "4px",
+                      "gutter": "24px",
+                      "section-gap": "80px"
+              },
+              "fontFamily": {
+                      "mono-label": [
+                              "Geist"
+                      ],
+                      "display-lg-mobile": [
+                              "\"Source Serif 4\""
+                      ],
+                      "body-md": [
+                              "Geist"
+                      ],
+                      "headline-md": [
+                              "\"Source Serif 4\""
+                      ],
+                      "label-sm": [
+                              "Geist"
+                      ],
+                      "body-lg": [
+                              "Geist"
+                      ],
+                      "display-lg": [
+                              "\"Source Serif 4\""
+                      ]
+              },
+              "fontSize": {
+                      "mono-label": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "15px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #F4F5EF; /* Surface Tier 1 */
+            color: #181d17;
+        }
+        
+        .floating-card {
+            background-color: #FFFFFF; /* Surface Tier 2 */
+            border-radius: 16px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+            transition: all 200ms ease-out;
+        }
+        
+        .floating-card:hover {
+            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .ambient-shadow {
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Entry Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        
+        /* Custom Scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background-color: #e0e4da;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-x-hidden min-h-screen flex">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant shadow-sm flex-col py-8 px-4 gap-y-2 z-50">
+<!-- Header -->
+<div class="mb-8 px-4">
+<div class="flex items-center gap-3 mb-2">
+<img alt="User Profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A minimalist, abstract avatar icon representing a professional user profile in a clean, corporate style, using soft greens and warm whites." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ra48ArBG32KGJ3FgD64JQx1TJPGZyCB7yCxJ4UaNBtkTGzrF7kutaH-ddtpMNfUeVB7JlVM9PxXy6jhyhV-L1sMfRO__zrHHa5MAv4doHXdeQD2OreYm0bgj4q-WIZQNw6596CdNNOUS4F5ycT1XVLzxXYr4BhbKD_KtLGasSRsSWEo2ugnj_NyF9IcYRBog-nig4k2Z07AsHbT-ItihTCurSoNou3Gak2J8fWIOB_74HGVWX2nwBQmGhu6tkXdi5dq8tzOo3GM"/>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary truncate">Chronix OS</h1>
+<p class="font-mono-label text-mono-label text-on-surface-variant">Premium Productivity</p>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-2 mb-6">
+<button class="w-full bg-primary-container text-on-primary py-3 rounded-lg font-mono-label text-mono-label hover:opacity-90 transition-opacity flex items-center justify-center gap-2 ambient-shadow">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                New Entry
+            </button>
+</div>
+<!-- Main Navigation -->
+<div class="flex-1 overflow-y-auto">
+<ul class="space-y-1">
+<!-- Active Tab -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold bg-secondary-container/20 font-mono-label text-mono-label transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                        Dashboard
+                    </a>
+</li>
+<!-- Inactive Tabs -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">target</span>
+                        Goals
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">check_circle</span>
+                        Tasks
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+                        Calendar
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+                        Future Self
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">emergency</span>
+                        Rescue Center
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">insights</span>
+                        Analytics
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+                        Agent Hub
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">notifications</span>
+                        Notifications
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                        Settings
+                    </a>
+</li>
+</ul>
+</div>
+<!-- Footer Navigation -->
+<div class="mt-auto pt-4 border-t border-outline-variant/30">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+                        Help
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-on-surface-variant font-mono-label text-mono-label hover:bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+                        Logout
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full">
+<!-- Top App Bar (Mobile Only) -->
+<div class="md:hidden flex justify-between items-center mb-6">
+<h1 class="font-display-lg-mobile text-display-lg-mobile font-semibold text-primary">Chronix OS</h1>
+<button class="p-2 bg-surface-container-lowest rounded-full ambient-shadow">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+</div>
+<!-- Hero Section -->
+<header class="mb-10 animate-fade-up">
+<h2 class="font-display-lg text-display-lg md:text-[48px] text-on-surface tracking-tight mb-2">Welcome back.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">You are currently at <span class="text-primary font-semibold">87 Momentum</span>.</p>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min">
+<!-- 1. Momentum Score (Large Card) -->
+<div class="floating-card p-6 md:col-span-8 animate-fade-up stagger-1 flex flex-col justify-between min-h-[320px]">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="font-mono-label text-mono-label text-on-surface-variant uppercase tracking-wider mb-1">System Status</h3>
+<div class="text-4xl font-headline-md text-primary">Momentum Score</div>
+</div>
+<div class="bg-secondary-container/30 px-3 py-1 rounded-full text-on-secondary-fixed-variant font-mono-label text-mono-label flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span>
+                        +4% This Week
+                    </div>
+</div>
+<!-- Chart Area Placeholder -->
+<div class="flex-1 w-full bg-surface-container-low rounded-lg relative overflow-hidden flex items-end">
+<!-- Abstract representation of a chart using gradients -->
+<div class="absolute inset-0 bg-gradient-to-t from-secondary-container/20 to-transparent"></div>
+<div class="w-full h-[60%] border-t-2 border-primary border-dashed relative">
+<!-- Data points -->
+<div class="absolute -top-1.5 left-[10%] w-3 h-3 bg-primary rounded-full ring-4 ring-white"></div>
+<div class="absolute -top-4 left-[30%] w-3 h-3 bg-primary rounded-full ring-4 ring-white"></div>
+<div class="absolute top-2 left-[50%] w-3 h-3 bg-primary rounded-full ring-4 ring-white"></div>
+<div class="absolute -top-8 left-[70%] w-3 h-3 bg-primary rounded-full ring-4 ring-white"></div>
+<div class="absolute -top-12 left-[90%] w-4 h-4 bg-primary-container rounded-full ring-4 ring-white shadow-lg flex items-center justify-center">
+<div class="w-2 h-2 bg-white rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- 2. Today's Focus -->
+<div class="floating-card p-6 md:col-span-4 animate-fade-up stagger-2">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-mono-label text-mono-label text-on-surface-variant uppercase tracking-wider">Today's Focus</h3>
+<span class="material-symbols-outlined text-outline">tune</span>
+</div>
+<div class="space-y-4">
+<!-- Task Item -->
+<div class="flex items-start gap-3 p-3 hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="mt-1 w-5 h-5 rounded border border-outline flex items-center justify-center">
+<!-- Checked state visual -->
+</div>
+<div>
+<p class="font-body-md text-on-surface font-medium leading-tight">Finalize Q3 Strategy Deck</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">High Priority • Atlas</p>
+</div>
+</div>
+<!-- Task Item -->
+<div class="flex items-start gap-3 p-3 hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="mt-1 w-5 h-5 rounded border border-outline flex items-center justify-center"></div>
+<div>
+<p class="font-body-md text-on-surface font-medium leading-tight">Review Sentinel Risk Report</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Medium Priority</p>
+</div>
+</div>
+<!-- Task Item -->
+<div class="flex items-start gap-3 p-3 hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30">
+<div class="mt-1 w-5 h-5 rounded border border-outline flex items-center justify-center"></div>
+<div>
+<p class="font-body-md text-on-surface font-medium leading-tight">Weekly Sync w/ Design</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Scheduled • 14:00</p>
+</div>
+</div>
+</div>
+<button class="mt-4 w-full py-2 text-primary font-mono-label text-mono-label border border-primary/20 rounded-lg hover:bg-primary/5 transition-colors">
+                    View All Tasks
+                </button>
+</div>
+<!-- 3. Future Self Simulator -->
+<div class="floating-card p-6 md:col-span-4 animate-fade-up stagger-3 bg-gradient-to-br from-surface-container-lowest to-surface-container-low">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-mono-label text-mono-label text-on-surface-variant uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 16px;">auto_awesome</span>
+                        Future Projection
+                    </h3>
+</div>
+<div class="py-4">
+<p class="font-headline-md text-headline-md text-on-surface mb-2">On track for Q4 Goals.</p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Current trajectory indicates early completion of "Project Horizon" by 12 days.</p>
+<div class="w-full bg-surface-variant rounded-full h-1.5 mb-2 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 78%"></div>
+</div>
+<div class="flex justify-between text-label-sm text-on-surface-variant font-mono-label">
+<span>Current: 78%</span>
+<span>Target: 100%</span>
+</div>
+</div>
+</div>
+<!-- 4. Deadline Radar -->
+<div class="floating-card p-6 md:col-span-4 animate-fade-up stagger-4">
+<h3 class="font-mono-label text-mono-label text-on-surface-variant uppercase tracking-wider mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 16px;">radar</span>
+                    Sentinel Radar
+                </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 bg-error-container/30 rounded-lg border border-error/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-error">warning</span>
+<span class="font-body-md text-on-surface font-medium">Tax Filing Prep</span>
+</div>
+<span class="font-mono-label text-mono-label text-error">2 Days</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">schedule</span>
+<span class="font-body-md text-on-surface">Client Presentation</span>
+</div>
+<span class="font-mono-label text-mono-label text-on-surface-variant">5 Days</span>
+</div>
+</div>
+</div>
+<!-- 5. Agent Feed -->
+<div class="floating-card p-6 md:col-span-4 animate-fade-up stagger-5">
+<h3 class="font-mono-label text-mono-label text-on-surface-variant uppercase tracking-wider mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 16px;">smart_toy</span>
+                    Agent Activity
+                </h3>
+<div class="relative pl-4 border-l-2 border-surface-variant space-y-6 mt-4">
+<!-- Feed Item -->
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-3 h-3 bg-primary rounded-full ring-4 ring-white"></div>
+<p class="font-label-sm text-label-sm text-primary font-mono-label mb-1">2 mins ago</p>
+<p class="font-body-md text-on-surface">Data Agent completed weekly analytics pull. Report is ready for review.</p>
+</div>
+<!-- Feed Item -->
+<div class="relative">
+<div class="absolute -left-[23px] top-1 w-3 h-3 bg-outline-variant rounded-full ring-4 ring-white"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant font-mono-label mb-1">1 hr ago</p>
+<p class="font-body-md text-on-surface">Scheduling Agent resolved conflict between Design Sync and Client Call.</p>
+</div>
+</div>
+</div>
+<!-- 6. Calendar Focus Blocks -->
+<div class="floating-card p-6 md:col-span-8 animate-fade-up stagger-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-mono-label text-mono-label text-on-surface-variant uppercase tracking-wider">Focus Blocks</h3>
+<div class="flex gap-2">
+<button class="p-1 rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-outline">chevron_left</span></button>
+<span class="font-mono-label text-mono-label py-1">Today</span>
+<button class="p-1 rounded hover:bg-surface-container transition-colors"><span class="material-symbols-outlined text-outline">chevron_right</span></button>
+</div>
+</div>
+<!-- Mini Timeline -->
+<div class="flex h-32 gap-2">
+<!-- Time slot 1 -->
+<div class="flex-1 flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant text-center">09:00</span>
+<div class="flex-1 bg-surface-container-low rounded-md border border-outline-variant/30 flex items-center justify-center p-2 text-center relative group">
+<span class="font-label-sm text-on-surface-variant opacity-50">Deep Work</span>
+<div class="absolute inset-0 bg-primary/10 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+</div>
+<!-- Time slot 2 (Active) -->
+<div class="flex-1 flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-primary font-bold text-center">11:00</span>
+<div class="flex-1 bg-primary/10 rounded-md border border-primary/30 flex flex-col items-center justify-center p-2 text-center shadow-inner">
+<span class="font-mono-label text-primary font-bold text-xs mb-1">Strategy Deck</span>
+<span class="material-symbols-outlined text-primary" style="font-size: 16px;">bolt</span>
+</div>
+</div>
+<!-- Time slot 3 -->
+<div class="flex-1 flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant text-center">13:00</span>
+<div class="flex-1 bg-transparent rounded-md border border-dashed border-outline-variant flex items-center justify-center p-2">
+<span class="font-label-sm text-on-surface-variant opacity-50">Lunch</span>
+</div>
+</div>
+<!-- Time slot 4 -->
+<div class="flex-1 flex flex-col gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant text-center">14:00</span>
+<div class="flex-1 bg-secondary-container/30 rounded-md border border-secondary-container flex items-center justify-center p-2 text-center">
+<span class="font-label-sm text-on-secondary-fixed-variant">Meetings</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom spacing for mobile if needed -->
+<div class="h-24 md:h-8"></div>
+</main>
+</body></html>
