@@ -2,8 +2,11 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import AnalyticsClient from "./AnalyticsClient";
 
+import { cookies } from "next/headers";
+
 export default async function AnalyticsPage() {
-  const userId = "demo-user-123";
+  const cookieStore = cookies();
+  const userId = cookieStore.get("chronix-uid")?.value || "demo-user-123";
 
   let user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) {

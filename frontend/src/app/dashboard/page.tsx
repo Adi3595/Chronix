@@ -1,8 +1,11 @@
 import DashboardClient from "./DashboardClient";
 import { prisma } from "@/lib/db";
 
+import { cookies } from "next/headers";
+
 export default async function DashboardPage() {
-  const userId = "demo-user-123";
+  const cookieStore = cookies();
+  const userId = cookieStore.get("chronix-uid")?.value || "demo-user-123";
 
   // Fetch data in parallel
   const [user, tasks, agentActions] = await Promise.all([

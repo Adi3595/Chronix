@@ -227,7 +227,7 @@ void main() {
             style={{ y: heroY, opacity }}
             className="lg:col-span-6 flex flex-col justify-center"
           >
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, ease: "easeOut" }}>
               <h1 className="font-display-lg font-serif text-[56px] md:text-[80px] leading-[1.05] font-semibold text-on-surface mb-6 tracking-tight">
                 Execution<br />
                 <span className="text-primary relative inline-block">
@@ -237,12 +237,12 @@ void main() {
               </h1>
             </motion.div>
             
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }} className="font-body-lg text-[18px] md:text-[22px] text-on-surface-variant mb-10 max-w-lg leading-relaxed">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.4, ease: "easeOut" }} className="font-body-lg text-[18px] md:text-[22px] text-on-surface-variant mb-10 max-w-lg leading-relaxed">
               Chronix transforms goals, deadlines, and responsibilities into clear, autonomous execution paths. Predict risks. Maintain momentum. Finish what matters.
             </motion.p>
             
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }} className="flex flex-wrap items-center gap-4 mb-12">
-              <Link href="/dashboard" className="bg-primary text-on-primary px-8 py-4 rounded-xl font-mono-label text-[14px] font-mono hover:opacity-90 transition-all shadow-[0_8px_30px_rgba(46,125,50,0.2)] hover:shadow-[0_8px_30px_rgba(46,125,50,0.4)] hover:-translate-y-0.5">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.8, ease: "easeOut" }} className="flex flex-wrap items-center gap-4 mb-12">
+              <Link href="/signup" className="bg-primary text-on-primary px-8 py-4 rounded-xl font-mono-label text-[14px] font-mono hover:opacity-90 transition-all shadow-[0_8px_30px_rgba(46,125,50,0.2)] hover:shadow-[0_8px_30px_rgba(46,125,50,0.4)] hover:-translate-y-0.5">
                 Start Planning Free
               </Link>
               <button className="bg-transparent border-2 border-outline-variant text-on-surface px-8 py-4 rounded-xl font-mono-label text-[14px] font-mono hover:bg-surface-container transition-colors flex items-center gap-2">
@@ -250,7 +250,7 @@ void main() {
               </button>
             </motion.div>
             
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} className="font-label-sm text-[12px] font-semibold text-on-surface-variant uppercase tracking-widest border-l-2 border-primary pl-4 flex flex-col gap-2">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1.4 }} className="font-label-sm text-[12px] font-semibold text-on-surface-variant uppercase tracking-widest border-l-2 border-primary pl-4 flex flex-col gap-2">
               <span>Trusted by forward-thinking executives & teams</span>
               <div className="flex gap-4 opacity-50 grayscale pt-2">
                 {/* Mock logos */}
@@ -542,13 +542,13 @@ void main() {
       </section>
 
       {/* CTA SECTION */}
-      <section className="py-[120px] bg-primary relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_white_0%,_transparent_100%)]"></div>
+      <section className="py-[120px] bg-surface-container-lowest relative overflow-hidden border-t border-outline-variant/20">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,125,50,0.15)_0%,transparent_70%)]"></div>
         <div className="max-w-[800px] mx-auto px-4 text-center relative z-10">
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display-lg font-serif text-[48px] text-white font-semibold mb-6">Ready to execute?</motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-primary-container text-[20px] mb-10">Stop managing tasks. Start achieving goals with the power of 6 distinct AI agents working behind the scenes.</motion.p>
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display-lg font-serif text-[48px] text-on-surface font-semibold mb-6">Ready to execute?</motion.h2>
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-on-surface-variant text-[20px] mb-10">Stop managing tasks. Start achieving goals with the power of 6 distinct AI agents working behind the scenes.</motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-            <Link href="/dashboard" className="bg-white text-primary px-10 py-5 rounded-2xl font-bold text-[16px] hover:scale-105 transition-transform inline-block shadow-2xl">Enter the Terminal</Link>
+            <Link href="/signup" className="bg-primary text-on-primary px-10 py-5 rounded-2xl font-bold text-[16px] hover:scale-105 transition-transform inline-block shadow-[0_8px_30px_rgba(46,125,50,0.3)]">Enter the Terminal</Link>
           </motion.div>
         </div>
       </section>
