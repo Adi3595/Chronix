@@ -56,14 +56,50 @@ export default function TermsPage() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-surface-container w-full py-12 border-t border-outline-variant/20">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] flex flex-col md:flex-row justify-between items-center">
-          <div className="font-display-lg font-serif text-[24px] text-primary mb-6 md:mb-0 flex items-center gap-2">
-            <img src="/icon.svg" alt="Logo" className="w-6 h-6 grayscale" />
-            Chronix OS
+      <footer className="bg-surface-container w-full py-16">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div className="col-span-1 md:col-span-2">
+            <div className="font-display-lg font-serif text-[24px] text-primary mb-4 flex items-center gap-2">
+              <img src="/icon.svg" alt="Logo" className="w-6 h-6 grayscale" />
+              Chronix OS
+            </div>
+            <p className="font-body-md text-[14px] text-on-surface-variant mb-6 max-w-sm leading-relaxed">
+              Execution Without Chaos. A premium autonomous executive productivity suite powered by an interconnected neural suite of AI agents.
+            </p>
+            <div className="flex flex-col gap-2 font-mono-label text-[13px] font-mono text-on-surface-variant">
+              <span className="flex items-center gap-2"><span className="material-symbols-outlined text-[16px]">location_on</span> 120 Execution Ave, San Francisco, CA 94105</span>
+              <a href="mailto:support@chronix.os" className="flex items-center gap-2 hover:text-primary transition-colors w-fit"><span className="material-symbols-outlined text-[16px]">mail</span> support@chronix.os</a>
+              <a href="tel:+15551234567" className="flex items-center gap-2 hover:text-primary transition-colors w-fit"><span className="material-symbols-outlined text-[16px]">call</span> +1 (555) 123-4567</a>
+            </div>
           </div>
+
+          <div>
+            <h4 className="font-bold text-[14px] text-on-surface mb-4 uppercase tracking-widest">Platform</h4>
+            <ul className="flex flex-col gap-3 font-mono-label text-[13px] font-mono">
+              <li><Link href="/#features" className="text-on-surface-variant hover:text-primary transition-colors">Features</Link></li>
+              <li><Link href="/#pricing" className="text-on-surface-variant hover:text-primary transition-colors">Pricing</Link></li>
+              <li><Link href="/dashboard" className="text-on-surface-variant hover:text-primary transition-colors">Terminal</Link></li>
+              <li><Link href="https://github.com/Adi3595/Chronix" target="_blank" className="text-on-surface-variant hover:text-primary transition-colors">GitHub</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-bold text-[14px] text-on-surface mb-4 uppercase tracking-widest">Legal</h4>
+            <ul className="flex flex-col gap-3 font-mono-label text-[13px] font-mono">
+              <li><Link href="/privacy" className="text-on-surface-variant hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-on-surface-variant hover:text-primary transition-colors">Terms of Service</Link></li>
+              <li><a href="mailto:support@chronix.os" className="text-on-surface-variant hover:text-primary transition-colors">Contact Support</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="font-body-md text-[13px] text-on-surface-variant">
             © {new Date().getFullYear()} Chronix Productivity OS. Swiss Engineered Focus.
+          </div>
+          <div className="flex gap-4 text-on-surface-variant">
+            {/* Social Icons Placeholder */}
+            <a href="#" className="hover:text-primary transition-colors"><span className="material-symbols-outlined text-[20px]">language</span></a>
           </div>
         </div>
       </footer>
