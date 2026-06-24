@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./public/icon.png" alt="Chronix OS Logo" width="120" height="120">
+  <img src="./public/icon.svg" alt="Chronix OS Logo" width="120" height="120">
   <br/>
   <h1>Chronix OS</h1>
   <p><strong>Execution Without Chaos.</strong> A premium autonomous executive productivity suite powered by an interconnected neural suite of AI agents.</p>
