@@ -1,0 +1,18 @@
+# Hackathon & Design Files
+Vibe2Ship*
+Chronix_Project_Documentation*
+Chronix.png
+requirements.txt
+
+# AI & Agent Files
+.gemini/
+stitch/
+.stitch/
+*.stitch
+stitch.json
+stitch_screens.md
+.cursor/
+.cursorrules
+
+# MacOS
+.DS_Store
