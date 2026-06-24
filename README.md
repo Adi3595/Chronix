@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./frontend/public/favicon.ico" alt="Chronix Logo" width="120" />
+  <img src="./frontend/public/icon.svg" alt="Chronix Logo" width="120" />
   <h1>Chronix OS</h1>
   <p><strong>Execution without chaos.</strong></p>
   <p>An autonomous productivity orchestration platform that helps users avoid missed deadlines using a collaborative AI neural suite.</p>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Left to right diagonal -->
+  <polygon points="20,20 45,20 80,80 55,80" fill="#111827" />
+  <!-- Right to left diagonal -->
+  <polygon points="80,20 55,20 20,80 45,80" fill="#111827" />
+  <!-- Green accent chevron -->
+  <path d="M 45 40 L 60 50 L 45 60 L 50 50 Z" fill="#2E7D32" />
+</svg>
