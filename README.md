@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4ra48ArBG32KGJ3FgD64JQx1TJPGZyCB7yCxJ4UaNBtkTGzrF7kutaH-ddtpMNfUeVB7JlVM9PxXy6jhyhV-L1sMfRO__zrHHa5MAv4doHXdeQD2OreYm0bgj4q-WIZQNw6596CdNNOUS4F5ycT1XVLzxXYr4BhbKD_KtLGasSRsSWEo2ugnj_NyF9IcYRBog-nig4k2Z07AsHbT-ItihTCurSoNou3Gak2J8fWIOB_74HGVWX2nwBQmGhu6tkXdi5dq8tzOo3GM" alt="Chronix OS Logo" width="120" height="120">
+  <img src="./public/icon.png" alt="Chronix OS Logo" width="120" height="120">
   <br/>
-  <h1>✨ Chronix OS ✨</h1>
+  <h1>Chronix OS</h1>
   <p><strong>Execution Without Chaos.</strong> A premium autonomous executive productivity suite powered by an interconnected neural suite of AI agents.</p>
 
   <p>
