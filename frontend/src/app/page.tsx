@@ -463,9 +463,9 @@ void main() {
           </div>
           <div className="flex flex-col items-center md:items-end gap-4">
             <div className="flex gap-6">
-              <Link href="#" className="text-on-surface-variant hover:text-primary transition-opacity ease-out duration-200 font-mono-label text-[13px] font-mono">Privacy Policy</Link>
-              <Link href="#" className="text-on-surface-variant hover:text-primary transition-opacity ease-out duration-200 font-mono-label text-[13px] font-mono">Terms of Service</Link>
-              <Link href="#" className="text-on-surface-variant hover:text-primary transition-opacity ease-out duration-200 font-mono-label text-[13px] font-mono">Contact Support</Link>
+              <Link href="/privacy" className="text-on-surface-variant hover:text-primary transition-opacity ease-out duration-200 font-mono-label text-[13px] font-mono">Privacy Policy</Link>
+              <Link href="/terms" className="text-on-surface-variant hover:text-primary transition-opacity ease-out duration-200 font-mono-label text-[13px] font-mono">Terms of Service</Link>
+              <a href="mailto:support@chronix.os" className="text-on-surface-variant hover:text-primary transition-opacity ease-out duration-200 font-mono-label text-[13px] font-mono">Contact Support</a>
             </div>
             <div className="font-body-md text-[13px] text-on-surface-variant">
               © 2026 Chronix Productivity OS. Swiss Engineered Focus.
