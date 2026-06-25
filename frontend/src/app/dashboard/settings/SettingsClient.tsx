@@ -7,32 +7,16 @@ import { PLANS, PlanDefinition } from "@/lib/plans";
 import CheckoutModal from "@/components/CheckoutModal";
 import { downgradePlan } from "@/app/actions/user-actions";
 import { useAuth } from "@/components/AuthProvider";
+import { useTheme } from "@/components/ThemeProvider";
 
 type Theme = "light" | "dark" | "auto";
 
-function applyTheme(theme: Theme) {
-  const root = document.documentElement;
-  if (theme === "dark") {
-    root.classList.add("dark");
-    root.style.colorScheme = "dark";
-  } else if (theme === "light") {
-    root.classList.remove("dark");
-    root.style.colorScheme = "light";
-  } else {
-    // Auto: follow system preference
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    root.classList.toggle("dark", prefersDark);
-    root.style.colorScheme = prefersDark ? "dark" : "light";
-  }
-  localStorage.setItem("chronix-theme", theme);
-}
-
 export default function SettingsClient({ user }: { user: any }) {
+  const { theme, setTheme } = useTheme();
   const [deepWorkEnabled, setDeepWorkEnabled] = useState(true);
   const [weeklyBriefing, setWeeklyBriefing] = useState(false);
   const [autonomyLevel, setAutonomyLevel] = useState(3);
   const [notificationThreshold, setNotificationThreshold] = useState(75);
-  const [theme, setTheme] = useState<Theme>("light");
   const [toast, setToast] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState(user?.name || "A. Executive");
   const [email, setEmail] = useState(user?.email || "admin@chronix.os");
@@ -52,16 +36,8 @@ export default function SettingsClient({ user }: { user: any }) {
     }
   };
 
-  // Load saved theme on mount
-  useEffect(() => {
-    const saved = (localStorage.getItem("chronix-theme") as Theme) || "light";
-    setTheme(saved);
-    applyTheme(saved);
-  }, []);
-
   const handleThemeChange = (newTheme: Theme) => {
     setTheme(newTheme);
-    applyTheme(newTheme);
     showToast(`Theme set to ${newTheme}`);
   };
 
