@@ -417,7 +417,7 @@ void main() {
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> External Integrations (Slack/Cal)</li>
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> Priority Rescue Mode</li>
               </ul>
-              <Link href="/signup" className="w-full py-3 rounded-xl bg-primary text-on-primary font-bold text-[14px] hover:opacity-90 transition-opacity block text-center">Get Started</Link>
+              <Link href="/signup?upgrade=executive" className="w-full py-3 rounded-xl bg-primary text-on-primary font-bold text-[14px] hover:opacity-90 transition-opacity block text-center">Get Started</Link>
             </motion.div>
 
             {/* Enterprise */}
@@ -436,7 +436,7 @@ void main() {
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> Cross-team Synergy Feed</li>
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> SSO / SAML</li>
               </ul>
-              <a href="mailto:support@chronix.os" className="w-full py-3 rounded-xl border-2 border-outline-variant font-bold text-[14px] hover:bg-surface-container transition-colors block text-center">Contact Sales</a>
+              <Link href="/signup?upgrade=enterprise" className="w-full py-3 rounded-xl border-2 border-outline-variant font-bold text-[14px] hover:bg-surface-container transition-colors block text-center">Contact Sales</Link>
             </motion.div>
           </div>
         </div>

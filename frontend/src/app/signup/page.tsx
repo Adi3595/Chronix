@@ -1,16 +1,23 @@
 "use client";
 
 import { useAuth } from "@/components/AuthProvider";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { createUserWithEmailAndPassword, updateProfile, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { syncUser } from "@/app/actions/user-actions";
 
-export default function SignupPage() {
+function SignupForm() {
   const { user, loading, login } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const upgradePlan = searchParams.get("upgrade");
+  
+  const getRedirectUrl = () => {
+    if (upgradePlan) return `/dashboard/settings?checkout=${upgradePlan}`;
+    return "/dashboard";
+  };
   
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,9 +27,9 @@ export default function SignupPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      router.push("/dashboard");
+      router.push(getRedirectUrl());
     }
-  }, [user, loading, router]);
+  }, [user, loading, router, upgradePlan]);
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,11 +51,12 @@ export default function SignupPage() {
         }
         
         document.cookie = `chronix-uid=${newUser.uid}; path=/; max-age=86400;`;
-        router.push("/dashboard");
+        router.push(getRedirectUrl());
       } else {
         // Fallback to mock if firebase is not configured
         login();
         document.cookie = `chronix-uid=demo-user-123; path=/; max-age=86400;`;
+        router.push(getRedirectUrl());
       }
     } catch (err: any) {
       setError(err.message || "Failed to create account. Please try again.");
@@ -71,10 +79,11 @@ export default function SignupPage() {
         await syncUser(user.uid, user.email || "", user.displayName || "Google User");
         
         document.cookie = `chronix-uid=${user.uid}; path=/; max-age=86400;`;
-        router.push("/dashboard");
+        router.push(getRedirectUrl());
       } else {
         login();
         document.cookie = `chronix-uid=demo-user-123; path=/; max-age=86400;`;
+        router.push(getRedirectUrl());
       }
     } catch (err: any) {
       setError(err.message || "Failed to sign up with Google.");
@@ -185,5 +194,13 @@ export default function SignupPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function SignupPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div></div>}>
+      <SignupForm />
+    </Suspense>
   );
 }

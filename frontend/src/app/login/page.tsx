@@ -1,16 +1,23 @@
 "use client";
 
 import { useAuth } from "@/components/AuthProvider";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { syncUser } from "@/app/actions/user-actions";
 
-export default function LoginPage() {
+function LoginForm() {
   const { user, loading, login } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const upgradePlan = searchParams.get("upgrade");
+  
+  const getRedirectUrl = () => {
+    if (upgradePlan) return `/dashboard/settings?checkout=${upgradePlan}`;
+    return "/dashboard";
+  };
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,9 +26,9 @@ export default function LoginPage() {
 
   useEffect(() => {
     if (!loading && user) {
-      router.push("/dashboard");
+      router.push(getRedirectUrl());
     }
-  }, [user, loading, router]);
+  }, [user, loading, router, upgradePlan]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,11 +39,12 @@ export default function LoginPage() {
       if (auth) {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         document.cookie = `chronix-uid=${userCredential.user.uid}; path=/; max-age=86400;`;
-        router.push("/dashboard");
+        router.push(getRedirectUrl());
       } else {
-        // Fallback to mock login if firebase is not configured
+        // Fallback to mock if firebase is not configured
         login();
         document.cookie = `chronix-uid=demo-user-123; path=/; max-age=86400;`;
+        router.push(getRedirectUrl());
       }
     } catch (err: any) {
       setError(err.message || "Failed to sign in. Please check your credentials.");
@@ -59,10 +67,11 @@ export default function LoginPage() {
         await syncUser(user.uid, user.email || "", user.displayName || "Google User");
         
         document.cookie = `chronix-uid=${user.uid}; path=/; max-age=86400;`;
-        router.push("/dashboard");
+        router.push(getRedirectUrl());
       } else {
         login();
         document.cookie = `chronix-uid=demo-user-123; path=/; max-age=86400;`;
+        router.push(getRedirectUrl());
       }
     } catch (err: any) {
       setError(err.message || "Failed to sign in with Google.");
@@ -161,5 +170,13 @@ export default function LoginPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center"><div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div></div>}>
+      <LoginForm />
+    </Suspense>
   );
 }
