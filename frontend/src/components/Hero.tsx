@@ -85,7 +85,7 @@ export function Hero() {
             <button className="px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium hover:bg-[#1b5e20] transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-300">
               Start Planning
             </button>
-            <button className="px-8 py-4 bg-white text-foreground border border-gray-200 rounded-full font-medium hover:bg-gray-50 transition-colors shadow-sm hover:shadow-md transform hover:-translate-y-1 duration-300">
+            <button className="px-8 py-4 bg-surface-container-lowest text-foreground border border-outline-variant/30 rounded-full font-medium hover:bg-surface-container transition-colors shadow-sm hover:shadow-md transform hover:-translate-y-1 duration-300">
               Watch Demo
             </button>
           </motion.div>
@@ -98,7 +98,7 @@ export function Hero() {
             initial={{ opacity: 0, x: 50, rotate: 5 }}
             animate={{ opacity: 1, x: 0, rotate: 0 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="absolute top-10 right-10 bg-white p-6 rounded-3xl shadow-2xl border border-gray-100 w-64 z-20 backdrop-blur-sm bg-white/90"
+            className="absolute top-10 right-10 bg-surface-container-lowest p-6 rounded-3xl shadow-2xl border border-outline-variant/30 w-64 z-20 backdrop-blur-sm bg-opacity-90"
           >
             <p className="text-sm text-muted-foreground mb-1 uppercase tracking-wider font-semibold">Momentum Score</p>
             <h2 className="text-5xl font-serif text-foreground mb-2">87</h2>
@@ -112,7 +112,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 50, rotate: -2 }}
             animate={{ opacity: 1, y: 0, rotate: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="absolute bottom-10 left-0 bg-white p-6 rounded-3xl shadow-xl border border-gray-100 w-72 z-10"
+            className="absolute bottom-10 left-0 bg-surface-container-lowest p-6 rounded-3xl shadow-xl border border-outline-variant/30 w-72 z-10"
           >
             <p className="text-sm text-muted-foreground mb-4 uppercase tracking-wider font-semibold">Future Self Simulator</p>
             <div className="space-y-4">
@@ -122,7 +122,7 @@ export function Hero() {
                   <span className="text-2xl font-serif text-foreground">120</span>
                   <span className="text-sm text-muted-foreground pb-1">Days</span>
                 </div>
-                <div className="w-full bg-gray-100 h-2 rounded-full mt-2 overflow-hidden">
+                <div className="w-full bg-surface-container-highest h-2 rounded-full mt-2 overflow-hidden">
                   <div className="bg-warning h-full w-[80%] rounded-full"></div>
                 </div>
               </div>
@@ -144,7 +144,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-2xl border border-gray-100 w-80 z-30"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-surface-container-lowest/80 backdrop-blur-md p-6 rounded-3xl shadow-2xl border border-outline-variant/30 w-80 z-30"
           >
             <div className="flex items-center justify-between mb-4">
               <p className="text-sm text-muted-foreground uppercase tracking-wider font-semibold">Agent Activity</p>
