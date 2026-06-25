@@ -56,12 +56,11 @@ export function Hero() {
             <div className="relative inline-block">
               Execution<br />
               Without<br />
-              <span className="text-primary italic relative inline-block group-hover:animate-pulse">
+              <span 
+                className="text-primary italic relative inline-block glitched-text group-hover:animate-pulse" 
+                data-text="Chaos."
+              >
                 Chaos.
-                {/* Glitch Layer 1 (Red) */}
-                <span className="absolute top-0 left-0 -ml-[3px] text-red-500 opacity-80 animate-vhs-glitch-1 pointer-events-none">Chaos.</span>
-                {/* Glitch Layer 2 (Blue) */}
-                <span className="absolute top-0 left-0 ml-[3px] text-blue-500 opacity-80 animate-vhs-glitch-2 pointer-events-none">Chaos.</span>
               </span>
             </div>
           </motion.h1>

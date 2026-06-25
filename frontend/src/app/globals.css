@@ -130,30 +130,52 @@ h1, h2, h3, h4, h5, h6 {
   100% { transform: translate(5%, 0); }
 }
 
-@keyframes vhs-glitch-1 {
-  0%, 100% { clip-path: inset(50% 0 30% 0); transform: translate(-4px, 2px); }
-  20% { clip-path: inset(15% 0 65% 0); transform: translate(4px, -2px); }
-  40% { clip-path: inset(80% 0 5% 0); transform: translate(-4px, -2px); }
-  60% { clip-path: inset(40% 0 40% 0); transform: translate(4px, 2px); }
-  80% { clip-path: inset(10% 0 70% 0); transform: translate(-4px, 1px); }
+.glitched-text {
+  position: relative;
+  display: inline-block;
 }
 
-@keyframes vhs-glitch-2 {
-  0%, 100% { clip-path: inset(10% 0 70% 0); transform: translate(4px, -2px); }
-  20% { clip-path: inset(60% 0 20% 0); transform: translate(-4px, 2px); }
-  40% { clip-path: inset(25% 0 55% 0); transform: translate(4px, 2px); }
-  60% { clip-path: inset(75% 0 15% 0); transform: translate(-4px, -2px); }
-  80% { clip-path: inset(30% 0 45% 0); transform: translate(4px, 1px); }
+.glitched-text::before,
+.glitched-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+}
+
+.glitched-text::before {
+  left: 3px;
+  text-shadow: -2px 0 red;
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitched-text::after {
+  left: -3px;
+  text-shadow: -2px 0 blue;
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip-path: inset(20% 0 80% 0); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translate(-2px, 1px); }
+  40% { clip-path: inset(40% 0 50% 0); }
+  60% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -1px); }
+  80% { clip-path: inset(10% 0 70% 0); }
+  100% { clip-path: inset(30% 0 50% 0); transform: translate(-2px, 2px); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip-path: inset(10% 0 60% 0); }
+  20% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+  40% { clip-path: inset(30% 0 20% 0); }
+  60% { clip-path: inset(70% 0 10% 0); transform: translate(-2px, 1px); }
+  80% { clip-path: inset(20% 0 50% 0); }
+  100% { clip-path: inset(50% 0 30% 0); transform: translate(2px, -1px); }
 }
 
 .animate-vhs-static {
   animation: vhs-static 0.3s steps(4) infinite;
-}
-
-.animate-vhs-glitch-1 {
-  animation: vhs-glitch-1 2.5s infinite linear alternate-reverse;
-}
-
-.animate-vhs-glitch-2 {
-  animation: vhs-glitch-2 3s infinite linear alternate-reverse;
 }
