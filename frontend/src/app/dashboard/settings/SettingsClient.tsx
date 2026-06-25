@@ -2,6 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePlan } from "@/components/PlanProvider";
+import { PLANS, PlanDefinition } from "@/lib/plans";
+import CheckoutModal from "@/components/CheckoutModal";
+import { downgradePlan } from "@/app/actions/user-actions";
+import { useAuth } from "@/components/AuthProvider";
 
 type Theme = "light" | "dark" | "auto";
 
@@ -32,6 +37,20 @@ export default function SettingsClient({ user }: { user: any }) {
   const [displayName, setDisplayName] = useState(user?.name || "A. Executive");
   const [email, setEmail] = useState(user?.email || "admin@chronix.os");
   const [role, setRole] = useState("Chief Strategy Officer");
+  const { plan, planDef } = usePlan();
+  const { user: authUser } = useAuth();
+  
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [checkoutPlan, setCheckoutPlan] = useState<PlanDefinition>(PLANS.executive);
+
+  const handleCancelPlan = async () => {
+    if (!authUser?.uid) return;
+    const res = await downgradePlan(authUser.uid);
+    if (res.success) {
+      showToast("Subscription cancelled");
+      setTimeout(() => window.location.reload(), 1000);
+    }
+  };
 
   // Load saved theme on mount
   useEffect(() => {
@@ -239,6 +258,49 @@ export default function SettingsClient({ user }: { user: any }) {
           </div>
         </section>
 
+        {/* Billing & Subscription */}
+        <section className="md:col-span-12 bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-sm border border-outline-variant/30">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="material-symbols-outlined text-primary">credit_card</span>
+            <h2 className="font-headline-md text-[24px] font-serif text-on-surface">Billing & Subscription</h2>
+          </div>
+          <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between p-6 border border-surface-variant rounded-xl">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <h3 className="font-display-md text-[20px] font-serif text-on-surface">Current Plan: {planDef.name}</h3>
+                <span className={`px-2 py-1 rounded font-mono-label text-[10px] uppercase tracking-wider ${planDef.badge}`}>Active</span>
+              </div>
+              <p className="text-on-surface-variant text-[14px]">You are currently on the {planDef.name} tier ({planDef.price}).</p>
+            </div>
+            
+            <div className="flex items-center gap-3 w-full md:w-auto">
+              {plan === "starter" ? (
+                <>
+                  <button 
+                    onClick={() => { setCheckoutPlan(PLANS.executive); setIsCheckoutOpen(true); }}
+                    className="flex-1 md:flex-none px-6 py-2.5 bg-primary text-on-primary rounded-xl font-bold text-[14px] hover:opacity-90 transition-opacity"
+                  >
+                    Upgrade to Executive
+                  </button>
+                  <button 
+                    onClick={() => { setCheckoutPlan(PLANS.enterprise); setIsCheckoutOpen(true); }}
+                    className="flex-1 md:flex-none px-6 py-2.5 bg-secondary text-on-secondary rounded-xl font-bold text-[14px] hover:opacity-90 transition-opacity"
+                  >
+                    Get Enterprise
+                  </button>
+                </>
+              ) : (
+                <button 
+                  onClick={handleCancelPlan}
+                  className="px-6 py-2.5 border border-error text-error rounded-xl font-bold text-[14px] hover:bg-error/10 transition-colors"
+                >
+                  Cancel Subscription
+                </button>
+              )}
+            </div>
+          </div>
+        </section>
+
         {/* AI Agent Sensitivity */}
         <section className="md:col-span-6 bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-sm border border-outline-variant/30">
           <div className="flex items-center gap-3 mb-6">
@@ -321,6 +383,12 @@ export default function SettingsClient({ user }: { user: any }) {
         <button onClick={() => showToast("Account deletion requires email confirmation — check your inbox")} className="text-error font-mono-label text-[13px] hover:underline">Delete Account</button>
         <span className="text-[13px] text-on-surface-variant">Chronix OS v2.4.1</span>
       </div>
+
+      <CheckoutModal 
+        isOpen={isCheckoutOpen} 
+        onClose={() => setIsCheckoutOpen(false)} 
+        plan={checkoutPlan} 
+      />
     </div>
   );
 }
