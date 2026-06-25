@@ -53,13 +53,15 @@ export function Hero() {
               </svg>
             </div>
             
-            <div className="animate-vhs-glitch">
+            <div className="relative inline-block">
               Execution<br />
               Without<br />
-              <span className="text-primary italic relative inline-block">
+              <span className="text-primary italic relative inline-block group-hover:animate-pulse">
                 Chaos.
-                <span className="absolute top-0 left-0 -ml-[2px] opacity-70 text-red-600 mix-blend-screen animate-vhs-glitch" style={{ animationDelay: '0.1s', animationDuration: '3s', clipPath: 'inset(10% 0 60% 0)' }}>Chaos.</span>
-                <span className="absolute top-0 left-0 ml-[2px] opacity-70 text-blue-600 mix-blend-screen animate-vhs-glitch" style={{ animationDelay: '0.2s', animationDuration: '2s', clipPath: 'inset(60% 0 10% 0)' }}>Chaos.</span>
+                {/* Glitch Layer 1 (Red) */}
+                <span className="absolute top-0 left-0 -ml-[3px] text-red-500 opacity-80 animate-vhs-glitch-1 pointer-events-none">Chaos.</span>
+                {/* Glitch Layer 2 (Blue) */}
+                <span className="absolute top-0 left-0 ml-[3px] text-blue-500 opacity-80 animate-vhs-glitch-2 pointer-events-none">Chaos.</span>
               </span>
             </div>
           </motion.h1>

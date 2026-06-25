@@ -130,22 +130,30 @@ h1, h2, h3, h4, h5, h6 {
   100% { transform: translate(5%, 0); }
 }
 
-@keyframes vhs-glitch {
-  0% { transform: skewX(0deg); }
-  5% { transform: skewX(2deg); }
-  10% { transform: skewX(-2deg); }
-  15% { transform: skewX(0deg); }
-  45% { transform: skewX(0deg); }
-  50% { transform: skewX(5deg); }
-  55% { transform: skewX(-5deg); }
-  60% { transform: skewX(0deg); }
-  100% { transform: skewX(0deg); }
+@keyframes vhs-glitch-1 {
+  0%, 100% { clip-path: inset(50% 0 30% 0); transform: translate(-4px, 2px); }
+  20% { clip-path: inset(15% 0 65% 0); transform: translate(4px, -2px); }
+  40% { clip-path: inset(80% 0 5% 0); transform: translate(-4px, -2px); }
+  60% { clip-path: inset(40% 0 40% 0); transform: translate(4px, 2px); }
+  80% { clip-path: inset(10% 0 70% 0); transform: translate(-4px, 1px); }
+}
+
+@keyframes vhs-glitch-2 {
+  0%, 100% { clip-path: inset(10% 0 70% 0); transform: translate(4px, -2px); }
+  20% { clip-path: inset(60% 0 20% 0); transform: translate(-4px, 2px); }
+  40% { clip-path: inset(25% 0 55% 0); transform: translate(4px, 2px); }
+  60% { clip-path: inset(75% 0 15% 0); transform: translate(-4px, -2px); }
+  80% { clip-path: inset(30% 0 45% 0); transform: translate(4px, 1px); }
 }
 
 .animate-vhs-static {
   animation: vhs-static 0.3s steps(4) infinite;
 }
 
-.animate-vhs-glitch {
-  animation: vhs-glitch 4s infinite;
+.animate-vhs-glitch-1 {
+  animation: vhs-glitch-1 2.5s infinite linear alternate-reverse;
+}
+
+.animate-vhs-glitch-2 {
+  animation: vhs-glitch-2 3s infinite linear alternate-reverse;
 }
