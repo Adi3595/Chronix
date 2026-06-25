@@ -56,10 +56,7 @@ export function Hero() {
             <div className="relative inline-block">
               Execution<br />
               Without<br />
-              <span 
-                className="text-primary italic relative inline-block glitched-text group-hover:animate-pulse" 
-                data-text="Chaos."
-              >
+              <span className="text-primary italic glitch-simple group-hover:animate-pulse">
                 Chaos.
               </span>
             </div>
