@@ -2,11 +2,14 @@
 
 @theme {
   --color-background: #f7fbf0;
+  --color-foreground: #181d17;
   --color-on-background: #181d17;
   --color-surface: #f7fbf0;
   --color-on-surface: #181d17;
   --color-surface-variant: #e0e4da;
   --color-on-surface-variant: #40493d;
+  --color-muted: #ebefe5;
+  --color-muted-foreground: #5a6557;
   --color-surface-container-lowest: #ffffff;
   --color-surface-container-low: #f1f5eb;
   --color-surface-container: #ebefe5;
@@ -54,16 +57,19 @@
 
 :root.dark {
   --color-background: #0f0b0a;
+  --color-foreground: #fdfcfb;
   --color-on-background: #fdfcfb;
   --color-surface: #0f0b0a;
   --color-on-surface: #fdfcfb;
-  --color-surface-variant: #2c2928;
-  --color-on-surface-variant: #d6d3d2;
+  --color-surface-variant: #232323;
+  --color-on-surface-variant: #e0dedd;
+  --color-muted: #232323;
+  --color-muted-foreground: #b3aeae;
   --color-surface-container-lowest: #000000;
-  --color-surface-container-low: #1a1716;
-  --color-surface-container: #201c1b;
-  --color-surface-container-high: #2b2726;
-  --color-surface-container-highest: #363130;
+  --color-surface-container-low: #151110;
+  --color-surface-container: #232323;
+  --color-surface-container-high: #2a2a2a;
+  --color-surface-container-highest: #333333;
   --color-primary: #a7d7a9;
   --color-on-primary: #113816;
   --color-primary-container: #2e7d32;
