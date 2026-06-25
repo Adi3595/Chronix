@@ -6,26 +6,31 @@ export const dynamic = 'force-dynamic';
 export default async function FutureSelfPage() {
   const userId = "demo-user-123";
 
-  // Fetch data in parallel
-  const [user, tasks] = await Promise.all([
-    prisma.user.findUnique({ where: { id: userId } }),
-    prisma.task.findMany({ where: { userId } })
-  ]);
+  let momentumScore = 87;
+  let optimizedProbability = 92;
+  let currentProbability = 0;
 
-  const momentumScore = user?.momentumScore || 87;
-  const totalTasks = tasks.length;
-  const completedTasks = tasks.filter(t => t.isCompleted).length;
-  
-  // Basic trajectory calculation
-  const completionRate = totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100;
-  
-  // The "Optimized Path" is what you get if you have high momentum.
-  // The "Current Path" is based on the actual completion rate.
-  const optimizedProbability = Math.min(100, momentumScore + 5);
-  const currentProbability = Math.max(0, Math.round(completionRate));
+  try {
+    const [user, tasks] = await Promise.all([
+      prisma.user.findUnique({ where: { id: userId } }),
+      prisma.task.findMany({ where: { userId } })
+    ]);
 
-  return <FutureSelfClient 
-    optimizedProbability={optimizedProbability} 
-    currentProbability={currentProbability} 
-  />;
+    momentumScore = user?.momentumScore || 87;
+    const totalTasks = tasks.length;
+    const completedTasks = tasks.filter(t => t.isCompleted).length;
+    const completionRate = totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100;
+
+    optimizedProbability = Math.min(100, momentumScore + 5);
+    currentProbability = Math.max(0, Math.round(completionRate));
+  } catch (error) {
+    console.error("[FutureSelf] DB error:", error);
+  }
+
+  return (
+    <FutureSelfClient
+      optimizedProbability={optimizedProbability}
+      currentProbability={currentProbability}
+    />
+  );
 }
