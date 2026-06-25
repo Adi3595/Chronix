@@ -42,9 +42,9 @@ export default function HelpPage() {
             <span className="material-symbols-outlined text-[32px] text-primary mb-3">quick_reference_all</span>
             <h3 className="font-headline-md text-[18px] font-serif mb-2 text-on-surface">Documentation</h3>
             <p className="text-[13px] text-on-surface-variant mb-4">Read the comprehensive guide to maximizing Chronix OS.</p>
-            <button className="w-full py-2 bg-surface-container text-on-surface rounded-lg font-mono-label text-[13px] hover:bg-surface-variant transition-colors">
+            <Link href="/dashboard/docs" className="block w-full py-2 bg-surface-container text-on-surface rounded-lg font-mono-label text-[13px] hover:bg-surface-variant transition-colors text-center">
               Read Docs
-            </button>
+            </Link>
           </div>
 
           <div className="bg-primary-container rounded-xl p-6 shadow-sm text-center">
