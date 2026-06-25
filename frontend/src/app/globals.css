@@ -109,9 +109,43 @@ h1, h2, h3, h4, h5, h6 {
   background: #2E7D32;
 }
 
-/* ── Skeleton shimmer ─────────────────────────────────────── */
 @keyframes shimmer {
   100% {
     transform: translateX(100%);
   }
+}
+
+/* ── VHS TV Glitch & Static ─────────────────────────────────────── */
+@keyframes vhs-static {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 10%); }
+  80% { transform: translate(-15%, 0); }
+  90% { transform: translate(10%, 5%); }
+  100% { transform: translate(5%, 0); }
+}
+
+@keyframes vhs-glitch {
+  0% { transform: skewX(0deg); }
+  5% { transform: skewX(2deg); }
+  10% { transform: skewX(-2deg); }
+  15% { transform: skewX(0deg); }
+  45% { transform: skewX(0deg); }
+  50% { transform: skewX(5deg); }
+  55% { transform: skewX(-5deg); }
+  60% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); }
+}
+
+.animate-vhs-static {
+  animation: vhs-static 0.3s steps(4) infinite;
+}
+
+.animate-vhs-glitch {
+  animation: vhs-glitch 4s infinite;
 }

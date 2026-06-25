@@ -21,6 +21,16 @@ export function Hero() {
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 lg:px-24">
       {/* Background soft gradients */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#e5e7e0] via-[#F4F5EF] to-[#F4F5EF]"></div>
+      
+      {/* VHS Noise Overlay for the section background */}
+      <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.03] mix-blend-multiply">
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <filter id="noiseFilterBg">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" stitchTiles="stitch" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noiseFilterBg)" className="animate-vhs-static" />
+        </svg>
+      </div>
 
       <div ref={containerRef} className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         
@@ -30,11 +40,28 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl lg:text-8xl font-serif text-foreground leading-[1.1] tracking-tight"
+            className="text-6xl lg:text-8xl font-serif text-foreground leading-[1.1] tracking-tight relative group"
           >
-            Execution<br />
-            Without<br />
-            <span className="text-primary italic">Chaos.</span>
+            {/* VHS Overlay specifically for the text to make the text glitch */}
+            <div className="pointer-events-none absolute -inset-4 z-10 opacity-0 group-hover:opacity-[0.15] transition-opacity duration-300 mix-blend-color-burn">
+              <svg className="absolute w-[120%] h-[120%] -left-[10%] -top-[10%]" xmlns="http://www.w3.org/2000/svg">
+                <filter id="noiseFilterText">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
+                  <feColorMatrix type="matrix" values="1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 5 -2" />
+                </filter>
+                <rect width="100%" height="100%" filter="url(#noiseFilterText)" className="animate-vhs-static" />
+              </svg>
+            </div>
+            
+            <div className="animate-vhs-glitch">
+              Execution<br />
+              Without<br />
+              <span className="text-primary italic relative inline-block">
+                Chaos.
+                <span className="absolute top-0 left-0 -ml-[2px] opacity-70 text-red-600 mix-blend-screen animate-vhs-glitch" style={{ animationDelay: '0.1s', animationDuration: '3s', clipPath: 'inset(10% 0 60% 0)' }}>Chaos.</span>
+                <span className="absolute top-0 left-0 ml-[2px] opacity-70 text-blue-600 mix-blend-screen animate-vhs-glitch" style={{ animationDelay: '0.2s', animationDuration: '2s', clipPath: 'inset(60% 0 10% 0)' }}>Chaos.</span>
+              </span>
+            </div>
           </motion.h1>
 
           <motion.div 
