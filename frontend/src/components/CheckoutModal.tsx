@@ -19,11 +19,44 @@ export default function CheckoutModal({ isOpen, onClose, plan }: CheckoutModalPr
   const [isProcessing, setIsProcessing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState("");
+  
+  // Form State
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvc, setCvc] = useState("");
 
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user?.uid) {
       setError("No active session found. Please log in.");
+      return;
+    }
+
+    // Validation
+    const cleanCard = cardNumber.replace(/\D/g, "");
+    if (cleanCard.length < 13 || cleanCard.length > 19) {
+      setError("Please enter a valid card number (13-19 digits).");
+      return;
+    }
+
+    const expiryMatch = expiry.match(/^(0[1-9]|1[0-2])\/?([0-9]{2})$/);
+    if (!expiryMatch) {
+      setError("Please enter a valid expiry date (MM/YY).");
+      return;
+    }
+    
+    const currentYear = new Date().getFullYear() % 100;
+    const currentMonth = new Date().getMonth() + 1;
+    const expMonth = parseInt(expiryMatch[1], 10);
+    const expYear = parseInt(expiryMatch[2], 10);
+    
+    if (expYear < currentYear || (expYear === currentYear && expMonth < currentMonth)) {
+      setError("Your card has expired.");
+      return;
+    }
+
+    if (!/^\d{3,4}$/.test(cvc)) {
+      setError("Please enter a valid 3 or 4 digit CVC.");
       return;
     }
 
@@ -49,6 +82,20 @@ export default function CheckoutModal({ isOpen, onClose, plan }: CheckoutModalPr
       setIsProcessing(false);
       setError(res.error || "Payment failed to process. Try again.");
     }
+  };
+
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.replace(/\D/g, "");
+    const formatted = val.replace(/(\d{4})/g, "$1 ").trim();
+    setCardNumber(formatted);
+  };
+
+  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/\D/g, "");
+    if (val.length > 2) {
+      val = val.substring(0, 2) + "/" + val.substring(2, 4);
+    }
+    setExpiry(val);
   };
 
   return (
@@ -116,6 +163,8 @@ export default function CheckoutModal({ isOpen, onClose, plan }: CheckoutModalPr
                         <input 
                           type="text" 
                           placeholder="4242 4242 4242 4242" 
+                          value={cardNumber}
+                          onChange={handleCardNumberChange}
                           className="w-full pl-10 pr-4 py-3 rounded-xl border border-outline-variant bg-transparent text-on-surface focus:border-primary focus:outline-none"
                           required
                           maxLength={19}
@@ -130,6 +179,8 @@ export default function CheckoutModal({ isOpen, onClose, plan }: CheckoutModalPr
                         <input 
                           type="text" 
                           placeholder="MM/YY" 
+                          value={expiry}
+                          onChange={handleExpiryChange}
                           className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-transparent text-on-surface focus:border-primary focus:outline-none"
                           required
                           maxLength={5}
@@ -140,6 +191,8 @@ export default function CheckoutModal({ isOpen, onClose, plan }: CheckoutModalPr
                         <input 
                           type="text" 
                           placeholder="123" 
+                          value={cvc}
+                          onChange={(e) => setCvc(e.target.value.replace(/\D/g, "").substring(0, 4))}
                           className="w-full px-4 py-3 rounded-xl border border-outline-variant bg-transparent text-on-surface focus:border-primary focus:outline-none"
                           required
                           maxLength={4}
