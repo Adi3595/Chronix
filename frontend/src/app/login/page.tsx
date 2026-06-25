@@ -38,12 +38,12 @@ function LoginForm() {
     try {
       if (auth) {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
-        document.cookie = `chronix-uid=${userCredential.user.uid}; path=/; max-age=86400;`;
+        document.cookie = `chronix-uid=${userCredential.user.uid}; path=/; max-age=31536000;`;
         router.push(getRedirectUrl());
       } else {
         // Fallback to mock if firebase is not configured
         login();
-        document.cookie = `chronix-uid=demo-user-123; path=/; max-age=86400;`;
+        document.cookie = `chronix-uid=demo-user-123; path=/; max-age=31536000;`;
         router.push(getRedirectUrl());
       }
     } catch (err: any) {
@@ -66,11 +66,11 @@ function LoginForm() {
         // Sync user to Prisma database
         await syncUser(user.uid, user.email || "", user.displayName || "Google User");
         
-        document.cookie = `chronix-uid=${user.uid}; path=/; max-age=86400;`;
+        document.cookie = `chronix-uid=${user.uid}; path=/; max-age=31536000;`;
         router.push(getRedirectUrl());
       } else {
         login();
-        document.cookie = `chronix-uid=demo-user-123; path=/; max-age=86400;`;
+        document.cookie = `chronix-uid=demo-user-123; path=/; max-age=31536000;`;
         router.push(getRedirectUrl());
       }
     } catch (err: any) {
