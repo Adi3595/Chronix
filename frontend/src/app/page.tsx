@@ -114,7 +114,7 @@ void main() {
           </div>
           <div className="flex items-center gap-4">
             <Link href="/login" className="hidden md:block font-mono-label text-[13px] font-mono text-on-surface-variant hover:text-primary transition-colors">Login</Link>
-            <Link href="/dashboard" className="bg-primary-container text-on-primary px-6 py-2 rounded-lg font-mono-label text-[13px] font-mono hover:opacity-90 transition-opacity shadow-sm">Get Started</Link>
+            <Link href="/signup" className="bg-primary-container text-on-primary px-6 py-2 rounded-lg font-mono-label text-[13px] font-mono hover:opacity-90 transition-opacity shadow-sm">Get Started</Link>
           </div>
         </div>
       </nav>
@@ -396,7 +396,7 @@ void main() {
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> Execution Matrix</li>
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> Basic Analytics</li>
               </ul>
-              <button className="w-full py-3 rounded-xl border-2 border-outline-variant font-bold text-[14px] hover:bg-surface-container transition-colors">Get Started</button>
+              <Link href="/signup" className="w-full py-3 rounded-xl border-2 border-outline-variant font-bold text-[14px] hover:bg-surface-container transition-colors block text-center">Get Started Free</Link>
             </motion.div>
 
             {/* Executive (Featured) */}
@@ -417,7 +417,7 @@ void main() {
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> External Integrations (Slack/Cal)</li>
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> Priority Rescue Mode</li>
               </ul>
-              <button className="w-full py-3 rounded-xl bg-primary text-on-primary font-bold text-[14px] hover:opacity-90 transition-opacity">Upgrade to Executive</button>
+              <Link href="/signup" className="w-full py-3 rounded-xl bg-primary text-on-primary font-bold text-[14px] hover:opacity-90 transition-opacity block text-center">Get Started</Link>
             </motion.div>
 
             {/* Enterprise */}
@@ -436,7 +436,7 @@ void main() {
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> Cross-team Synergy Feed</li>
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> SSO / SAML</li>
               </ul>
-              <button className="w-full py-3 rounded-xl border-2 border-outline-variant font-bold text-[14px] hover:bg-surface-container transition-colors">Contact Sales</button>
+              <a href="mailto:support@chronix.os" className="w-full py-3 rounded-xl border-2 border-outline-variant font-bold text-[14px] hover:bg-surface-container transition-colors block text-center">Contact Sales</a>
             </motion.div>
           </div>
         </div>
@@ -477,7 +477,7 @@ void main() {
             <ul className="flex flex-col gap-3 font-mono-label text-[13px] font-mono">
               <li><Link href="/#features" className="text-on-surface-variant hover:text-primary transition-colors">Features</Link></li>
               <li><Link href="/#pricing" className="text-on-surface-variant hover:text-primary transition-colors">Pricing</Link></li>
-              <li><Link href="/dashboard" className="text-on-surface-variant hover:text-primary transition-colors">Terminal</Link></li>
+              <li><Link href="/login" className="text-on-surface-variant hover:text-primary transition-colors">Terminal</Link></li>
               <li><Link href="https://github.com/Adi3595/Chronix" target="_blank" className="text-on-surface-variant hover:text-primary transition-colors">GitHub</Link></li>
             </ul>
           </div>

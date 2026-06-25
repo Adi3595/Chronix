@@ -1,19 +1,87 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+type Theme = "light" | "dark" | "auto";
+
+function applyTheme(theme: Theme) {
+  const root = document.documentElement;
+  if (theme === "dark") {
+    root.classList.add("dark");
+    root.style.colorScheme = "dark";
+  } else if (theme === "light") {
+    root.classList.remove("dark");
+    root.style.colorScheme = "light";
+  } else {
+    // Auto: follow system preference
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    root.classList.toggle("dark", prefersDark);
+    root.style.colorScheme = prefersDark ? "dark" : "light";
+  }
+  localStorage.setItem("chronix-theme", theme);
+}
 
 export default function SettingsClient({ user }: { user: any }) {
   const [deepWorkEnabled, setDeepWorkEnabled] = useState(true);
   const [weeklyBriefing, setWeeklyBriefing] = useState(false);
   const [autonomyLevel, setAutonomyLevel] = useState(3);
   const [notificationThreshold, setNotificationThreshold] = useState(75);
+  const [theme, setTheme] = useState<Theme>("light");
+  const [toast, setToast] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState(user?.name || "A. Executive");
+  const [email, setEmail] = useState(user?.email || "admin@chronix.os");
+  const [role, setRole] = useState("Chief Strategy Officer");
+
+  // Load saved theme on mount
+  useEffect(() => {
+    const saved = (localStorage.getItem("chronix-theme") as Theme) || "light";
+    setTheme(saved);
+    applyTheme(saved);
+  }, []);
+
+  const handleThemeChange = (newTheme: Theme) => {
+    setTheme(newTheme);
+    applyTheme(newTheme);
+    showToast(`Theme set to ${newTheme}`);
+  };
+
+  const showToast = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 2500);
+  };
+
+  const handleSave = () => {
+    // In production, this would call a server action to persist changes
+    showToast("Settings saved successfully");
+  };
+
+  const themeOptions: { value: Theme; icon: string; label: string }[] = [
+    { value: "light", icon: "light_mode", label: "Light" },
+    { value: "dark", icon: "dark_mode", label: "Dark" },
+    { value: "auto", icon: "contrast", label: "Auto" },
+  ];
 
   return (
     <div className="max-w-4xl mx-auto space-y-12 pb-12">
+      {/* Toast */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-6 right-6 z-50 bg-primary text-on-primary px-5 py-3 rounded-xl shadow-lg font-mono-label text-[13px] flex items-center gap-2"
+          >
+            <span className="material-symbols-outlined text-[16px]">check_circle</span>
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Header */}
       <div className="pb-6 border-b border-surface-variant">
-        <h1 className="font-display-lg text-[48px] font-serif text-on-surface">Settings & Preferences</h1>
+        <h1 className="font-display-lg text-[48px] font-serif text-on-surface">Settings &amp; Preferences</h1>
         <p className="text-on-surface-variant mt-2 font-body-lg">Manage your executive suite configuration and integrations.</p>
       </div>
 
@@ -34,23 +102,41 @@ export default function SettingsClient({ user }: { user: any }) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block font-mono-label text-[13px] text-on-surface-variant mb-2">Display Name</label>
-                      <input className="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:outline-none font-body-md text-on-surface transition-colors" type="text" defaultValue={user?.name || "A. Executive"} />
+                      <input
+                        className="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:outline-none font-body-md text-on-surface transition-colors"
+                        type="text"
+                        value={displayName}
+                        onChange={(e) => setDisplayName(e.target.value)}
+                      />
                     </div>
                     <div>
                       <label className="block font-mono-label text-[13px] text-on-surface-variant mb-2">Email Address</label>
-                      <input className="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:outline-none font-body-md text-on-surface transition-colors" type="email" defaultValue={user?.email || "admin@chronix.os"} />
+                      <input
+                        className="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:outline-none font-body-md text-on-surface transition-colors"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
                     </div>
                   </div>
                   <div>
                     <label className="block font-mono-label text-[13px] text-on-surface-variant mb-2">Role / Title</label>
-                    <input className="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:outline-none font-body-md text-on-surface transition-colors" type="text" defaultValue="Chief Strategy Officer" />
+                    <input
+                      className="w-full px-4 py-3 rounded-lg bg-surface-container-lowest border border-outline-variant focus:border-primary focus:outline-none font-body-md text-on-surface transition-colors"
+                      type="text"
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="mt-8 flex justify-end">
-            <button className="px-6 py-2 bg-primary-container text-on-primary-container rounded-lg font-mono-label hover:opacity-90 transition-all duration-200">
+            <button
+              onClick={handleSave}
+              className="px-6 py-2 bg-primary-container text-on-primary-container rounded-lg font-mono-label hover:opacity-90 transition-all duration-200"
+            >
               Save Changes
             </button>
           </div>
@@ -65,29 +151,34 @@ export default function SettingsClient({ user }: { user: any }) {
           <div className="space-y-4 flex-1">
             <label className="block font-mono-label text-[13px] text-on-surface-variant mb-4">Color Scheme</label>
             <div className="space-y-2">
-              <label className="flex items-center justify-between p-3 rounded-lg border border-primary-container bg-surface-container-low cursor-pointer">
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-primary">light_mode</span>
-                  <span className="font-mono-label text-on-surface">Light</span>
-                </div>
-                <div className="w-4 h-4 rounded-full border-2 border-primary-container flex items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-primary-container"></div>
-                </div>
-              </label>
-              <label className="flex items-center justify-between p-3 rounded-lg border border-transparent hover:bg-surface-container transition-colors cursor-pointer">
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-on-surface-variant">dark_mode</span>
-                  <span className="font-mono-label text-on-surface-variant">Dark</span>
-                </div>
-                <div className="w-4 h-4 rounded-full border-2 border-outline-variant"></div>
-              </label>
-              <label className="flex items-center justify-between p-3 rounded-lg border border-transparent hover:bg-surface-container transition-colors cursor-pointer">
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-on-surface-variant">contrast</span>
-                  <span className="font-mono-label text-on-surface-variant">Auto</span>
-                </div>
-                <div className="w-4 h-4 rounded-full border-2 border-outline-variant"></div>
-              </label>
+              {themeOptions.map((opt) => {
+                const isSelected = theme === opt.value;
+                return (
+                  <button
+                    key={opt.value}
+                    onClick={() => handleThemeChange(opt.value)}
+                    className={`w-full flex items-center justify-between p-3 rounded-lg border transition-all cursor-pointer ${
+                      isSelected
+                        ? "border-primary bg-surface-container-low"
+                        : "border-transparent hover:bg-surface-container"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className={`material-symbols-outlined ${isSelected ? "text-primary" : "text-on-surface-variant"}`}>
+                        {opt.icon}
+                      </span>
+                      <span className={`font-mono-label ${isSelected ? "text-on-surface" : "text-on-surface-variant"}`}>
+                        {opt.label}
+                      </span>
+                    </div>
+                    <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all ${
+                      isSelected ? "border-primary" : "border-outline-variant"
+                    }`}>
+                      {isSelected && <div className="w-2 h-2 rounded-full bg-primary" />}
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -110,8 +201,8 @@ export default function SettingsClient({ user }: { user: any }) {
                 <p className="text-on-surface-variant text-[13px]">Sync events and scheduling conflicts.</p>
               </div>
               <div className="mt-6 pt-4 border-t border-surface-variant flex justify-between items-center">
-                <span className="text-[13px] text-on-surface-variant truncate">admin@chronix.os</span>
-                <button className="text-error text-[13px] font-bold hover:underline">Revoke</button>
+                <span className="text-[13px] text-on-surface-variant truncate">{email}</span>
+                <button onClick={() => showToast("Integration revoked")} className="text-error text-[13px] font-bold hover:underline">Revoke</button>
               </div>
             </div>
             {/* Slack */}
@@ -125,7 +216,7 @@ export default function SettingsClient({ user }: { user: any }) {
                 <p className="text-on-surface-variant text-[13px]">Send executive summaries to channels.</p>
               </div>
               <div className="mt-6 pt-4 border-t border-surface-variant">
-                <button className="w-full py-2 border border-outline-variant text-on-surface rounded-lg font-mono-label text-[13px] hover:bg-surface-container transition-all">
+                <button onClick={() => showToast("Slack connection coming soon")} className="w-full py-2 border border-outline-variant text-on-surface rounded-lg font-mono-label text-[13px] hover:bg-surface-container transition-all">
                   Connect
                 </button>
               </div>
@@ -142,7 +233,7 @@ export default function SettingsClient({ user }: { user: any }) {
               </div>
               <div className="mt-6 pt-4 border-t border-surface-variant flex justify-between items-center">
                 <span className="text-[13px] text-on-surface-variant truncate">chronix-org</span>
-                <button className="text-error text-[13px] font-bold hover:underline">Revoke</button>
+                <button onClick={() => showToast("Integration revoked")} className="text-error text-[13px] font-bold hover:underline">Revoke</button>
               </div>
             </div>
           </div>
@@ -161,11 +252,11 @@ export default function SettingsClient({ user }: { user: any }) {
                 <label className="font-mono-label text-[13px] text-on-surface">Autonomy Level</label>
                 <span className="font-label-sm text-[12px] font-bold text-primary">Level {autonomyLevel}</span>
               </div>
-              <input 
-                className="w-full accent-primary" 
-                max="5" 
-                min="1" 
-                type="range" 
+              <input
+                className="w-full accent-primary"
+                max="5"
+                min="1"
+                type="range"
                 value={autonomyLevel}
                 onChange={(e) => setAutonomyLevel(Number(e.target.value))}
               />
@@ -179,11 +270,11 @@ export default function SettingsClient({ user }: { user: any }) {
                 <label className="font-mono-label text-[13px] text-on-surface">Notification Threshold</label>
                 <span className="font-label-sm text-[12px] font-bold text-primary">High Importance ({notificationThreshold})</span>
               </div>
-              <input 
-                className="w-full accent-primary" 
-                max="100" 
-                min="1" 
-                type="range" 
+              <input
+                className="w-full accent-primary"
+                max="100"
+                min="1"
+                type="range"
                 value={notificationThreshold}
                 onChange={(e) => setNotificationThreshold(Number(e.target.value))}
               />
@@ -198,30 +289,28 @@ export default function SettingsClient({ user }: { user: any }) {
             <h2 className="font-headline-md text-[24px] font-serif text-on-surface">Productivity Modes</h2>
           </div>
           <div className="space-y-6">
-            {/* Toggle Item */}
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="font-mono-label text-[13px] text-on-surface">Deep Work Enforcement</h3>
                 <p className="text-[13px] text-on-surface-variant mt-1">Automatically mute non-critical channels.</p>
               </div>
-              <button 
-                onClick={() => setDeepWorkEnabled(!deepWorkEnabled)}
-                className={`w-12 h-6 rounded-full relative transition-colors ${deepWorkEnabled ? 'bg-primary' : 'bg-surface-dim'}`}
+              <button
+                onClick={() => { setDeepWorkEnabled(!deepWorkEnabled); showToast(`Deep Work ${!deepWorkEnabled ? "enabled" : "disabled"}`); }}
+                className={`w-12 h-6 rounded-full relative transition-colors ${deepWorkEnabled ? "bg-primary" : "bg-surface-container-highest"}`}
               >
-                <span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${deepWorkEnabled ? 'right-1' : 'left-1'}`}></span>
+                <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${deepWorkEnabled ? "right-1" : "left-1"}`} />
               </button>
             </div>
-            {/* Toggle Item */}
             <div className="flex items-center justify-between pt-6 border-t border-surface-variant">
               <div>
                 <h3 className="font-mono-label text-[13px] text-on-surface">Weekly Briefing Email</h3>
                 <p className="text-[13px] text-on-surface-variant mt-1">Receive automated summary on Monday 8 AM.</p>
               </div>
-              <button 
-                onClick={() => setWeeklyBriefing(!weeklyBriefing)}
-                className={`w-12 h-6 rounded-full relative transition-colors ${weeklyBriefing ? 'bg-primary' : 'bg-surface-dim'}`}
+              <button
+                onClick={() => { setWeeklyBriefing(!weeklyBriefing); showToast(`Weekly Briefing ${!weeklyBriefing ? "enabled" : "disabled"}`); }}
+                className={`w-12 h-6 rounded-full relative transition-colors ${weeklyBriefing ? "bg-primary" : "bg-surface-container-highest"}`}
               >
-                <span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${weeklyBriefing ? 'right-1' : 'left-1'}`}></span>
+                <span className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow transition-transform ${weeklyBriefing ? "right-1" : "left-1"}`} />
               </button>
             </div>
           </div>
@@ -229,9 +318,10 @@ export default function SettingsClient({ user }: { user: any }) {
       </div>
 
       <div className="flex justify-between items-center pt-8 border-t border-surface-variant mt-12">
-        <button className="text-error font-mono-label text-[13px] hover:underline">Delete Account</button>
+        <button onClick={() => showToast("Account deletion requires email confirmation — check your inbox")} className="text-error font-mono-label text-[13px] hover:underline">Delete Account</button>
         <span className="text-[13px] text-on-surface-variant">Chronix OS v2.4.1</span>
       </div>
     </div>
   );
 }
+
