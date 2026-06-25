@@ -40,14 +40,17 @@ void main() {
 varying vec2 v_texCoord;
 uniform float u_time;
 uniform vec2 u_resolution;
+uniform float u_isDark;
 
 void main() {
     vec2 uv = v_texCoord;
     float noise = sin(uv.x * 10.0 + u_time * 0.5) * cos(uv.y * 8.0 - u_time * 0.3) * 0.05;
-    vec3 color = vec3(0.957, 0.961, 0.937);
+    vec3 lightBg = vec3(0.957, 0.961, 0.937);
+    vec3 darkBg = vec3(0.059, 0.043, 0.039);
+    vec3 baseColor = mix(lightBg, darkBg, u_isDark);
     vec3 green = vec3(0.18, 0.49, 0.20);
     float glow = smoothstep(0.8, 1.0, 1.0 - distance(uv, vec2(0.5 + sin(u_time*0.2)*0.1, 0.5)));
-    color = mix(color, color + green * 0.03, glow);
+    vec3 color = mix(baseColor, baseColor + green * (u_isDark > 0.5 ? 0.15 : 0.03), glow);
     gl_FragColor = vec4(color, 1.0);
 }`;
 
@@ -78,6 +81,7 @@ void main() {
       
       const uTime = gl.getUniformLocation(prog, "u_time");
       const uRes = gl.getUniformLocation(prog, "u_resolution");
+      const uIsDark = gl.getUniformLocation(prog, "u_isDark");
       
       let animationFrameId: number;
       function render(t: number) {
@@ -86,6 +90,10 @@ void main() {
         gl.viewport(0, 0, canvas.width, canvas.height);
         if (uTime) gl.uniform1f(uTime, t * 0.001);
         if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+        if (uIsDark) {
+          const isDark = document.documentElement.classList.contains("dark") ? 1.0 : 0.0;
+          gl.uniform1f(uIsDark, isDark);
+        }
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
         animationFrameId = requestAnimationFrame(render);
       }
@@ -321,13 +329,15 @@ void main() {
       </section>
 
       {/* SECTION: Testimonials */}
-      <section className="py-[120px] bg-white border-b border-outline-variant/20">
+      <section className="py-[120px] bg-surface-container-lowest border-b border-outline-variant/20">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">Trusted by Doers</h2>
+            <p className="font-body-lg text-[18px] text-on-surface-variant max-w-2xl mx-auto">See how top performers maintain their edge with Chronix.</p>
           </motion.div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-surface-container-lowest p-8 rounded-2xl border border-outline-variant/30">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-surface-container-low p-8 rounded-2xl border border-outline-variant/30">
               <div className="flex gap-1 text-primary mb-4">
                 {[1,2,3,4,5].map(i => <span key={i} className="material-symbols-outlined text-[18px]">star</span>)}
               </div>
@@ -382,7 +392,7 @@ void main() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Starter */}
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white rounded-3xl p-8 border border-outline-variant/30 flex flex-col h-full">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant/30 flex flex-col h-full">
               <div className="mb-8">
                 <h3 className="font-bold text-[20px] mb-2">Starter</h3>
                 <p className="text-on-surface-variant text-[14px]">For individuals building habits.</p>
@@ -421,7 +431,7 @@ void main() {
             </motion.div>
 
             {/* Enterprise */}
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="bg-white rounded-3xl p-8 border border-outline-variant/30 flex flex-col h-full">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant/30 flex flex-col h-full">
               <div className="mb-8">
                 <h3 className="font-bold text-[20px] mb-2">Enterprise</h3>
                 <p className="text-on-surface-variant text-[14px]">For teams scaling execution.</p>
