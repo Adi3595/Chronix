@@ -524,7 +524,12 @@ void main() {
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> SSO / SAML</li>
               </ul>
               <Link href="/signup?upgrade=enterprise" className="w-full py-3 rounded-xl border-2 border-outline-variant font-bold text-[14px] hover:bg-surface-container transition-colors block text-center">Contact Sales</Link>
-      {/* PRICING SECTION */}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA SECTION */}
       <section className="py-[120px] bg-surface-container-lowest relative overflow-hidden border-t border-outline-variant/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,125,50,0.15)_0%,transparent_70%)]"></div>
         <div className="max-w-[800px] mx-auto px-4 text-center relative z-10">
