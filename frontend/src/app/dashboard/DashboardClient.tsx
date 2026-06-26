@@ -95,7 +95,7 @@ export default function DashboardClient({
                   key={task.id}
                   className="flex items-start gap-3 p-3 hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30"
                 >
-                  <div className={`mt-1 w-5 h-5 rounded border flex items-center justify-center ${task.isCompleted ? 'bg-primary border-primary text-white' : 'border-outline'}`}>
+                  <div className={`mt-1 w-5 h-5 rounded border flex items-center justify-center ${task.isCompleted ? 'bg-primary border-primary text-on-primary' : 'border-outline'}`}>
                     {task.isCompleted && <span className="material-symbols-outlined text-[14px]">check</span>}
                   </div>
                   <div>

@@ -353,7 +353,7 @@ void main() {
                 className="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 hover:border-primary/50 transition-all group relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 p-4 font-mono font-bold text-surface-container-highest text-[40px] opacity-20 transition-opacity group-hover:opacity-40">{agent.id}</div>
-                <div className="w-14 h-14 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary border border-surface-variant mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                <div className="w-14 h-14 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary border border-surface-variant mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
                   <span className="material-symbols-outlined text-[28px]">{agent.icon}</span>
                 </div>
                 <h3 className="font-headline-md font-serif text-[24px] font-semibold mb-3">{agent.name}</h3>

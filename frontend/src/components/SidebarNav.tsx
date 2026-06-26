@@ -38,9 +38,9 @@ export default function SidebarNav() {
         if (!hasAccess) {
           return (
             <li key={idx}>
-              <div className="flex items-center justify-between px-4 py-3 rounded-lg font-mono-label text-[13px] text-on-surface-variant/50 cursor-not-allowed">
+              <div className="flex items-center justify-between px-4 py-3 rounded-lg font-mono-label text-[13px] text-on-surface-variant opacity-60 cursor-not-allowed">
                 <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined opacity-50">{tab.icon}</span>
+                  <span className="material-symbols-outlined">{tab.icon}</span>
                   {tab.label}
                 </div>
                 <span className="material-symbols-outlined text-[14px] text-outline">lock</span>

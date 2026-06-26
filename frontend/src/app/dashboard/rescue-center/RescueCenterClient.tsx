@@ -35,9 +35,9 @@ export default function RescueCenterClient() {
               <button 
                 disabled={isRescuing}
                 onClick={handleRescue}
-                className="bg-primary text-white font-mono-label font-mono text-[13px] px-6 py-3 rounded-lg hover:bg-opacity-90 transition-opacity ease-out duration-200 flex items-center gap-2 disabled:opacity-50"
+                className="bg-primary text-on-primary font-mono-label font-mono text-[13px] px-6 py-3 rounded-lg hover:bg-opacity-90 transition-opacity ease-out duration-200 flex items-center gap-2 disabled:opacity-50"
               >
-                {isRescuing && <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>}
+                {isRescuing && <span className="w-4 h-4 border-2 border-on-primary border-t-transparent rounded-full animate-spin"></span>}
                 <span className="material-symbols-outlined text-[18px]">done_all</span>
                 {isRescuing ? "Activating Rescue..." : "Commit Rescue Plan"}
               </button>
