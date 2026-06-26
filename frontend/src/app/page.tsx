@@ -153,9 +153,13 @@ void main() {
                 Execution<br />
                 <span className="text-primary relative inline-block mt-2">
                   Without{" "}
-                  <span className="italic font-black text-[#A9C632] ml-1">
+                  <motion.span 
+                    animate={{ opacity: [0.8, 1, 0.8] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="italic font-black text-primary-container ml-1"
+                  >
                     Chaos
-                  </span>
+                  </motion.span>
                   <span className="absolute bottom-2 left-0 w-full h-3 bg-primary-container/30 -z-10 -rotate-1"></span>
                 </span>
               </h1>
@@ -176,11 +180,18 @@ void main() {
                 </motion.div>
               </Link>
               <motion.button 
-                whileHover={{ scale: 1.05, backgroundColor: "#E6D4A6", borderColor: "#1D2E1B" }}
+                whileHover={{ scale: 1.05, backgroundColor: "var(--color-surface-container-highest)", borderColor: "var(--color-primary-container)" }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-[#1D2E1B] text-[#1D2E1B] px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold font-mono transition-colors flex items-center gap-2"
+                className="bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold font-mono transition-colors flex items-center gap-2 group"
               >
-                <span className="material-symbols-outlined text-[18px]">play_circle</span> Watch Demo
+                <motion.span 
+                  animate={{ scale: [1, 1.1, 1] }} 
+                  transition={{ duration: 2, repeat: Infinity }} 
+                  className="material-symbols-outlined text-[18px] group-hover:text-primary-container"
+                >
+                  play_circle
+                </motion.span> 
+                Watch Demo
               </motion.button>
             </motion.div>
             
@@ -338,9 +349,12 @@ void main() {
                 className="bg-white p-8 rounded-2xl shadow-[0px_4px_20px_rgba(0,0,0,0.02)] border border-outline-variant/30 hover:border-primary/50 transition-all group relative overflow-hidden"
               >
                 <div className="absolute top-0 right-0 p-4 font-mono font-bold text-surface-container-highest text-[40px] opacity-20 transition-opacity group-hover:opacity-40">{agent.id}</div>
-                <div className="w-14 h-14 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary border border-surface-variant mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300">
+                <motion.div 
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-14 h-14 rounded-xl bg-surface-container-lowest flex items-center justify-center text-primary border border-surface-variant mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors duration-300"
+                >
                   <span className="material-symbols-outlined text-[28px]">{agent.icon}</span>
-                </div>
+                </motion.div>
                 <h3 className="font-headline-md font-serif text-[24px] font-semibold mb-3">{agent.name}</h3>
                 <p className="font-body-md text-[15px] text-on-surface-variant leading-relaxed">{agent.desc}</p>
               </motion.div>
@@ -413,7 +427,15 @@ void main() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Starter */}
-            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-surface-container-lowest rounded-3xl p-8 border border-outline-variant/30 flex flex-col h-full">
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.7 }} className="bg-surface-container-lowest p-8 rounded-3xl shadow-sm border border-outline-variant/30 relative overflow-hidden group hover:border-primary/50 transition-colors">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-[radial-gradient(circle_at_top_right,rgba(169,198,50,0.1)_0%,transparent_70%)] rounded-bl-full pointer-events-none"></div>
+              <motion.div 
+                animate={{ y: [0, -5, 0] }} 
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="w-12 h-12 bg-primary-container text-on-primary rounded-xl flex items-center justify-center mb-6 shadow-sm"
+              >
+                <span className="material-symbols-outlined text-[24px]">target</span>
+              </motion.div>
               <div className="mb-8">
                 <h3 className="font-bold text-[20px] mb-2">Starter</h3>
                 <p className="text-on-surface-variant text-[14px]">For individuals building habits.</p>
