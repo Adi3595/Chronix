@@ -29,11 +29,14 @@ export default function LandingPage() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
-  const heroBgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const heroMidX = useTransform(smoothMouseX, [-0.5, 0.5], [40, -40]);
-  const heroMidY = useTransform(smoothMouseY, [-0.5, 0.5], [40, -40]);
-  const heroFgX = useTransform(smoothMouseX, [-0.5, 0.5], [-80, 80]);
-  const heroFgY = useTransform(smoothMouseY, [-0.5, 0.5], [-80, 80]);
+  // Apple-Style 3D Scroll Transforms
+  const coreRotateY = useTransform(scrollYProgress, [0, 0.3], [15, -45]);
+  const coreRotateX = useTransform(scrollYProgress, [0, 0.3], [5, 25]);
+  const coreScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.4]);
+  const coreOpacity = useTransform(scrollYProgress, [0, 0.3, 0.5], [1, 0.5, 0]);
+
+  const coreMouseX = useTransform(smoothMouseX, [-0.5, 0.5], [40, -40]);
+  const coreMouseY = useTransform(smoothMouseY, [-0.5, 0.5], [40, -40]);
 
   // FAQ State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -169,11 +172,23 @@ void main() {
           <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
         </div>
 
-        {/* 3D Image Parallax Layers */}
-        <div className="absolute inset-0 w-full h-full z-10 pointer-events-none overflow-hidden flex items-center justify-center">
-          <motion.img style={{ y: heroBgY }} src="/images/hero_bg.png" alt="Background" className="absolute w-[120%] h-[120%] object-cover opacity-30 blur-sm mix-blend-overlay" />
-          <motion.img style={{ x: heroMidX, y: heroMidY }} src="/images/hero_mid.png" alt="Midground" className="absolute top-[5%] right-[-10%] md:right-[5%] w-[600px] md:w-[800px] object-contain opacity-90 drop-shadow-2xl" />
-          <motion.img style={{ x: heroFgX, y: heroFgY }} src="/images/hero_fg.png" alt="Foreground" className="absolute bottom-[-15%] left-[-10%] w-[500px] object-contain opacity-80 blur-[3px]" />
+        {/* 3D Scroll-Interactive Core */}
+        <div className="absolute inset-0 w-full h-full z-10 pointer-events-none overflow-hidden flex items-center justify-end md:justify-center md:translate-x-[20%]">
+          <motion.div 
+            style={{ 
+              x: coreMouseX, 
+              y: coreMouseY,
+              rotateY: coreRotateY,
+              rotateX: coreRotateX,
+              scale: coreScale,
+              opacity: coreOpacity,
+              perspective: 1000
+            }}
+            className="relative w-[800px] h-[800px] flex items-center justify-center transform-gpu"
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(169,198,50,0.15)_0%,transparent_60%)] -z-10"></div>
+            <img src="/images/chronix_core.png" alt="Chronix 3D Core" className="w-[80%] h-[80%] object-contain drop-shadow-[0_20px_50px_rgba(29,46,27,0.4)]" />
+          </motion.div>
         </div>
 
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-20 pointer-events-auto">
