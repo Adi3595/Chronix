@@ -153,7 +153,7 @@ void main() {
                 Execution<br />
                 <span className="text-primary relative inline-block mt-2">
                   Without{" "}
-                  <span className="italic inline-block font-black text-[#A9C632] bg-[#1D2E1B] px-4 py-1 rounded-xl shadow-sm border border-[#A9C632]/50 ml-1">
+                  <span className="italic font-black text-[#A9C632] ml-1">
                     Chaos
                   </span>
                   <span className="absolute bottom-2 left-0 w-full h-3 bg-primary-container/30 -z-10 -rotate-1"></span>
