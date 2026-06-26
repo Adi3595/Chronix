@@ -94,3 +94,62 @@ export async function detectCalendarConflicts(userId: string) {
     return { success: false };
   }
 }
+
+export async function triggerOrbitSync(userId: string) {
+  try {
+    let logMessage = "Simulated Orbit: Calendar synced successfully. 0 new conflicts found.";
+
+    if (
+      process.env.GOOGLE_CALENDAR_CLIENT_ID &&
+      process.env.GOOGLE_CALENDAR_CLIENT_SECRET &&
+      process.env.GOOGLE_CALENDAR_REFRESH_TOKEN
+    ) {
+      const auth = new google.auth.OAuth2(
+        process.env.GOOGLE_CALENDAR_CLIENT_ID,
+        process.env.GOOGLE_CALENDAR_CLIENT_SECRET
+      );
+      
+      auth.setCredentials({ refresh_token: process.env.GOOGLE_CALENDAR_REFRESH_TOKEN });
+      
+      const calendar = google.calendar({ version: 'v3', auth });
+      
+      const response = await calendar.events.list({
+        calendarId: 'primary',
+        timeMin: new Date().toISOString(),
+        maxResults: 10,
+        singleEvents: true,
+        orderBy: 'startTime',
+      });
+      
+      const events = response.data.items;
+      const eventCount = events ? events.length : 0;
+      
+      logMessage = `Orbit Sync Complete: Successfully fetched ${eventCount} upcoming Google Calendar events!`;
+      
+      if (eventCount > 0 && events && events[0]) {
+        const nextEvent = events[0];
+        const startTime = nextEvent.start?.dateTime || nextEvent.start?.date || "";
+        if (startTime) {
+          logMessage += ` Next event: "${nextEvent.summary}" at ${new Date(startTime).toLocaleTimeString()}.`;
+        }
+      }
+    } else if (process.env.GOOGLE_CALENDAR_CLIENT_ID) {
+      logMessage = "Orbit Sync Simulated (Missing Refresh Token). Setup OAuth Playground to get real events.";
+    }
+
+    await prisma.agentAction.create({
+      data: {
+        userId,
+        agentName: "Orbit",
+        actionType: "SYNC",
+        logMessage: logMessage,
+      },
+    });
+
+    revalidatePath("/dashboard/agent-hub");
+    return { success: true, message: logMessage };
+  } catch (error) {
+    console.error("Orbit Sync Error:", error);
+    return { success: false, error: "Failed to sync calendar" };
+  }
+}

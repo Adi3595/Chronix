@@ -20,14 +20,23 @@ export async function summarizeCommunications(userId: string) {
       const slack = new WebClient(process.env.SLACK_BOT_TOKEN);
       
       // Real API: Fetch conversations, map history, send to Gemini for summary
-      // const result = await slack.conversations.history({ channel: "C12345" });
-      
-      if (process.env.GEMINI_API_KEY) {
-        const prompt = `You are Nova, an executive communications AI. Summarize the following messages into 3 bullet points.`;
-        const response = await ai.models.generateContent({ model: "gemini-2.5-flash", contents: prompt });
+      try {
+        const channels = await slack.conversations.list({ limit: 1, types: "public_channel" });
+        const channelId = channels.channels?.[0]?.id;
+        
+        if (channelId && process.env.GEMINI_API_KEY) {
+          const history = await slack.conversations.history({ channel: channelId, limit: 10 });
+          const messages = history.messages?.map(m => `${m.user || 'Unknown'}: ${m.text}`).join('\n') || "";
+          
+          if (messages.trim()) {
+            const prompt = `You are Nova, an executive communications AI. Summarize the following recent Slack messages from the team into 1 concise sentence highlighting any action items:\n\n${messages}`;
+            const response = await ai.models.generateContent({ model: "gemini-2.5-flash", contents: prompt });
+            logMessage = response.text || "Analyzed Slack API. Generated executive summary.";
+          }
+        }
+      } catch (slackErr) {
+        console.error("Slack API error, falling back to simulation.", slackErr);
       }
-
-      logMessage = "Analyzed Slack API. Generated executive summary for #engineering and #general channels.";
     }
 
     await prisma.agentAction.create({
@@ -56,9 +65,21 @@ export async function enableDeepWorkMode(userId: string) {
 
     if (process.env.SLACK_USER_TOKEN) {
       const slack = new WebClient(process.env.SLACK_USER_TOKEN);
-      // await slack.dnd.setSnooze({ num_minutes: 120 });
-      // await slack.users.profile.set({ profile: { status_text: "In Deep Work", status_emoji: ":stop_sign:" } });
-      logMessage = "Deep Work mode engaged. Slack DND enabled via API and status updated.";
+      try {
+        // Set Do Not Disturb for 120 minutes
+        await slack.dnd.setSnooze({ num_minutes: 120 });
+        // Set custom status
+        await slack.users.profile.set({ 
+          profile: { 
+            status_text: "In Deep Work", 
+            status_emoji: ":stop_sign:",
+            status_expiration: Math.floor(Date.now() / 1000) + (120 * 60)
+          } 
+        });
+        logMessage = "Deep Work mode engaged. Slack DND enabled via live API and status updated.";
+      } catch (slackErr) {
+        console.error("Slack DND error, falling back to simulation.", slackErr);
+      }
     }
 
     await prisma.agentAction.create({
