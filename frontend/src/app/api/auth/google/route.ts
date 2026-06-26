@@ -10,10 +10,13 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "userId is required" }, { status: 400 });
     }
 
+    const urlObj = new URL(req.url);
+    const redirectUri = `${urlObj.origin}/api/auth/google/callback`;
+
     const oauth2Client = new google.auth.OAuth2(
       process.env.GOOGLE_CALENDAR_CLIENT_ID,
       process.env.GOOGLE_CALENDAR_CLIENT_SECRET,
-      "http://localhost:3000/api/auth/google/callback"
+      redirectUri
     );
 
     const scopes = [
