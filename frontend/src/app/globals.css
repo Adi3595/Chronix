@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #E6D4A6; /* Bamboo Beige */
-  --color-foreground: #1D2E1B; /* Forest Brew */
-  --color-on-background: #1D2E1B; /* Forest Brew */
-  --color-surface: #C8D2A6; /* Tea Mist */
-  --color-on-surface: #1D2E1B; /* Forest Brew */
-  --color-surface-variant: #A9C632; /* Matcha Lime */
-  --color-on-surface-variant: #1D2E1B; /* Forest Brew */
-  --color-muted: #C8D2A6; /* Tea Mist */
-  --color-muted-foreground: #1D2E1B; /* Forest Brew */
-  --color-surface-container-lowest: #E6D4A6; /* Bamboo Beige (Base) */
-  --color-surface-container-low: #C8D2A6; /* Tea Mist (Cards) */
-  --color-surface-container: #C8D2A6; /* Tea Mist */
-  --color-surface-container-high: #A9C632; /* Matcha Lime */
-  --color-surface-container-highest: #1D2E1B; /* Forest Brew */
-  --color-primary: #1D2E1B; /* Forest Brew */
-  --color-on-primary: #A9C632; /* Matcha Lime */
+  --color-background: #1D2E1B; /* Forest Brew */
+  --color-foreground: #E6D4A6; /* Bamboo Beige */
+  --color-on-background: #E6D4A6; /* Bamboo Beige */
+  --color-surface: #1D2E1B; /* Forest Brew */
+  --color-on-surface: #E6D4A6; /* Bamboo Beige */
+  --color-surface-variant: #C8D2A6; /* Tea Mist */
+  --color-on-surface-variant: #C8D2A6; /* Tea Mist (Muted Text) */
+  --color-muted: #1D2E1B; /* Forest Brew */
+  --color-muted-foreground: #C8D2A6; /* Tea Mist */
+  --color-surface-container-lowest: #1D2E1B; /* Forest Brew */
+  --color-surface-container-low: #1D2E1B; /* Forest Brew */
+  --color-surface-container: #1D2E1B; /* Forest Brew */
+  --color-surface-container-high: #C8D2A6; /* Tea Mist */
+  --color-surface-container-highest: #E6D4A6; /* Bamboo Beige */
+  --color-primary: #A9C632; /* Matcha Lime */
+  --color-on-primary: #1D2E1B; /* Forest Brew */
   --color-primary-container: #A9C632; /* Matcha Lime */
   --color-on-primary-container: #1D2E1B; /* Forest Brew */
   --color-secondary: #C8D2A6; /* Tea Mist */
@@ -27,7 +27,7 @@
   --color-on-error: #ffffff;
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
-  --color-outline: #1D2E1B; /* Forest Brew */
+  --color-outline: #C8D2A6; /* Tea Mist */
   --color-outline-variant: #C8D2A6; /* Tea Mist */
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;

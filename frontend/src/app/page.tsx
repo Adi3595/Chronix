@@ -509,36 +509,48 @@ void main() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-surface-container w-full py-16">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div className="col-span-1 md:col-span-2">
-            <div className="font-display-lg font-serif text-[24px] text-primary mb-4 flex items-center gap-2">
-              <img src="/icon.svg" alt="Logo" className="w-6 h-6 grayscale" />
+      <motion.footer 
+        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}
+        className="bg-surface-container-lowest w-full py-16 border-t border-outline-variant/20"
+      >
+        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+          {/* Brand Col */}
+          <div className="col-span-1 md:col-span-6 lg:col-span-5">
+            <div className="font-display-lg font-serif text-[28px] text-primary mb-6 flex items-center gap-3">
+              <img src="/icon.svg" alt="Logo" className="w-8 h-8" />
               Chronix OS
             </div>
-            <p className="font-body-md text-[14px] text-on-surface-variant mb-6 max-w-sm leading-relaxed">
-              Execution Without Chaos. A premium autonomous executive productivity suite powered by an interconnected neural suite of AI agents.
+            <p className="font-body-md text-[15px] text-on-surface-variant mb-8 max-w-md leading-relaxed">
+              Execution Without Chaos. A premium autonomous executive productivity suite powered by an interconnected neural network of AI agents.
             </p>
-            <div className="flex flex-col gap-2 font-mono-label text-[13px] font-mono text-on-surface-variant">
-              <span className="flex items-center gap-2"><span className="material-symbols-outlined text-[16px]">location_on</span> 120 Execution Ave, San Francisco, CA 94105</span>
-              <a href="mailto:support@chronix.os" className="flex items-center gap-2 hover:text-primary transition-colors w-fit"><span className="material-symbols-outlined text-[16px]">mail</span> support@chronix.os</a>
-              <a href="tel:+15551234567" className="flex items-center gap-2 hover:text-primary transition-colors w-fit"><span className="material-symbols-outlined text-[16px]">call</span> +1 (555) 123-4567</a>
+            <div className="flex flex-col gap-3 font-mono-label text-[13px] font-mono text-on-surface-variant">
+              <span className="flex items-center gap-3"><span className="material-symbols-outlined text-[18px]">location_on</span> 120 Execution Ave, SF, CA 94105</span>
+              <a href="mailto:support@chronix.os" className="flex items-center gap-3 hover:text-primary transition-colors w-fit"><span className="material-symbols-outlined text-[18px]">mail</span> support@chronix.os</a>
             </div>
           </div>
 
-          <div>
-            <h4 className="font-bold text-[14px] text-on-surface mb-4 uppercase tracking-widest">Platform</h4>
-            <ul className="flex flex-col gap-3 font-mono-label text-[13px] font-mono">
+          {/* Spacer */}
+          <div className="hidden lg:block lg:col-span-3"></div>
+
+          {/* Platform Links */}
+          <div className="col-span-1 md:col-span-3 lg:col-span-2">
+            <h4 className="font-bold text-[14px] text-on-surface mb-6 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary rounded-full inline-block"></span> Platform
+            </h4>
+            <ul className="flex flex-col gap-4 font-mono-label text-[13px] font-mono">
               <li><Link href="/#features" className="text-on-surface-variant hover:text-primary transition-colors">Features</Link></li>
               <li><Link href="/#pricing" className="text-on-surface-variant hover:text-primary transition-colors">Pricing</Link></li>
-              <li><Link href="/login" className="text-on-surface-variant hover:text-primary transition-colors">Terminal</Link></li>
-              <li><Link href="https://github.com/Adi3595/Chronix" target="_blank" className="text-on-surface-variant hover:text-primary transition-colors">GitHub</Link></li>
+              <li><Link href="/login" className="text-on-surface-variant hover:text-primary transition-colors">Terminal Login</Link></li>
+              <li><Link href="https://github.com/Adi3595/Chronix" target="_blank" className="text-on-surface-variant hover:text-primary transition-colors">Source Code</Link></li>
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-bold text-[14px] text-on-surface mb-4 uppercase tracking-widest">Legal</h4>
-            <ul className="flex flex-col gap-3 font-mono-label text-[13px] font-mono">
+          {/* Legal Links */}
+          <div className="col-span-1 md:col-span-3 lg:col-span-2">
+            <h4 className="font-bold text-[14px] text-on-surface mb-6 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-2 h-2 bg-outline-variant rounded-full inline-block"></span> Legal
+            </h4>
+            <ul className="flex flex-col gap-4 font-mono-label text-[13px] font-mono">
               <li><Link href="/privacy" className="text-on-surface-variant hover:text-primary transition-colors">Privacy Policy</Link></li>
               <li><Link href="/terms" className="text-on-surface-variant hover:text-primary transition-colors">Terms of Service</Link></li>
               <li><a href="mailto:support@chronix.os" className="text-on-surface-variant hover:text-primary transition-colors">Contact Support</a></li>
@@ -556,7 +568,7 @@ void main() {
             <a href="https://linkedin.com/company/chronixos" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">LinkedIn</a>
           </div>
         </div>
-      </footer>
+      </motion.footer>
       
     </div>
   );
