@@ -5,6 +5,13 @@ import Link from "next/link";
 import Script from "next/script";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 export default function LandingPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -12,34 +19,45 @@ export default function LandingPage() {
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
-  // Mouse Parallax Logic
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springConfig = { damping: 25, stiffness: 150 };
-  const smoothMouseX = useSpring(mouseX, springConfig);
-  const smoothMouseY = useSpring(mouseY, springConfig);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      mouseX.set((e.clientX - innerWidth / 2) / innerWidth);
-      mouseY.set((e.clientY - innerHeight / 2) / innerHeight);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  // Apple-Style 3D Scroll Transforms
-  const coreRotateY = useTransform(scrollYProgress, [0, 0.3], [15, -45]);
-  const coreRotateX = useTransform(scrollYProgress, [0, 0.3], [5, 25]);
-  const coreScale = useTransform(scrollYProgress, [0, 0.3], [1, 1.4]);
-  const coreOpacity = useTransform(scrollYProgress, [0, 0.3, 0.5], [1, 0.5, 0]);
-
-  const coreMouseX = useTransform(smoothMouseX, [-0.5, 0.5], [40, -40]);
-  const coreMouseY = useTransform(smoothMouseY, [-0.5, 0.5], [40, -40]);
-
   // FAQ State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  // GSAP Image Sequence Scrubber
+  const seqRef = useRef<HTMLImageElement>(null);
+  
+  useGSAP(() => {
+    const images = [
+      "/images/sequence/1.png",
+      "/images/sequence/2.png",
+      "/images/sequence/3.png",
+      "/images/sequence/4.png",
+      "/images/sequence/5.png",
+    ];
+    
+    // Preload
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    const obj = { frame: 0 };
+    gsap.to(obj, {
+      frame: images.length - 1,
+      snap: "frame",
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero-section",
+        start: "top top",
+        end: "+=800",
+        scrub: 0.5,
+      },
+      onUpdate: () => {
+        if (seqRef.current) {
+          seqRef.current.src = images[obj.frame];
+        }
+      }
+    });
+  }, []);
 
   useEffect(() => {
     // Background WebGL Shader (Soft Organic)
@@ -136,7 +154,7 @@ void main() {
   }, []);
 
   return (
-    <div className="text-on-surface antialiased selection:bg-primary-container selection:text-on-primary bg-background min-h-screen overflow-x-hidden">
+    <div className="text-on-surface antialiased selection:bg-[#A9C632] selection:text-[#1D2E1B] bg-background min-h-screen overflow-x-hidden">
 
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md transition-all duration-200 border-b border-outline-variant/20">
@@ -166,29 +184,18 @@ void main() {
       </nav>
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[100vh] flex items-center pt-24 overflow-hidden">
+      <section className="hero-section relative min-h-[100vh] flex items-center pt-24 overflow-hidden">
         {/* WebGL Background Base */}
         <div className="absolute inset-0 w-full h-full opacity-30 mix-blend-multiply pointer-events-none z-0">
           <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
         </div>
 
-        {/* 3D Scroll-Interactive Core */}
+        {/* GSAP Image Sequence Core */}
         <div className="absolute inset-0 w-full h-full z-10 pointer-events-none overflow-hidden flex items-center justify-end md:justify-center md:translate-x-[20%]">
-          <motion.div 
-            style={{ 
-              x: coreMouseX, 
-              y: coreMouseY,
-              rotateY: coreRotateY,
-              rotateX: coreRotateX,
-              scale: coreScale,
-              opacity: coreOpacity,
-              perspective: 1000
-            }}
-            className="relative w-[800px] h-[800px] flex items-center justify-center transform-gpu"
-          >
+          <div className="relative w-[800px] h-[800px] flex items-center justify-center">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(169,198,50,0.15)_0%,transparent_60%)] -z-10"></div>
-            <img src="/images/chronix_core.png" alt="Chronix 3D Core" className="w-[80%] h-[80%] object-contain drop-shadow-[0_20px_50px_rgba(29,46,27,0.4)]" />
-          </motion.div>
+            <img ref={seqRef} src="/images/sequence/1.png" alt="Chronix 3D Sequence" className="w-[80%] h-[80%] object-contain drop-shadow-[0_20px_50px_rgba(29,46,27,0.4)]" />
+          </div>
         </div>
 
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-20 pointer-events-auto">
