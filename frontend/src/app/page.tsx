@@ -124,9 +124,9 @@ void main() {
             <Link href="/login" className="hidden md:block font-mono-label text-[13px] font-mono text-on-surface-variant hover:text-primary transition-colors">Login</Link>
             <Link href="/signup">
               <motion.div
-                whileHover={{ scale: 1.05, backgroundColor: "#A9C632", color: "#1D2E1B" }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-[#1D2E1B] text-[#A9C632] px-6 py-2 rounded-lg font-mono-label text-[13px] font-bold font-mono transition-colors shadow-sm cursor-pointer"
+                className="bg-primary text-on-primary hover:bg-surface-variant hover:text-on-surface-variant px-6 py-2 rounded-lg font-mono-label text-[13px] font-bold font-mono transition-colors shadow-sm cursor-pointer"
               >
                 Get Started
               </motion.div>
@@ -153,24 +153,9 @@ void main() {
                 Execution<br />
                 <span className="text-primary relative inline-block mt-2">
                   Without{" "}
-                  <motion.span
-                    whileHover={{ 
-                      scale: 1.1,
-                      rotate: [0, -4, 4, -4, 4, 0],
-                      x: [0, -8, 8, -8, 8, 0],
-                      color: "#A9C632",
-                      textShadow: "6px 6px 0px #1D2E1B, -6px -6px 0px #1D2E1B",
-                      transition: { duration: 0.4, repeat: Infinity, repeatType: "mirror" }
-                    }}
-                    animate={{
-                      y: [0, -4, 0],
-                      textShadow: ["0px 0px 0px #1D2E1B", "2px 2px 0px #A9C632", "0px 0px 0px #1D2E1B"],
-                      transition: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                    }}
-                    className="inline-block relative cursor-crosshair font-black text-on-surface bg-[#1D2E1B] text-[#A9C632] px-4 py-1 rounded-xl shadow-lg border-2 border-[#A9C632] z-10"
-                  >
+                  <span className="glitch-chaos text-3xl md:text-5xl lg:text-6xl uppercase tracking-tighter" data-text="Chaos">
                     Chaos
-                  </motion.span>
+                  </span>
                   <span className="absolute bottom-2 left-0 w-full h-3 bg-primary-container/30 -z-10 -rotate-1"></span>
                 </span>
               </h1>
@@ -183,17 +168,17 @@ void main() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.8, ease: "easeOut" }} className="flex flex-wrap items-center gap-4 mb-12 pointer-events-auto">
               <Link href="/signup">
                 <motion.div
-                  whileHover={{ scale: 1.05, backgroundColor: "#A9C632", color: "#1D2E1B", boxShadow: "0px 15px 30px rgba(29, 46, 27, 0.4)" }}
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-[#1D2E1B] text-[#A9C632] px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold font-mono transition-colors shadow-[0_8px_30px_rgba(29,46,27,0.2)] border-2 border-[#1D2E1B] inline-block"
+                  className="bg-primary text-on-primary hover:bg-surface-variant hover:text-on-surface-variant px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold font-mono transition-colors shadow-lg border-2 border-primary inline-block"
                 >
                   Start Planning Free
                 </motion.div>
               </Link>
               <motion.button 
-                whileHover={{ scale: 1.05, backgroundColor: "#E6D4A6", borderColor: "#1D2E1B" }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-transparent border-2 border-[#1D2E1B] text-[#1D2E1B] px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold font-mono transition-colors flex items-center gap-2"
+                className="bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-on-primary px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold font-mono transition-colors flex items-center gap-2"
               >
                 <span className="material-symbols-outlined text-[18px]">play_circle</span> Watch Demo
               </motion.button>
@@ -497,9 +482,9 @@ void main() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
             <Link href="/signup">
               <motion.div
-                whileHover={{ scale: 1.05, backgroundColor: "#A9C632", color: "#1D2E1B", boxShadow: "0px 15px 30px rgba(169, 198, 50, 0.4)" }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-[#1D2E1B] text-[#A9C632] px-10 py-5 rounded-2xl font-bold font-mono text-[16px] transition-colors shadow-[0_8px_30px_rgba(29,46,27,0.3)] inline-block border-2 border-[#1D2E1B]"
+                className="bg-primary text-on-primary hover:bg-surface-variant hover:text-on-surface-variant px-10 py-5 rounded-2xl font-bold font-mono text-[16px] transition-colors shadow-lg inline-block border-2 border-primary"
               >
                 Enter the Terminal
               </motion.div>
