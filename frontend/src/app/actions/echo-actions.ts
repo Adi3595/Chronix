@@ -55,7 +55,7 @@ export async function searchSecondBrain(userId: string, query: string) {
                   id: `notion-${pageId}`,
                   values: vector,
                   metadata: { text: documentContext.substring(0, 1000) }
-                }]);
+                }] as any);
               }
             }
           } catch (pineconeErr) {
