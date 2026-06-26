@@ -3,13 +3,40 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Script from "next/script";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
+import { useState } from "react";
 
 export default function LandingPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { scrollYProgress } = useScroll();
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+
+  // Mouse Parallax Logic
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { damping: 25, stiffness: 150 };
+  const smoothMouseX = useSpring(mouseX, springConfig);
+  const smoothMouseY = useSpring(mouseY, springConfig);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      mouseX.set((e.clientX - innerWidth / 2) / innerWidth);
+      mouseY.set((e.clientY - innerHeight / 2) / innerHeight);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [mouseX, mouseY]);
+
+  const heroBgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const heroMidX = useTransform(smoothMouseX, [-0.5, 0.5], [40, -40]);
+  const heroMidY = useTransform(smoothMouseY, [-0.5, 0.5], [40, -40]);
+  const heroFgX = useTransform(smoothMouseX, [-0.5, 0.5], [-80, 80]);
+  const heroFgY = useTransform(smoothMouseY, [-0.5, 0.5], [-80, 80]);
+
+  // FAQ State
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
     // Background WebGL Shader (Soft Organic)
@@ -137,9 +164,16 @@ void main() {
 
       {/* HERO SECTION */}
       <section className="relative min-h-[100vh] flex items-center pt-24 overflow-hidden">
-        {/* WebGL Background */}
-        <div className="absolute inset-0 w-full h-full opacity-50 mix-blend-multiply pointer-events-none z-0" style={{ display: "block" }}>
+        {/* WebGL Background Base */}
+        <div className="absolute inset-0 w-full h-full opacity-30 mix-blend-multiply pointer-events-none z-0">
           <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
+        </div>
+
+        {/* 3D Image Parallax Layers */}
+        <div className="absolute inset-0 w-full h-full z-10 pointer-events-none overflow-hidden flex items-center justify-center">
+          <motion.img style={{ y: heroBgY }} src="/images/hero_bg.png" alt="Background" className="absolute w-[120%] h-[120%] object-cover opacity-30 blur-sm mix-blend-overlay" />
+          <motion.img style={{ x: heroMidX, y: heroMidY }} src="/images/hero_mid.png" alt="Midground" className="absolute top-[5%] right-[-10%] md:right-[5%] w-[600px] md:w-[800px] object-contain opacity-90 drop-shadow-2xl" />
+          <motion.img style={{ x: heroFgX, y: heroFgY }} src="/images/hero_fg.png" alt="Foreground" className="absolute bottom-[-15%] left-[-10%] w-[500px] object-contain opacity-80 blur-[3px]" />
         </div>
 
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-20 pointer-events-auto">
@@ -490,12 +524,7 @@ void main() {
                 <li className="flex items-center gap-3 text-[14px]"><span className="material-symbols-outlined text-primary text-[18px]">check</span> SSO / SAML</li>
               </ul>
               <Link href="/signup?upgrade=enterprise" className="w-full py-3 rounded-xl border-2 border-outline-variant font-bold text-[14px] hover:bg-surface-container transition-colors block text-center">Contact Sales</Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA SECTION */}
+      {/* PRICING SECTION */}
       <section className="py-[120px] bg-surface-container-lowest relative overflow-hidden border-t border-outline-variant/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,125,50,0.15)_0%,transparent_70%)]"></div>
         <div className="max-w-[800px] mx-auto px-4 text-center relative z-10">
