@@ -12,6 +12,7 @@ import { useTheme } from "@/components/ThemeProvider";
 type Theme = "light" | "dark" | "auto";
 
 export default function SettingsClient({ user }: { user: any }) {
+  const isGoogleConnected = !!user?.googleRefreshToken;
   const { theme, setTheme } = useTheme();
   const [deepWorkEnabled, setDeepWorkEnabled] = useState(true);
   const [weeklyBriefing, setWeeklyBriefing] = useState(false);
@@ -196,8 +197,25 @@ export default function SettingsClient({ user }: { user: any }) {
                 <p className="text-on-surface-variant text-[13px]">Sync events and scheduling conflicts.</p>
               </div>
               <div className="mt-6 pt-4 border-t border-surface-variant flex justify-between items-center">
-                <span className="text-[13px] text-on-surface-variant truncate">{email}</span>
-                <button onClick={() => showToast("Integration revoked")} className="text-error text-[13px] font-bold hover:underline">Revoke</button>
+                {isGoogleConnected ? (
+                  <>
+                    <span className="text-[13px] text-on-surface-variant truncate">Connected</span>
+                    <button onClick={() => showToast("Integration revoked")} className="text-error text-[13px] font-bold hover:underline">Revoke</button>
+                  </>
+                ) : (
+                  <button 
+                    onClick={() => {
+                      if (user?.id) {
+                        window.location.href = `/api/auth/google?userId=${user.id}`;
+                      } else {
+                        showToast("User session not found");
+                      }
+                    }} 
+                    className="w-full py-2 border border-outline-variant text-on-surface rounded-lg font-mono-label text-[13px] hover:bg-surface-container transition-all"
+                  >
+                    Connect
+                  </button>
+                )}
               </div>
             </div>
             {/* Slack */}

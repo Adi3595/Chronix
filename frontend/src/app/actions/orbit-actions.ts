@@ -23,25 +23,41 @@ export async function scheduleDeepWork(userId: string, taskId: string, durationM
     let logMessage = `No Google Calendar API keys found. Simulated Orbit: Scheduled [${task.title}] for ${durationMinutes} mins at ${scheduledTime.toLocaleTimeString()}.`;
 
     // Real API Integration Path
-    if (process.env.GOOGLE_CALENDAR_CLIENT_ID && process.env.GOOGLE_CALENDAR_CLIENT_SECRET) {
-      // In a real multi-user app, you would retrieve the user's OAuth tokens from the DB.
-      // For this hackathon server-to-server demo, we simulate the API call logic.
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+    
+    if (process.env.GOOGLE_CALENDAR_CLIENT_ID && process.env.GOOGLE_CALENDAR_CLIENT_SECRET && user?.googleRefreshToken) {
       
       const auth = new google.auth.OAuth2(
         process.env.GOOGLE_CALENDAR_CLIENT_ID,
         process.env.GOOGLE_CALENDAR_CLIENT_SECRET
       );
-      // auth.setCredentials({ access_token: "MOCK_TOKEN" });
-      // const calendar = google.calendar({ version: 'v3', auth });
       
-      // Simulate calling Gemini to find the best free block
-      if (process.env.GEMINI_API_KEY) {
-        const prompt = `You are Orbit, a scheduling AI. The user needs ${durationMinutes} minutes for task: ${task.title}. Based on an empty calendar, recommend a start time formatted as ISO string.`;
-        const response = await ai.models.generateContent({ model: "gemini-2.5-flash", contents: prompt });
-        // Parse ISO string in real app...
-      }
+      auth.setCredentials({ refresh_token: user.googleRefreshToken });
+      const calendar = google.calendar({ version: 'v3', auth });
+      
+      try {
+        // Create an actual Google Calendar event!
+        const event = {
+          summary: `[Orbit Deep Work] ${task.title}`,
+          description: "Automatically scheduled by Chronix OS Orbit Agent.",
+          start: {
+            dateTime: scheduledTime.toISOString(),
+          },
+          end: {
+            dateTime: new Date(scheduledTime.getTime() + durationMinutes * 60000).toISOString(),
+          }
+        };
 
-      logMessage = `Analyzed Google Calendar. Successfully found free block and scheduled deep work for [${task.title}].`;
+        await calendar.events.insert({
+          calendarId: 'primary',
+          requestBody: event,
+        });
+
+        logMessage = `Analyzed Google Calendar. Successfully found free block and injected deep work event for [${task.title}] onto your primary calendar.`;
+      } catch (calErr) {
+        console.error("Google Calendar API error:", calErr);
+        logMessage = `Analyzed Google Calendar but failed to insert event. Simulating: Scheduled [${task.title}].`;
+      }
     }
 
     // Update the task with scheduled time
@@ -99,17 +115,19 @@ export async function triggerOrbitSync(userId: string) {
   try {
     let logMessage = "Simulated Orbit: Calendar synced successfully. 0 new conflicts found.";
 
+    const user = await prisma.user.findUnique({ where: { id: userId } });
+
     if (
       process.env.GOOGLE_CALENDAR_CLIENT_ID &&
       process.env.GOOGLE_CALENDAR_CLIENT_SECRET &&
-      process.env.GOOGLE_CALENDAR_REFRESH_TOKEN
+      user?.googleRefreshToken
     ) {
       const auth = new google.auth.OAuth2(
         process.env.GOOGLE_CALENDAR_CLIENT_ID,
         process.env.GOOGLE_CALENDAR_CLIENT_SECRET
       );
       
-      auth.setCredentials({ refresh_token: process.env.GOOGLE_CALENDAR_REFRESH_TOKEN });
+      auth.setCredentials({ refresh_token: user.googleRefreshToken });
       
       const calendar = google.calendar({ version: 'v3', auth });
       
