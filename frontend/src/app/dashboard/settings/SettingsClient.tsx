@@ -83,7 +83,7 @@ export default function SettingsClient({ user }: { user: any }) {
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Profile & Identity */}
-        <section className="md:col-span-8 bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+        <section className="md:col-span-12 bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-sm border border-outline-variant/30 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <span className="material-symbols-outlined text-primary">person</span>
@@ -138,46 +138,7 @@ export default function SettingsClient({ user }: { user: any }) {
           </div>
         </section>
 
-        {/* Theme / Interface */}
-        <section className="md:col-span-4 bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-sm border border-outline-variant/30 flex flex-col">
-          <div className="flex items-center gap-3 mb-6">
-            <span className="material-symbols-outlined text-primary">palette</span>
-            <h2 className="font-headline-md text-[24px] font-serif text-on-surface">Interface</h2>
-          </div>
-          <div className="space-y-4 flex-1">
-            <label className="block font-mono-label text-[13px] text-on-surface-variant mb-4">Color Scheme</label>
-            <div className="space-y-2">
-              {themeOptions.map((opt) => {
-                const isSelected = theme === opt.value;
-                return (
-                  <button
-                    key={opt.value}
-                    onClick={() => handleThemeChange(opt.value)}
-                    className={`w-full flex items-center justify-between p-3 rounded-lg border transition-all cursor-pointer ${
-                      isSelected
-                        ? "border-primary bg-surface-container-low"
-                        : "border-transparent hover:bg-surface-container"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className={`material-symbols-outlined ${isSelected ? "text-primary" : "text-on-surface-variant"}`}>
-                        {opt.icon}
-                      </span>
-                      <span className={`font-mono-label ${isSelected ? "text-on-surface" : "text-on-surface-variant"}`}>
-                        {opt.label}
-                      </span>
-                    </div>
-                    <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-all ${
-                      isSelected ? "border-primary" : "border-outline-variant"
-                    }`}>
-                      {isSelected && <div className="w-2 h-2 rounded-full bg-primary" />}
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+
 
         {/* External Integrations */}
         <section className="md:col-span-12 bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-sm border border-outline-variant/30">
