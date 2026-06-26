@@ -99,3 +99,21 @@ export async function searchSecondBrain(userId: string, query: string) {
     return { success: false, error: "Failed to query second brain" };
   }
 }
+
+export async function generateEchoReport(userId: string) {
+  try {
+    await prisma.agentAction.create({
+      data: {
+        userId,
+        agentName: "Echo",
+        actionType: "OPTIMIZATION",
+        logMessage: "Generated weekly synthesis report based on task completion velocity.",
+      }
+    });
+    revalidatePath("/dashboard/analytics");
+    revalidatePath("/dashboard/agent-hub");
+    return { success: true };
+  } catch (error) {
+    return { success: false };
+  }
+}
