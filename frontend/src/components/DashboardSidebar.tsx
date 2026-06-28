@@ -95,7 +95,7 @@ export default function DashboardSidebar({ resolvedPlan }: { resolvedPlan: strin
       </div>
 
       {/* Desktop Sidebar */}
-      <nav className="hidden md:flex h-screen w-72 fixed left-0 top-0 bg-surface/40 backdrop-blur-3xl border-r border-outline flex-col py-8 px-6 gap-y-4 z-50 shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
+      <nav className="hidden md:flex h-screen w-72 sticky self-start left-0 top-0 bg-surface/40 backdrop-blur-3xl border-r border-outline flex-col py-8 px-6 gap-y-4 z-50 shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
         {SidebarContent}
       </nav>
 

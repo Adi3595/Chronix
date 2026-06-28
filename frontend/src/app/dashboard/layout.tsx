@@ -35,7 +35,7 @@ export default async function DashboardLayout({
         <DashboardSidebar resolvedPlan={resolvedPlan} />
 
         {/* Main Content Area */}
-        <main className="flex-1 md:ml-72 p-6 md:p-[60px] max-w-[1600px] mx-auto w-full relative z-10 pt-6 md:pt-[60px]">
+        <main className="flex-1 p-6 md:p-[60px] max-w-[1600px] mx-auto w-full relative z-10 pt-6 md:pt-[60px]">
           {children}
         </main>
       </PlanProvider>
