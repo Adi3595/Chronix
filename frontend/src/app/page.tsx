@@ -64,8 +64,19 @@ export default function LandingPage() {
 
 
       {/* NEW SECTION: About / Project Description */}
-      <section className="py-[120px] relative z-10 bg-background/10 border-y border-white/5 backdrop-blur-[64px] shadow-[0_0_100px_rgba(0,0,0,0.8)_inset,0_0_80px_rgba(46,125,50,0.15)]" id="about">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px]">
+      <section className="py-[120px] relative z-10 bg-transparent border-y border-white/5 backdrop-blur-md shadow-[0_0_100px_rgba(0,0,0,0.8)_inset,0_0_80px_rgba(46,125,50,0.15)] overflow-hidden" id="about">
+        
+        {/* Localized 3D Sandwich Layer (Only inside Hero) */}
+        <div 
+          className="absolute inset-0 z-20 pointer-events-none bg-fixed bg-cover bg-center"
+          style={{ 
+            backgroundImage: "url('/bg.png')",
+            maskImage: "linear-gradient(to bottom, transparent 50%, black 100%)",
+            WebkitMaskImage: "linear-gradient(to bottom, transparent 50%, black 100%)"
+          }}
+        />
+
+        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             
             <div>
