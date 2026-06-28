@@ -10,12 +10,12 @@ export function CinematicBackground() {
   return (
     <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-background">
       {/* Deep volumetric glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background opacity-90" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/40 via-background/90 to-background opacity-100" />
       
       {/* Animated SVG Glowing Paths */}
       <motion.svg 
         style={{ y }}
-        className="absolute w-[150vw] h-[150vh] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-40 mix-blend-screen"
+        className="absolute w-[150vw] h-[150vh] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 mix-blend-screen"
         viewBox="0 0 1000 1000"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMid slice"
@@ -74,14 +74,14 @@ export function CinematicBackground() {
             key={i}
             className="absolute rounded-full bg-primary/50"
             style={{
-              width: Math.random() * 4 + 1 + "px",
-              height: Math.random() * 4 + 1 + "px",
+              width: Math.random() * 4 + 2 + "px",
+              height: Math.random() * 4 + 2 + "px",
               left: Math.random() * 100 + "%",
               top: Math.random() * 100 + "%",
-              boxShadow: "0 0 10px 2px rgba(46, 125, 50, 0.4)",
+              boxShadow: "0 0 15px 3px rgba(46, 125, 50, 0.8)",
             }}
             animate={{
-              y: [0, -100, 0],
+              y: [0, -150, 0],
               opacity: [0, 1, 0],
               scale: [1, 1.5, 1],
             }}
@@ -96,7 +96,7 @@ export function CinematicBackground() {
       </div>
       
       {/* Fog Overlay */}
-      <div className="absolute inset-0 bg-background/40 backdrop-blur-[2px]" />
+      <div className="absolute inset-0 bg-background/20 backdrop-blur-[1px]" />
     </div>
   );
 }
