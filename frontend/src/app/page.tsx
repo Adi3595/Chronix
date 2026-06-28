@@ -324,7 +324,7 @@ void main() {
       </section>
 
       {/* SECTION: Features Deep Dive */}
-      <section id="features" className="py-[120px] bg-white relative">
+      <section id="features" className="py-[120px] bg-transparent relative">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div 
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -382,7 +382,7 @@ void main() {
       </section>
 
       {/* SECTION: Ecosystem */}
-      <section id="ecosystem" className="py-[120px] bg-surface-container-lowest relative overflow-hidden">
+      <section id="ecosystem" className="py-[120px] bg-transparent relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">The 6-Agent Neural Suite</h2>
@@ -423,7 +423,7 @@ void main() {
       </section>
 
       {/* SECTION: Testimonials */}
-      <section className="py-[120px] bg-surface-container-lowest border-b border-outline-variant/20">
+      <section className="py-[120px] bg-transparent border-b border-outline-variant/20">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">Trusted by Doers</h2>
@@ -477,7 +477,7 @@ void main() {
       </section>
 
       {/* SECTION: Pricing */}
-      <section id="pricing" className="py-[120px] bg-surface-container-lowest">
+      <section id="pricing" className="py-[120px] bg-transparent">
         <div className="max-w-[1200px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">Invest in your execution</h2>
@@ -555,7 +555,7 @@ void main() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section className="py-[120px] bg-surface-container-lowest relative overflow-hidden border-t border-outline-variant/20">
+      <section className="py-[120px] bg-transparent relative overflow-hidden border-t border-outline-variant/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,125,50,0.15)_0%,transparent_70%)]"></div>
         <div className="max-w-[800px] mx-auto px-4 text-center relative z-10">
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display-lg font-serif text-[48px] text-on-surface font-semibold mb-6">Ready to execute?</motion.h2>
@@ -577,7 +577,7 @@ void main() {
       {/* Footer */}
       <motion.footer 
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}
-        className="bg-surface-container-lowest w-full py-16 border-t border-outline-variant/20"
+        className="bg-transparent w-full py-16 border-t border-outline-variant/20"
       >
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
           {/* Brand Col */}

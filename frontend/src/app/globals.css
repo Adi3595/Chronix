@@ -1,24 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #041014; /* Cinematic Dark Teal */
+  /* We use transparent background so the 3D Image Sandwich is always visible! */
+  --color-background: transparent; 
   --color-foreground: #FFFFFF; 
   --color-on-background: #FFFFFF; 
-  --color-surface: #061a22; /* Elevated Dark Teal */
+  --color-surface: #0F5C6D; /* Deep Teal */
   --color-on-surface: #FFFFFF; 
-  --color-surface-variant: rgba(15, 92, 109, 0.2); /* Deep Teal Accent */
-  --color-on-surface-variant: #A1C9D4; /* Light Muted Teal */
-  --color-muted: #1E7F98; /* Ocean Blue */
-  --color-muted-foreground: #A1C9D4; 
-  --color-surface-container-lowest: #041014;
-  --color-surface-container-low: #061a22;
-  --color-surface-container: rgba(15, 92, 109, 0.15); /* Deep Teal Surface */
-  --color-surface-container-high: rgba(30, 127, 152, 0.3); /* Ocean Blue Accent */
-  --color-surface-container-highest: #F2D24B; /* Lemon Glow Edge */
+  --color-surface-variant: #1E7F98; /* Ocean Blue */
+  --color-on-surface-variant: #F2D24B; /* Lemon Glow Accent Text */
+  --color-muted: #1E7F98; 
+  --color-muted-foreground: #FFFFFF; 
+  --color-surface-container-lowest: rgba(15, 92, 109, 0.4); /* Transparent Deep Teal */
+  --color-surface-container-low: rgba(15, 92, 109, 0.6);
+  --color-surface-container: rgba(15, 92, 109, 0.8);
+  --color-surface-container-high: rgba(30, 127, 152, 0.8); /* Ocean Blue */
+  --color-surface-container-highest: #F2D24B; /* Lemon Glow */
   --color-primary: #F2D24B; /* Lemon Glow */
-  --color-on-primary: #041014; 
+  --color-on-primary: #0F5C6D; /* Deep Teal text on Lemon Glow buttons */
   --color-primary-container: #F39A1E; /* Citrus Orange */
-  --color-on-primary-container: #041014; 
+  --color-on-primary-container: #0F5C6D; 
   --color-secondary: #1E7F98; /* Ocean Blue */
   --color-on-secondary: #FFFFFF; 
   --color-secondary-container: #0F5C6D; /* Deep Teal */
@@ -27,8 +28,8 @@
   --color-on-error: #ffffff;
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
-  --color-outline: rgba(255,255,255,0.1); 
-  --color-outline-variant: rgba(255,255,255,0.03); 
+  --color-outline: rgba(255,255,255,0.2); 
+  --color-outline-variant: rgba(255,255,255,0.1); 
 
   --font-sans: var(--font-outfit), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
@@ -43,20 +44,6 @@
 }
 
 @layer utilities {
-  .noise-overlay {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-    pointer-events: none;
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-  }
-  
-  .bg-grid-pattern {
-    background-size: 40px 40px;
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  }
-
   .font-display-lg {
     font-size: var(--font-display-lg-size, 64px);
     line-height: var(--font-display-lg-line-height, 1.1);
@@ -98,37 +85,6 @@
   --foreground: var(--color-on-background);
 }
 
-:root.dark {
-  --color-background: #041014;
-  --color-foreground: #FFFFFF; 
-  --color-on-background: #FFFFFF; 
-  --color-surface: #061a22;
-  --color-on-surface: #FFFFFF; 
-  --color-surface-variant: rgba(15, 92, 109, 0.2);
-  --color-on-surface-variant: #A1C9D4;
-  --color-muted: #1E7F98;
-  --color-muted-foreground: #A1C9D4; 
-  --color-surface-container-lowest: #041014;
-  --color-surface-container-low: #061a22;
-  --color-surface-container: rgba(15, 92, 109, 0.15);
-  --color-surface-container-high: rgba(30, 127, 152, 0.3);
-  --color-surface-container-highest: #F2D24B;
-  --color-primary: #F2D24B;
-  --color-on-primary: #041014; 
-  --color-primary-container: #F39A1E;
-  --color-on-primary-container: #041014; 
-  --color-secondary: #1E7F98;
-  --color-on-secondary: #FFFFFF; 
-  --color-secondary-container: #0F5C6D;
-  --color-on-secondary-container: #FFFFFF; 
-  --color-error: #ba1a1a;
-  --color-on-error: #ffffff;
-  --color-error-container: #ffdad6;
-  --color-on-error-container: #93000a;
-  --color-outline: rgba(255,255,255,0.1); 
-  --color-outline-variant: rgba(255,255,255,0.03); 
-}
-
 body {
   background-color: var(--background);
   color: var(--foreground);
@@ -154,44 +110,4 @@ h1, h2, h3, h4, h5, h6 {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #F2D24B;
-}
-
-@keyframes shimmer {
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* ── VHS TV Glitch & Static ─────────────────────────────────────── */
-@keyframes vhs-static {
-  0% { transform: translate(0, 0); }
-  10% { transform: translate(-5%, -5%); }
-  20% { transform: translate(-10%, 5%); }
-  30% { transform: translate(5%, -10%); }
-  40% { transform: translate(-5%, 15%); }
-  50% { transform: translate(-10%, 5%); }
-  60% { transform: translate(15%, 0); }
-  70% { transform: translate(0, 10%); }
-  80% { transform: translate(-15%, 0); }
-  90% { transform: translate(10%, 5%); }
-  100% { transform: translate(5%, 0); }
-}
-
-@keyframes glitch-simple-text {
-  0%, 80% { text-shadow: none; transform: none; }
-  82% { text-shadow: 4px 0 0 red, -4px 0 0 blue; transform: translate(2px, -1px) skewX(5deg); }
-  84% { text-shadow: -4px 0 0 red, 4px 0 0 blue; transform: translate(-2px, 1px) skewX(-5deg); }
-  86% { text-shadow: 4px 0 0 red, -4px 0 0 blue; transform: translate(2px, -1px) skewX(5deg); }
-  88% { text-shadow: -4px 0 0 red, 4px 0 0 blue; transform: translate(-2px, 1px) skewX(-5deg); }
-  90% { text-shadow: none; transform: none; }
-  100% { text-shadow: none; transform: none; }
-}
-
-.glitch-simple {
-  display: inline-block;
-  animation: glitch-simple-text 3s infinite;
-}
-
-.animate-vhs-static {
-  animation: vhs-static 0.3s steps(4) infinite;
 }
