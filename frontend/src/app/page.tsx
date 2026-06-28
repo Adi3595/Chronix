@@ -29,7 +29,7 @@ export default function LandingPage() {
       <nav className="fixed top-0 w-full z-50 bg-background/90 backdrop-blur-md transition-all duration-200 border-b border-outline-variant">
         <div className="flex justify-between items-center px-4 md:px-[40px] py-4 max-w-[1440px] mx-auto">
           <div className="font-mono text-[16px] font-bold text-foreground tracking-[0.2em] uppercase flex items-center gap-3">
-            <div className="w-4 h-4 bg-primary"></div>
+            <img src="/icon.svg" alt="Chronix Logo" className="w-6 h-6 brightness-0 invert" />
             CHRONIX
           </div>
           <div className="hidden md:flex gap-10 items-center">
@@ -44,7 +44,7 @@ export default function LandingPage() {
                 whileHover={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
                 className="bg-transparent text-primary px-6 py-2 border border-primary font-mono-label text-[12px] font-bold font-mono uppercase tracking-widest transition-colors cursor-pointer"
               >
-                [ INIT_SYSTEM ]
+                Get Started
               </motion.div>
             </Link>
           </div>
@@ -68,7 +68,7 @@ export default function LandingPage() {
           >
             <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, ease: "easeOut" }}>
               <div className="font-mono text-primary text-[12px] uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-primary inline-block animate-pulse"></span> [ORCHESTRATION_LAYER] V.2.4
+                <span className="w-2 h-2 bg-primary inline-block animate-pulse"></span> Chronix OS 2.0
               </div>
               <h1 className="font-sans text-[64px] md:text-[88px] leading-[0.95] font-black text-foreground mb-6 tracking-tighter uppercase">
                 Execution<br />
@@ -76,7 +76,7 @@ export default function LandingPage() {
               </h1>
             </motion.div>
             
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.4, ease: "easeOut" }} className="font-mono text-[14px] md:text-[16px] text-muted-foreground mb-10 max-w-lg leading-relaxed uppercase">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.4, ease: "easeOut" }} className="font-mono text-[14px] md:text-[16px] text-muted-foreground mb-10 max-w-lg leading-relaxed">
               Chronix transforms goals, deadlines, and responsibilities into clear, autonomous execution paths. Predict risks. Maintain momentum. Finish what matters.
             </motion.p>
             
@@ -86,7 +86,7 @@ export default function LandingPage() {
                   whileHover={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
                   className="bg-transparent text-primary px-8 py-4 border border-primary font-mono-label text-[14px] font-bold font-mono uppercase tracking-widest transition-colors cursor-pointer"
                 >
-                  [ INITIALIZE_SYSTEM ]
+                  Start Execution
                 </motion.div>
               </Link>
               <motion.button 
@@ -138,18 +138,18 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
             className="mb-20 border-l-4 border-primary pl-6"
           >
-            <div className="font-mono text-[12px] text-primary tracking-[0.2em] uppercase mb-4">[ CAPABILITIES ]</div>
+            <div className="font-mono text-[12px] text-primary tracking-[0.2em] uppercase mb-4">Capabilities</div>
             <h2 className="font-sans text-[40px] md:text-[56px] font-black text-foreground uppercase tracking-tight leading-[1.1]">Focus on strategy.<br/>Let the AI handle execution.</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-              <div className="font-mono text-[10px] text-primary tracking-widest uppercase mb-6 border border-primary px-3 py-1 inline-block bg-primary/10">SYS.MATRIX</div>
+              <div className="font-mono text-[10px] text-primary tracking-widest uppercase mb-6 border border-primary px-3 py-1 inline-block bg-primary/10">System: Matrix</div>
               <h3 className="font-sans text-[32px] font-black uppercase text-foreground mb-4">The Execution Matrix</h3>
-              <p className="font-mono text-[14px] text-muted-foreground leading-relaxed mb-6 uppercase">
+              <p className="font-mono text-[14px] text-muted-foreground leading-relaxed mb-6">
                 Stop looking at endless to-do lists. Chronix automatically prioritizes your tasks into an Eisenhower-style Execution Matrix, ensuring you tackle high-impact items first while gracefully deferring the noise.
               </p>
-              <ul className="space-y-4 font-mono text-[12px] uppercase tracking-wider text-foreground">
+              <ul className="space-y-4 font-mono text-[12px] tracking-wider text-foreground">
                 <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-primary"></span> Automated Priority Sorting</li>
                 <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-primary"></span> Effort vs Impact Analysis</li>
                 <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-primary"></span> One-click Deferral</li>
@@ -171,23 +171,23 @@ export default function LandingPage() {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="bg-surface p-8 border border-outline-variant order-2 md:order-1 hover:border-primary/50 transition-colors">
               <div className="grid grid-cols-1 gap-4">
                 <div className="bg-background border border-error/50 p-6 flex flex-col items-start gap-4">
-                  <div className="font-mono text-error text-[10px] uppercase tracking-widest px-2 py-1 bg-error/10 border border-error/20">WARNING_DETECTED</div>
-                  <div className="font-mono text-[14px] text-foreground uppercase">Burnout Risk Threshold Exceeded</div>
+                  <div className="font-mono text-error text-[10px] uppercase tracking-widest px-2 py-1 bg-error/10 border border-error/20">Warning Detected</div>
+                  <div className="font-mono text-[14px] text-foreground">Burnout Risk Threshold Exceeded</div>
                 </div>
                 <div className="bg-background border border-primary/50 p-6 flex flex-col items-start gap-4">
-                  <div className="font-mono text-primary text-[10px] uppercase tracking-widest px-2 py-1 bg-primary/10 border border-primary/20">INTERVENTION</div>
-                  <div className="font-mono text-[14px] text-foreground uppercase">Schedule Compressed. Tasks Deferred.</div>
+                  <div className="font-mono text-primary text-[10px] uppercase tracking-widest px-2 py-1 bg-primary/10 border border-primary/20">System Intervention</div>
+                  <div className="font-mono text-[14px] text-foreground">Schedule Compressed. Tasks Deferred.</div>
                 </div>
               </div>
             </motion.div>
             
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="order-1 md:order-2">
-              <div className="font-mono text-[10px] text-primary tracking-widest uppercase mb-6 border border-primary px-3 py-1 inline-block bg-primary/10">SYS.RESCUE</div>
+              <div className="font-mono text-[10px] text-primary tracking-widest uppercase mb-6 border border-primary px-3 py-1 inline-block bg-primary/10">System: Rescue</div>
               <h3 className="font-sans text-[32px] font-black uppercase text-foreground mb-4">Autonomous Protection</h3>
-              <p className="font-mono text-[14px] text-muted-foreground leading-relaxed mb-6 uppercase">
+              <p className="font-mono text-[14px] text-muted-foreground leading-relaxed mb-6">
                 When you fall behind, Chronix doesn't just show you red overdue tags. The Rescue Agent actively freezes non-essential tasks and reschedules your week to help you recover your momentum.
               </p>
-              <Link href="/dashboard/rescue-center" className="text-primary font-mono text-[12px] font-bold uppercase tracking-widest hover:bg-primary/10 px-4 py-2 border border-primary transition-colors inline-block">[ EXPLORE_RESCUE_CENTER ]</Link>
+              <Link href="/dashboard/rescue-center" className="text-primary font-mono text-[12px] font-bold uppercase tracking-widest hover:bg-primary/10 px-4 py-2 border border-primary transition-colors inline-block">Explore Rescue Center</Link>
             </motion.div>
           </div>
         </div>
@@ -197,18 +197,18 @@ export default function LandingPage() {
       <section id="ecosystem" className="py-[120px] bg-background relative overflow-hidden border-t border-outline-variant/50">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16 border-l-4 border-primary pl-6">
-            <div className="font-mono text-[12px] text-primary tracking-[0.2em] uppercase mb-4">[ SYSTEM_COMPONENTS ]</div>
+            <div className="font-mono text-[12px] text-primary tracking-[0.2em] uppercase mb-4">Neural Architecture</div>
             <h2 className="font-sans text-[40px] font-black text-foreground uppercase tracking-tight">The 6-Agent Neural Suite</h2>
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
             {[
-              { id: 'A_01', name: 'Atlas', desc: 'Strategic mapping and macro-goal planning. Breaks down massive goals instantly.' },
-              { id: 'A_02', name: 'Orbit', desc: 'Autonomous scheduling and cross-platform synchronization.' },
-              { id: 'A_03', name: 'Sentinel', desc: 'Proactive deadline risk detection and intelligent alerts.' },
-              { id: 'A_04', name: 'Pulse', desc: 'Continuous monitoring of your productivity vitals and velocity.' },
-              { id: 'A_05', name: 'Rescue', desc: 'Emergency intervention and schedule compression during burnout.' },
-              { id: 'A_06', name: 'Echo', desc: 'Deep analytics and automated executive synthesis reports.' }
+              { id: '01', name: 'Atlas', desc: 'Strategic mapping and macro-goal planning. Breaks down massive goals instantly.' },
+              { id: '02', name: 'Orbit', desc: 'Autonomous scheduling and cross-platform synchronization.' },
+              { id: '03', name: 'Sentinel', desc: 'Proactive deadline risk detection and intelligent alerts.' },
+              { id: '04', name: 'Pulse', desc: 'Continuous monitoring of your productivity vitals and velocity.' },
+              { id: '05', name: 'Rescue', desc: 'Emergency intervention and schedule compression during burnout.' },
+              { id: '06', name: 'Echo', desc: 'Deep analytics and automated executive synthesis reports.' }
             ].map((agent, i) => (
               <motion.div 
                 key={agent.id}
@@ -224,7 +224,7 @@ export default function LandingPage() {
                   <div className="w-2 h-2 rounded-full bg-outline-variant group-hover:bg-primary group-hover:shadow-[0_0_10px_rgba(169,198,50,0.8)] transition-all"></div>
                 </div>
                 <h3 className="font-sans text-[24px] font-black uppercase text-foreground mb-4 tracking-wide">{agent.name}</h3>
-                <p className="font-mono text-[13px] text-muted-foreground leading-relaxed uppercase">{agent.desc}</p>
+                <p className="font-mono text-[13px] text-muted-foreground leading-relaxed">{agent.desc}</p>
                 
                 {/* Scanline effect on hover */}
                 <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.1)_50%)] bg-[length:100%_4px] opacity-0 group-hover:opacity-100 pointer-events-none"></div>
@@ -239,13 +239,13 @@ export default function LandingPage() {
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-sans text-[40px] font-black text-foreground uppercase tracking-tight mb-4">Trusted by Doers</h2>
-            <p className="font-mono text-[14px] text-muted-foreground max-w-2xl mx-auto uppercase">See how top performers maintain their edge with Chronix.</p>
+            <p className="font-mono text-[14px] text-muted-foreground max-w-2xl mx-auto">See how top performers maintain their edge with Chronix.</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-surface p-8 border border-outline-variant hover:border-primary/50 transition-colors">
-              <div className="font-mono text-primary text-[10px] uppercase tracking-widest mb-6">[ CLIENT_LOG_01 ]</div>
-              <p className="text-[14px] text-foreground mb-8 font-mono leading-relaxed uppercase">"Chronix OS feels like having a Chief of Staff in my browser. The Sentinel agent saved my product launch by warning me of a task bottleneck 3 days before it happened."</p>
+              <div className="font-mono text-primary text-[10px] uppercase tracking-widest mb-6">Client Feedback</div>
+              <p className="text-[14px] text-foreground mb-8 font-mono leading-relaxed">"Chronix OS feels like having a Chief of Staff in my browser. The Sentinel agent saved my product launch by warning me of a task bottleneck 3 days before it happened."</p>
               <div className="flex items-center gap-4 border-t border-outline-variant/50 pt-4">
                 <div className="w-8 h-8 bg-primary/20 flex items-center justify-center font-bold text-primary font-mono text-[12px] border border-primary/30">S</div>
                 <div>
@@ -256,8 +256,8 @@ export default function LandingPage() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="bg-surface p-8 border border-outline-variant hover:border-primary/50 transition-colors">
-              <div className="font-mono text-primary text-[10px] uppercase tracking-widest mb-6">[ CLIENT_LOG_02 ]</div>
-              <p className="text-[14px] text-foreground mb-8 font-mono leading-relaxed uppercase">"The Future Self Simulator completely changed how I look at my daily tasks. Visualizing the long-term impact of procrastination cured my bad habits instantly."</p>
+              <div className="font-mono text-primary text-[10px] uppercase tracking-widest mb-6">Client Feedback</div>
+              <p className="text-[14px] text-foreground mb-8 font-mono leading-relaxed">"The Future Self Simulator completely changed how I look at my daily tasks. Visualizing the long-term impact of procrastination cured my bad habits instantly."</p>
               <div className="flex items-center gap-4 border-t border-outline-variant/50 pt-4">
                 <div className="w-8 h-8 bg-primary/20 flex items-center justify-center font-bold text-primary font-mono text-[12px] border border-primary/30">D</div>
                 <div>
@@ -268,8 +268,8 @@ export default function LandingPage() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="bg-surface p-8 border border-outline-variant hover:border-primary/50 transition-colors">
-              <div className="font-mono text-primary text-[10px] uppercase tracking-widest mb-6">[ CLIENT_LOG_03 ]</div>
-              <p className="text-[14px] text-foreground mb-8 font-mono leading-relaxed uppercase">"Finally, a productivity tool that doesn't just give you more work to organize. Rescue mode is incredible—it literally told me to stop working."</p>
+              <div className="font-mono text-primary text-[10px] uppercase tracking-widest mb-6">Client Feedback</div>
+              <p className="text-[14px] text-foreground mb-8 font-mono leading-relaxed">"Finally, a productivity tool that doesn't just give you more work to organize. Rescue mode is incredible—it literally told me to stop working."</p>
               <div className="flex items-center gap-4 border-t border-outline-variant/50 pt-4">
                 <div className="w-8 h-8 bg-primary/20 flex items-center justify-center font-bold text-primary font-mono text-[12px] border border-primary/30">E</div>
                 <div>
@@ -306,7 +306,7 @@ export default function LandingPage() {
                 <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-primary rounded-full"></span> Execution Matrix</li>
                 <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-primary rounded-full"></span> Basic Analytics</li>
               </ul>
-              <Link href="/signup" className="w-full py-4 border border-outline font-bold font-mono text-[12px] uppercase tracking-widest hover:bg-white/5 transition-colors block text-center text-foreground">[ GET_STARTED ]</Link>
+              <Link href="/signup" className="w-full py-4 border border-outline font-bold font-mono text-[12px] uppercase tracking-widest hover:bg-white/5 transition-colors block text-center text-foreground">Get Started</Link>
             </motion.div>
 
             {/* Executive (Featured) */}
@@ -326,7 +326,7 @@ export default function LandingPage() {
                 <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-primary rounded-full"></span> Future Simulator</li>
                 <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-primary rounded-full"></span> Rescue Mode</li>
               </ul>
-              <Link href="/signup?upgrade=executive" className="w-full py-4 bg-primary/10 border border-primary text-primary font-bold font-mono text-[12px] uppercase tracking-widest hover:bg-primary hover:text-background transition-colors block text-center shadow-[0_0_15px_rgba(169,198,50,0.2)]">[ UPGRADE_NOW ]</Link>
+              <Link href="/signup?upgrade=executive" className="w-full py-4 bg-primary/10 border border-primary text-primary font-bold font-mono text-[12px] uppercase tracking-widest hover:bg-primary hover:text-background transition-colors block text-center shadow-[0_0_15px_rgba(169,198,50,0.2)]">Upgrade Now</Link>
             </motion.div>
 
             {/* Enterprise */}
@@ -345,7 +345,7 @@ export default function LandingPage() {
                 <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-primary rounded-full"></span> Synergy Feed</li>
                 <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-primary rounded-full"></span> SSO / SAML</li>
               </ul>
-              <Link href="/signup?upgrade=enterprise" className="w-full py-4 border border-outline font-bold font-mono text-[12px] uppercase tracking-widest hover:bg-white/5 transition-colors block text-center text-foreground">[ CONTACT_SALES ]</Link>
+              <Link href="/signup?upgrade=enterprise" className="w-full py-4 border border-outline font-bold font-mono text-[12px] uppercase tracking-widest hover:bg-white/5 transition-colors block text-center text-foreground">Contact Sales</Link>
             </motion.div>
           </div>
         </div>
@@ -356,14 +356,14 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(169,198,50,0.05)_0%,transparent_50%)] pointer-events-none"></div>
         <div className="max-w-[800px] mx-auto px-4 text-center relative z-10">
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-sans font-black text-[48px] md:text-[64px] text-foreground uppercase tracking-tighter mb-6">Ready to execute?</motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-muted-foreground font-mono text-[14px] md:text-[16px] uppercase tracking-widest mb-10 leading-relaxed">Stop managing tasks. Start achieving goals with the power of 6 distinct AI agents working behind the scenes.</motion.p>
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-muted-foreground font-mono text-[14px] md:text-[16px] mb-10 leading-relaxed">Stop managing tasks. Start achieving goals with the power of 6 distinct AI agents working behind the scenes.</motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
             <Link href="/signup">
               <motion.div
                 whileHover={{ backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
                 className="bg-transparent text-primary px-10 py-5 border border-primary font-bold font-mono text-[14px] uppercase tracking-[0.2em] transition-colors inline-block"
               >
-                [ ENTER_THE_SYSTEM ]
+                Enter the System
               </motion.div>
             </Link>
           </motion.div>
@@ -376,7 +376,7 @@ export default function LandingPage() {
         className="bg-background w-full pt-20 pb-8 border-t border-outline-variant/20 relative overflow-hidden"
       >
         {/* Massive Watermark Title */}
-        <div className="w-full flex justify-center mb-16 px-4">
+        <div className="w-full flex justify-start mb-16 px-4 md:px-[40px]">
           <h2 className="font-display-lg font-black text-[12vw] leading-none text-foreground/5 tracking-tighter uppercase select-none pointer-events-none">
             CHRONIX
           </h2>
