@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { ProblemSection, AgentEcosystemSection } from "@/components/LandingSections";
 
 export default function LandingPage() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,13 +24,15 @@ export default function LandingPage() {
   };
 
   return (
-    <div ref={containerRef} className="text-foreground antialiased min-h-screen selection:bg-primary selection:text-background relative">
+    <div ref={containerRef} className="text-foreground antialiased min-h-screen selection:bg-primary selection:text-background relative bg-cover bg-center bg-fixed bg-no-repeat" style={{ backgroundImage: "url('/bg.png')" }}>
+      
+      <div className="absolute inset-0 bg-background/80 pointer-events-none mix-blend-multiply z-0"></div>
       
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 bg-background/50 backdrop-blur-xl transition-all duration-300 border-b border-outline">
         <div className="flex justify-between items-center px-6 md:px-[80px] py-6 max-w-[1440px] mx-auto">
           <div className="font-sans text-[18px] font-bold text-foreground tracking-widest uppercase flex items-center gap-3">
-            <span className="w-6 h-6 bg-primary rounded-full"></span>
+            <img src="/icon.svg" className="w-8 h-8 brightness-0 invert" alt="Chronix Logo" />
             CHRONIX
           </div>
           <div className="hidden md:flex gap-12 items-center">
@@ -253,6 +256,10 @@ export default function LandingPage() {
           </motion.div>
         </div>
       </section>
+      
+      <ProblemSection />
+      
+      <AgentEcosystemSection />
       
       {/* FINAL CTA SECTION */}
       <section className="py-[120px] bg-surface-variant relative overflow-hidden border-t border-outline">

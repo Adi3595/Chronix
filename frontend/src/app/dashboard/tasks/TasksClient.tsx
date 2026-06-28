@@ -5,17 +5,21 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createTaskAction } from "@/app/actions/task-actions";
 
-export default function TasksClient({ initialTasks }: { initialTasks: any[] }) {
+export default function TasksClient({ initialTasks, userId }: { initialTasks: any[], userId?: string }) {
   const router = useRouter();
   const [isAdding, setIsAdding] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTaskDesc, setNewTaskDesc] = useState("");
+  const [newTaskDate, setNewTaskDate] = useState("");
 
   async function handleAddTask(e: React.FormEvent) {
     e.preventDefault();
-    if (!newTaskTitle.trim()) return;
+    if (!newTaskTitle.trim() || !userId) return;
     
-    await createTaskAction(newTaskTitle);
+    await createTaskAction(userId, newTaskTitle, newTaskDesc, newTaskDate ? new Date(newTaskDate) : undefined);
     setNewTaskTitle("");
+    setNewTaskDesc("");
+    setNewTaskDate("");
     setIsAdding(false);
     router.refresh();
   }
@@ -107,22 +111,42 @@ export default function TasksClient({ initialTasks }: { initialTasks: any[] }) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             onSubmit={handleAddTask} 
-            className="mb-12 flex gap-4"
+            className="mb-12 bg-surface/40 backdrop-blur-xl border border-outline rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)]"
           >
-            <input 
-              autoFocus
-              type="text" 
-              value={newTaskTitle}
-              onChange={(e) => setNewTaskTitle(e.target.value)}
-              placeholder="Initialize new objective..." 
-              className="flex-1 bg-surface/40 backdrop-blur-xl border border-outline rounded-2xl px-6 py-4 text-foreground font-sans text-[15px] focus:outline-none focus:border-primary/50 transition-colors shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
-            />
-            <button type="submit" className="bg-primary text-background px-8 rounded-2xl font-sans text-[13px] uppercase tracking-widest font-bold hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">
-              Deploy
-            </button>
-            <button type="button" onClick={() => setIsAdding(false)} className="px-6 text-muted-foreground hover:text-foreground font-sans text-[13px] font-bold uppercase tracking-widest transition-colors">
-              Abort
-            </button>
+            <div className="flex flex-col gap-6 mb-8">
+              <input 
+                autoFocus
+                type="text" 
+                value={newTaskTitle}
+                onChange={(e) => setNewTaskTitle(e.target.value)}
+                placeholder="Initialize new objective..." 
+                className="w-full bg-transparent border-b border-outline-variant pb-4 text-foreground font-serif text-[32px] focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/30"
+              />
+              <textarea 
+                value={newTaskDesc}
+                onChange={(e) => setNewTaskDesc(e.target.value)}
+                placeholder="Details & context..." 
+                className="w-full bg-transparent border border-outline-variant rounded-xl p-4 text-foreground font-sans text-[15px] focus:outline-none focus:border-primary transition-colors min-h-[100px] placeholder:text-muted-foreground/30"
+              />
+              <div className="flex flex-col gap-2">
+                <label className="text-[11px] font-sans text-muted-foreground uppercase tracking-widest font-bold">Deadline (Optional)</label>
+                <input 
+                  type="datetime-local" 
+                  value={newTaskDate}
+                  onChange={(e) => setNewTaskDate(e.target.value)}
+                  className="w-full md:w-auto bg-transparent border border-outline-variant rounded-xl px-4 py-3 text-foreground font-sans text-[15px] focus:outline-none focus:border-primary transition-colors"
+                />
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+              <button type="submit" className="bg-primary text-background px-10 py-4 rounded-full font-sans text-[13px] uppercase tracking-widest font-bold hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">
+                Deploy Task
+              </button>
+              <button type="button" onClick={() => setIsAdding(false)} className="px-8 py-4 text-muted-foreground hover:text-foreground font-sans text-[13px] font-bold uppercase tracking-widest transition-colors">
+                Abort
+              </button>
+            </div>
           </motion.form>
         )}
 

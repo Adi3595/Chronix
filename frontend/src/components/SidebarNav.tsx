@@ -13,7 +13,7 @@ type Tab = {
   feature?: keyof PlanDefinition["features"];
 };
 
-export default function SidebarNav() {
+export default function SidebarNav({ onClick }: { onClick?: () => void }) {
   const pathname = usePathname();
   const { can } = usePlan();
 
@@ -58,6 +58,7 @@ export default function SidebarNav() {
                   ? "bg-primary/10 text-primary font-bold border-primary/30 shadow-[0_4px_20px_rgba(46,125,50,0.15)]"
                   : "text-muted-foreground border-transparent hover:bg-surface-variant hover:text-foreground hover:border-outline-variant"
               }`}
+              onClick={onClick}
             >
               <span className="material-symbols-outlined">{tab.icon}</span>
               {tab.label}

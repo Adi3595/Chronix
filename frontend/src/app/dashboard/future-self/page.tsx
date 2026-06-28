@@ -1,10 +1,13 @@
 import FutureSelfClient from "./FutureSelfClient";
 import { prisma } from "@/lib/db";
 
+import { cookies } from "next/headers";
+
 export const dynamic = 'force-dynamic';
 
 export default async function FutureSelfPage() {
-  const userId = "demo-user-123";
+  const cookieStore = await cookies();
+  const userId = cookieStore.get("chronix-uid")?.value || "demo-user-123";
 
   let momentumScore = 87;
   let optimizedProbability = 92;

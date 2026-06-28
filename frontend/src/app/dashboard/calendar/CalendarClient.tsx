@@ -1,88 +1,120 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { formatDistanceToNow, format } from "date-fns";
 
-export default function CalendarClient({ tasks, agentActions }: { tasks: any[], agentActions: any[] }) {
+export default function CalendarClient({ initialTasks, userId }: { initialTasks: any[], userId: string }) {
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+  const firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+  
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  
+  const prevMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+  const nextMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+  const today = () => setCurrentDate(new Date());
+
+  const isToday = (day: number) => {
+    const todayDate = new Date();
+    return todayDate.getDate() === day && todayDate.getMonth() === currentDate.getMonth() && todayDate.getFullYear() === currentDate.getFullYear();
+  };
+
+  const getTasksForDay = (day: number) => {
+    return initialTasks.filter(task => {
+      if (!task.scheduledAt) return false;
+      const taskDate = new Date(task.scheduledAt);
+      return taskDate.getDate() === day && taskDate.getMonth() === currentDate.getMonth() && taskDate.getFullYear() === currentDate.getFullYear();
+    });
+  };
+
   return (
     <>
-      {/* TopAppBar */}
-      <header className="hidden md:flex justify-between items-center h-20 sticky top-0 z-40 bg-surface/80 backdrop-blur-md mb-6 border-none">
+      <header className="flex justify-between items-center h-20 sticky top-0 z-40 bg-background/50 backdrop-blur-xl mb-8 border-b border-outline">
         <div className="flex items-center gap-4">
-          <h2 className="font-headline-md font-serif text-[24px] font-medium text-on-surface">Weekly Overview</h2>
-          <span className="font-label-sm text-[12px] font-semibold text-on-surface-variant uppercase tracking-widest px-2 py-1 bg-surface-container rounded">
-            Live Feed
-          </span>
+          <h2 className="font-serif font-black text-[32px] md:text-[48px] text-foreground hidden md:block tracking-tight">
+            Timeline
+          </h2>
+          <h2 className="font-sans font-bold text-[24px] text-foreground md:hidden">
+            Calendar
+          </h2>
+        </div>
+        <div className="flex items-center space-x-4">
+          <button 
+            onClick={today}
+            className="bg-surface border border-outline-variant text-foreground font-sans font-bold text-[13px] uppercase tracking-widest py-3 px-6 rounded-full hover:bg-surface-variant transition-all duration-200"
+          >
+            Today
+          </button>
         </div>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 max-w-[1440px] mx-auto pb-12">
-        {/* Scheduled Tasks List (Main View) */}
-        <div className="lg:col-span-3 bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] p-6">
+      <div className="max-w-[1440px] mx-auto pb-24">
+        <div className="bg-surface/40 backdrop-blur-xl border border-outline rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)]">
+          
           <div className="flex justify-between items-center mb-8">
-            <h3 className="font-headline-md font-serif text-[18px] font-medium text-on-surface">Scheduled Tasks</h3>
+            <h3 className="font-sans font-bold text-[24px] text-foreground">
+              {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
+            </h3>
+            <div className="flex gap-2">
+              <button onClick={prevMonth} className="p-3 bg-background border border-outline-variant rounded-xl hover:text-primary hover:border-primary transition-colors flex items-center justify-center">
+                <span className="material-symbols-outlined">chevron_left</span>
+              </button>
+              <button onClick={nextMonth} className="p-3 bg-background border border-outline-variant rounded-xl hover:text-primary hover:border-primary transition-colors flex items-center justify-center">
+                <span className="material-symbols-outlined">chevron_right</span>
+              </button>
+            </div>
           </div>
 
-          <div className="space-y-4">
-            {tasks.length === 0 ? (
-              <p className="text-on-surface-variant">No tasks scheduled. Go to Tasks to schedule them.</p>
-            ) : (
-              tasks.map((task) => (
-                <div key={task.id} className="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-outline-variant/30 hover:border-primary/50 transition-colors">
-                  <div>
-                    <h4 className={`font-body-md font-medium text-[16px] ${task.isCompleted ? 'line-through text-on-surface-variant' : 'text-on-surface'}`}>
-                      {task.title}
-                    </h4>
-                    <p className="font-label-sm text-[12px] text-on-surface-variant mt-1">
-                      Priority: {task.priority}
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-mono-label font-mono text-[13px] text-primary bg-primary/10 px-3 py-1 rounded-full">
-                      {format(new Date(task.scheduledAt), "MMM d, h:mm a")}
-                    </p>
+          <div className="grid grid-cols-7 gap-4 mb-4">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, i) => (
+              <div key={i} className="text-center font-sans font-bold text-[12px] uppercase tracking-widest text-muted-foreground pb-2 border-b border-outline-variant/50">
+                {day}
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-7 gap-4 auto-rows-fr">
+            {Array.from({ length: firstDayOfMonth }).map((_, i) => (
+              <div key={`empty-${i}`} className="min-h-[120px] rounded-2xl bg-background/30 border border-transparent"></div>
+            ))}
+            
+            {Array.from({ length: daysInMonth }).map((_, i) => {
+              const day = i + 1;
+              const dayTasks = getTasksForDay(day);
+              return (
+                <div 
+                  key={`day-${day}`} 
+                  className={`min-h-[120px] rounded-2xl p-3 border transition-colors relative group
+                    ${isToday(day) 
+                      ? 'bg-primary/5 border-primary/30 shadow-[0_0_15px_rgba(46,125,50,0.1)]' 
+                      : 'bg-background border-outline hover:border-primary/20'}`}
+                >
+                  <span className={`font-sans font-bold text-[14px] ${isToday(day) ? 'text-primary' : 'text-muted-foreground'}`}>
+                    {day}
+                  </span>
+                  
+                  <div className="mt-2 flex flex-col gap-1.5 overflow-y-auto max-h-[80px] custom-scrollbar">
+                    {dayTasks.map(task => (
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        key={task.id} 
+                        title={task.title}
+                        className={`text-[10px] font-sans font-bold uppercase tracking-wide truncate px-2 py-1 rounded border cursor-pointer
+                          ${task.priority === 'High' 
+                            ? 'bg-error/10 text-error border-error/30' 
+                            : 'bg-surface border-outline-variant text-foreground'}`}
+                      >
+                        {task.title}
+                      </motion.div>
+                    ))}
                   </div>
                 </div>
-              ))
-            )}
+              );
+            })}
           </div>
-        </div>
-
-        {/* Agent Scheduling Sidebar (1 column) */}
-        <div className="lg:col-span-1 flex flex-col gap-6">
-          {/* Agent Status Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] p-6"
-          >
-            <h3 className="font-headline-md font-serif text-[18px] font-medium text-on-surface mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-primary">robot_2</span>
-              Agent Optimizations
-            </h3>
-            <div className="space-y-4">
-              {agentActions.length === 0 ? (
-                <p className="font-label-sm text-[11px] text-on-surface-variant">Agents standing by.</p>
-              ) : (
-                agentActions.map((action, i) => (
-                  <div key={action.id} className="p-3 bg-surface-container-low rounded-lg border border-outline-variant/30">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center">
-                          <span className="font-mono-label font-mono text-[10px] font-bold">{action.agentName.substring(0, 2).toUpperCase()}</span>
-                        </div>
-                        <span className="font-body-md text-[14px] font-medium text-on-surface">{action.agentName}</span>
-                      </div>
-                      {i === 0 && <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>}
-                    </div>
-                    <p className="font-label-sm text-[11px] font-semibold text-on-surface-variant leading-relaxed">
-                      {action.logMessage}
-                    </p>
-                  </div>
-                ))
-              )}
-            </div>
-          </motion.div>
+          
         </div>
       </div>
     </>

@@ -51,13 +51,22 @@ export async function analyzeTaskRisk(userId: string, taskTitle: string, taskDes
 /**
  * Atlas Agent: Plans a new goal by breaking it down into 3 tasks.
  */
-export async function planGoal(userId: string, goalTitle: string) {
+export async function planGoal(userId: string, goalTitle: string, targetDays: number = 30) {
   try {
     let tasks = ["Research", "Implementation", "Review"];
     
+    let aiDescription = "";
+    
     if (process.env.GEMINI_API_KEY) {
       const prompt = `You are Atlas, a strategic planning AI for Chronix.
-        Break down the following goal into exactly 3 actionable task titles separated by commas.
+        Break down the following goal into exactly 3 actionable task titles.
+        Also provide a 1-2 sentence description of what you understand the goal to be and the strategy to achieve it.
+        Respond ONLY with a raw JSON object in exactly this format, no markdown formatting, no backticks:
+        {
+          "tasks": ["Task 1", "Task 2", "Task 3"],
+          "aiUnderstanding": "Your strategy description here."
+        }
+        
         Goal: ${goalTitle}
       `;
       
@@ -67,7 +76,18 @@ export async function planGoal(userId: string, goalTitle: string) {
       });
       
       if (response.text) {
-        tasks = response.text.split(",").map(t => t.trim()).slice(0, 3);
+        try {
+          const cleanedText = response.text.replace(/```json/g, '').replace(/```/g, '').trim();
+          const parsed = JSON.parse(cleanedText);
+          tasks = parsed.tasks && Array.isArray(parsed.tasks) ? parsed.tasks.slice(0, 3) : tasks;
+          aiDescription = parsed.aiUnderstanding || "";
+        } catch (e) {
+          console.error("Failed to parse JSON from AI response", response.text);
+          // Fallback parsing just in case
+          if (response.text.includes(",")) {
+            tasks = response.text.split(",").map(t => t.trim()).slice(0, 3);
+          }
+        }
       }
     }
 
@@ -76,7 +96,8 @@ export async function planGoal(userId: string, goalTitle: string) {
       data: {
         userId,
         title: goalTitle,
-        targetDays: 30,
+        description: aiDescription,
+        targetDays: targetDays,
         currentDays: 0,
       },
     });

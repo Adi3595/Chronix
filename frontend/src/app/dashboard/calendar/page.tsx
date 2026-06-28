@@ -1,29 +1,22 @@
-import CalendarClient from "./CalendarClient";
 import { prisma } from "@/lib/db";
+import { cookies } from "next/headers";
+import CalendarClient from "./CalendarClient";
 
 export const dynamic = 'force-dynamic';
 
 export default async function CalendarPage() {
-  const userId = "demo-user-123";
+  const cookieStore = await cookies();
+  const userId = cookieStore.get("chronix-uid")?.value || "demo-user-123";
 
   let tasks: any[] = [];
-  let agentActions: any[] = [];
-
   try {
-    [tasks, agentActions] = await Promise.all([
-      prisma.task.findMany({
-        where: { userId, scheduledAt: { not: null } },
-        orderBy: { scheduledAt: "asc" },
-      }),
-      prisma.agentAction.findMany({
-        where: { userId },
-        orderBy: { createdAt: "desc" },
-        take: 3
-      })
-    ]);
+    tasks = await prisma.task.findMany({
+      where: { userId, scheduledAt: { not: null } },
+      orderBy: { scheduledAt: "asc" },
+    });
   } catch (error) {
     console.error("[Calendar] DB error:", error);
   }
 
-  return <CalendarClient tasks={tasks} agentActions={agentActions} />;
+  return <CalendarClient initialTasks={tasks} userId={userId} />;
 }

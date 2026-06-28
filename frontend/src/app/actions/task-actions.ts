@@ -3,12 +3,14 @@
 import { prisma } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
-export async function createTaskAction(title: string) {
+export async function createTaskAction(userId: string, title: string, description?: string, scheduledAt?: Date) {
   try {
     const task = await prisma.task.create({
       data: {
-        userId: "demo-user-123", // Assuming demo user
+        userId,
         title,
+        description,
+        scheduledAt,
         priority: title.toLowerCase().includes("urgent") || title.toLowerCase().includes("asap") ? "High" : "Medium",
       },
     });
