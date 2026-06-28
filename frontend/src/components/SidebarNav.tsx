@@ -38,7 +38,7 @@ export default function SidebarNav() {
         if (!hasAccess) {
           return (
             <li key={idx}>
-              <div className="flex items-center justify-between px-4 py-3 font-mono text-[12px] uppercase tracking-widest text-muted-foreground opacity-40 cursor-not-allowed border border-transparent">
+              <div className="flex items-center justify-between px-4 py-3 font-sans text-[13px] tracking-wide text-muted-foreground opacity-40 cursor-not-allowed rounded-xl border border-transparent">
                 <div className="flex items-center gap-3">
                   <span className="material-symbols-outlined">{tab.icon}</span>
                   {tab.label}
@@ -53,10 +53,10 @@ export default function SidebarNav() {
           <li key={idx}>
             <Link
               href={tab.href}
-              className={`flex items-center gap-3 px-4 py-3 font-mono text-[12px] uppercase tracking-widest transition-colors duration-200 border ${
+              className={`flex items-center gap-3 px-4 py-3 font-sans text-[13px] tracking-wide transition-all duration-200 rounded-xl border ${
                 isActive
-                  ? "bg-primary/10 text-primary font-bold border-primary shadow-[inset_4px_0_0_rgba(169,198,50,1)]"
-                  : "text-muted-foreground border-transparent hover:bg-surface hover:text-primary hover:border-outline-variant"
+                  ? "bg-primary/10 text-primary font-bold border-primary/30 shadow-[0_4px_20px_rgba(46,125,50,0.15)]"
+                  : "text-muted-foreground border-transparent hover:bg-surface-variant hover:text-foreground hover:border-outline-variant"
               }`}
             >
               <span className="material-symbols-outlined">{tab.icon}</span>

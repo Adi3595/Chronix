@@ -1,51 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  /* design.png Glassmorphic Palette */
-  --color-background: #050806; /* Ultra Dark Obsidian */
-  --color-foreground: #FFFFFF; /* Pure White */
-  --color-on-background: #FFFFFF;
+  /* Ultra-Premium Cinematic Palette */
+  --color-background: #050807; /* Cinematic Black-Green Base */
+  --color-foreground: #F4F5EF; /* Text Primary */
+  --color-on-background: #F4F5EF; 
   
-  --color-surface: #121613; /* Translucent Dark Grey-Green */
-  --color-on-surface: #FFFFFF;
+  --color-surface: #0B0F0D; /* Main Surface */
+  --color-on-surface: #F4F5EF; 
   
-  --color-surface-variant: #1A201B; 
-  --color-on-surface-variant: #9CA3AF; /* Muted Grey */
+  --color-surface-variant: rgba(255, 255, 255, 0.05); /* Cards Glassmorphism */
+  --color-on-surface-variant: rgba(244, 245, 239, 0.72); /* Text Secondary */
   
-  --color-muted: #1A201B; 
-  --color-muted-foreground: #9CA3AF; 
+  --color-muted: rgba(255, 255, 255, 0.03); 
+  --color-muted-foreground: rgba(244, 245, 239, 0.72); 
   
-  --color-surface-container-lowest: #030504; 
-  --color-surface-container-low: #080B09; 
-  --color-surface-container: #121613; 
-  --color-surface-container-high: #1A201B; 
-  --color-surface-container-highest: #262D27; 
+  --color-surface-container-lowest: #020403; 
+  --color-surface-container-low: #050807; 
+  --color-surface-container: #0B0F0D; 
+  --color-surface-container-high: rgba(255, 255, 255, 0.05); 
+  --color-surface-container-highest: rgba(255, 255, 255, 0.08); 
   
-  --color-primary: #6BBE66; /* Vibrant Matcha Green */
-  --color-on-primary: #050806; 
-  --color-primary-container: #264624; 
-  --color-on-primary-container: #6BBE66; 
+  --color-primary: #2E7D32; /* Primary Accent */
+  --color-on-primary: #F4F5EF; 
+  --color-primary-container: rgba(46, 125, 50, 0.2); 
+  --color-on-primary-container: #A7D7A9; 
   
-  --color-secondary: #9CA3AF; 
-  --color-on-secondary: #050806; 
-  --color-secondary-container: #1A201B; 
-  --color-on-secondary-container: #E5E7EB; 
+  --color-secondary: #A7D7A9; /* Secondary Accent */
+  --color-on-secondary: #050807; 
+  --color-secondary-container: rgba(167, 215, 169, 0.1); 
+  --color-on-secondary-container: #F4F5EF; 
   
-  --color-error: #ff6b4a; /* Alert Orange/Red */
-  --color-on-error: #ffffff;
-  --color-error-container: #4a1911;
-  --color-on-error-container: #ff6b4a;
+  --color-error: #FF6B4A; /* Danger */
+  --color-warning: #D97706; /* Warning */
   
-  --color-outline: rgba(255, 255, 255, 0.1); 
-  --color-outline-variant: rgba(255, 255, 255, 0.05);
+  --color-outline: rgba(255, 255, 255, 0.08); /* Borders */
+  --color-outline-variant: rgba(255, 255, 255, 0.04);
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
   --font-serif: "Veldman", var(--font-serif), ui-serif, Georgia, serif;
   
-  --font-body-md: var(--font-geist-sans);
-  --font-body-lg: var(--font-geist-sans);
-  --font-label-sm: var(--font-geist-sans);
+  --font-body-md: var(--font-inter);
+  --font-body-lg: var(--font-inter);
+  --font-label-sm: var(--font-inter);
   --font-mono-label: var(--font-geist-mono);
   --font-headline-md: var(--font-serif);
   --font-display-lg: var(--font-serif);
@@ -65,34 +63,33 @@
 }
 
 :root.dark {
-  --color-background: #050806;
-  --color-foreground: #FFFFFF;
-  --color-on-background: #FFFFFF;
-  --color-surface: #121613;
-  --color-on-surface: #FFFFFF;
-  --color-surface-variant: #1A201B;
-  --color-on-surface-variant: #9CA3AF;
-  --color-muted: #1A201B;
-  --color-muted-foreground: #9CA3AF;
-  --color-surface-container-lowest: #030504;
-  --color-surface-container-low: #080B09;
-  --color-surface-container: #121613;
-  --color-surface-container-high: #1A201B;
-  --color-surface-container-highest: #262D27;
-  --color-primary: #6BBE66;
-  --color-on-primary: #050806;
-  --color-primary-container: #264624;
-  --color-on-primary-container: #6BBE66;
-  --color-secondary: #9CA3AF;
-  --color-on-secondary: #050806;
-  --color-secondary-container: #1A201B;
-  --color-on-secondary-container: #E5E7EB;
-  --color-error: #ff6b4a;
-  --color-on-error: #ffffff;
-  --color-error-container: #4a1911;
-  --color-on-error-container: #ff6b4a;
-  --color-outline: rgba(255, 255, 255, 0.1);
-  --color-outline-variant: rgba(255, 255, 255, 0.05);
+  --color-background: #050807;
+  --color-foreground: #F4F5EF;
+  --color-on-background: #F4F5EF;
+  --color-surface: #0B0F0D;
+  --color-on-surface: #F4F5EF;
+  --color-surface-variant: rgba(255, 255, 255, 0.05);
+  --color-on-surface-variant: rgba(244, 245, 239, 0.72);
+  --color-muted: rgba(255, 255, 255, 0.03);
+  --color-muted-foreground: rgba(244, 245, 239, 0.72);
+  --color-surface-container-lowest: #020403;
+  --color-surface-container-low: #050807;
+  --color-surface-container: #0B0F0D;
+  --color-surface-container-high: rgba(255, 255, 255, 0.05);
+  --color-surface-container-highest: rgba(255, 255, 255, 0.08);
+  --color-primary: #2E7D32;
+  --color-on-primary: #F4F5EF;
+  --color-primary-container: rgba(46, 125, 50, 0.2);
+  --color-on-primary-container: #A7D7A9;
+  --color-secondary: #A7D7A9;
+  --color-on-secondary: #050807;
+  --color-secondary-container: rgba(167, 215, 169, 0.1);
+  --color-on-secondary-container: #F4F5EF;
+  --color-error: #FF6B4A;
+  --color-on-error: #F4F5EF;
+  --color-warning: #D97706;
+  --color-outline: rgba(255, 255, 255, 0.08);
+  --color-outline-variant: rgba(255, 255, 255, 0.04);
 }
 
 
@@ -125,11 +122,11 @@ h1, h2, h3, h4, h5, h6 {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #A9C632;
+  background: #2E7D32;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #1D2E1B;
+  background: #A7D7A9;
 }
 
 @keyframes shimmer {

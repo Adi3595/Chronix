@@ -29,7 +29,7 @@ export default function FutureSelfClient({
       <div className="pb-12 pt-8 max-w-[1440px] mx-auto w-full">
         {/* Page Header */}
         <div className="mb-12 max-w-4xl">
-          <h2 className="font-display-lg font-serif text-[48px] text-on-surface mb-4">Future Self Projection</h2>
+          <h2 className="font-serif font-black text-[48px] text-foreground mb-4">Future Self Projection</h2>
           <p className="font-body-lg text-[18px] text-on-surface-variant max-w-2xl leading-relaxed">
             Analyzing current momentum vectors and completion rates against optimal lifecycle patterns. The simulation indicates a {delta > 20 ? "critical divergence" : "stable alignment"} point.
           </p>
@@ -45,57 +45,74 @@ export default function FutureSelfClient({
             className="xl:col-span-8 flex flex-col gap-6"
           >
             {/* Generative Texture Card holding the paths */}
-            <motion.div variants={itemVariants} className="relative w-full h-[600px] bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] overflow-hidden flex flex-col">
-              {/* Generative Background Image via Placeholder */}
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-40 z-0"
-                style={{
-                  backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDH6V80khJlEcKDlz9WYosWTfId3ZB9-IuMTz0vqqYUPMG8aPjQXcsAv2y-thLcaqk_5VK-uO0AQL68wPu14Wc4WhQKqG_CzGfIXbxRuTxle8igYO_5eAvrstkpef_xky_JfAD1lvCAKWUTX-P19f8VXuWL3HTH6TZK9dBVazEDuXyuX71rAoeKLbpgBgRQgLMAX3sMUcp-YF7l1BEA83JgYe_ESvq3nreeyvXKKBHRdctQibAuzyaTcAhveW_ysl86if4QxMq-in4')"
-                }}
-              ></div>
+            <motion.div variants={itemVariants} className="relative w-full h-[600px] bg-surface/40 backdrop-blur-xl border border-outline rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col">
               {/* Card Header */}
-              <div className="relative z-10 p-8 flex justify-between items-center border-b border-surface-variant/50 bg-white/50 backdrop-blur-sm">
-                <h3 className="font-headline-md font-serif text-[24px] text-on-surface">Trajectory Analysis</h3>
-                <span className="font-mono-label font-mono text-[13px] text-on-surface-variant tracking-widest uppercase">Delta: +{delta}%</span>
+              <div className="relative z-10 p-8 flex justify-between items-center border-b border-outline bg-surface-variant/30">
+                <h3 className="font-sans font-bold text-[24px] text-foreground tracking-wide">Trajectory Analysis</h3>
+                <span className="font-sans text-[12px] font-bold text-primary tracking-widest uppercase">Delta: +{delta}%</span>
               </div>
               {/* Simulation Canvas */}
               <div className="relative flex-1 p-8 z-10 flex">
                 {/* Origin Point */}
                 <div className="absolute left-8 bottom-1/2 translate-y-1/2 flex items-center gap-3">
-                  <div className="w-4 h-4 rounded-full bg-on-surface border-4 border-surface-container-lowest shadow-sm z-20"></div>
-                  <span className="font-mono-label font-mono text-[13px] text-on-surface">Present</span>
+                  <div className="w-4 h-4 rounded-full bg-foreground border-4 border-surface shadow-[0_0_10px_rgba(255,255,255,0.5)] z-20"></div>
+                  <span className="font-sans font-bold text-[13px] text-foreground tracking-widest uppercase">Present</span>
                 </div>
                 {/* Lines holding the "Paths" */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none" viewBox="0 0 100 100">
-                  {/* Current Trajectory Line */}
-                  <path d="M 10 50 C 40 50, 60 70, 90 75" fill="none" stroke="#bfcaba" strokeDasharray="2,2" strokeWidth="0.5"></path>
+                  <defs>
+                    <filter id="glowLine" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="1.5" result="blur" />
+                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                  </defs>
+                  {/* Current Trajectory Line (Chaotic) */}
+                  <motion.path 
+                    d="M 10 50 Q 20 20, 30 60 T 50 40 T 70 80 T 90 75" 
+                    fill="none" 
+                    stroke="rgba(255,255,255,0.15)" 
+                    strokeDasharray="1,1" 
+                    strokeWidth="0.5"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 4, ease: "linear" }}
+                  />
                   {/* Optimized Path Line */}
-                  <path d="M 10 50 C 40 50, 50 20, 90 15" fill="none" stroke="#0d631b" strokeWidth="1.5"></path>
+                  <motion.path 
+                    d="M 10 50 C 40 50, 50 20, 90 15" 
+                    fill="none" 
+                    stroke="var(--color-primary)" 
+                    strokeWidth="1.5"
+                    filter="url(#glowLine)"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 2, ease: "easeOut" }}
+                  />
                 </svg>
                 {/* Path Endpoints / Markers */}
                 {/* Optimized Point */}
                 <div className="absolute right-12 top-[12%] flex flex-col items-end">
-                  <div className="bg-surface-container-lowest shadow-[0px_4px_20px_rgba(0,0,0,0.03)] p-4 rounded-lg border border-primary/10 backdrop-blur-md min-w-[200px]">
+                  <div className="bg-surface/60 shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-6 rounded-2xl border border-primary/30 backdrop-blur-md min-w-[220px]">
                     <div className="flex items-center gap-2 mb-2 text-primary">
                       <span className="material-symbols-outlined">trending_up</span>
-                      <span className="font-label-sm text-[12px] uppercase tracking-wider font-semibold">Optimized Path</span>
+                      <span className="font-sans text-[12px] font-bold uppercase tracking-widest">Optimized Path</span>
                     </div>
-                    <div className="font-display-lg-mobile font-serif text-[32px] text-on-surface leading-tight">{optimizedProbability}<span className="font-serif text-[24px] text-on-surface-variant">%</span></div>
-                    <p className="font-body-md text-[15px] text-on-surface-variant mt-1 text-sm">Success Probability</p>
+                    <div className="font-serif text-[40px] font-bold text-foreground leading-tight">{optimizedProbability}<span className="text-[24px] text-muted-foreground">%</span></div>
+                    <p className="font-sans text-[13px] text-muted-foreground mt-1">Success Probability</p>
                   </div>
-                  <div className="w-3 h-3 rounded-full bg-primary mt-2 mr-6 shadow-[0_0_10px_rgba(13,99,27,0.5)]"></div>
+                  <div className="w-3 h-3 rounded-full bg-primary mt-3 mr-8 shadow-[0_0_15px_rgba(46,125,50,0.8)]"></div>
                 </div>
                 {/* Current Trajectory Point */}
                 <div className="absolute right-12 bottom-[20%] flex flex-col items-end">
-                  <div className="bg-surface-container-lowest shadow-[0px_4px_20px_rgba(0,0,0,0.03)] p-4 rounded-lg border border-outline-variant/30 backdrop-blur-md min-w-[200px] opacity-80">
-                    <div className="flex items-center gap-2 mb-2 text-on-surface-variant">
+                  <div className="bg-surface/40 shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-6 rounded-2xl border border-outline backdrop-blur-md min-w-[220px] opacity-80">
+                    <div className="flex items-center gap-2 mb-2 text-muted-foreground">
                       <span className="material-symbols-outlined text-[18px]">trending_flat</span>
-                      <span className="font-label-sm text-[12px] uppercase tracking-wider font-semibold">Current Trajectory</span>
+                      <span className="font-sans text-[12px] font-bold uppercase tracking-widest">Current Trajectory</span>
                     </div>
-                    <div className="font-display-lg-mobile font-serif text-[32px] text-on-surface leading-tight">{currentProbability}<span className="font-serif text-[24px] text-outline-variant">%</span></div>
-                    <p className="font-body-md text-[15px] text-outline mt-1 text-sm">Task Completion Rate</p>
+                    <div className="font-serif text-[40px] font-bold text-foreground leading-tight">{currentProbability}<span className="text-[24px] text-muted-foreground">%</span></div>
+                    <p className="font-sans text-[13px] text-muted-foreground mt-1">Task Completion Rate</p>
                   </div>
-                  <div className="w-3 h-3 rounded-full bg-outline-variant mt-2 mr-6"></div>
+                  <div className="w-3 h-3 rounded-full bg-muted-foreground mt-3 mr-8"></div>
                 </div>
               </div>
             </motion.div>
@@ -109,31 +126,31 @@ export default function FutureSelfClient({
             className="xl:col-span-4 flex flex-col gap-6"
           >
             {/* Life Stages Card */}
-            <motion.div variants={itemVariants} className="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] p-8 flex-1">
-              <h3 className="font-headline-md font-serif text-[24px] text-on-surface mb-8">Intelligence Synthesis</h3>
-              <div className="relative border-l border-surface-variant ml-4 space-y-10 py-2">
+            <motion.div variants={itemVariants} className="bg-surface/40 backdrop-blur-xl border border-outline rounded-3xl p-8 flex-1">
+              <h3 className="font-sans font-bold text-[20px] text-foreground mb-8">Intelligence Synthesis</h3>
+              <div className="relative border-l border-outline ml-4 space-y-10 py-2">
                 <div className="relative pl-8">
-                  <div className="absolute -left-[17px] top-0.5 w-8 h-8 rounded-full bg-primary-container flex items-center justify-center border-4 border-surface-container-lowest text-on-primary-container shadow-sm">
+                  <div className="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center border border-primary text-primary shadow-[0_0_10px_rgba(46,125,50,0.4)]">
                     <span className="material-symbols-outlined text-[16px]">target</span>
                   </div>
-                  <h4 className="font-mono-label font-mono text-[13px] text-on-surface mb-1">Momentum Tracking</h4>
-                  <p className="font-body-md text-[14px] text-on-surface-variant">Your momentum score strongly influences your optimized path curve.</p>
+                  <h4 className="font-sans font-bold text-[13px] uppercase tracking-widest text-foreground mb-1">Momentum Tracking</h4>
+                  <p className="font-sans text-[14px] text-muted-foreground">Your momentum score strongly influences your optimized path curve.</p>
                 </div>
                 <div className="relative pl-8">
-                  <div className="absolute -left-[17px] top-0.5 w-8 h-8 rounded-full bg-surface-container flex items-center justify-center border-4 border-surface-container-lowest text-on-surface-variant">
+                  <div className="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-surface flex items-center justify-center border border-outline text-muted-foreground">
                     <span className="material-symbols-outlined text-[16px]">task_alt</span>
                   </div>
-                  <h4 className="font-mono-label font-mono text-[13px] text-on-surface mb-1">Execution Metrics</h4>
-                  <p className="font-body-md text-[14px] text-on-surface-variant">Your current path is calculated based on the ratio of completed vs pending tasks.</p>
+                  <h4 className="font-sans font-bold text-[13px] uppercase tracking-widest text-foreground mb-1">Execution Metrics</h4>
+                  <p className="font-sans text-[14px] text-muted-foreground">Your current path is calculated based on the ratio of completed vs pending tasks.</p>
                 </div>
               </div>
             </motion.div>
 
             {/* Action Card */}
-            <motion.div variants={itemVariants} className="bg-surface-container-lowest rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.03)] p-6 flex flex-col justify-center items-center text-center border border-primary/10">
+            <motion.div variants={itemVariants} className="bg-primary/5 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 flex flex-col justify-center items-center text-center">
               <span className="material-symbols-outlined text-primary mb-3 text-[32px]">tune</span>
-              <h4 className="font-mono-label font-mono text-[13px] text-on-surface mb-2">Increase Probability</h4>
-              <p className="font-body-md text-[14px] text-on-surface-variant mb-4">Complete pending tasks in the dashboard to raise your Current Trajectory score.</p>
+              <h4 className="font-sans font-bold text-[13px] uppercase tracking-widest text-primary mb-2">Increase Probability</h4>
+              <p className="font-sans text-[14px] text-muted-foreground">Complete pending tasks in the dashboard to raise your Current Trajectory score.</p>
             </motion.div>
           </motion.div>
         </div>

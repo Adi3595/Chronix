@@ -27,19 +27,19 @@ export default function GoalsClient({ initialGoals }: { initialGoals: any[] }) {
 
   return (
     <>
-      <header className="flex justify-between items-center h-20 sticky top-0 z-40 bg-surface/80 backdrop-blur-md mb-8">
+      <header className="flex justify-between items-center h-20 sticky top-0 z-40 bg-background/50 backdrop-blur-xl mb-8 border-b border-outline">
         <div className="flex items-center gap-4">
-          <h2 className="font-display-lg-mobile md:font-display-lg text-[32px] md:text-[48px] font-serif text-on-surface hidden md:block">
+          <h2 className="font-serif font-black text-[32px] md:text-[48px] text-foreground hidden md:block tracking-tight">
             Milestone View
           </h2>
-          <h2 className="font-headline-md font-serif text-[24px] text-on-surface md:hidden">
+          <h2 className="font-sans font-bold text-[24px] text-foreground md:hidden">
             Goals
           </h2>
         </div>
         <div className="flex items-center space-x-4">
           <button 
             onClick={() => setIsAdding(true)}
-            className="bg-primary text-on-primary font-label-sm text-[12px] py-2 px-4 rounded-full hover:opacity-90 transition-all duration-200"
+            className="bg-primary text-background font-sans font-bold text-[13px] uppercase tracking-widest py-3 px-6 rounded-full hover:bg-primary/90 transition-all duration-200 shadow-[0_0_20px_rgba(46,125,50,0.4)]"
           >
             New Goal (Atlas AI)
           </button>
@@ -60,13 +60,13 @@ export default function GoalsClient({ initialGoals }: { initialGoals: any[] }) {
             onChange={(e) => setNewGoalTitle(e.target.value)}
             disabled={isPlanning}
             placeholder="Describe your ambitious new goal... Atlas will handle the rest." 
-            className="flex-1 bg-surface-container-lowest border border-outline-variant p-4 rounded-xl text-on-surface focus:border-primary focus:outline-none font-body-md"
+            className="flex-1 bg-surface/40 backdrop-blur-xl border border-outline p-5 rounded-2xl text-foreground focus:border-primary/50 focus:outline-none font-sans text-[15px] shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
           />
-          <button disabled={isPlanning} type="submit" className="bg-primary text-on-primary px-6 rounded-xl font-mono-label disabled:opacity-50 flex items-center gap-2">
-            {isPlanning && <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>}
+          <button disabled={isPlanning} type="submit" className="bg-primary text-background px-8 rounded-2xl font-sans font-bold text-[13px] uppercase tracking-widest disabled:opacity-50 flex items-center gap-2 shadow-[0_0_20px_rgba(46,125,50,0.4)]">
+            {isPlanning && <span className="w-4 h-4 border-2 border-background border-t-transparent rounded-full animate-spin"></span>}
             {isPlanning ? "Planning..." : "Generate"}
           </button>
-          <button disabled={isPlanning} type="button" onClick={() => setIsAdding(false)} className="px-6 text-on-surface-variant hover:underline font-mono-label disabled:opacity-50">
+          <button disabled={isPlanning} type="button" onClick={() => setIsAdding(false)} className="px-6 text-muted-foreground hover:text-foreground font-sans text-[13px] font-bold uppercase tracking-widest transition-colors disabled:opacity-50">
             Cancel
           </button>
         </motion.form>
@@ -98,39 +98,39 @@ export default function GoalsClient({ initialGoals }: { initialGoals: any[] }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="bg-surface-container-lowest rounded-xl p-6 md:p-8 shadow-[0px_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden group"
+                className="bg-surface/40 backdrop-blur-xl border border-outline rounded-3xl p-6 md:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.2)] relative overflow-hidden group hover:border-primary/40 transition-colors"
               >
                 <div className="flex justify-between items-start mb-6">
                   <div>
-                    <span className="font-label-sm text-[12px] font-semibold text-primary uppercase tracking-widest mb-2 block">
+                    <span className="font-sans text-[11px] font-bold text-primary uppercase tracking-widest mb-2 block">
                       Chronix Goal
                     </span>
-                    <h3 className="font-headline-md font-serif text-[24px] text-on-surface font-semibold mb-1">
+                    <h3 className="font-sans font-bold text-[24px] text-foreground mb-1">
                       {goal.title}
                     </h3>
-                    <p className="font-body-md text-[15px] text-on-surface-variant max-w-lg">
+                    <p className="font-sans text-[15px] text-muted-foreground max-w-lg mt-2">
                       {totalTasks} total sub-tasks automatically generated by Atlas AI.
                     </p>
                   </div>
-                  <div className="bg-surface-container-low px-3 py-1 rounded-full flex items-center space-x-1">
-                    <div className={`w-2 h-2 rounded-full ${progress === 100 ? 'bg-primary' : 'bg-outline-variant'} animate-pulse`}></div>
-                    <span className="font-mono-label font-mono text-[13px] text-on-surface">
+                  <div className="bg-surface border border-outline px-4 py-2 rounded-full flex items-center space-x-2">
+                    <div className={`w-2 h-2 rounded-full ${progress === 100 ? 'bg-primary shadow-[0_0_10px_rgba(46,125,50,0.8)]' : 'bg-muted-foreground'} animate-pulse`}></div>
+                    <span className="font-sans text-[11px] font-bold uppercase tracking-widest text-foreground">
                       {progress === 100 ? 'Completed' : 'In Progress'}
                     </span>
                   </div>
                 </div>
 
                 {/* Timeline */}
-                <div className="mt-8 mb-6 relative">
-                  <div className="h-2 w-full bg-surface-variant rounded-full overflow-hidden">
-                    <div className="h-full bg-primary rounded-full transition-all duration-1000" style={{ width: `${progress}%` }}></div>
+                <div className="mt-8 mb-4 relative">
+                  <div className="h-1.5 w-full bg-surface rounded-full overflow-hidden">
+                    <div className="h-full bg-primary rounded-full transition-all duration-1000 shadow-[0_0_10px_rgba(46,125,50,0.8)]" style={{ width: `${progress}%` }}></div>
                   </div>
-                  <div className="flex justify-between mt-3">
-                    <span className="font-label-sm text-[12px] font-semibold text-on-surface-variant">Start</span>
-                    <span className="font-label-sm text-[12px] font-semibold text-primary font-medium" style={{ marginLeft: "-5%" }}>
+                  <div className="flex justify-between mt-4">
+                    <span className="font-sans text-[11px] uppercase tracking-widest font-bold text-muted-foreground">Start</span>
+                    <span className="font-sans text-[11px] uppercase tracking-widest font-bold text-primary" style={{ marginLeft: "-5%" }}>
                       {progress}% Complete ({completedTasks}/{totalTasks} Tasks)
                     </span>
-                    <span className="font-label-sm text-[12px] font-semibold text-on-surface-variant">Target</span>
+                    <span className="font-sans text-[11px] uppercase tracking-widest font-bold text-muted-foreground">Target</span>
                   </div>
                 </div>
               </motion.article>
@@ -140,13 +140,13 @@ export default function GoalsClient({ initialGoals }: { initialGoals: any[] }) {
 
         {/* Right Column: Future Projection (AI Panel) */}
         <aside className="xl:col-span-4 flex flex-col gap-6">
-          <div className="bg-surface/80 backdrop-blur-md border border-outline-variant rounded-xl p-6 relative overflow-hidden flex-1 min-h-[400px] flex flex-col">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent -z-10"></div>
-            <div className="flex items-center space-x-2 mb-6">
-              <span className="material-symbols-outlined text-primary">auto_awesome</span>
-              <h3 className="font-headline-md font-serif text-[24px] text-on-surface font-medium">Atlas AI Planner</h3>
+          <div className="bg-primary/5 backdrop-blur-xl border border-primary/20 rounded-3xl p-8 relative overflow-hidden flex-1 min-h-[400px] flex flex-col shadow-[0_20px_50px_rgba(46,125,50,0.1)]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(46,125,50,0.1)_0%,transparent_50%)] -z-10"></div>
+            <div className="flex items-center space-x-3 mb-6">
+              <span className="material-symbols-outlined text-primary text-[28px]">auto_awesome</span>
+              <h3 className="font-sans font-bold text-[24px] text-primary">Atlas AI Planner</h3>
             </div>
-            <p className="font-body-md text-[15px] text-on-surface-variant mb-8">
+            <p className="font-sans text-[15px] text-muted-foreground leading-relaxed mb-8">
               Click "New Goal" and simply describe what you want to achieve. Atlas will automatically parse your goal, break it down into an optimal 3-step action plan, and inject those tasks directly into your Execution Matrix.
             </p>
           </div>
