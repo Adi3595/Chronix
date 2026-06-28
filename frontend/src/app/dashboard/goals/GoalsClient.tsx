@@ -140,8 +140,8 @@ export default function GoalsClient({ initialGoals }: { initialGoals: any[] }) {
 
         {/* Right Column: Future Projection (AI Panel) */}
         <aside className="xl:col-span-4 flex flex-col gap-6">
-          <div className="bg-white/90 backdrop-blur-md border border-gray-200/50 rounded-xl p-6 relative overflow-hidden flex-1 min-h-[400px] flex flex-col">
-            <div className="absolute inset-0 bg-gradient-to-br from-surface-bright/40 via-transparent to-primary/5 -z-10"></div>
+          <div className="bg-surface/80 backdrop-blur-md border border-outline-variant rounded-xl p-6 relative overflow-hidden flex-1 min-h-[400px] flex flex-col">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent -z-10"></div>
             <div className="flex items-center space-x-2 mb-6">
               <span className="material-symbols-outlined text-primary">auto_awesome</span>
               <h3 className="font-headline-md font-serif text-[24px] text-on-surface font-medium">Atlas AI Planner</h3>
