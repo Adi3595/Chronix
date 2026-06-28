@@ -76,7 +76,7 @@ export default function LandingPage() {
 
         {/* Front Layer: Zooming masked background to create deep 3D effect */}
         <motion.div
-          className="absolute inset-0 z-10 pointer-events-none"
+          className="fixed inset-0 z-50 pointer-events-none"
           style={{
             backgroundImage: "url('/bg.png')",
             backgroundSize: "cover",
@@ -84,25 +84,35 @@ export default function LandingPage() {
             maskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
             WebkitMaskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
             scale: useTransform(scrollYProgress, [0, 1], [1, 1.8]),
-            filter: useTransform(scrollYProgress, [0, 0.5], ["brightness(0.8)", "brightness(1.5)"]),
+            filter: useTransform(scrollYProgress, [0, 1], ["brightness(1.2) contrast(1.2)", "brightness(2.5) contrast(1.5)"]),
           }}
         >
-          {/* Sparkles that brighten on scroll */}
+          {/* Sparkles that roam around continually */}
           <motion.div 
             className="absolute inset-0"
-            style={{ opacity: useTransform(scrollYProgress, [0, 0.3], [0, 1]) }}
+            style={{ opacity: useTransform(scrollYProgress, [0, 0.2], [0, 1]) }}
           >
             {[...Array(40)].map((_, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="absolute bg-primary rounded-full animate-pulse mix-blend-screen shadow-[0_0_15px_3px_rgba(46,125,50,0.9)]"
+                className="absolute bg-primary rounded-full mix-blend-screen shadow-[0_0_20px_4px_rgba(46,125,50,1)]"
                 style={{
-                  width: Math.random() * 3 + 1 + "px",
-                  height: Math.random() * 3 + 1 + "px",
+                  width: Math.random() * 4 + 2 + "px",
+                  height: Math.random() * 4 + 2 + "px",
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 40 + 60}%`, // Only in the bottom 40% where the mask is visible
-                  animationDelay: `${Math.random() * 2}s`,
-                  animationDuration: `${Math.random() * 2 + 1}s`
+                }}
+                animate={{
+                  x: [0, (Math.random() - 0.5) * 200, 0],
+                  y: [0, (Math.random() - 0.5) * 100, 0],
+                  opacity: [0.2, 1, 0.2],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration: Math.random() * 5 + 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: Math.random() * 2
                 }}
               />
             ))}
