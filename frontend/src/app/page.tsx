@@ -123,8 +123,6 @@ export default function LandingPage() {
                  animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                  className="w-32 h-32 bg-primary/20 rounded-full blur-2xl"
                ></motion.div>
-               
-               <div className="font-mono text-[10px] text-primary absolute bottom-10 tracking-[0.3em] uppercase bg-background px-4 border border-primary/30 py-1">System_Active</div>
             </motion.div>
           </div>
         </div>
@@ -144,7 +142,7 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">
             <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-              <div className="font-mono text-[10px] text-primary tracking-widest uppercase mb-6 border border-primary px-3 py-1 inline-block bg-primary/10">System: Matrix</div>
+              <div className="font-mono text-[10px] text-primary tracking-widest uppercase mb-6 border border-primary px-3 py-1 inline-block bg-primary/10">Smart Prioritization</div>
               <h3 className="font-sans text-[32px] font-black uppercase text-foreground mb-4">The Execution Matrix</h3>
               <p className="font-mono text-[14px] text-muted-foreground leading-relaxed mb-6">
                 Stop looking at endless to-do lists. Chronix automatically prioritizes your tasks into an Eisenhower-style Execution Matrix, ensuring you tackle high-impact items first while gracefully deferring the noise.
@@ -159,10 +157,10 @@ export default function LandingPage() {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="bg-surface p-1 border border-outline-variant relative h-[400px] flex items-center justify-center overflow-hidden group hover:border-primary/50 transition-colors">
               {/* Abstract UI Wireframe */}
               <div className="absolute inset-4 border border-outline-variant grid grid-cols-2 grid-rows-2 gap-px bg-outline-variant">
-                <div className="bg-surface flex items-center justify-center hover:bg-primary/5 transition-colors"><span className="font-mono text-primary text-[10px]">Q1_URGENT_IMPORTANT</span></div>
-                <div className="bg-surface flex items-center justify-center hover:bg-primary/5 transition-colors"><span className="font-mono text-muted-foreground text-[10px]">Q2_IMPORTANT</span></div>
-                <div className="bg-surface flex items-center justify-center hover:bg-primary/5 transition-colors"><span className="font-mono text-muted-foreground text-[10px]">Q3_URGENT</span></div>
-                <div className="bg-surface flex items-center justify-center hover:bg-primary/5 transition-colors"><span className="font-mono text-muted-foreground/30 text-[10px]">Q4_DEFER</span></div>
+                <div className="bg-surface flex items-center justify-center hover:bg-primary/5 transition-colors"><span className="font-mono text-primary text-[10px] uppercase tracking-widest">Do First</span></div>
+                <div className="bg-surface flex items-center justify-center hover:bg-primary/5 transition-colors"><span className="font-mono text-muted-foreground text-[10px] uppercase tracking-widest">Schedule</span></div>
+                <div className="bg-surface flex items-center justify-center hover:bg-primary/5 transition-colors"><span className="font-mono text-muted-foreground text-[10px] uppercase tracking-widest">Delegate</span></div>
+                <div className="bg-surface flex items-center justify-center hover:bg-primary/5 transition-colors"><span className="font-mono text-muted-foreground/30 text-[10px] uppercase tracking-widest">Don't Do</span></div>
               </div>
             </motion.div>
           </div>
@@ -171,18 +169,18 @@ export default function LandingPage() {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="bg-surface p-8 border border-outline-variant order-2 md:order-1 hover:border-primary/50 transition-colors">
               <div className="grid grid-cols-1 gap-4">
                 <div className="bg-background border border-error/50 p-6 flex flex-col items-start gap-4">
-                  <div className="font-mono text-error text-[10px] uppercase tracking-widest px-2 py-1 bg-error/10 border border-error/20">Warning Detected</div>
+                  <div className="font-mono text-error text-[10px] uppercase tracking-widest px-2 py-1 bg-error/10 border border-error/20">Risk Detection</div>
                   <div className="font-mono text-[14px] text-foreground">Burnout Risk Threshold Exceeded</div>
                 </div>
                 <div className="bg-background border border-primary/50 p-6 flex flex-col items-start gap-4">
-                  <div className="font-mono text-primary text-[10px] uppercase tracking-widest px-2 py-1 bg-primary/10 border border-primary/20">System Intervention</div>
+                  <div className="font-mono text-primary text-[10px] uppercase tracking-widest px-2 py-1 bg-primary/10 border border-primary/20">Schedule Adjustment</div>
                   <div className="font-mono text-[14px] text-foreground">Schedule Compressed. Tasks Deferred.</div>
                 </div>
               </div>
             </motion.div>
             
             <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="order-1 md:order-2">
-              <div className="font-mono text-[10px] text-primary tracking-widest uppercase mb-6 border border-primary px-3 py-1 inline-block bg-primary/10">System: Rescue</div>
+              <div className="font-mono text-[10px] text-primary tracking-widest uppercase mb-6 border border-primary px-3 py-1 inline-block bg-primary/10">Burnout Prevention</div>
               <h3 className="font-sans text-[32px] font-black uppercase text-foreground mb-4">Autonomous Protection</h3>
               <p className="font-mono text-[14px] text-muted-foreground leading-relaxed mb-6">
                 When you fall behind, Chronix doesn't just show you red overdue tags. The Rescue Agent actively freezes non-essential tasks and reschedules your week to help you recover your momentum.
@@ -197,7 +195,7 @@ export default function LandingPage() {
       <section id="ecosystem" className="py-[120px] bg-background relative overflow-hidden border-t border-outline-variant/50">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-16 border-l-4 border-primary pl-6">
-            <div className="font-mono text-[12px] text-primary tracking-[0.2em] uppercase mb-4">Neural Architecture</div>
+            <div className="font-mono text-[12px] text-primary tracking-[0.2em] uppercase mb-4">Meet Your Agents</div>
             <h2 className="font-sans text-[40px] font-black text-foreground uppercase tracking-tight">The 6-Agent Neural Suite</h2>
           </motion.div>
           
