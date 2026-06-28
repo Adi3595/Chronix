@@ -26,7 +26,8 @@ export default function LandingPage() {
   return (
     <div ref={containerRef} className="text-foreground antialiased min-h-screen selection:bg-primary selection:text-background relative bg-cover bg-center bg-fixed bg-no-repeat" style={{ backgroundImage: "url('/bg.png')" }}>
       
-      <div className="absolute inset-0 bg-background/80 pointer-events-none mix-blend-multiply z-0"></div>
+      {/* No dark overlay - let bg.png shine through maximally */}
+      <div className="absolute inset-0 pointer-events-none z-0"></div>
       
       {/* TopNavBar */}
       <nav className="sticky top-0 w-full z-50 bg-background/50 backdrop-blur-xl transition-all duration-300 border-b border-outline">
@@ -86,7 +87,7 @@ export default function LandingPage() {
             maskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
             WebkitMaskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
             scale: useTransform(scrollYProgress, [0, 1], [1, 1.8]),
-            filter: useTransform(scrollYProgress, [0, 1], ["brightness(1.2) contrast(1.2)", "brightness(2.5) contrast(1.5)"]),
+            filter: useTransform(scrollYProgress, [0, 1], ["brightness(1) contrast(1)", "brightness(1.5) contrast(1.2)"]),
           }}
         >
           {/* Sparkles that roam around continually */}
