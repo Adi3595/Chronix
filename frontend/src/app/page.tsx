@@ -47,9 +47,9 @@ export default function LandingPage() {
       snap: "frame",
       ease: "none",
       scrollTrigger: {
-        trigger: ".hero-section",
+        trigger: "body",
         start: "top top",
-        end: "+=1200",
+        end: "bottom bottom",
         scrub: 0.5,
       },
       onUpdate: () => {
@@ -154,12 +154,23 @@ void main() {
   }, []);
 
   return (
-    <div className="text-on-surface antialiased selection:bg-[#A9C632] selection:text-[#1D2E1B] bg-background min-h-screen overflow-x-hidden">
+    <div className="landing-container text-on-surface antialiased selection:bg-primary selection:text-on-primary bg-background min-h-screen overflow-x-hidden relative">
+
+      {/* GLOBAL 3D BACKGROUND LAYER */}
+      <div className="fixed inset-0 w-full h-full z-0 pointer-events-none flex items-center justify-center">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,92,109,0.15)_0%,transparent_60%)] -z-10"></div>
+          <img ref={bgSeqRef} src="/images/sequence/1.png" alt="Sequence Background" className="w-[100%] h-[100%] object-cover md:object-contain object-center drop-shadow-[0_20px_50px_rgba(4,16,20,0.4)] opacity-90" />
+      </div>
+
+      {/* GLOBAL 3D FOREGROUND LAYER (Sandwich Effect) */}
+      <div className="fixed inset-0 w-full h-full z-40 pointer-events-none flex items-center justify-center opacity-70 mix-blend-overlay">
+          <img ref={fgSeqRef} src="/images/sequence/1.png" alt="Sequence Foreground" className="w-[100%] h-[100%] object-cover md:object-contain object-center" />
+      </div>
 
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md transition-all duration-200 border-b border-outline-variant/20">
         <div className="flex justify-between items-center px-4 md:px-[40px] py-4 max-w-[1440px] mx-auto">
-          <div className="font-display-lg font-serif text-[24px] font-semibold text-primary tracking-tight flex items-center gap-2">
+          <div className="font-display-lg text-[24px] font-semibold text-primary tracking-tight flex items-center gap-2">
             <img src="/icon.svg" alt="Logo" className="w-8 h-8" />
             Chronix OS
           </div>
@@ -188,12 +199,6 @@ void main() {
         {/* WebGL Background Base */}
         <div className="absolute inset-0 w-full h-full opacity-30 mix-blend-multiply pointer-events-none z-0">
           <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
-        </div>
-
-        {/* Sequence Background Image Layer (Behind Text) */}
-        <div className="absolute inset-0 w-full h-full z-10 pointer-events-none flex items-center justify-center">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(169,198,50,0.15)_0%,transparent_60%)] -z-10"></div>
-            <img ref={bgSeqRef} src="/images/sequence/1.png" alt="Sequence Background" className="w-[100%] h-[100%] object-cover md:object-contain object-center drop-shadow-[0_20px_50px_rgba(29,46,27,0.4)] opacity-90" />
         </div>
 
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-20 pointer-events-auto">
@@ -315,11 +320,6 @@ void main() {
               </motion.div>
             </div>
           </div>
-        </div>
-
-        {/* Sequence Foreground Image Layer (Sandwich Effect) */}
-        <div className="absolute inset-0 w-full h-full z-30 pointer-events-none flex items-center justify-center opacity-70 mix-blend-overlay">
-            <img ref={fgSeqRef} src="/images/sequence/1.png" alt="Sequence Foreground" className="w-[100%] h-[100%] object-cover md:object-contain object-center" />
         </div>
       </section>
 
