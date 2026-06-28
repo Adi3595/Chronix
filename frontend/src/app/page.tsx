@@ -29,7 +29,7 @@ export default function LandingPage() {
       <div className="absolute inset-0 bg-background/80 pointer-events-none mix-blend-multiply z-0"></div>
       
       {/* TopNavBar */}
-      <nav className="fixed top-0 w-full z-50 bg-background/50 backdrop-blur-xl transition-all duration-300 border-b border-outline">
+      <nav className="sticky top-0 w-full z-50 bg-background/50 backdrop-blur-xl transition-all duration-300 border-b border-outline">
         <div className="flex justify-between items-center px-6 md:px-[80px] py-6 max-w-[1440px] mx-auto">
           <div className="font-sans text-[18px] font-bold text-foreground tracking-widest uppercase flex items-center gap-3">
             <img src="/icon.svg" className="w-8 h-8 brightness-0 invert" alt="Chronix Logo" />
@@ -57,11 +57,11 @@ export default function LandingPage() {
       </nav>
 
       {/* HERO SECTION - Centered Mockup */}
-      <section className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden z-10">
+      <section className="relative pt-32 pb-12 overflow-hidden z-10">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] w-full flex flex-col items-center justify-center">
           
           {/* Right Side (Now Centered): Floating Execution Dashboard */}
-          <div className="lg:col-span-7 relative h-[800px] w-full perspective-[1000px] flex items-center justify-center">
+          <div className="relative w-full perspective-[1000px] flex items-center justify-center">
             
             {/* Central Mockup Container */}
             <motion.div 
