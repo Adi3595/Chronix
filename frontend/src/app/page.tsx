@@ -71,8 +71,8 @@ export default function LandingPage() {
           className="absolute inset-0 z-20 pointer-events-none bg-fixed bg-cover bg-center"
           style={{ 
             backgroundImage: "url('/bg.png')",
-            maskImage: "linear-gradient(to bottom, transparent 50%, black 100%)",
-            WebkitMaskImage: "linear-gradient(to bottom, transparent 50%, black 100%)"
+            maskImage: "linear-gradient(to bottom, transparent 50%, black 50%)",
+            WebkitMaskImage: "linear-gradient(to bottom, transparent 50%, black 50%)"
           }}
         />
 
