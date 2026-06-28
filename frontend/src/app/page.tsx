@@ -524,64 +524,68 @@ void main() {
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer (Reference Inspired) */}
       <motion.footer 
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}
-        className="bg-primary w-full py-16 border-t border-outline-variant/20"
+        className="bg-background w-full pt-20 pb-8 border-t border-outline-variant/20 relative overflow-hidden"
       >
-        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
-          {/* Brand Col */}
-          <div className="col-span-1 md:col-span-6 lg:col-span-5">
-            <div className="font-display-lg font-serif text-[28px] text-on-primary mb-6 flex items-center gap-3">
-              <img src="/icon.svg" alt="Logo" className="w-8 h-8" />
-              Chronix OS
-            </div>
-            <p className="font-body-md text-[15px] text-on-primary mb-8 max-w-md leading-relaxed">
-              Execution Without Chaos. A premium autonomous executive productivity suite powered by an interconnected neural network of AI agents.
-            </p>
-            <div className="flex flex-col gap-3 font-mono-label text-[13px] font-mono text-on-primary">
-              <span className="flex items-center gap-3"><span className="material-symbols-outlined text-[18px]">location_on</span> 120 Execution Ave, SF, CA 94105</span>
-              <a href="mailto:support@chronix.os" className="flex items-center gap-3 hover:opacity-80 transition-opacity w-fit"><span className="material-symbols-outlined text-[18px]">mail</span> support@chronix.os</a>
-            </div>
-          </div>
-
-          {/* Spacer */}
-          <div className="hidden lg:block lg:col-span-3"></div>
-
-          {/* Platform Links */}
-          <div className="col-span-1 md:col-span-3 lg:col-span-2">
-            <h4 className="font-bold text-[14px] text-on-primary mb-6 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-2 h-2 bg-on-primary rounded-full inline-block"></span> Platform
-            </h4>
-            <ul className="flex flex-col gap-4 font-mono-label text-[13px] font-mono">
-              <li><Link href="/#features" className="text-on-primary hover:opacity-80 transition-opacity">Features</Link></li>
-              <li><Link href="/#pricing" className="text-on-primary hover:opacity-80 transition-opacity">Pricing</Link></li>
-              <li><Link href="/login" className="text-on-primary hover:opacity-80 transition-opacity">Terminal Login</Link></li>
-              <li><Link href="https://github.com/Adi3595/Chronix" target="_blank" className="text-on-primary hover:opacity-80 transition-opacity">Source Code</Link></li>
-            </ul>
-          </div>
-
-          {/* Legal Links */}
-          <div className="col-span-1 md:col-span-3 lg:col-span-2">
-            <h4 className="font-bold text-[14px] text-on-primary mb-6 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-2 h-2 bg-outline-variant rounded-full inline-block"></span> Legal
-            </h4>
-            <ul className="flex flex-col gap-4 font-mono-label text-[13px] font-mono">
-              <li><Link href="/privacy" className="text-on-primary hover:opacity-80 transition-opacity">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="text-on-primary hover:opacity-80 transition-opacity">Terms of Service</Link></li>
-              <li><a href="mailto:support@chronix.os" className="text-on-primary hover:opacity-80 transition-opacity">Contact Support</a></li>
-            </ul>
-          </div>
+        {/* Massive Watermark Title */}
+        <div className="w-full flex justify-center mb-16 px-4">
+          <h2 className="font-display-lg font-black text-[12vw] leading-none text-foreground/5 tracking-tighter uppercase select-none pointer-events-none">
+            CHRONIX
+          </h2>
         </div>
 
-        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="font-body-md text-[13px] text-on-primary">
-            © 2026 Chronix Productivity OS. Swiss Engineered Focus.
+        <div className="max-w-[1440px] mx-auto px-4 md:px-[80px]">
+          {/* Navigation Columns */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-24 mb-24 max-w-4xl">
+            {/* Column 1 */}
+            <div>
+              <h4 className="font-bold text-[14px] text-primary mb-6 uppercase tracking-widest">
+                Resources
+              </h4>
+              <ul className="flex flex-col gap-4 font-mono-label text-[13px] font-mono text-on-surface-variant uppercase">
+                <li><Link href="/docs" className="hover:text-primary-container transition-colors">Documentation</Link></li>
+                <li><Link href="/api" className="hover:text-primary-container transition-colors">API Resources</Link></li>
+                <li><Link href="/status" className="hover:text-primary-container transition-colors">Network Status</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 2 */}
+            <div>
+              <h4 className="font-bold text-[14px] text-primary mb-6 uppercase tracking-widest">
+                Company
+              </h4>
+              <ul className="flex flex-col gap-4 font-mono-label text-[13px] font-mono text-on-surface-variant uppercase">
+                <li><Link href="/about" className="hover:text-primary-container transition-colors">About Us</Link></li>
+                <li><a href="mailto:support@chronix.os" className="hover:text-primary-container transition-colors">Contact Us</a></li>
+                <li><Link href="/careers" className="hover:text-primary-container transition-colors">Careers</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 3 */}
+            <div>
+              <h4 className="font-bold text-[14px] text-primary mb-6 uppercase tracking-widest">
+                Legal
+              </h4>
+              <ul className="flex flex-col gap-4 font-mono-label text-[13px] font-mono text-on-surface-variant uppercase">
+                <li><Link href="/terms" className="hover:text-primary-container transition-colors">Terms & Conditions</Link></li>
+                <li><Link href="/privacy" className="hover:text-primary-container transition-colors">Privacy Policy</Link></li>
+                <li><Link href="/security" className="hover:text-primary-container transition-colors">Security & SOC 2</Link></li>
+              </ul>
+            </div>
           </div>
-          <div className="flex gap-6 text-on-primary font-mono-label text-[13px] font-mono uppercase tracking-widest">
-            <a href="https://twitter.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">X (Twitter)</a>
-            <a href="https://instagram.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">Instagram</a>
-            <a href="https://linkedin.com/company/chronixos" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">LinkedIn</a>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="font-mono-label text-[12px] font-mono text-on-surface-variant uppercase tracking-wider">
+              © 2026 CHRONIX SYSTEMS. ALL RIGHTS RESERVED.
+            </div>
+            <div className="flex gap-8 text-on-surface-variant font-mono-label text-[12px] font-mono uppercase tracking-widest">
+              <a href="https://instagram.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:text-primary-container transition-colors">Insta</a>
+              <a href="https://twitter.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:text-primary-container transition-colors">X</a>
+              <a href="https://github.com/Adi3595/Chronix" target="_blank" rel="noopener noreferrer" className="hover:text-primary-container transition-colors">Github</a>
+            </div>
           </div>
         </div>
       </motion.footer>
