@@ -59,18 +59,7 @@ export default function LandingPage() {
       {/* HERO SECTION - Centered Mockup with 3D Sandwich Effect */}
       <section className="relative pt-32 pb-24 overflow-hidden z-10 min-h-screen flex items-center justify-center">
         
-        {/* Middle Layer: Massive Typography */}
-        <motion.div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none z-0"
-          style={{ y: useTransform(scrollYProgress, [0, 1], [0, 300]) }}
-        >
-          <h1 className="font-serif font-black text-[15vw] md:text-[200px] leading-none text-foreground/20 tracking-tighter uppercase whitespace-nowrap">
-            CHRONIX
-          </h1>
-          <p className="font-sans text-[2vw] md:text-[24px] text-primary/60 tracking-[0.5em] uppercase font-bold mt-4">
-            Operating System
-          </p>
-        </motion.div>
+
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] w-full flex flex-col items-center justify-center relative z-10">
         </div>
 
