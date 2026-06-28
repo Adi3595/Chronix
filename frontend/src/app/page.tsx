@@ -61,17 +61,7 @@ export default function LandingPage() {
 
 
 
-      {/* Front Layer: Static masked background to create seamless deep 3D sandwich effect */}
-      <motion.div
-        className="fixed inset-0 z-40 pointer-events-none"
-        style={{
-          backgroundImage: "url('/bg.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          maskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
-        }}
-      />
+
 
       {/* NEW SECTION: About / Project Description */}
       <section className="py-[120px] relative z-10 bg-background/10 border-y border-white/5 backdrop-blur-[64px] shadow-[0_0_100px_rgba(0,0,0,0.8)_inset,0_0_80px_rgba(46,125,50,0.15)]" id="about">
