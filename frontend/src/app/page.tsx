@@ -324,6 +324,17 @@ void main() {
             </div>
           </div>
         </div>
+
+        {/* Deep 3D Image Layer Stack - IN FRONT OF TEXT (The Sandwich Effect) */}
+        <div className="absolute inset-0 w-full h-full z-30 pointer-events-none overflow-hidden flex items-center justify-end md:justify-center md:translate-x-[20%] opacity-70 mix-blend-overlay">
+          <div className="relative w-[1000px] h-[1000px] flex items-center justify-center">
+            <motion.img style={{ x: l1X, y: l1Y }} animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} src="/images/sequence/1.png" className="absolute w-[80%] h-[80%] object-contain blur-[2px]" />
+            <motion.img style={{ x: l2X, y: l2Y }} animate={{ y: [0, -15, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }} src="/images/sequence/2.png" className="absolute w-[85%] h-[85%] object-contain blur-[1px]" />
+            <motion.img style={{ x: l3X, y: l3Y }} animate={{ y: [0, -20, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }} src="/images/sequence/3.png" className="absolute w-[90%] h-[90%] object-contain" />
+            <motion.img style={{ x: l4X, y: l4Y }} animate={{ y: [0, -25, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} src="/images/sequence/4.png" className="absolute w-[95%] h-[95%] object-contain" />
+            <motion.img style={{ x: l5X, y: l5Y }} animate={{ y: [0, -30, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} src="/images/sequence/5.png" className="absolute w-[100%] h-[100%] object-contain blur-[3px]" />
+          </div>
+        </div>
       </section>
 
       {/* SECTION: Features Deep Dive */}
