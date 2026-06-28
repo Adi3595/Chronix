@@ -15,8 +15,11 @@ export default function AboutPage() {
       {/* TopNavBar */}
       <nav className="w-full z-50 bg-background/50 backdrop-blur-xl border-b border-outline">
         <div className="flex justify-between items-center px-6 md:px-[80px] py-6 max-w-[1440px] mx-auto">
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="font-sans text-[18px] font-bold tracking-widest uppercase flex items-center gap-3">
             <img src="/icon.png" className="w-12 h-12 object-contain mix-blend-screen [filter:invert(1)_hue-rotate(180deg)]" alt="Chronix Logo" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-primary">
+              CHRONIX
+            </span>
           </Link>
           <div className="flex items-center gap-8">
             <Link href="/login" className="hidden md:block font-sans text-[13px] text-muted-foreground hover:text-foreground uppercase tracking-widest transition-colors">Log In</Link>

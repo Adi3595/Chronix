@@ -19,6 +19,14 @@ export default function DashboardSidebar({ resolvedPlan }: { resolvedPlan: strin
             className="w-16 h-16 object-contain mix-blend-screen [filter:invert(1)_hue-rotate(180deg)]"
             src="/icon.png"
           />
+          <div>
+            <h1 className="font-serif font-black text-[24px] tracking-tight leading-none text-transparent bg-clip-text bg-gradient-to-r from-foreground to-primary">
+              Chronix OS
+            </h1>
+            <p className="text-[11px] text-primary font-sans uppercase tracking-widest mt-1">
+              {resolvedPlan === "executive" ? "Executive Suite" : resolvedPlan === "enterprise" ? "Enterprise" : "Starter Plan"}
+            </p>
+          </div>
         </div>
         <button 
           className="md:hidden text-foreground p-2" 
@@ -74,6 +82,9 @@ export default function DashboardSidebar({ resolvedPlan }: { resolvedPlan: strin
       <div className="md:hidden flex justify-between items-center mb-6 pb-4 border-b border-outline-variant/50 sticky top-0 bg-background z-40 px-6 pt-6">
         <div className="flex items-center gap-3">
           <img src="/icon.png" className="w-12 h-12 object-contain mix-blend-screen [filter:invert(1)_hue-rotate(180deg)]" alt="Logo" />
+          <h1 className="font-sans font-black text-[20px] uppercase tracking-tighter leading-none mt-1 text-transparent bg-clip-text bg-gradient-to-r from-foreground to-primary">
+            Chronix OS
+          </h1>
         </div>
         <button 
           className="p-2 bg-surface border border-outline-variant rounded-xl"
