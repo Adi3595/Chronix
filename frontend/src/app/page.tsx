@@ -3,8 +3,14 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Script from "next/script";
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 export default function LandingPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -15,41 +21,42 @@ export default function LandingPage() {
   // FAQ State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  // Mouse Parallax Logic
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springConfig = { damping: 25, stiffness: 150 };
-  const smoothMouseX = useSpring(mouseX, springConfig);
-  const smoothMouseY = useSpring(mouseY, springConfig);
+  // GSAP 3D Sandwich Sequence
+  const bgSeqRef = useRef<HTMLImageElement>(null);
+  const fgSeqRef = useRef<HTMLImageElement>(null);
+  
+  useGSAP(() => {
+    const images = [
+      "/images/sequence/1.png",
+      "/images/sequence/2.png",
+      "/images/sequence/3.png",
+      "/images/sequence/4.png",
+      "/images/sequence/5.png",
+    ];
+    
+    // Preload
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      mouseX.set((e.clientX - innerWidth / 2) / innerWidth);
-      mouseY.set((e.clientY - innerHeight / 2) / innerHeight);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  // Deep 3D Parallax Layering
-  const l1Y = useTransform(scrollYProgress, [0, 1], ["0%", "5%"]);
-  const l2Y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const l3Y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const l4Y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const l5Y = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
-
-  const l1X = useTransform(smoothMouseX, [-0.5, 0.5], [10, -10]);
-  const l2X = useTransform(smoothMouseX, [-0.5, 0.5], [20, -20]);
-  const l3X = useTransform(smoothMouseX, [-0.5, 0.5], [40, -40]);
-  const l4X = useTransform(smoothMouseX, [-0.5, 0.5], [60, -60]);
-  const l5X = useTransform(smoothMouseX, [-0.5, 0.5], [90, -90]);
-
-  const l1MY = useTransform(smoothMouseY, [-0.5, 0.5], [10, -10]);
-  const l2MY = useTransform(smoothMouseY, [-0.5, 0.5], [20, -20]);
-  const l3MY = useTransform(smoothMouseY, [-0.5, 0.5], [40, -40]);
-  const l4MY = useTransform(smoothMouseY, [-0.5, 0.5], [60, -60]);
-  const l5MY = useTransform(smoothMouseY, [-0.5, 0.5], [90, -90]);
+    const obj = { frame: 0 };
+    gsap.to(obj, {
+      frame: images.length - 1,
+      snap: "frame",
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".hero-section",
+        start: "top top",
+        end: "+=1200",
+        scrub: 0.5,
+      },
+      onUpdate: () => {
+        if (bgSeqRef.current) bgSeqRef.current.src = images[obj.frame];
+        if (fgSeqRef.current) fgSeqRef.current.src = images[obj.frame];
+      }
+    });
+  }, []);
 
   useEffect(() => {
     // Background WebGL Shader (Soft Organic)
@@ -182,26 +189,10 @@ void main() {
           <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
         </div>
 
-        {/* Deep 3D Image Layer Stack */}
-        <div className="absolute inset-0 w-full h-full z-10 pointer-events-none overflow-hidden flex items-center justify-end md:justify-center md:translate-x-[20%]">
-          <div className="relative w-[1000px] h-[1000px] flex items-center justify-center">
+        {/* Sequence Background Image Layer (Behind Text) */}
+        <div className="absolute inset-0 w-full h-full z-10 pointer-events-none flex items-center justify-center">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(169,198,50,0.15)_0%,transparent_60%)] -z-10"></div>
-            
-            {/* Layer 1 - Furthest Back */}
-            <motion.img style={{ x: l1X, y: l1Y }} animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} src="/images/sequence/1.png" className="absolute w-[80%] h-[80%] object-contain opacity-40 blur-[2px]" />
-            
-            {/* Layer 2 */}
-            <motion.img style={{ x: l2X, y: l2Y }} animate={{ y: [0, -15, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }} src="/images/sequence/2.png" className="absolute w-[85%] h-[85%] object-contain opacity-60 blur-[1px]" />
-            
-            {/* Layer 3 - Midground Main */}
-            <motion.img style={{ x: l3X, y: l3Y }} animate={{ y: [0, -20, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }} src="/images/sequence/3.png" className="absolute w-[90%] h-[90%] object-contain opacity-90 drop-shadow-2xl" />
-            
-            {/* Layer 4 - Foreground */}
-            <motion.img style={{ x: l4X, y: l4Y }} animate={{ y: [0, -25, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} src="/images/sequence/4.png" className="absolute w-[95%] h-[95%] object-contain opacity-80" />
-            
-            {/* Layer 5 - Closest */}
-            <motion.img style={{ x: l5X, y: l5Y }} animate={{ y: [0, -30, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} src="/images/sequence/5.png" className="absolute w-[100%] h-[100%] object-contain opacity-70 blur-[3px]" />
-          </div>
+            <img ref={bgSeqRef} src="/images/sequence/1.png" alt="Sequence Background" className="w-[100%] h-[100%] object-cover md:object-contain object-center drop-shadow-[0_20px_50px_rgba(29,46,27,0.4)] opacity-90" />
         </div>
 
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-20 pointer-events-auto">
@@ -325,15 +316,9 @@ void main() {
           </div>
         </div>
 
-        {/* Deep 3D Image Layer Stack - IN FRONT OF TEXT (The Sandwich Effect) */}
-        <div className="absolute inset-0 w-full h-full z-30 pointer-events-none overflow-hidden flex items-center justify-end md:justify-center md:translate-x-[20%] opacity-70 mix-blend-overlay">
-          <div className="relative w-[1000px] h-[1000px] flex items-center justify-center">
-            <motion.img style={{ x: l1X, y: l1Y }} animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} src="/images/sequence/1.png" className="absolute w-[80%] h-[80%] object-contain blur-[2px]" />
-            <motion.img style={{ x: l2X, y: l2Y }} animate={{ y: [0, -15, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }} src="/images/sequence/2.png" className="absolute w-[85%] h-[85%] object-contain blur-[1px]" />
-            <motion.img style={{ x: l3X, y: l3Y }} animate={{ y: [0, -20, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 2 }} src="/images/sequence/3.png" className="absolute w-[90%] h-[90%] object-contain" />
-            <motion.img style={{ x: l4X, y: l4Y }} animate={{ y: [0, -25, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.5 }} src="/images/sequence/4.png" className="absolute w-[95%] h-[95%] object-contain" />
-            <motion.img style={{ x: l5X, y: l5Y }} animate={{ y: [0, -30, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1.5 }} src="/images/sequence/5.png" className="absolute w-[100%] h-[100%] object-contain blur-[3px]" />
-          </div>
+        {/* Sequence Foreground Image Layer (Sandwich Effect) */}
+        <div className="absolute inset-0 w-full h-full z-30 pointer-events-none flex items-center justify-center opacity-70 mix-blend-overlay">
+            <img ref={fgSeqRef} src="/images/sequence/1.png" alt="Sequence Foreground" className="w-[100%] h-[100%] object-cover md:object-contain object-center" />
         </div>
       </section>
 
