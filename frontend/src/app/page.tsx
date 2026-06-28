@@ -64,7 +64,7 @@ export default function LandingPage() {
 
 
       {/* NEW SECTION: About / Project Description */}
-      <section className="py-[120px] relative z-10 bg-transparent overflow-hidden" id="about">
+      <section className="pt-[60px] pb-[120px] relative z-10 bg-transparent overflow-hidden" id="about">
         
         {/* Localized 3D Sandwich Layer (Only inside Hero) */}
         <div 
