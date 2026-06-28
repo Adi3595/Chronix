@@ -61,17 +61,15 @@ export default function LandingPage() {
 
 
 
-      {/* Front Layer: Zooming masked background to create deep 3D sandwich effect */}
+      {/* Front Layer: Static masked background to create seamless deep 3D sandwich effect */}
       <motion.div
         className="fixed inset-0 z-40 pointer-events-none"
         style={{
           backgroundImage: "url('/bg.png')",
           backgroundSize: "cover",
-          backgroundPosition: "center bottom",
+          backgroundPosition: "center",
           maskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
           WebkitMaskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
-          scale: useTransform(scrollYProgress, [0, 1], [1, 1.8]),
-          filter: useTransform(scrollYProgress, [0, 1], ["brightness(1) contrast(1)", "brightness(1.5) contrast(1.2)"]),
         }}
       />
 
