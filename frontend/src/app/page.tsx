@@ -72,65 +72,7 @@ export default function LandingPage() {
           </p>
         </motion.div>
 
-        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] w-full flex flex-col items-center justify-center relative z-10">
-          
-          {/* Front Layer: Floating Execution Dashboard */}
-          <motion.div 
-            style={{ y: useTransform(scrollYProgress, [0, 1], [0, -150]) }}
-            className="relative w-full perspective-[1000px] flex items-center justify-center"
-          >
-            
-            {/* Central Mockup Container */}
-            <motion.div 
-              initial={{ opacity: 0, rotateY: 10, rotateX: 5, z: -100 }}
-              animate={{ opacity: 1, rotateY: -5, rotateX: 2, z: 0 }}
-              transition={{ duration: 2, ease: "easeOut", delay: 0.2 }}
-              className="relative w-full max-w-[600px] bg-surface/40 backdrop-blur-2xl border border-outline rounded-3xl p-6 shadow-[0_0_80px_rgba(0,0,0,0.5)]"
-            >
-              
-              {/* Sentinel Alert & Agent Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                {/* Sentinel */}
-                <motion.div 
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  className="bg-surface-variant/80 border border-outline rounded-2xl p-5 relative overflow-hidden transition-all group"
-                >
-                  <div className="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
-                    <span className="material-symbols-outlined text-error text-[24px]">warning</span>
-                  </div>
-                  <h4 className="text-foreground font-sans text-[13px] mb-4">Sentinel Alert</h4>
-                  <p className="text-muted-foreground text-[11px] mb-1">Deadline Risk</p>
-                  <p className="text-[32px] font-serif text-error leading-none mb-4">82%</p>
-                  <p className="text-[11px] text-muted-foreground mb-1">Recommendation</p>
-                  <p className="text-[12px] text-error font-medium">Activate Rescue Mode</p>
-                </motion.div>
 
-                {/* Agent Status */}
-                <div className="grid grid-cols-2 grid-rows-2 gap-2">
-                  {[
-                    { n: 'Atlas', desc: 'Roadmap Generated', icon: 'map' },
-                    { n: 'Orbit', desc: 'Schedule Optimized', icon: 'schedule' },
-                    { n: 'Sentinel', desc: 'Risks Detected', icon: 'shield' },
-                    { n: 'Rescue', desc: 'Plan Ready', icon: 'health_and_safety' }
-                  ].map((agent, i) => (
-                    <motion.div 
-                      key={i}
-                      whileHover={{ scale: 1.05 }}
-                      className="bg-surface-variant/80 border border-outline rounded-xl p-3 flex flex-col justify-between"
-                    >
-                      <div className="flex justify-between items-start mb-2">
-                        <span className="text-[12px] font-sans text-foreground">{agent.n}</span>
-                        <span className="material-symbols-outlined text-primary text-[12px]">{agent.icon}</span>
-                      </div>
-                      <span className="text-[10px] text-muted-foreground leading-tight">{agent.desc}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-        
         {/* Scroll indicator */}
         <motion.div 
           animate={{ y: [0, 10, 0] }} 
