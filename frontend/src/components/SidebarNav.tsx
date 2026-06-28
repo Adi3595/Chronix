@@ -38,7 +38,7 @@ export default function SidebarNav() {
         if (!hasAccess) {
           return (
             <li key={idx}>
-              <div className="flex items-center justify-between px-4 py-3 rounded-lg font-mono-label text-[13px] text-on-surface-variant opacity-60 cursor-not-allowed">
+              <div className="flex items-center justify-between px-4 py-3 font-mono text-[12px] uppercase tracking-widest text-muted-foreground opacity-40 cursor-not-allowed border border-transparent">
                 <div className="flex items-center gap-3">
                   <span className="material-symbols-outlined">{tab.icon}</span>
                   {tab.label}
@@ -53,10 +53,10 @@ export default function SidebarNav() {
           <li key={idx}>
             <Link
               href={tab.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg font-mono-label text-[13px] transition-colors duration-200 ${
+              className={`flex items-center gap-3 px-4 py-3 font-mono text-[12px] uppercase tracking-widest transition-colors duration-200 border ${
                 isActive
-                  ? "bg-surface-container text-primary font-bold shadow-sm border border-outline-variant/20"
-                  : "text-on-surface-variant hover:bg-surface-container hover:text-primary"
+                  ? "bg-primary/10 text-primary font-bold border-primary shadow-[inset_4px_0_0_rgba(169,198,50,1)]"
+                  : "text-muted-foreground border-transparent hover:bg-surface hover:text-primary hover:border-outline-variant"
               }`}
             >
               <span className="material-symbols-outlined">{tab.icon}</span>

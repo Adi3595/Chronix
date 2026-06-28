@@ -93,16 +93,21 @@ function SignupForm() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
-      <div className="bg-surface-container-lowest p-8 rounded-3xl shadow-[0px_20px_40px_rgba(0,0,0,0.05)] border border-outline-variant/30 w-full max-w-md">
-        <div className="flex justify-center mb-6">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative overflow-hidden">
+      {/* Brutalist Grid Background */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-10" 
+           style={{ backgroundImage: 'linear-gradient(var(--color-outline-variant) 1px, transparent 1px), linear-gradient(90deg, var(--color-outline-variant) 1px, transparent 1px)', backgroundSize: '60px 60px', backgroundPosition: 'center center' }}>
+      </div>
+
+      <div className="bg-surface p-10 border border-outline-variant w-full max-w-md relative z-10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+        <div className="flex justify-center mb-8">
           <Link href="/">
-            <img src="/icon.svg" alt="Chronix OS Logo" className="w-16 h-16 hover:opacity-80 transition-opacity cursor-pointer" />
+            <img src="/icon.svg" alt="Chronix OS Logo" className="w-12 h-12 hover:opacity-80 transition-opacity cursor-pointer brightness-0 invert" />
           </Link>
         </div>
-        <div className="text-center mb-8">
-          <h1 className="font-display-md font-serif text-[28px] text-on-surface mb-2">Initialize Profile</h1>
-          <p className="font-body-md text-on-surface-variant">Create your execution terminal account.</p>
+        <div className="text-center mb-10">
+          <h1 className="font-sans font-black text-[32px] text-foreground uppercase tracking-tighter mb-2">Create Account</h1>
+          <p className="font-mono text-[12px] text-muted-foreground uppercase tracking-widest">Initialize your execution profile</p>
         </div>
         
         {loading ? (
@@ -110,37 +115,37 @@ function SignupForm() {
         ) : (
           <form onSubmit={handleSignup} className="flex flex-col gap-4">
             {error && (
-              <div className="bg-error-container text-on-error-container p-3 rounded-lg text-sm mb-2">
+              <div className="bg-error/10 border border-error/20 text-error p-4 text-sm mb-2 font-mono">
                 {error}
               </div>
             )}
             
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-semibold text-on-surface">Full Name</label>
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Full Name</label>
               <input 
                 type="text" 
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="A. Executive"
-                className="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                className="w-full bg-background border border-outline-variant px-4 py-3 text-foreground font-mono text-[14px] focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/30"
                 required
               />
             </div>
             
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-semibold text-on-surface">Email Address</label>
+            <div className="flex flex-col gap-2">
+              <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground">Email Address</label>
               <input 
                 type="email" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="executive@chronix.os"
-                className="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                className="w-full bg-background border border-outline-variant px-4 py-3 text-foreground font-mono text-[14px] focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/30"
                 required
               />
             </div>
             
-            <div className="flex flex-col gap-1 mb-2">
-              <label className="text-sm font-semibold text-on-surface flex justify-between">
+            <div className="flex flex-col gap-2 mb-4">
+              <label className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground flex justify-between">
                 Password
               </label>
               <input 
@@ -148,7 +153,7 @@ function SignupForm() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-surface-container border border-outline-variant rounded-xl px-4 py-3 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                className="w-full bg-background border border-outline-variant px-4 py-3 text-foreground font-mono text-[14px] focus:outline-none focus:border-primary transition-colors placeholder:text-muted-foreground/30"
                 required
                 minLength={6}
               />
@@ -157,35 +162,35 @@ function SignupForm() {
             <button 
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-primary text-on-primary py-3 rounded-xl font-mono-label font-bold hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center h-12 mt-2"
+              className="w-full bg-primary text-background py-4 font-bold font-mono text-[12px] uppercase tracking-widest hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center"
             >
               {isSubmitting ? (
-                <div className="w-5 h-5 border-2 border-on-primary border-t-transparent rounded-full animate-spin"></div>
+                <div className="w-5 h-5 border-2 border-background border-t-transparent rounded-full animate-spin"></div>
               ) : (
-                "CREATE TERMINAL"
+                "Create Account"
               )}
             </button>
 
-            <div className="flex items-center gap-4 my-2">
-              <div className="h-[1px] bg-outline-variant/30 flex-1"></div>
-              <span className="text-on-surface-variant text-xs font-mono uppercase tracking-widest">OR</span>
-              <div className="h-[1px] bg-outline-variant/30 flex-1"></div>
+            <div className="flex items-center gap-4 my-4">
+              <div className="h-[1px] bg-outline-variant/50 flex-1"></div>
+              <span className="text-muted-foreground text-[10px] font-mono uppercase tracking-widest">OR</span>
+              <div className="h-[1px] bg-outline-variant/50 flex-1"></div>
             </div>
 
             <button
               type="button"
               onClick={handleGoogleSignup}
               disabled={isSubmitting}
-              className="w-full bg-transparent border-2 border-outline-variant/50 text-on-surface py-3 rounded-xl font-mono-label font-bold hover:bg-surface-container transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center h-12 gap-2"
+              className="w-full bg-transparent border border-outline-variant text-foreground py-4 font-bold font-mono text-[12px] uppercase tracking-widest hover:border-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-3"
             >
-              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-5 h-5" />
-              CONTINUE WITH GOOGLE
+              <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" className="w-4 h-4" />
+              Continue with Google
             </button>
             
-            <div className="text-center mt-4">
-              <p className="text-sm text-on-surface-variant">
-                Already have an execution profile?{" "}
-                <Link href="/login" className="text-primary font-bold hover:underline">
+            <div className="text-center mt-6">
+              <p className="text-[12px] text-muted-foreground font-mono">
+                Already have an account?{" "}
+                <Link href="/login" className="text-primary font-bold hover:underline uppercase tracking-widest">
                   Log in
                 </Link>
               </p>
