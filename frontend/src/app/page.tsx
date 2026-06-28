@@ -320,6 +320,7 @@ export default function LandingPage() {
               <h4 className="font-bold text-[13px] text-primary mb-6 uppercase tracking-widest">Company</h4>
               <ul className="flex flex-col gap-4 text-[13px] font-sans text-muted-foreground uppercase tracking-wider">
                 <li><Link href="/about" className="hover:text-foreground transition-colors">About Us</Link></li>
+                <li><Link href="/contact" className="hover:text-foreground transition-colors">Contact Us</Link></li>
                 <li><Link href="/careers" className="hover:text-foreground transition-colors">Careers</Link></li>
               </ul>
             </div>
