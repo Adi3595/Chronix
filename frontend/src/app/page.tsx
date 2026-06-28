@@ -78,17 +78,7 @@ export default function LandingPage() {
         </div>
 
 
-        {/* Scroll indicator */}
-        <motion.div 
-          animate={{ y: [0, 10, 0] }} 
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50"
-        >
-          <span className="text-[11px] font-sans text-muted-foreground uppercase tracking-widest">Scroll to explore</span>
-          <div className="w-5 h-8 border border-outline rounded-full flex justify-center pt-2">
-            <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
-          </div>
-        </motion.div>
+
       </section>
 
       {/* NEW SECTION: About / Project Description */}
