@@ -34,6 +34,45 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
             animate="show"
             className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6"
           >
+            {/* Agent: Echo (Second Brain - Full Width Top) */}
+            <motion.div variants={itemVariants} className="bg-surface/40 backdrop-blur-xl p-8 flex flex-col group transition-all duration-300 relative border border-outline rounded-3xl hover:border-primary/40 shadow-none hover:shadow-[0_10px_40px_rgba(46,125,50,0.15)] md:col-span-2">
+              <div className="flex justify-between items-start mb-6 relative z-10">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(46,125,50,0.3)]">
+                    <span className="material-symbols-outlined text-[24px]">memory</span>
+                  </div>
+                  <div>
+                    <h3 className="font-sans font-black text-[24px] uppercase text-foreground tracking-tighter leading-none">Echo</h3>
+                    <p className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground mt-1">A-05 // Knowledge Retrieval</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1 bg-background border border-outline-variant">
+                  <span className="w-1.5 h-1.5 bg-primary animate-pulse"></span>
+                  <span className="font-sans text-[13px] font-bold uppercase tracking-widest text-foreground">Ready</span>
+                </div>
+              </div>
+              <div className="space-y-4 relative z-10 flex-1">
+                <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Query Second Brain</span>
+                <form 
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const input = e.currentTarget.elements.namedItem('query') as HTMLInputElement;
+                    const query = input.value;
+                    if(!query) return;
+                    input.disabled = true;
+                    const { searchSecondBrain } = await import("@/app/actions/echo-actions");
+                    await searchSecondBrain("demo-user-123", query);
+                    input.value = "";
+                    input.disabled = false;
+                  }}
+                  className="flex gap-2"
+                >
+                  <input name="query" type="text" placeholder="Access Neural Link..." className="flex-1 bg-surface-variant border border-outline rounded-l-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
+                  <button type="submit" className="bg-primary text-background px-6 rounded-r-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Search</button>
+                </form>
+              </div>
+            </motion.div>
+
             {/* Agent: Sentinel */}
             <motion.div variants={itemVariants} className="bg-surface/40 backdrop-blur-xl p-8 flex flex-col group transition-all duration-300 relative border border-outline rounded-3xl hover:border-primary/40 shadow-none hover:shadow-[0_10px_40px_rgba(46,125,50,0.15)]">
               <div className="flex justify-between items-start mb-6 relative z-10">
@@ -168,44 +207,7 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
               </div>
             </motion.div>
 
-            {/* Agent: Echo */}
-            <motion.div variants={itemVariants} className="bg-surface/40 backdrop-blur-xl p-8 flex flex-col group transition-all duration-300 relative border border-outline rounded-3xl hover:border-primary/40 shadow-none hover:shadow-[0_10px_40px_rgba(46,125,50,0.15)]">
-              <div className="flex justify-between items-start mb-6 relative z-10">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(46,125,50,0.3)]">
-                    <span className="material-symbols-outlined text-[24px]">memory</span>
-                  </div>
-                  <div>
-                    <h3 className="font-sans font-black text-[24px] uppercase text-foreground tracking-tighter leading-none">Echo</h3>
-                    <p className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground mt-1">A-05 // Knowledge Retrieval</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 px-3 py-1 bg-background border border-outline-variant">
-                  <span className="w-1.5 h-1.5 bg-primary animate-pulse"></span>
-                  <span className="font-sans text-[13px] font-bold uppercase tracking-widest text-foreground">Ready</span>
-                </div>
-              </div>
-              <div className="space-y-4 relative z-10 flex-1">
-                <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Query Second Brain</span>
-                <form 
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    const input = e.currentTarget.elements.namedItem('query') as HTMLInputElement;
-                    const query = input.value;
-                    if(!query) return;
-                    input.disabled = true;
-                    const { searchSecondBrain } = await import("@/app/actions/echo-actions");
-                    await searchSecondBrain("demo-user-123", query);
-                    input.value = "";
-                    input.disabled = false;
-                  }}
-                  className="flex gap-2"
-                >
-                  <input name="query" type="text" placeholder="Access Neural Link..." className="flex-1 bg-surface-variant border border-outline rounded-l-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
-                  <button type="submit" className="bg-primary text-background px-6 rounded-r-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Search</button>
-                </form>
-              </div>
-            </motion.div>
+
 
             {/* Agent: Aura */}
             <motion.div variants={itemVariants} className="bg-surface/40 backdrop-blur-xl p-8 flex flex-col group transition-all duration-300 relative border border-outline rounded-3xl hover:border-primary/40 shadow-none hover:shadow-[0_10px_40px_rgba(46,125,50,0.15)]">
