@@ -30,12 +30,12 @@ export default async function DashboardLayout({
   const resolvedPlan = resolveUserPlan(email, dbPlan, isAdmin);
 
   return (
-    <div className="font-sans text-[15px] antialiased overflow-x-hidden min-h-screen flex bg-transparent text-on-background">
+    <div className="font-sans text-[15px] antialiased min-h-screen flex flex-col md:flex-row bg-transparent text-on-background">
       <PlanProvider plan={resolvedPlan} isAdmin={isAdmin}>
         <DashboardSidebar resolvedPlan={resolvedPlan} />
 
         {/* Main Content Area */}
-        <main className="flex-1 md:ml-72 p-6 md:p-[60px] max-w-[1600px] mx-auto w-full relative z-10 pt-20 md:pt-[60px]">
+        <main className="flex-1 md:ml-72 p-6 md:p-[60px] max-w-[1600px] mx-auto w-full relative z-10 pt-6 md:pt-[60px]">
           {children}
         </main>
       </PlanProvider>
