@@ -64,7 +64,7 @@ export default function LandingPage() {
 
 
       {/* NEW SECTION: About / Project Description */}
-      <section className="py-[120px] relative z-10 bg-transparent border-y border-white/5 backdrop-blur-md shadow-[0_0_100px_rgba(0,0,0,0.8)_inset,0_0_80px_rgba(46,125,50,0.15)] overflow-hidden" id="about">
+      <section className="py-[120px] relative z-10 bg-transparent overflow-hidden" id="about">
         
         {/* Localized 3D Sandwich Layer (Only inside Hero) */}
         <div 
