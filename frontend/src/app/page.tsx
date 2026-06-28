@@ -88,44 +88,6 @@ export default function LandingPage() {
               className="relative w-full max-w-[600px] bg-surface/40 backdrop-blur-2xl border border-outline rounded-3xl p-6 shadow-[0_0_80px_rgba(0,0,0,0.5)]"
             >
               
-              {/* Future Self Simulator */}
-              <motion.div 
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-surface-variant/80 border border-outline rounded-2xl p-6 mb-4 transition-all"
-              >
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-foreground font-sans text-[14px]">Future Self Simulator</h3>
-                  <span className="text-muted-foreground font-sans text-[12px]">Goal: Launch Startup</span>
-                </div>
-                
-                <div className="space-y-4">
-                  <div>
-                    <div className="flex justify-between text-[12px] font-sans mb-2">
-                      <span className="text-muted-foreground">Current Path</span>
-                      <span className="text-foreground">180 Days</span>
-                    </div>
-                    <div className="w-full h-2 bg-surface rounded-full overflow-hidden flex gap-1">
-                      {[...Array(15)].map((_, i) => <div key={i} className="h-full flex-1 bg-muted-foreground/30 rounded-full"></div>)}
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <div className="flex justify-between text-[12px] font-sans mb-2">
-                      <span className="text-primary font-bold">Recommended Path</span>
-                      <span className="text-primary font-bold">90 Days</span>
-                    </div>
-                    <div className="w-2/3 h-2 bg-surface rounded-full overflow-hidden flex gap-1">
-                      {[...Array(8)].map((_, i) => <div key={i} className="h-full flex-1 bg-primary rounded-full shadow-[0_0_10px_rgba(46,125,50,1)]"></div>)}
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="mt-6 text-right">
-                  <p className="text-[10px] text-muted-foreground uppercase tracking-widest">Potential time saved</p>
-                  <p className="text-[20px] font-serif text-primary">90 Days</p>
-                </div>
-              </motion.div>
-
               {/* Sentinel Alert & Agent Grid */}
               <div className="grid grid-cols-2 gap-4">
                 {/* Sentinel */}
@@ -166,8 +128,7 @@ export default function LandingPage() {
                 </div>
               </div>
             </motion.div>
-            
-          </div>
+          </motion.div>
         </div>
         
         {/* Scroll indicator */}
