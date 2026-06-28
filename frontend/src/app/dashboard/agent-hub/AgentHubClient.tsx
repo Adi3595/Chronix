@@ -169,7 +169,7 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
             </motion.div>
 
             {/* Agent: Echo */}
-            <motion.div variants={itemVariants} className="bg-surface/40 backdrop-blur-xl p-8 flex flex-col group transition-all duration-300 relative border border-outline rounded-3xl hover:border-primary/40 shadow-none hover:shadow-[0_10px_40px_rgba(46,125,50,0.15)] md:col-span-2">
+            <motion.div variants={itemVariants} className="bg-surface/40 backdrop-blur-xl p-8 flex flex-col group transition-all duration-300 relative border border-outline rounded-3xl hover:border-primary/40 shadow-none hover:shadow-[0_10px_40px_rgba(46,125,50,0.15)]">
               <div className="flex justify-between items-start mb-6 relative z-10">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary border border-primary/20 group-hover:scale-110 transition-transform shadow-[0_0_15px_rgba(46,125,50,0.3)]">
