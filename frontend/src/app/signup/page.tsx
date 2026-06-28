@@ -101,8 +101,11 @@ function SignupForm() {
 
       <div className="bg-surface p-10 border border-outline-variant w-full max-w-md relative z-10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
         <div className="flex justify-center mb-8">
-          <Link href="/">
-            <img src="/icon.svg" alt="Chronix OS Logo" className="w-12 h-12 hover:opacity-80 transition-opacity cursor-pointer brightness-0 invert" />
+          <Link href="/" className="font-sans text-[24px] font-bold tracking-widest uppercase flex items-center gap-4 hover:opacity-80 transition-opacity">
+            <img src="/icon.png" alt="Chronix OS Logo" className="w-16 h-16 object-contain mix-blend-screen [filter:invert(1)_hue-rotate(180deg)] cursor-pointer" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-primary">
+              CHRONIX
+            </span>
           </Link>
         </div>
         <div className="text-center mb-10">
