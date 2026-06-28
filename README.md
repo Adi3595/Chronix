@@ -1,67 +1,61 @@
 <div align="center">
-  <img src="./frontend/public/icon.svg" alt="Chronix OS Logo" width="120" height="120">
+  <img src="./frontend/public/icon.svg" alt="Chronix OS Logo" width="120" height="120" style="filter: invert(1);">
   <br/>
-  <h1>Chronix OS</h1>
-  <p><strong>Execution Without Chaos.</strong> A premium autonomous executive productivity suite powered by an interconnected neural suite of AI agents.</p>
+  <h1>CHRONIX OS</h1>
+  <p><strong>Execution Without Chaos.</strong> The world's first cinematic productivity operating system powered by an interconnected neural suite of AI agents.</p>
 
   <p>
-    <a href="#-overview"><img src="https://img.shields.io/badge/Overview-Explore-blue?style=for-the-badge&logo=explore" alt="Overview" /></a>
-    <a href="#-the-6-agent-neural-suite"><img src="https://img.shields.io/badge/Agents-View_AI-purple?style=for-the-badge&logo=robot" alt="Agents" /></a>
-    <a href="#-tech-stack"><img src="https://img.shields.io/badge/Tech-Stack-green?style=for-the-badge&logo=react" alt="Tech Stack" /></a>
-    <a href="#-features"><img src="https://img.shields.io/badge/Features-Check-red?style=for-the-badge&logo=sparkles" alt="Features" /></a>
-    <a href="#-quick-start"><img src="https://img.shields.io/badge/Quick-Start-orange?style=for-the-badge&logo=rocket" alt="Quick Start" /></a>
-    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-black?style=for-the-badge" alt="License" /></a>
+    <a href="#-overview"><img src="https://img.shields.io/badge/Overview-Explore-121212?style=for-the-badge&logo=explore&logoColor=2e7d32" alt="Overview" /></a>
+    <a href="#-the-neural-suite"><img src="https://img.shields.io/badge/Agents-View_AI-121212?style=for-the-badge&logo=robot&logoColor=2e7d32" alt="Agents" /></a>
+    <a href="#-tech-stack"><img src="https://img.shields.io/badge/Tech-Stack-121212?style=for-the-badge&logo=react&logoColor=2e7d32" alt="Tech Stack" /></a>
+    <a href="#-quick-start"><img src="https://img.shields.io/badge/Quick-Start-121212?style=for-the-badge&logo=rocket&logoColor=2e7d32" alt="Quick Start" /></a>
   </p>
 </div>
 
 ---
 
 ## ⚡ Overview
-Chronix OS transforms your goals, deadlines, and responsibilities into clear, autonomous execution paths. It actively manages your workload via a **6-agent Neural Suite**, preventing burnout and context switching through smart rescheduling, momentum calculation, and real-time telemetry.
 
-![Chronix OS Dashboard Overview](https://chronix.os/og-image.jpg)
+Designed exclusively for founders, executive leaders, and high-leverage builders who cannot afford context switching. Chronix transforms goals, deadlines, and responsibilities into intelligent, autonomous execution paths. 
+
+Instead of another simple to-do list, Chronix acts as a true Operating System for your ambition. It actively manages your workload via a **6-agent Neural Suite**, preventing burnout and context switching through smart rescheduling, momentum calculation, and real-time telemetry.
 
 <details>
 <summary><strong>✨ Why choose Chronix OS? (Click to expand)</strong></summary>
 
 Most task managers expect you to do all the micro-management. Chronix OS inverts the model. The **AI Agents** work alongside you:
-- They break down goals so you don't have to.
-- They push non-critical tasks away when you are overwhelmed.
-- They write your weekly reports.
+- They break down massive goals so you don't have to.
+- They push non-critical tasks away when your schedule is overwhelmed.
+- They query your personal Notion workspace to answer deep questions.
+- They directly modify your Google Calendar to enforce Deep Work.
 </details>
 
 ---
 
 ## 🚀 Key Features
 
-- **Advanced Landing Page:** Immersive WebGL interactive background with Framer Motion cinematic scroll animations.
-- **Firebase Authentication:** Secure login and sign-up flows fully integrated with Firebase Auth. 
-- **Dynamic Database Syncing:** User accounts automatically mirror from Firebase into a Prisma PostgreSQL database via Next.js Server Actions.
+- **Cinematic Interface:** A stunning, premium aesthetic featuring glassmorphism, dynamic grids, and frictionless Framer Motion micro-animations.
 - **The Execution Matrix:** Prioritize tasks seamlessly with the auto-sorted matrix and Kanban view.
-- **Future Self Simulator:** Set ambitious deadlines and visualize the butterfly effect of your choices today on your future goals.
-- **Agent Command Center:** A live telemetry feed tracking what your AI agents are doing in real-time.
-- **Settings & Autonomy Controls:** Dial the autonomy of your agents up or down depending on your comfort level.
-- **Pricing Tiers:** Scalable solutions designed for independent doers up to massive Enterprise teams.
+- **Future Self Simulator:** Visualize the butterfly effect of your choices today on your future goals.
+- **Agent Command Center:** A live telemetry feed tracking exactly what your AI agents are doing in real-time.
+- **Native Integrations:** Directly hooks into Google Calendar, Slack, and Notion for genuine external autonomy.
 
 ---
 
-## 🤖 The 6-Agent Neural Suite
-Our custom-built intelligent agents manage your workflow autonomously behind the scenes.
+## 🤖 The Neural Suite (AI Agents)
 
-| Agent | Designation | Core Responsibility |
-| :--- | :--- | :--- |
-| **Atlas** | `A-01 | Strategic Core` | Automatically deconstructs massive goals into step-by-step actionable tasks. |
-| **Orbit** | `A-02 | Integrations` | Synchronizes external platforms (Calendar, Slack, GitHub) to detect scheduling conflicts. |
-| **Sentinel** | `A-03 | Risk Monitor` | Scans for impending bottlenecks in your Task Matrix and suggests deferring non-essential work. |
-| **Pulse** | `A-04 | Momentum` | Dynamically calculates your productivity velocity score based on completion rates. |
-| **Rescue** | `A-05 | Recovery` | Steps in when you're overwhelmed, freezing overdue tasks and enforcing deep work. |
-| **Echo** | `A-06 | Synthesis` | Automatically synthesizes your weekly accomplishments into an executive briefing report. |
+Our custom-built intelligent agents manage your workflow autonomously behind the scenes. 
 
-<details>
-<summary><strong>🧠 How do they communicate? (Click to expand)</strong></summary>
+| Agent | Designation | Core Responsibility | Required Integration |
+| :--- | :--- | :--- | :--- |
+| **Atlas** | `A-01 | Strategic Core` | Automatically deconstructs massive goals into step-by-step actionable tasks with strategic reasoning. | `Google Gemini API` |
+| **Orbit** | `A-02 | Integrations` | Scans Google Calendar for conflicts and auto-schedules Deep Work blocks for high-priority tasks. | `Google Calendar API (OAuth)` |
+| **Sentinel** | `A-03 | Risk Monitor` | Detects context-switching and suggests deferring non-essential work when overloaded. | *Native Logic* |
+| **Pulse** | `A-04 | Momentum` | Dynamically calculates your productivity velocity score based on completion rates. | *Native Logic* |
+| **Nova** | `A-05 | Communications`| Auto-drafts Slack messages or summarizes missed communications. | `Slack Bot Token` |
+| **Echo** | `A-06 | Second Brain` | RAG architecture that queries your Notion workspace to answer executive-level questions. | `Notion API`, `Pinecone DB` |
 
-The agents operate using Next.js Server Actions and Prisma to log real-time actions into a central **Synergy Feed** (visible on the Agent Hub page). There are absolutely NO external API dependencies required (e.g. OpenAI keys). They function purely through built-in logic algorithms and local processing.
-</details>
+> **Graceful Degradation:** If you don't configure the external API keys, the agents will intelligently fall back into "Simulated Mode"—allowing you to test the beautiful UI and experience the product without breaking!
 
 ---
 
@@ -69,25 +63,23 @@ The agents operate using Next.js Server Actions and Prisma to log real-time acti
 
 ![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase)
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer&logoColor=blue)
 ![PostgreSQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
 
 - **Framework:** Next.js 16 (App Router, Server Actions)
-- **Authentication:** Firebase Auth
-- **Database:** Prisma ORM with PostgreSQL (Serverless/Managed)
-- **Authentication:** Firebase Auth (Email/Password & Google OAuth)
-- **Styling:** Tailwind CSS + Framer Motion (Glassmorphism & Micro-animations)
-- **Graphics:** Custom WebGL Shaders
-- **Typography:** Geist Sans/Mono + Source Serif 4 (Premium aesthetic)
+- **Database:** PostgreSQL + Prisma ORM
+- **AI Core:** Google Gemini (`gemini-2.5-flash` & `text-embedding-004`)
+- **Vector DB:** Pinecone
+- **Styling:** Tailwind CSS + Framer Motion 
+- **Typography:** Geist Sans/Mono + Source Serif 4
 
 ---
 
 ## 📦 Quick Start
 
-Want to run Chronix OS locally? Just follow these steps:
+Run Chronix OS locally:
 
 1. **Clone the repository**
    ```bash
@@ -101,16 +93,28 @@ Want to run Chronix OS locally? Just follow these steps:
    ```
 
 3. **Configure Environment Variables**
-   Create a `.env` file in the `frontend` directory and add your Firebase Config:
+   Create a `.env` file in the `frontend` directory:
    ```env
-   NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
-   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
-   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+   # Database (Required)
+   DATABASE_URL="postgresql://..."
+   
+   # Core AI (Required for Atlas)
+   GEMINI_API_KEY="..."
+   
+   # Google Calendar (Required for Orbit)
+   GOOGLE_CALENDAR_CLIENT_ID="..."
+   GOOGLE_CALENDAR_CLIENT_SECRET="..."
+   
+   # Notion & Vector DB (Required for Echo)
+   NOTION_API_KEY="..."
+   NOTION_PAGE_ID="..."
+   PINECONE_API_KEY="..."
+   PINECONE_INDEX_NAME="chronix-index"
+   
+   # Slack (Required for Nova)
+   SLACK_BOT_TOKEN="..."
+   SLACK_CHANNEL_ID="..."
    ```
-   *(Note: If you leave these blank, the app will gracefully fallback to a mock "Executive User" profile so you can still test the UI!)*
 
 4. **Initialize the database**
    ```bash
@@ -118,13 +122,12 @@ Want to run Chronix OS locally? Just follow these steps:
    npx prisma db push
    ```
 
-5. **Start the development server**
+5. **Start the execution matrix**
    ```bash
-   npm run dev --webpack
+   npm run dev
    ```
 
-> [!TIP]
-> **Accessing the app:** Visit `http://localhost:3000` to interact with the 3D WebGL landing page and access the terminal.
+Visit `http://localhost:3000` to enter the system.
 
 ---
 
