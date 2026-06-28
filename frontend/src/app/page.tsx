@@ -68,7 +68,7 @@ export default function LandingPage() {
         
         {/* Localized 3D Sandwich Layer (Only inside Hero) */}
         <div 
-          className="absolute inset-0 z-20 pointer-events-none bg-fixed bg-cover bg-center"
+          className="absolute inset-0 z-0 pointer-events-none bg-fixed bg-cover bg-center"
           style={{ 
             backgroundImage: "url('/bg.png')",
             maskImage: "linear-gradient(to bottom, transparent 50%, black 50%)",
