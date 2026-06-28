@@ -183,9 +183,9 @@ void main() {
             <Link href="/login" className="hidden md:block font-mono-label text-[13px] font-mono text-on-surface-variant hover:text-primary transition-colors">Login</Link>
             <Link href="/signup">
               <motion.div
-                whileHover={{ scale: 1.05, backgroundColor: "#A9C632", color: "#1D2E1B" }}
+                whileHover={{ scale: 1.05, backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-[#1D2E1B] text-[#A9C632] px-6 py-2 rounded-lg font-mono-label text-[13px] font-bold font-mono transition-colors shadow-sm cursor-pointer"
+                className="bg-primary/20 border border-primary/50 text-primary px-6 py-2 rounded-lg font-mono-label text-[13px] font-bold font-mono transition-colors shadow-sm cursor-pointer"
               >
                 Get Started
               </motion.div>
@@ -324,7 +324,7 @@ void main() {
       </section>
 
       {/* SECTION: Features Deep Dive */}
-      <section id="features" className="py-[120px] bg-transparent relative">
+      <section id="features" className="py-[120px] bg-surface-container-lowest/60 backdrop-blur-xl relative border-t border-outline/20">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div 
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -382,7 +382,7 @@ void main() {
       </section>
 
       {/* SECTION: Ecosystem */}
-      <section id="ecosystem" className="py-[120px] bg-transparent relative overflow-hidden">
+      <section id="ecosystem" className="py-[120px] bg-surface-container-low/70 backdrop-blur-xl relative overflow-hidden border-t border-outline/20">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">The 6-Agent Neural Suite</h2>
@@ -423,7 +423,7 @@ void main() {
       </section>
 
       {/* SECTION: Testimonials */}
-      <section className="py-[120px] bg-transparent border-b border-outline-variant/20">
+      <section className="py-[120px] bg-surface-container/60 backdrop-blur-xl border-y border-outline/20">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">Trusted by Doers</h2>
@@ -477,7 +477,7 @@ void main() {
       </section>
 
       {/* SECTION: Pricing */}
-      <section id="pricing" className="py-[120px] bg-transparent">
+      <section id="pricing" className="py-[120px] bg-surface-container-low/70 backdrop-blur-xl border-b border-outline/20">
         <div className="max-w-[1200px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">Invest in your execution</h2>
@@ -555,7 +555,7 @@ void main() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section className="py-[120px] bg-transparent relative overflow-hidden border-t border-outline-variant/20">
+      <section className="py-[120px] bg-surface-container-lowest/80 backdrop-blur-xl relative overflow-hidden border-b border-outline/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,125,50,0.15)_0%,transparent_70%)]"></div>
         <div className="max-w-[800px] mx-auto px-4 text-center relative z-10">
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display-lg font-serif text-[48px] text-on-surface font-semibold mb-6">Ready to execute?</motion.h2>
@@ -563,9 +563,9 @@ void main() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
             <Link href="/signup">
               <motion.div
-                whileHover={{ scale: 1.05, backgroundColor: "#A9C632", color: "#1D2E1B", boxShadow: "0px 15px 30px rgba(169, 198, 50, 0.4)" }}
+                whileHover={{ scale: 1.05, backgroundColor: "var(--color-primary-container)", color: "var(--color-on-primary-container)", boxShadow: "0px 15px 30px rgba(242, 210, 75, 0.4)" }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-[#1D2E1B] text-[#A9C632] px-10 py-5 rounded-2xl font-bold font-mono text-[16px] transition-colors shadow-[0_8px_30px_rgba(29,46,27,0.3)] inline-block border-2 border-[#1D2E1B]"
+                className="bg-primary text-on-primary px-10 py-5 rounded-2xl font-bold font-mono text-[16px] transition-colors shadow-[0_8px_30px_rgba(242,210,75,0.2)] inline-block border-2 border-primary/50"
               >
                 Enter the Terminal
               </motion.div>
@@ -577,7 +577,7 @@ void main() {
       {/* Footer */}
       <motion.footer 
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}
-        className="bg-transparent w-full py-16 border-t border-outline-variant/20"
+        className="bg-background/90 backdrop-blur-2xl w-full py-16 border-t border-outline/20"
       >
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
           {/* Brand Col */}
