@@ -61,6 +61,20 @@ export default function LandingPage() {
 
 
 
+      {/* Front Layer: Zooming masked background to create deep 3D sandwich effect */}
+      <motion.div
+        className="fixed inset-0 z-40 pointer-events-none"
+        style={{
+          backgroundImage: "url('/bg.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center bottom",
+          maskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent 40%, black 100%)",
+          scale: useTransform(scrollYProgress, [0, 1], [1, 1.8]),
+          filter: useTransform(scrollYProgress, [0, 1], ["brightness(1) contrast(1)", "brightness(1.5) contrast(1.2)"]),
+        }}
+      />
+
       {/* NEW SECTION: About / Project Description */}
       <section className="py-[120px] relative z-10 bg-surface/10 border-y border-outline/50 backdrop-blur-3xl shadow-[0_10px_40px_rgba(0,0,0,0.5)]" id="about">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px]">
