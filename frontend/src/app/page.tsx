@@ -274,7 +274,7 @@ void main() {
       </section>
 
       {/* SECTION: Features Deep Dive */}
-      <section id="features" className="py-[120px] bg-white relative">
+      <section id="features" className="py-[120px] bg-surface relative">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div 
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -373,7 +373,7 @@ void main() {
       </section>
 
       {/* SECTION: Testimonials */}
-      <section className="py-[120px] bg-surface-container-lowest border-b border-outline-variant/20">
+      <section className="py-[120px] bg-surface-variant border-b border-outline-variant/20">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">Trusted by Doers</h2>
@@ -427,7 +427,7 @@ void main() {
       </section>
 
       {/* SECTION: Pricing */}
-      <section id="pricing" className="py-[120px] bg-surface-container-lowest">
+      <section id="pricing" className="py-[120px] bg-surface">
         <div className="max-w-[1200px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">Invest in your execution</h2>
@@ -505,11 +505,11 @@ void main() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section className="py-[120px] bg-surface-container-lowest relative overflow-hidden border-t border-outline-variant/20">
+      <section className="py-[120px] bg-primary relative overflow-hidden border-t border-outline-variant/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,125,50,0.15)_0%,transparent_70%)]"></div>
         <div className="max-w-[800px] mx-auto px-4 text-center relative z-10">
-          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display-lg font-serif text-[48px] text-on-surface font-semibold mb-6">Ready to execute?</motion.h2>
-          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-on-surface-variant text-[20px] mb-10">Stop managing tasks. Start achieving goals with the power of 6 distinct AI agents working behind the scenes.</motion.p>
+          <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display-lg font-serif text-[48px] text-on-primary font-semibold mb-6">Ready to execute?</motion.h2>
+          <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-on-primary text-[20px] mb-10">Stop managing tasks. Start achieving goals with the power of 6 distinct AI agents working behind the scenes.</motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
             <Link href="/signup">
               <motion.div
@@ -527,21 +527,21 @@ void main() {
       {/* Footer */}
       <motion.footer 
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}
-        className="bg-surface-container-lowest w-full py-16 border-t border-outline-variant/20"
+        className="bg-primary w-full py-16 border-t border-outline-variant/20"
       >
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
           {/* Brand Col */}
           <div className="col-span-1 md:col-span-6 lg:col-span-5">
-            <div className="font-display-lg font-serif text-[28px] text-primary mb-6 flex items-center gap-3">
+            <div className="font-display-lg font-serif text-[28px] text-on-primary mb-6 flex items-center gap-3">
               <img src="/icon.svg" alt="Logo" className="w-8 h-8" />
               Chronix OS
             </div>
-            <p className="font-body-md text-[15px] text-on-surface-variant mb-8 max-w-md leading-relaxed">
+            <p className="font-body-md text-[15px] text-on-primary mb-8 max-w-md leading-relaxed">
               Execution Without Chaos. A premium autonomous executive productivity suite powered by an interconnected neural network of AI agents.
             </p>
-            <div className="flex flex-col gap-3 font-mono-label text-[13px] font-mono text-on-surface-variant">
+            <div className="flex flex-col gap-3 font-mono-label text-[13px] font-mono text-on-primary">
               <span className="flex items-center gap-3"><span className="material-symbols-outlined text-[18px]">location_on</span> 120 Execution Ave, SF, CA 94105</span>
-              <a href="mailto:support@chronix.os" className="flex items-center gap-3 hover:text-primary transition-colors w-fit"><span className="material-symbols-outlined text-[18px]">mail</span> support@chronix.os</a>
+              <a href="mailto:support@chronix.os" className="flex items-center gap-3 hover:opacity-80 transition-opacity w-fit"><span className="material-symbols-outlined text-[18px]">mail</span> support@chronix.os</a>
             </div>
           </div>
 
@@ -550,38 +550,38 @@ void main() {
 
           {/* Platform Links */}
           <div className="col-span-1 md:col-span-3 lg:col-span-2">
-            <h4 className="font-bold text-[14px] text-on-surface mb-6 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-2 h-2 bg-primary rounded-full inline-block"></span> Platform
+            <h4 className="font-bold text-[14px] text-on-primary mb-6 uppercase tracking-widest flex items-center gap-2">
+              <span className="w-2 h-2 bg-on-primary rounded-full inline-block"></span> Platform
             </h4>
             <ul className="flex flex-col gap-4 font-mono-label text-[13px] font-mono">
-              <li><Link href="/#features" className="text-on-surface-variant hover:text-primary transition-colors">Features</Link></li>
-              <li><Link href="/#pricing" className="text-on-surface-variant hover:text-primary transition-colors">Pricing</Link></li>
-              <li><Link href="/login" className="text-on-surface-variant hover:text-primary transition-colors">Terminal Login</Link></li>
-              <li><Link href="https://github.com/Adi3595/Chronix" target="_blank" className="text-on-surface-variant hover:text-primary transition-colors">Source Code</Link></li>
+              <li><Link href="/#features" className="text-on-primary hover:opacity-80 transition-opacity">Features</Link></li>
+              <li><Link href="/#pricing" className="text-on-primary hover:opacity-80 transition-opacity">Pricing</Link></li>
+              <li><Link href="/login" className="text-on-primary hover:opacity-80 transition-opacity">Terminal Login</Link></li>
+              <li><Link href="https://github.com/Adi3595/Chronix" target="_blank" className="text-on-primary hover:opacity-80 transition-opacity">Source Code</Link></li>
             </ul>
           </div>
 
           {/* Legal Links */}
           <div className="col-span-1 md:col-span-3 lg:col-span-2">
-            <h4 className="font-bold text-[14px] text-on-surface mb-6 uppercase tracking-widest flex items-center gap-2">
+            <h4 className="font-bold text-[14px] text-on-primary mb-6 uppercase tracking-widest flex items-center gap-2">
               <span className="w-2 h-2 bg-outline-variant rounded-full inline-block"></span> Legal
             </h4>
             <ul className="flex flex-col gap-4 font-mono-label text-[13px] font-mono">
-              <li><Link href="/privacy" className="text-on-surface-variant hover:text-primary transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/terms" className="text-on-surface-variant hover:text-primary transition-colors">Terms of Service</Link></li>
-              <li><a href="mailto:support@chronix.os" className="text-on-surface-variant hover:text-primary transition-colors">Contact Support</a></li>
+              <li><Link href="/privacy" className="text-on-primary hover:opacity-80 transition-opacity">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-on-primary hover:opacity-80 transition-opacity">Terms of Service</Link></li>
+              <li><a href="mailto:support@chronix.os" className="text-on-primary hover:opacity-80 transition-opacity">Contact Support</a></li>
             </ul>
           </div>
         </div>
 
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="font-body-md text-[13px] text-on-surface-variant">
+          <div className="font-body-md text-[13px] text-on-primary">
             © 2026 Chronix Productivity OS. Swiss Engineered Focus.
           </div>
-          <div className="flex gap-6 text-on-surface-variant font-mono-label text-[13px] font-mono uppercase tracking-widest">
-            <a href="https://twitter.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">X (Twitter)</a>
-            <a href="https://instagram.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">Instagram</a>
-            <a href="https://linkedin.com/company/chronixos" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">LinkedIn</a>
+          <div className="flex gap-6 text-on-primary font-mono-label text-[13px] font-mono uppercase tracking-widest">
+            <a href="https://twitter.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">X (Twitter)</a>
+            <a href="https://instagram.com/chronixos" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">Instagram</a>
+            <a href="https://linkedin.com/company/chronixos" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">LinkedIn</a>
           </div>
         </div>
       </motion.footer>
