@@ -88,31 +88,6 @@ export default function LandingPage() {
               className="relative w-full max-w-[600px] bg-surface/40 backdrop-blur-2xl border border-outline rounded-3xl p-6 shadow-[0_0_80px_rgba(0,0,0,0.5)]"
             >
               
-              {/* Momentum Widget */}
-              <motion.div 
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-surface-variant/80 border border-outline rounded-2xl p-6 mb-4 flex justify-between items-center group transition-all"
-              >
-                <div>
-                  <p className="text-muted-foreground font-sans text-[13px] mb-1">Momentum Score</p>
-                  <div className="flex items-baseline gap-2">
-                    <span className="text-[48px] font-serif text-foreground leading-none">87</span>
-                    <span className="text-muted-foreground text-[14px]">/100</span>
-                  </div>
-                  <p className="text-primary font-sans text-[12px] mt-2 flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[14px]">arrow_upward</span> 12% this week
-                  </p>
-                </div>
-                {/* Simulated Chart */}
-                <div className="relative w-24 h-24 rounded-full border-4 border-surface flex items-center justify-center">
-                  <svg className="absolute inset-0 w-full h-full -rotate-90">
-                    <circle cx="44" cy="44" r="44" fill="none" stroke="var(--color-surface)" strokeWidth="8" />
-                    <circle cx="44" cy="44" r="44" fill="none" stroke="var(--color-primary)" strokeWidth="8" strokeDasharray="276" strokeDashoffset="35" strokeLinecap="round" className="opacity-80" />
-                  </svg>
-                  <span className="material-symbols-outlined text-primary text-[24px]">trending_up</span>
-                </div>
-              </motion.div>
-
               {/* Future Self Simulator */}
               <motion.div 
                 whileHover={{ y: -5, scale: 1.02 }}
