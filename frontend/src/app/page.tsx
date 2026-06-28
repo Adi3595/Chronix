@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Script from "next/script";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 export default function LandingPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
