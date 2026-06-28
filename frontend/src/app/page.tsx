@@ -3,15 +3,9 @@
 import { useEffect, useRef } from "react";
 import Link from "next/link";
 import Script from "next/script";
-import { useState } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { useState } from "react";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
-}
 
 export default function LandingPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -22,42 +16,7 @@ export default function LandingPage() {
   // FAQ State
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
-  // GSAP 3D Sandwich Sequence
-  const bgSeqRef = useRef<HTMLImageElement>(null);
-  const fgSeqRef = useRef<HTMLImageElement>(null);
-  
-  useGSAP(() => {
-    const images = [
-      "/images/sequence/1.png",
-      "/images/sequence/2.png",
-      "/images/sequence/3.png",
-      "/images/sequence/4.png",
-      "/images/sequence/5.png",
-    ];
-    
-    // Preload
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
 
-    const obj = { frame: 0 };
-    gsap.to(obj, {
-      frame: images.length - 1,
-      snap: "frame",
-      ease: "none",
-      scrollTrigger: {
-        trigger: "body",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 0.5,
-      },
-      onUpdate: () => {
-        if (bgSeqRef.current) bgSeqRef.current.src = images[obj.frame];
-        if (fgSeqRef.current) fgSeqRef.current.src = images[obj.frame];
-      }
-    });
-  }, []);
 
   useEffect(() => {
     // Background WebGL Shader (Soft Organic)
@@ -154,23 +113,12 @@ void main() {
   }, []);
 
   return (
-    <div className="landing-container text-on-surface antialiased selection:bg-primary selection:text-on-primary bg-background min-h-screen overflow-x-hidden relative">
-
-      {/* GLOBAL 3D BACKGROUND LAYER */}
-      <div className="fixed inset-0 w-full h-full z-0 pointer-events-none flex items-center justify-center">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(15,92,109,0.15)_0%,transparent_60%)] -z-10"></div>
-          <img ref={bgSeqRef} src="/images/sequence/1.png" alt="Sequence Background" className="w-[100%] h-[100%] object-cover md:object-contain object-center drop-shadow-[0_20px_50px_rgba(4,16,20,0.4)] opacity-90" />
-      </div>
-
-      {/* GLOBAL 3D FOREGROUND LAYER (Sandwich Effect) */}
-      <div className="fixed inset-0 w-full h-full z-40 pointer-events-none flex items-center justify-center opacity-70 mix-blend-overlay">
-          <img ref={fgSeqRef} src="/images/sequence/1.png" alt="Sequence Foreground" className="w-[100%] h-[100%] object-cover md:object-contain object-center" />
-      </div>
+    <div className="text-on-surface antialiased selection:bg-[#A9C632] selection:text-[#1D2E1B] bg-background min-h-screen overflow-x-hidden">
 
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md transition-all duration-200 border-b border-outline-variant/20">
         <div className="flex justify-between items-center px-4 md:px-[40px] py-4 max-w-[1440px] mx-auto">
-          <div className="font-display-lg text-[24px] font-semibold text-primary tracking-tight flex items-center gap-2">
+          <div className="font-display-lg font-serif text-[24px] font-semibold text-primary tracking-tight flex items-center gap-2">
             <img src="/icon.svg" alt="Logo" className="w-8 h-8" />
             Chronix OS
           </div>
@@ -183,9 +131,9 @@ void main() {
             <Link href="/login" className="hidden md:block font-mono-label text-[13px] font-mono text-on-surface-variant hover:text-primary transition-colors">Login</Link>
             <Link href="/signup">
               <motion.div
-                whileHover={{ scale: 1.05, backgroundColor: "var(--color-primary)", color: "var(--color-on-primary)" }}
+                whileHover={{ scale: 1.05, backgroundColor: "#A9C632", color: "#1D2E1B" }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-primary/20 border border-primary/50 text-primary px-6 py-2 rounded-lg font-mono-label text-[13px] font-bold font-mono transition-colors shadow-sm cursor-pointer"
+                className="bg-[#1D2E1B] text-[#A9C632] px-6 py-2 rounded-lg font-mono-label text-[13px] font-bold font-mono transition-colors shadow-sm cursor-pointer"
               >
                 Get Started
               </motion.div>
@@ -201,47 +149,49 @@ void main() {
           <canvas ref={canvasRef} style={{ display: "block", width: "100%", height: "100%" }} />
         </div>
 
+
+
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] w-full grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-20 pointer-events-auto">
           {/* Typography & CTA */}
           <motion.div 
             style={{ y: heroY, opacity }}
             className="lg:col-span-6 flex flex-col justify-center pointer-events-none"
           >
-            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, ease: "easeOut" }}>
-              <h1 className="font-display-lg text-[64px] md:text-[90px] lg:text-[110px] leading-[0.95] font-semibold text-foreground mb-6 tracking-tighter">
+            <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2, ease: "easeOut" }}>
+              <h1 className="font-display-lg font-serif text-[56px] md:text-[80px] leading-[1.05] font-semibold text-on-surface mb-6 tracking-tight">
                 Execution<br />
                 <span className="text-primary relative inline-block mt-2">
                   Without{" "}
                   <motion.span 
                     animate={{ opacity: [0.8, 1, 0.8] }}
                     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="font-black text-primary-container ml-1"
+                    className="italic font-black text-primary-container ml-1"
                   >
                     Chaos
                   </motion.span>
-                  <span className="absolute bottom-2 left-0 w-full h-4 bg-primary-container/30 -z-10 -rotate-1 blur-sm"></span>
+                  <span className="absolute bottom-2 left-0 w-full h-3 bg-primary-container/30 -z-10 -rotate-1"></span>
                 </span>
               </h1>
             </motion.div>
             
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.2, ease: "easeOut" }} className="font-body-lg text-[18px] md:text-[22px] text-on-surface-variant mb-10 max-w-lg leading-relaxed">
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.4, ease: "easeOut" }} className="font-body-lg text-[18px] md:text-[22px] text-on-surface-variant mb-10 max-w-lg leading-relaxed">
               Chronix transforms goals, deadlines, and responsibilities into clear, autonomous execution paths. Predict risks. Maintain momentum. Finish what matters.
             </motion.p>
             
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.4, ease: "easeOut" }} className="flex flex-wrap items-center gap-4 mb-12 pointer-events-auto">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.0, delay: 0.8, ease: "easeOut" }} className="flex flex-wrap items-center gap-4 mb-12 pointer-events-auto">
               <Link href="/signup">
                 <motion.div
-                  whileHover={{ scale: 1.05, backgroundColor: "var(--color-primary-container)", color: "var(--color-on-primary-container)", boxShadow: "0px 15px 30px rgba(242, 210, 75, 0.25)" }}
+                  whileHover={{ scale: 1.05, backgroundColor: "#A9C632", color: "#1D2E1B", boxShadow: "0px 15px 30px rgba(29, 46, 27, 0.4)" }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-primary text-on-primary px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold uppercase tracking-wider transition-colors shadow-[0_8px_30px_rgba(242,210,75,0.1)] border border-primary/50 inline-block"
+                  className="bg-[#1D2E1B] text-[#A9C632] px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold font-mono transition-colors shadow-[0_8px_30px_rgba(29,46,27,0.2)] border-2 border-[#1D2E1B] inline-block"
                 >
                   Start Planning Free
                 </motion.div>
               </Link>
               <motion.button 
-                whileHover={{ scale: 1.05, backgroundColor: "var(--color-surface-variant)" }}
+                whileHover={{ scale: 1.05, backgroundColor: "var(--color-surface-container-highest)", borderColor: "var(--color-primary-container)" }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-surface/50 border border-outline text-on-surface px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold uppercase tracking-wider transition-colors flex items-center gap-2 group backdrop-blur-md"
+                className="bg-transparent border-2 border-primary text-primary px-8 py-4 rounded-xl font-mono-label text-[14px] font-bold font-mono transition-colors flex items-center gap-2 group"
               >
                 <motion.span 
                   animate={{ scale: [1, 1.1, 1] }} 
@@ -254,13 +204,13 @@ void main() {
               </motion.button>
             </motion.div>
             
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 0.8 }} className="font-label-sm text-[12px] font-semibold text-on-surface-variant uppercase tracking-widest border-l-2 border-primary pl-4 flex flex-col gap-2">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: 1.4 }} className="font-label-sm text-[12px] font-semibold text-on-surface-variant uppercase tracking-widest border-l-2 border-primary pl-4 flex flex-col gap-2">
               <span>Trusted by forward-thinking executives & teams</span>
-              <div className="flex gap-4 opacity-70 grayscale pt-2 text-on-surface">
+              <div className="flex gap-4 opacity-50 grayscale pt-2">
                 {/* Mock logos */}
-                <div className="font-bold text-[16px] tracking-tight">Acme Corp</div>
-                <div className="font-bold text-[16px] tracking-tight">VERTEX</div>
-                <div className="font-black text-[16px] tracking-tight">NEXUS</div>
+                <div className="font-serif font-bold text-[16px]">Acme Corp</div>
+                <div className="font-mono font-bold text-[16px]">VERTEX</div>
+                <div className="font-sans font-black text-[16px]">NEXUS</div>
               </div>
             </motion.div>
           </motion.div>
@@ -273,15 +223,15 @@ void main() {
               <motion.div 
                 initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.6 }}
                 whileHover={{ scale: 1.05, rotateY: 5, rotateX: -5 }}
-                className="bg-surface/80 backdrop-blur-xl rounded-2xl p-6 shadow-[0px_20px_40px_rgba(0,0,0,0.5)] border border-outline transition-all transform perspective-1000 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                className="bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-[0px_20px_40px_rgba(0,0,0,0.08)] border border-white transition-all transform perspective-1000"
               >
                 <div className="flex justify-between items-start mb-4">
-                  <span className="font-mono-label text-[13px] text-on-surface-variant flex items-center gap-2">
+                  <span className="font-mono-label text-[13px] font-mono text-on-surface-variant flex items-center gap-2">
                     <span className="material-symbols-outlined text-[18px]">trending_up</span> Momentum Score
                   </span>
-                  <span className="text-primary font-mono-label text-[13px] bg-primary/10 border border-primary/20 px-2 py-1 rounded-full">+12 This Week</span>
+                  <span className="text-primary font-mono-label text-[13px] font-mono bg-primary-fixed/20 px-2 py-1 rounded-full">+12 This Week</span>
                 </div>
-                <div className="font-headline-md text-[40px] font-semibold text-on-surface flex items-baseline gap-2">
+                <div className="font-headline-md font-serif text-[40px] font-semibold text-on-surface flex items-baseline gap-2">
                   <span>87</span>
                   <span className="font-body-md text-[16px] text-on-surface-variant font-normal">/ 100</span>
                 </div>
@@ -291,29 +241,29 @@ void main() {
               <motion.div 
                 initial={{ opacity: 0, x: 50 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.8 }}
                 whileHover={{ scale: 1.05, rotateY: -5, rotateX: 5 }}
-                className="bg-surface/80 backdrop-blur-xl rounded-2xl p-6 shadow-[0px_20px_40px_rgba(0,0,0,0.5)] border border-outline transform perspective-1000 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                className="bg-white/90 backdrop-blur-xl rounded-2xl p-6 shadow-[0px_20px_40px_rgba(0,0,0,0.08)] border border-white transform perspective-1000"
               >
-                <div className="font-mono-label text-[13px] text-on-surface-variant mb-4 flex items-center gap-2">
+                <div className="font-mono-label text-[13px] font-mono text-on-surface-variant mb-4 flex items-center gap-2">
                   <span className="material-symbols-outlined text-[18px]">auto_awesome</span> Future Self Simulator
                 </div>
                 <div className="font-body-md text-[15px] font-medium text-on-surface mb-4">Goal: Launch SaaS MVP</div>
                 <div className="space-y-4">
                   <div>
-                    <div className="flex justify-between font-mono-label text-[11px] mb-2 text-on-surface-variant">
+                    <div className="flex justify-between font-mono-label text-[11px] font-mono mb-2 text-on-surface-variant">
                       <span>Current Trajectory</span>
                       <span>120 Days</span>
                     </div>
                     <div className="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
-                      <div className="bg-outline-variant h-full w-[100%] rounded-full"></div>
+                      <div className="bg-outline h-full w-[100%] rounded-full"></div>
                     </div>
                   </div>
                   <div>
-                    <div className="flex justify-between font-mono-label text-[11px] mb-2 text-primary">
+                    <div className="flex justify-between font-mono-label text-[11px] font-mono mb-2 text-primary">
                       <span>Chronix Optimized Path</span>
                       <span>58 Days</span>
                     </div>
                     <div className="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden relative">
-                      <motion.div initial={{ width: "0%" }} animate={{ width: "48%" }} transition={{ duration: 1.5, delay: 1.5 }} className="bg-primary h-full rounded-full shadow-[0_0_10px_rgba(242,210,75,0.5)]"></motion.div>
+                      <motion.div initial={{ width: "0%" }} animate={{ width: "48%" }} transition={{ duration: 1.5, delay: 1.5 }} className="bg-primary h-full rounded-full"></motion.div>
                     </div>
                   </div>
                 </div>
@@ -324,7 +274,7 @@ void main() {
       </section>
 
       {/* SECTION: Features Deep Dive */}
-      <section id="features" className="py-[120px] bg-surface-container-lowest/60 backdrop-blur-xl relative border-t border-outline/20">
+      <section id="features" className="py-[120px] bg-white relative">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div 
             initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -382,7 +332,7 @@ void main() {
       </section>
 
       {/* SECTION: Ecosystem */}
-      <section id="ecosystem" className="py-[120px] bg-surface-container-low/70 backdrop-blur-xl relative overflow-hidden border-t border-outline/20">
+      <section id="ecosystem" className="py-[120px] bg-surface-container-lowest relative overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">The 6-Agent Neural Suite</h2>
@@ -423,7 +373,7 @@ void main() {
       </section>
 
       {/* SECTION: Testimonials */}
-      <section className="py-[120px] bg-surface-container/60 backdrop-blur-xl border-y border-outline/20">
+      <section className="py-[120px] bg-surface-container-lowest border-b border-outline-variant/20">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">Trusted by Doers</h2>
@@ -477,7 +427,7 @@ void main() {
       </section>
 
       {/* SECTION: Pricing */}
-      <section id="pricing" className="py-[120px] bg-surface-container-low/70 backdrop-blur-xl border-b border-outline/20">
+      <section id="pricing" className="py-[120px] bg-surface-container-lowest">
         <div className="max-w-[1200px] mx-auto px-4 md:px-[40px]">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
             <h2 className="font-display-lg font-serif text-[40px] font-semibold text-on-surface mb-4">Invest in your execution</h2>
@@ -555,7 +505,7 @@ void main() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section className="py-[120px] bg-surface-container-lowest/80 backdrop-blur-xl relative overflow-hidden border-b border-outline/20">
+      <section className="py-[120px] bg-surface-container-lowest relative overflow-hidden border-t border-outline-variant/20">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(46,125,50,0.15)_0%,transparent_70%)]"></div>
         <div className="max-w-[800px] mx-auto px-4 text-center relative z-10">
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="font-display-lg font-serif text-[48px] text-on-surface font-semibold mb-6">Ready to execute?</motion.h2>
@@ -563,9 +513,9 @@ void main() {
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
             <Link href="/signup">
               <motion.div
-                whileHover={{ scale: 1.05, backgroundColor: "var(--color-primary-container)", color: "var(--color-on-primary-container)", boxShadow: "0px 15px 30px rgba(242, 210, 75, 0.4)" }}
+                whileHover={{ scale: 1.05, backgroundColor: "#A9C632", color: "#1D2E1B", boxShadow: "0px 15px 30px rgba(169, 198, 50, 0.4)" }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-primary text-on-primary px-10 py-5 rounded-2xl font-bold font-mono text-[16px] transition-colors shadow-[0_8px_30px_rgba(242,210,75,0.2)] inline-block border-2 border-primary/50"
+                className="bg-[#1D2E1B] text-[#A9C632] px-10 py-5 rounded-2xl font-bold font-mono text-[16px] transition-colors shadow-[0_8px_30px_rgba(29,46,27,0.3)] inline-block border-2 border-[#1D2E1B]"
               >
                 Enter the Terminal
               </motion.div>
@@ -577,7 +527,7 @@ void main() {
       {/* Footer */}
       <motion.footer 
         initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1 }}
-        className="bg-background/90 backdrop-blur-2xl w-full py-16 border-t border-outline/20"
+        className="bg-surface-container-lowest w-full py-16 border-t border-outline-variant/20"
       >
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px] grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
           {/* Brand Col */}
