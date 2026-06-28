@@ -74,7 +74,7 @@ export default function LandingPage() {
       />
 
       {/* NEW SECTION: About / Project Description */}
-      <section className="py-[120px] relative z-10 bg-surface/10 border-y border-outline/50 backdrop-blur-3xl shadow-[0_10px_40px_rgba(0,0,0,0.5)]" id="about">
+      <section className="py-[120px] relative z-10 bg-background/10 border-y border-white/5 backdrop-blur-[64px] shadow-[0_0_100px_rgba(0,0,0,0.8)_inset,0_0_80px_rgba(46,125,50,0.15)]" id="about">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px]">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             

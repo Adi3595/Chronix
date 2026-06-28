@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 
 export function ProblemSection() {
   return (
-    <section className="py-[120px] bg-transparent text-center px-6 relative z-10 border-t border-outline/50">
-      <div className="max-w-5xl mx-auto">
+    <section className="py-[120px] bg-transparent text-center relative z-10 border-t border-outline/50">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-[80px]">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,8 +48,8 @@ export function ProblemSection() {
 
 export function AgentEcosystemSection() {
   return (
-    <section className="py-[120px] bg-transparent text-foreground px-6 relative z-10 border-t border-outline/50" id="agents">
-      <div className="max-w-6xl mx-auto text-center">
+    <section className="py-[120px] bg-transparent text-foreground relative z-10 border-t border-outline/50" id="agents">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] text-center">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
