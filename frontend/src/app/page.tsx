@@ -59,16 +59,7 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* HERO SECTION - Centered Mockup with 3D Sandwich Effect */}
-      <section className="relative pt-32 pb-24 overflow-hidden z-10 min-h-screen flex items-center justify-center">
-        
 
-        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] w-full flex flex-col items-center justify-center relative z-10">
-        </div>
-
-
-
-      </section>
 
       {/* NEW SECTION: About / Project Description */}
       <section className="py-[120px] relative z-10 bg-surface/30 border-y border-outline backdrop-blur-md" id="about">
