@@ -33,7 +33,7 @@ export default function LandingPage() {
       <nav className="sticky top-0 w-full z-50 bg-background/50 backdrop-blur-xl transition-all duration-300 border-b border-outline">
         <div className="flex justify-between items-center px-6 md:px-[80px] py-6 max-w-[1440px] mx-auto">
           <div className="font-sans text-[18px] font-bold tracking-widest uppercase flex items-center gap-3">
-            <img src="/icon.png" className="w-8 h-8 object-contain" alt="Chronix Logo" />
+            <img src="/icon.png" className="w-8 h-8 object-contain mix-blend-screen [filter:invert(1)_hue-rotate(180deg)]" alt="Chronix Logo" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-primary">
               CHRONIX
             </span>
