@@ -130,9 +130,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* SECTION: Features Deep Dive */}
-      <section id="features" className="py-[120px] bg-surface relative">
-        <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
+
       {/* SECTION: Features Deep Dive */}
       <section id="features" className="py-[120px] bg-background relative border-t border-outline-variant/50">
         <div className="max-w-[1440px] mx-auto px-4 md:px-[40px]">
