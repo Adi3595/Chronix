@@ -56,60 +56,11 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
-      <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden z-10">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+      {/* HERO SECTION - Centered Mockup */}
+      <section className="relative min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden z-10">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] w-full flex flex-col items-center justify-center">
           
-          {/* Left Side: Editorial Typography */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <motion.h1 className="font-serif text-[72px] md:text-[100px] leading-[0.9] text-foreground mb-8 tracking-tight">
-              <motion.span custom={0} variants={heroTextVariants} initial="hidden" animate="visible" className="block">Execution</motion.span>
-              <motion.span custom={1} variants={heroTextVariants} initial="hidden" animate="visible" className="block text-muted-foreground">Without</motion.span>
-              <motion.span custom={2} variants={heroTextVariants} initial="hidden" animate="visible" className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary pb-4">Chaos</motion.span>
-            </motion.h1>
-            
-            <motion.div custom={3} variants={heroTextVariants} initial="hidden" animate="visible" className="mb-10">
-              <p className="font-sans text-[16px] text-muted-foreground mb-6 max-w-md leading-relaxed">
-                Chronix transforms goals, deadlines, and responsibilities into intelligent execution paths.
-              </p>
-              <ul className="space-y-2 font-sans text-[14px] text-foreground tracking-wide border-l-2 border-primary/30 pl-4">
-                <li>Predict risks.</li>
-                <li>Maintain momentum.</li>
-                <li>Finish what matters.</li>
-              </ul>
-            </motion.div>
-            
-            <motion.div custom={4} variants={heroTextVariants} initial="hidden" animate="visible" className="flex flex-wrap items-center gap-6 mb-12">
-              <Link href="/signup">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-primary text-background px-8 py-4 rounded-full font-sans text-[14px] font-bold uppercase tracking-widest transition-all cursor-pointer shadow-[0_0_30px_rgba(46,125,50,0.4)]"
-                >
-                  Start Planning &rarr;
-                </motion.div>
-              </Link>
-              <motion.button 
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
-                className="bg-surface-variant border border-outline text-foreground px-8 py-4 rounded-full font-sans text-[14px] font-bold uppercase tracking-widest transition-all flex items-center gap-3"
-              >
-                Watch Demo <span className="material-symbols-outlined text-[18px]">play_circle</span>
-              </motion.button>
-            </motion.div>
-            
-            <motion.div custom={5} variants={heroTextVariants} initial="hidden" animate="visible" className="flex items-center gap-4">
-              <div className="flex -space-x-3">
-                {[1,2,3].map(i => (
-                  <div key={i} className="w-10 h-10 rounded-full border-2 border-background bg-surface-variant"></div>
-                ))}
-              </div>
-              <p className="font-sans text-[12px] text-muted-foreground">
-                Join 25,000+ builders <br />who stay ahead with Chronix
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Right Side: Floating Execution Dashboard */}
+          {/* Right Side (Now Centered): Floating Execution Dashboard */}
           <div className="lg:col-span-7 relative h-[800px] w-full perspective-[1000px] flex items-center justify-center">
             
             {/* Central Mockup Container */}
@@ -238,6 +189,131 @@ export default function LandingPage() {
             <div className="w-1 h-1 bg-muted-foreground rounded-full"></div>
           </div>
         </motion.div>
+      </section>
+
+      {/* NEW SECTION: About / Project Description */}
+      <section className="py-[120px] relative z-10 bg-surface/30 border-y border-outline backdrop-blur-md" id="about">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            
+            <div>
+              <motion.h2 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="font-serif text-[60px] md:text-[80px] leading-[0.9] text-foreground mb-8 tracking-tight"
+              >
+                <span className="block">Execution</span>
+                <span className="block text-muted-foreground">Without</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary pb-4">Chaos</span>
+              </motion.h2>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="mb-10"
+              >
+                <p className="font-sans text-[18px] text-muted-foreground mb-6 max-w-xl leading-relaxed">
+                  Chronix is the world's first cinematic productivity operating system. We transform goals, deadlines, and responsibilities into intelligent, autonomous execution paths powered by a network of specialized AI agents.
+                </p>
+                <ul className="space-y-4 font-sans text-[16px] text-foreground tracking-wide border-l-2 border-primary/30 pl-6">
+                  <li className="flex items-center gap-3"><span className="w-2 h-2 bg-primary rounded-full"></span> Predict risks before they happen.</li>
+                  <li className="flex items-center gap-3"><span className="w-2 h-2 bg-primary rounded-full"></span> Maintain unbreakable momentum.</li>
+                  <li className="flex items-center gap-3"><span className="w-2 h-2 bg-primary rounded-full"></span> Finish what truly matters.</li>
+                </ul>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="flex flex-wrap items-center gap-6"
+              >
+                <Link href="/signup">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="bg-primary text-background px-8 py-4 rounded-full font-sans text-[14px] font-bold uppercase tracking-widest transition-all cursor-pointer shadow-[0_0_30px_rgba(46,125,50,0.4)]"
+                  >
+                    Start Planning &rarr;
+                  </motion.div>
+                </Link>
+                <motion.button 
+                  whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.05)" }}
+                  className="bg-surface border border-outline text-foreground px-8 py-4 rounded-full font-sans text-[14px] font-bold uppercase tracking-widest transition-all flex items-center gap-3"
+                >
+                  Watch Demo <span className="material-symbols-outlined text-[18px]">play_circle</span>
+                </motion.button>
+              </motion.div>
+            </div>
+
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent rounded-3xl blur-3xl"></div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="bg-surface/50 border border-outline rounded-3xl p-10 backdrop-blur-xl relative z-10"
+              >
+                <h3 className="font-sans font-bold text-[20px] uppercase tracking-widest text-primary mb-6">Who is this for?</h3>
+                <p className="text-muted-foreground font-sans text-[15px] leading-relaxed mb-8">
+                  Designed exclusively for founders, executive leaders, and high-leverage builders who cannot afford context switching. If you manage multiple workstreams, a network of people, and complex product roadmaps, Chronix handles the meta-work so you can focus on execution.
+                </p>
+                <div className="flex items-center gap-4 border-t border-outline pt-6">
+                  <div className="flex -space-x-3">
+                    {[1,2,3].map(i => (
+                      <div key={i} className="w-12 h-12 rounded-full border-2 border-surface bg-surface-variant"></div>
+                    ))}
+                  </div>
+                  <p className="font-sans text-[13px] text-muted-foreground">
+                    Join <strong className="text-foreground">25,000+ builders</strong> <br />who stay ahead with Chronix
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* NEW SECTION: Contact / Integration Support */}
+      <section className="py-[120px] relative z-10" id="contact">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px]">
+          <div className="bg-surface-variant/50 border border-outline rounded-3xl p-12 md:p-24 text-center relative overflow-hidden backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.2)]">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(46,125,50,0.15)_0%,transparent_70%)]"></div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="relative z-10 max-w-2xl mx-auto"
+            >
+              <span className="material-symbols-outlined text-[48px] text-primary mb-6">rocket_launch</span>
+              <h2 className="font-serif text-[40px] md:text-[56px] leading-[1.1] text-foreground mb-6 tracking-tight">
+                Ready to Upgrade Your Execution?
+              </h2>
+              <p className="font-sans text-[18px] text-muted-foreground mb-10 leading-relaxed">
+                Connect your existing tools. Our AI agents natively integrate with Slack, Google Calendar, and Notion to pull your fragmented workflows into one unified OS. Need a custom enterprise integration? Reach out to our engineering team.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link href="/signup">
+                  <button className="bg-primary text-background px-10 py-4 rounded-full font-sans text-[14px] font-bold uppercase tracking-widest transition-all hover:scale-105 shadow-[0_0_30px_rgba(46,125,50,0.4)] w-full sm:w-auto">
+                    Start For Free
+                  </button>
+                </Link>
+                <a href="mailto:contact@chronix.os">
+                  <button className="bg-background border border-outline text-foreground px-10 py-4 rounded-full font-sans text-[14px] font-bold uppercase tracking-widest transition-all hover:bg-surface w-full sm:w-auto">
+                    Contact Enterprise
+                  </button>
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* Cinematic Storytelling Scroll */}
