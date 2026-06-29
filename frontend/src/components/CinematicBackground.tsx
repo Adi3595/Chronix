@@ -8,7 +8,7 @@ export function CinematicBackground() {
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   return (
-    <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-background">
+    <div className="fixed inset-0 z-[-1] pointer-events-none overflow-hidden bg-background hidden dark:block">
       {/* Deep volumetric glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/40 via-background/90 to-background opacity-100" />
       
