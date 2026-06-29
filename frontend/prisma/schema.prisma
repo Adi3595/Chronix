@@ -18,6 +18,13 @@ model User {
   createdAt          DateTime       @default(now())
   updatedAt          DateTime       @updatedAt
   googleRefreshToken String?
+  
+  // Slack Integrations
+  slackBotToken      String?
+  slackUserToken     String?
+  slackWorkspaceId   String?
+  slackWorkspaceName String?
+
   goals              Goal[]
   tasks              Task[]
   agentActions       AgentAction[]

@@ -13,6 +13,8 @@ type Theme = "light" | "dark" | "auto";
 
 export default function SettingsClient({ user }: { user: any }) {
   const isGoogleConnected = !!user?.googleRefreshToken;
+  const isSlackConnected = !!user?.slackBotToken;
+  const slackWorkspaceName = user?.slackWorkspaceName || null;
   const { theme, setTheme } = useTheme();
   const [deepWorkEnabled, setDeepWorkEnabled] = useState(true);
   const [weeklyBriefing, setWeeklyBriefing] = useState(false);
@@ -184,15 +186,56 @@ export default function SettingsClient({ user }: { user: any }) {
               <div>
                 <div className="flex justify-between items-start mb-4">
                   <span className="material-symbols-outlined text-[32px] text-on-surface">forum</span>
-                  <span className="px-2 py-1 bg-surface-container text-on-surface-variant rounded font-label-sm text-[10px] uppercase">Inactive</span>
+                  <span className={`px-2 py-1 rounded font-label-sm text-[10px] uppercase ${isSlackConnected ? 'bg-secondary-container text-on-secondary-container' : 'bg-surface-container text-on-surface-variant'}`}>
+                    {isSlackConnected ? 'Connected' : 'Inactive'}
+                  </span>
                 </div>
                 <h3 className="font-mono-label text-[13px] text-on-surface mb-1">Slack Workspace</h3>
-                <p className="text-on-surface-variant text-[13px]">Send executive summaries to channels.</p>
+                <p className="text-on-surface-variant text-[13px]">
+                  {isSlackConnected ? `Nova is reading messages from ${slackWorkspaceName || 'your workspace'}` : 'Connect your workspace to power Nova and Sentinel agents.'}
+                </p>
+
+                {/* Setup Guide */}
+                {!isSlackConnected && (
+                  <details className="mt-4 group">
+                    <summary className="cursor-pointer text-[12px] text-primary font-mono-label uppercase tracking-widest flex items-center gap-1">
+                      <span className="material-symbols-outlined text-[14px]">help</span> Setup Guide
+                    </summary>
+                    <ol className="mt-3 space-y-2 text-[12px] text-on-surface-variant list-decimal list-inside">
+                      <li>Click <strong className="text-on-surface">Add to Slack</strong> below.</li>
+                      <li>Log in to your Slack account if prompted.</li>
+                      <li>Select the workspace to install Chronix Bot into.</li>
+                      <li>Review & click <strong className="text-on-surface">Allow</strong> on the permissions screen.</li>
+                      <li>You'll be redirected back here automatically.</li>
+                      <li>Go to the channel you want Nova to read & type <code className="bg-surface-container px-1 rounded">/invite @Chronix Bot</code>.</li>
+                      <li>Head to the Nova Agent page and start executing!</li>
+                    </ol>
+                    <p className="mt-3 text-[11px] text-on-surface-variant border border-outline-variant rounded p-2">
+                      <strong className="text-on-surface">Permissions requested:</strong> <code>channels:read</code>, <code>channels:history</code>, <code>dnd:write</code>, <code>users.profile:write</code>
+                    </p>
+                  </details>
+                )}
               </div>
               <div className="mt-6 pt-4 border-t border-surface-variant">
-                <button onClick={() => showToast("Slack connection coming soon")} className="w-full py-2 border border-outline-variant text-on-surface rounded-lg font-mono-label text-[13px] hover:bg-surface-container transition-all">
-                  Connect
-                </button>
+                {isSlackConnected ? (
+                  <div className="flex justify-between items-center">
+                    <span className="text-[13px] text-on-surface-variant truncate">{slackWorkspaceName}</span>
+                    <button onClick={() => showToast("Go to Settings in your Slack App to uninstall Chronix Bot.")} className="text-error text-[13px] font-bold hover:underline">Disconnect</button>
+                  </div>
+                ) : (
+                  <a
+                    href="/api/slack/oauth"
+                    className="w-full py-2 flex items-center justify-center gap-2 bg-[#4A154B] text-white rounded-lg font-mono-label text-[13px] hover:opacity-90 transition-all"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19.712.133a5.381 5.381 0 0 0-5.376 5.387 5.381 5.381 0 0 0 5.376 5.386h5.376V5.52A5.381 5.381 0 0 0 19.712.133m0 14.365H5.376A5.381 5.381 0 0 0 0 19.884a5.381 5.381 0 0 0 5.376 5.387h14.336a5.381 5.381 0 0 0 5.376-5.387 5.381 5.381 0 0 0-5.376-5.386" fill="#36C5F0"/>
+                      <path d="M53.76 19.884a5.381 5.381 0 0 0-5.376-5.386 5.381 5.381 0 0 0-5.376 5.386v5.387h5.376a5.381 5.381 0 0 0 5.376-5.387m-14.336 0V5.52A5.381 5.381 0 0 0 34.048.133a5.381 5.381 0 0 0-5.376 5.387v14.364a5.381 5.381 0 0 0 5.376 5.387 5.381 5.381 0 0 0 5.376-5.387" fill="#2EB67D"/>
+                      <path d="M34.048 54a5.381 5.381 0 0 0 5.376-5.387 5.381 5.381 0 0 0-5.376-5.386h-5.376v5.386A5.381 5.381 0 0 0 34.048 54m0-14.365h14.336a5.381 5.381 0 0 0 5.376-5.386 5.381 5.381 0 0 0-5.376-5.387H34.048a5.381 5.381 0 0 0-5.376 5.387 5.381 5.381 0 0 0 5.376 5.386" fill="#ECB22E"/>
+                      <path d="M0 34.249a5.381 5.381 0 0 0 5.376 5.386 5.381 5.381 0 0 0 5.376-5.386v-5.387H5.376A5.381 5.381 0 0 0 0 34.249m14.336 0v14.364A5.381 5.381 0 0 0 19.712 54a5.381 5.381 0 0 0 5.376-5.387V34.249a5.381 5.381 0 0 0-5.376-5.387 5.381 5.381 0 0 0-5.376 5.387" fill="#E01E5A"/>
+                    </svg>
+                    Add to Slack
+                  </a>
+                )}
               </div>
             </div>
             {/* GitHub */}

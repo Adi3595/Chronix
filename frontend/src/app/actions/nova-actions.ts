@@ -14,10 +14,14 @@ const ai = new GoogleGenAI({
  */
 export async function summarizeCommunications(userId: string, command: string, targetChannelId?: string) {
   try {
-    let logMessage = "No Slack tokens found. Simulated Nova: Summarized 45 unread messages across 3 channels into 2 key action items.";
+    let logMessage = "No Slack tokens found. Connect your Slack workspace in Settings → Integrations to enable Nova.";
 
-    if (process.env.SLACK_BOT_TOKEN) {
-      const slack = new WebClient(process.env.SLACK_BOT_TOKEN);
+    // Look up user's DB tokens first, then fall back to env vars
+    const userRecord = await prisma.user.findUnique({ where: { id: userId } });
+    const botToken = userRecord?.slackBotToken || process.env.SLACK_BOT_TOKEN;
+
+    if (botToken) {
+      const slack = new WebClient(botToken);
       
       // Real API: Fetch conversations, map history, send to Gemini for summary
       try {
@@ -73,8 +77,12 @@ export async function enableDeepWorkMode(userId: string) {
   try {
     let logMessage = "Simulated Sentinel: Deep Work mode engaged. Slack notifications paused for 2 hours.";
 
-    if (process.env.SLACK_USER_TOKEN) {
-      const slack = new WebClient(process.env.SLACK_USER_TOKEN);
+    // Look up user's DB tokens first, then fall back to env vars
+    const userRecord2 = await prisma.user.findUnique({ where: { id: userId } });
+    const userToken = userRecord2?.slackUserToken || process.env.SLACK_USER_TOKEN;
+
+    if (userToken) {
+      const slack = new WebClient(userToken);
       try {
         // Set Do Not Disturb for 120 minutes
         await slack.dnd.setSnooze({ num_minutes: 120 });

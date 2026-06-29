@@ -8,7 +8,7 @@ export default async function SettingsPage() {
   const cookieStore = await cookies();
   const userId = cookieStore.get("chronix-uid")?.value || "demo-user-123";
 
-  let user: any = { id: userId, name: "A. Executive", email: "admin@chronix.os", momentumScore: 87, createdAt: new Date(), updatedAt: new Date() };
+  let user: any = { id: userId, name: "A. Executive", email: "admin@chronix.os", momentumScore: 87, createdAt: new Date(), updatedAt: new Date(), googleRefreshToken: null, slackBotToken: null, slackWorkspaceName: null };
 
   try {
     const dbUser = await prisma.user.findUnique({ where: { id: userId } });
