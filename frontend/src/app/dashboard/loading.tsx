@@ -40,11 +40,27 @@ export default function DashboardLoading() {
         </SkeletonCard>
 
         {/* Agent Feed */}
-        <SkeletonCard className="md:col-span-12">
-          <Skeleton className="h-3 w-40 mb-6" />
-          <div className="relative pl-4 border-l-2 border-surface-variant space-y-6">
+        <SkeletonCard className="md:col-span-6">
+          <Skeleton className="h-4 w-40 mb-6" />
+          <div className="space-y-4">
             {Array.from({ length: 3 }).map((_, i) => (
               <SkeletonFeedItem key={i} />
+            ))}
+          </div>
+        </SkeletonCard>
+
+        {/* System Status */}
+        <SkeletonCard className="md:col-span-6">
+          <Skeleton className="h-4 w-40 mb-6" />
+          <div className="space-y-6">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="flex justify-between items-center">
+                <div className="flex gap-4 items-center">
+                  <Skeleton className="h-10 w-10 rounded-full" />
+                  <Skeleton className="h-4 w-24" />
+                </div>
+                <Skeleton className="h-6 w-16 rounded-full" />
+              </div>
             ))}
           </div>
         </SkeletonCard>
