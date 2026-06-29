@@ -12,7 +12,7 @@ const ai = new GoogleGenAI({
 /**
  * Nova Agent: Communications filter and summarizer.
  */
-export async function summarizeCommunications(userId: string) {
+export async function summarizeCommunications(userId: string, targetChannelId?: string) {
   try {
     let logMessage = "No Slack tokens found. Simulated Nova: Summarized 45 unread messages across 3 channels into 2 key action items.";
 
@@ -21,8 +21,12 @@ export async function summarizeCommunications(userId: string) {
       
       // Real API: Fetch conversations, map history, send to Gemini for summary
       try {
-        const channels = await slack.conversations.list({ limit: 1, types: "public_channel" });
-        const channelId = channels.channels?.[0]?.id;
+        let channelId = targetChannelId;
+        
+        if (!channelId) {
+          const channels = await slack.conversations.list({ limit: 1, types: "public_channel" });
+          channelId = channels.channels?.[0]?.id;
+        }
         
         if (channelId && process.env.GEMINI_API_KEY) {
           const history = await slack.conversations.history({ channel: channelId, limit: 10 });

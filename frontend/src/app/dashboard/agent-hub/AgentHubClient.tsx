@@ -205,20 +205,29 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                 <form 
                   onSubmit={async (e) => {
                     e.preventDefault();
-                    const input = e.currentTarget.elements.namedItem('command') as HTMLInputElement;
-                    if(!input.value) return;
-                    input.disabled = true;
+                    const cmdInput = e.currentTarget.elements.namedItem('command') as HTMLInputElement;
+                    const channelInput = e.currentTarget.elements.namedItem('channelId') as HTMLInputElement;
+                    if(!cmdInput.value && !channelInput.value) return;
+                    
+                    cmdInput.disabled = true;
+                    channelInput.disabled = true;
                     setNovaResponse("Summarizing...");
+                    
                     const { summarizeCommunications } = await import("@/app/actions/nova-actions");
-                    const res = await summarizeCommunications("demo-user-123");
+                    const res = await summarizeCommunications("demo-user-123", channelInput.value || undefined);
                     setNovaResponse(res.message || "Failed to get summary");
-                    input.value = "";
-                    input.disabled = false;
+                    
+                    cmdInput.value = "";
+                    cmdInput.disabled = false;
+                    channelInput.disabled = false;
                   }}
-                  className="flex gap-2"
+                  className="flex flex-col gap-2"
                 >
-                  <input name="command" type="text" placeholder="Command Nova..." className="flex-1 bg-surface-variant border border-outline rounded-l-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
-                  <button type="submit" className="bg-primary text-background px-6 rounded-r-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Send</button>
+                  <div className="flex gap-2">
+                    <input name="channelId" type="text" placeholder="Channel ID (Optional)" className="w-1/3 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[13px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
+                    <input name="command" type="text" placeholder="Command Nova..." className="flex-1 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
+                  </div>
+                  <button type="submit" className="w-full bg-primary text-background px-6 py-3 rounded-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Send Command</button>
                 </form>
                 {novaResponse && (
                   <div className="mt-4 p-4 bg-background/50 border border-primary/20 rounded-lg text-[13px] font-mono text-primary/90 leading-relaxed shadow-[0_0_15px_rgba(46,125,50,0.1)]">
