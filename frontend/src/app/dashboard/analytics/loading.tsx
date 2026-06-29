@@ -7,6 +7,7 @@ import {
 } from "@/components/Skeleton";
 
 export default function AnalyticsLoading() {
+  return (
     <div className="max-w-7xl mx-auto">
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">

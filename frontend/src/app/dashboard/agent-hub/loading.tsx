@@ -50,5 +50,6 @@ export default function AgentHubLoading() {
           </SkeletonCard>
         </div>
       </div>
+    </>
   );
 }
