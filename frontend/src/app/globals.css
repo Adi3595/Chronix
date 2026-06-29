@@ -2,40 +2,40 @@
 
 @theme {
   /* Ultra-Premium Cinematic Palette */
-  --color-background: var(--color-background); 
-  --color-foreground: var(--color-foreground); 
-  --color-on-background: var(--color-on-background); 
+  --color-background: var(--sys-background); 
+  --color-foreground: var(--sys-foreground); 
+  --color-on-background: var(--sys-on-background); 
   
-  --color-surface: var(--color-surface); 
-  --color-on-surface: var(--color-on-surface); 
+  --color-surface: var(--sys-surface); 
+  --color-on-surface: var(--sys-on-surface); 
   
-  --color-surface-variant: var(--color-surface-variant); 
-  --color-on-surface-variant: var(--color-on-surface-variant); 
+  --color-surface-variant: var(--sys-surface-variant); 
+  --color-on-surface-variant: var(--sys-on-surface-variant); 
   
-  --color-muted: var(--color-muted); 
-  --color-muted-foreground: var(--color-muted-foreground); 
+  --color-muted: var(--sys-muted); 
+  --color-muted-foreground: var(--sys-muted-foreground); 
   
-  --color-surface-container-lowest: var(--color-surface-container-lowest); 
-  --color-surface-container-low: var(--color-surface-container-low); 
-  --color-surface-container: var(--color-surface-container); 
-  --color-surface-container-high: var(--color-surface-container-high); 
-  --color-surface-container-highest: var(--color-surface-container-highest); 
+  --color-surface-container-lowest: var(--sys-surface-container-lowest); 
+  --color-surface-container-low: var(--sys-surface-container-low); 
+  --color-surface-container: var(--sys-surface-container); 
+  --color-surface-container-high: var(--sys-surface-container-high); 
+  --color-surface-container-highest: var(--sys-surface-container-highest); 
   
-  --color-primary: var(--color-primary); 
-  --color-on-primary: var(--color-on-primary); 
-  --color-primary-container: var(--color-primary-container); 
-  --color-on-primary-container: var(--color-on-primary-container); 
+  --color-primary: var(--sys-primary); 
+  --color-on-primary: var(--sys-on-primary); 
+  --color-primary-container: var(--sys-primary-container); 
+  --color-on-primary-container: var(--sys-on-primary-container); 
   
-  --color-secondary: var(--color-secondary); 
-  --color-on-secondary: var(--color-on-secondary); 
-  --color-secondary-container: var(--color-secondary-container); 
-  --color-on-secondary-container: var(--color-on-secondary-container); 
+  --color-secondary: var(--sys-secondary); 
+  --color-on-secondary: var(--sys-on-secondary); 
+  --color-secondary-container: var(--sys-secondary-container); 
+  --color-on-secondary-container: var(--sys-on-secondary-container); 
   
-  --color-error: var(--color-error); 
-  --color-warning: var(--color-warning); 
+  --color-error: var(--sys-error); 
+  --color-warning: var(--sys-warning); 
   
-  --color-outline: var(--color-outline); 
-  --color-outline-variant: var(--color-outline-variant);
+  --color-outline: var(--sys-outline); 
+  --color-outline-variant: var(--sys-outline-variant);
 
   --font-sans: var(--font-inter), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
@@ -59,71 +59,75 @@
 
 :root {
   /* LIGHT MODE: Matcha Lime & Forest Brew */
-  --color-background: #E6D4A6; /* Bamboo Beige */
-  --color-foreground: #1D2E1B; /* Forest Brew */
-  --color-on-background: #1D2E1B;
+  --sys-background: #E6D4A6; /* Bamboo Beige */
+  --sys-foreground: #1D2E1B; /* Forest Brew */
+  --sys-on-background: #1D2E1B;
   
-  --color-surface: #F4E8CB; /* Slightly lighter beige for surface */
-  --color-on-surface: #1D2E1B;
+  --sys-surface: #F4E8CB; /* Slightly lighter beige for surface */
+  --sys-on-surface: #1D2E1B;
   
-  --color-surface-variant: rgba(29, 46, 27, 0.08);
-  --color-on-surface-variant: rgba(29, 46, 27, 0.72);
+  --sys-surface-variant: rgba(29, 46, 27, 0.08);
+  --sys-on-surface-variant: rgba(29, 46, 27, 0.72);
   
-  --color-muted: rgba(29, 46, 27, 0.05);
-  --color-muted-foreground: rgba(29, 46, 27, 0.72);
+  --sys-muted: rgba(29, 46, 27, 0.05);
+  --sys-muted-foreground: rgba(29, 46, 27, 0.72);
   
-  --color-surface-container-lowest: #FFFFFF;
-  --color-surface-container-low: #F9F1DF;
-  --color-surface-container: #E6D4A6;
-  --color-surface-container-high: rgba(29, 46, 27, 0.08);
-  --color-surface-container-highest: rgba(29, 46, 27, 0.12);
+  --sys-surface-container-lowest: #FFFFFF;
+  --sys-surface-container-low: #F9F1DF;
+  --sys-surface-container: #E6D4A6;
+  --sys-surface-container-high: rgba(29, 46, 27, 0.08);
+  --sys-surface-container-highest: rgba(29, 46, 27, 0.12);
   
-  --color-primary: #A9C632; /* Matcha Lime */
-  --color-on-primary: #1D2E1B;
-  --color-primary-container: rgba(169, 198, 50, 0.25);
-  --color-on-primary-container: #1D2E1B;
+  --sys-primary: #A9C632; /* Matcha Lime */
+  --sys-on-primary: #1D2E1B;
+  --sys-primary-container: rgba(169, 198, 50, 0.25);
+  --sys-on-primary-container: #1D2E1B;
   
-  --color-secondary: #C8D2A6; /* Tea Mist */
-  --color-on-secondary: #1D2E1B;
-  --color-secondary-container: rgba(200, 210, 166, 0.25);
-  --color-on-secondary-container: #1D2E1B;
+  --sys-secondary: #C8D2A6; /* Tea Mist */
+  --sys-on-secondary: #1D2E1B;
+  --sys-secondary-container: rgba(200, 210, 166, 0.25);
+  --sys-on-secondary-container: #1D2E1B;
   
-  --color-error: #D32F2F; 
-  --color-warning: #F57C00;
+  --sys-error: #D32F2F; 
+  --sys-warning: #F57C00;
   
-  --color-outline: rgba(29, 46, 27, 0.2);
-  --color-outline-variant: rgba(29, 46, 27, 0.1);
+  --sys-outline: rgba(29, 46, 27, 0.2);
+  --sys-outline-variant: rgba(29, 46, 27, 0.1);
+
+  /* Next.js Body Background variables */
+  --background: var(--sys-background);
+  --foreground: var(--sys-foreground);
 }
 
 .dark {
   /* DARK MODE: Cinematic Black-Green */
-  --color-background: #050807;
-  --color-foreground: #F4F5EF;
-  --color-on-background: #F4F5EF;
-  --color-surface: #0B0F0D;
-  --color-on-surface: #F4F5EF;
-  --color-surface-variant: rgba(255, 255, 255, 0.05);
-  --color-on-surface-variant: rgba(244, 245, 239, 0.72);
-  --color-muted: rgba(255, 255, 255, 0.03);
-  --color-muted-foreground: rgba(244, 245, 239, 0.72);
-  --color-surface-container-lowest: #020403;
-  --color-surface-container-low: #050807;
-  --color-surface-container: #0B0F0D;
-  --color-surface-container-high: rgba(255, 255, 255, 0.05);
-  --color-surface-container-highest: rgba(255, 255, 255, 0.08);
-  --color-primary: #2E7D32;
-  --color-on-primary: #F4F5EF;
-  --color-primary-container: rgba(46, 125, 50, 0.2);
-  --color-on-primary-container: #A7D7A9;
-  --color-secondary: #A7D7A9;
-  --color-on-secondary: #050807;
-  --color-secondary-container: rgba(167, 215, 169, 0.1);
-  --color-on-secondary-container: #F4F5EF;
-  --color-error: #FF6B4A;
-  --color-on-error: #F4F5EF;
-  --color-warning: #D97706;
-  --color-outline: rgba(255, 255, 255, 0.08);
-  --color-outline-variant: rgba(255, 255, 255, 0.04);
+  --sys-background: #050807;
+  --sys-foreground: #F4F5EF;
+  --sys-on-background: #F4F5EF;
+  --sys-surface: #0B0F0D;
+  --sys-on-surface: #F4F5EF;
+  --sys-surface-variant: rgba(255, 255, 255, 0.05);
+  --sys-on-surface-variant: rgba(244, 245, 239, 0.72);
+  --sys-muted: rgba(255, 255, 255, 0.03);
+  --sys-muted-foreground: rgba(244, 245, 239, 0.72);
+  --sys-surface-container-lowest: #020403;
+  --sys-surface-container-low: #050807;
+  --sys-surface-container: #0B0F0D;
+  --sys-surface-container-high: rgba(255, 255, 255, 0.05);
+  --sys-surface-container-highest: rgba(255, 255, 255, 0.08);
+  --sys-primary: #2E7D32;
+  --sys-on-primary: #F4F5EF;
+  --sys-primary-container: rgba(46, 125, 50, 0.2);
+  --sys-on-primary-container: #A7D7A9;
+  --sys-secondary: #A7D7A9;
+  --sys-on-secondary: #050807;
+  --sys-secondary-container: rgba(167, 215, 169, 0.1);
+  --sys-on-secondary-container: #F4F5EF;
+  --sys-error: #FF6B4A;
+  --sys-on-error: #F4F5EF;
+  --sys-warning: #D97706;
+  --sys-outline: rgba(255, 255, 255, 0.08);
+  --sys-outline-variant: rgba(255, 255, 255, 0.04);
 }
 
 
