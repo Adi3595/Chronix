@@ -66,12 +66,12 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="text-lg lg:text-xl text-muted-foreground max-w-md font-sans leading-relaxed"
+            className="text-lg lg:text-xl text-muted-foreground max-w-md font-sans font-bold leading-relaxed"
           >
             <p className="mb-4">
               Chronix transforms goals, deadlines, and responsibilities into clear execution paths.
             </p>
-            <p className="font-medium text-foreground">
+            <p className="font-bold text-foreground">
               Predict risks. Maintain momentum. Finish what matters.
             </p>
           </motion.div>

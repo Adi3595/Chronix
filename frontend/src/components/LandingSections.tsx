@@ -37,7 +37,7 @@ export function ProblemSection() {
                 </div>
                 <h3 className="text-[20px] font-sans font-bold text-foreground">{item.title}</h3>
               </div>
-              <p className="text-muted-foreground font-sans text-[15px] relative z-10">{item.desc}</p>
+              <p className="text-muted-foreground font-sans font-bold text-[15px] relative z-10">{item.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -86,7 +86,7 @@ export function AgentEcosystemSection() {
                   <p className="text-[12px] uppercase font-sans tracking-widest font-bold text-primary">{agent.role}</p>
                 </div>
               </div>
-              <p className="text-muted-foreground font-sans text-[15px] relative z-10">{agent.desc}</p>
+              <p className="text-muted-foreground font-sans font-bold text-[15px] relative z-10">{agent.desc}</p>
             </motion.div>
           ))}
         </div>
