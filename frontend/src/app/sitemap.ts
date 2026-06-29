@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || "https://chronix-os.onrender.com";
+    process.env.NEXT_PUBLIC_BASE_URL || "https://chronix-os.vercel.app";
 
   const now = new Date();
 

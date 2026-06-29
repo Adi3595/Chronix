@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: ["/", "/login"],
       disallow: ["/dashboard/", "/api/"],
     },
-    sitemap: "https://chronix.os/sitemap.xml",
+    sitemap: "https://chronix-os.vercel.app/sitemap.xml",
   };
 }

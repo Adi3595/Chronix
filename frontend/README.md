@@ -7,11 +7,11 @@ Chronix OS is a hyper-executive suite built for high-performers, designed to orc
 Chronix is powered by 6 specialized agents. Each operates autonomously in the background to streamline your life:
 
 - **Atlas (Goal Architecture)**: Powered by Gemini 2.5 Flash, Atlas breaks down your macroscopic goals into highly structured, actionable sub-tasks in real-time.
-- **Orbit (Calendar Synchronization)**: Deeply integrated with **Google Calendar via secure OAuth 2.0**. Orbit analyzes your schedule, detects conflicts, and autonomously injects "Deep Work" blocks directly onto your live calendar.
+- **Orbit (Calendar Synchronization)**: Analyzes your schedule and deadline priorities to autonomously inject tasks onto your timeline.
 - **Nova (Communications Filter)**: Integrated directly with the **Slack Web API**. Nova intercepts Slack channels and uses Gemini to generate concise, executive summaries of the conversation, saving you hours of reading.
-- **Sentinel (Risk & Focus)**: The ultimate protector of your time. When engaged, Sentinel physically alters your Slack profile, sets Do-Not-Disturb modes, and aggressively protects your Deep Work sessions.
+- **Sentinel (Risk & Focus)**: The ultimate protector of your time. Global background worker that checks your active tasks and issues real-time toast notifications if deadlines are approaching within 24 hours.
 - **Echo (Knowledge Retrieval)**: A state-of-the-art **RAG (Retrieval-Augmented Generation) pipeline**. Echo connects to your live **Notion** workspace, uses Gemini to generate vector embeddings, stores them in **Pinecone**, and retrieves answers based solely on your personal second brain.
-- **Aura (Biometrics)**: Monitors energy levels to optimize when you tackle your most cognitively demanding tasks.
+- **Rescue Agent (Crisis Management)**: Detects low/medium priority tasks that you haven't completed, and automatically defers them forward by 7 days to clear up your immediate bandwidth.
 
 ## Tech Stack
 - **Framework**: Next.js 15 (App Router)
@@ -19,7 +19,7 @@ Chronix is powered by 6 specialized agents. Each operates autonomously in the ba
 - **Database**: PostgreSQL (via Vercel) + Prisma ORM
 - **AI/LLM**: Google Gemini (`@google/genai`)
 - **Integrations**: Google APIs, Slack Web API, Notion Client, Pinecone Database
-- **Authentication**: Custom JWT / Cookie-based with Firebase UI
+- **Authentication**: Firebase Authentication (Email/Password & Google OAuth)
 - **Deployment**: Vercel
 
 ## Live Integrations Note
