@@ -58,6 +58,7 @@ model AgentAction {
   userId        String
   agentName     String   // Atlas, Orbit, Sentinel, Pulse, Echo, Rescue
   actionType    String   // LOG, ALERT, OPTIMIZATION
+  command       String?  // The query or command issued by the user
   logMessage    String
   createdAt     DateTime @default(now())
 

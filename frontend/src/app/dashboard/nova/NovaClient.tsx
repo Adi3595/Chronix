@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function NovaClient() {
-  const [novaHistory, setNovaHistory] = useState<{command: string, response: string}[]>([]);
+export default function NovaClient({ initialHistory = [] }: { initialHistory?: { command: string, response: string }[] }) {
+  const [novaHistory, setNovaHistory] = useState<{command: string, response: string}[]>(initialHistory);
   const [savedChannelId, setSavedChannelId] = useState("");
 
   const containerVariants = {
@@ -67,7 +67,7 @@ export default function NovaClient() {
                   setNovaHistory(prev => [...prev, { command: cmdInput.value || "Summarize", response: "Summarizing Communications..." }]);
                   
                   const { summarizeCommunications } = await import("@/app/actions/nova-actions");
-                  const res = await summarizeCommunications("demo-user-123", channelInput.value || undefined);
+                  const res = await summarizeCommunications("demo-user-123", cmdInput.value || "Summarize", channelInput.value || undefined);
                   
                   // Update last entry with real response
                   setNovaHistory(prev => {

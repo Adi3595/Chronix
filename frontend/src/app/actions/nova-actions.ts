@@ -12,7 +12,7 @@ const ai = new GoogleGenAI({
 /**
  * Nova Agent: Communications filter and summarizer.
  */
-export async function summarizeCommunications(userId: string, targetChannelId?: string) {
+export async function summarizeCommunications(userId: string, command: string, targetChannelId?: string) {
   try {
     let logMessage = "No Slack tokens found. Simulated Nova: Summarized 45 unread messages across 3 channels into 2 key action items.";
 
@@ -40,7 +40,11 @@ export async function summarizeCommunications(userId: string, targetChannelId?: 
         }
       } catch (slackErr: any) {
         console.error("Slack API error:", slackErr);
-        logMessage = `Nova Slack Error: ${slackErr.message || "Failed to fetch messages. Check if bot is in channel."}`;
+        if (slackErr.data?.error === "missing_scope") {
+          logMessage = `Nova Slack Error: Missing required scopes. Add 'channels:read' and 'channels:history' to your Bot Token scopes and reinstall the app.`;
+        } else {
+          logMessage = `Nova Slack Error: ${slackErr.message || "Failed to fetch messages. Check if bot is in channel."}`;
+        }
       }
     }
 
@@ -49,6 +53,7 @@ export async function summarizeCommunications(userId: string, targetChannelId?: 
         userId,
         agentName: "Nova",
         actionType: "OPTIMIZATION",
+        command: command,
         logMessage: logMessage,
       },
     });

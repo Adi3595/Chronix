@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function EchoClient() {
-  const [echoHistory, setEchoHistory] = useState<{query: string, response: string}[]>([]);
+export default function EchoClient({ initialHistory = [] }: { initialHistory?: { query: string, response: string }[] }) {
+  const [echoHistory, setEchoHistory] = useState<{query: string, response: string}[]>(initialHistory);
   const [savedPageId, setSavedPageId] = useState("");
 
   const containerVariants = {
