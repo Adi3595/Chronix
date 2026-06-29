@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   /* Ultra-Premium Cinematic Palette */
@@ -94,6 +95,8 @@
   --sys-outline: #1D2E1B; /* Forest Brew */
   --sys-outline-variant: #C8D2A6; /* Tea Mist */
 
+  --sys-bg-image: none;
+
   /* Next.js Body Background variables */
   --background: var(--sys-background);
   --foreground: var(--sys-foreground);
@@ -128,6 +131,8 @@
   --sys-warning: #D97706;
   --sys-outline: rgba(255, 255, 255, 0.08);
   --sys-outline-variant: rgba(255, 255, 255, 0.04);
+  
+  --sys-bg-image: url('/bg.png');
 }
 
 

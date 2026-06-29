@@ -24,7 +24,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div ref={containerRef} className="text-foreground antialiased min-h-screen selection:bg-primary selection:text-background relative bg-background bg-cover bg-center bg-fixed bg-no-repeat dark:bg-[url('/bg.png')]">
+    <div ref={containerRef} className="text-foreground antialiased min-h-screen selection:bg-primary selection:text-background relative bg-background bg-cover bg-center bg-fixed bg-no-repeat" style={{ backgroundImage: "var(--sys-bg-image)" }}>
       
       {/* No dark overlay - let bg.png shine through maximally */}
       <div className="absolute inset-0 pointer-events-none z-0"></div>
@@ -68,9 +68,9 @@ export default function LandingPage() {
         
         {/* Localized 3D Sandwich Layer (Only inside Hero) */}
         <div 
-          className="absolute inset-0 z-0 pointer-events-none bg-fixed bg-cover bg-center hidden dark:block"
+          className="absolute inset-0 z-0 pointer-events-none bg-fixed bg-cover bg-center"
           style={{ 
-            backgroundImage: "url('/bg.png')",
+            backgroundImage: "var(--sys-bg-image)",
             maskImage: "linear-gradient(to bottom, transparent 50%, black 50%)",
             WebkitMaskImage: "linear-gradient(to bottom, transparent 50%, black 50%)"
           }}
