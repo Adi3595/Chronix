@@ -113,46 +113,72 @@ export async function detectCalendarConflicts(userId: string) {
 
 export async function triggerOrbitSync(userId: string) {
   try {
-    let logMessage = "Simulated Orbit: Calendar synced successfully. 0 new conflicts found.";
+    let logMessage = "";
+    
+    // 1. Fetch unscheduled tasks
+    const unscheduledTasks = await prisma.task.findMany({
+      where: { userId, isCompleted: false, scheduledAt: null },
+      take: 5 // Limit to 5 tasks per sync for simplicity
+    });
 
-    const user = await prisma.user.findUnique({ where: { id: userId } });
+    if (unscheduledTasks.length === 0) {
+      logMessage = "Orbit Sync Complete: All active tasks are already scheduled.";
+    } else {
+      const user = await prisma.user.findUnique({ where: { id: userId } });
+      let authClient = null;
+      let calendar = null;
 
-    if (
-      process.env.GOOGLE_CALENDAR_CLIENT_ID &&
-      process.env.GOOGLE_CALENDAR_CLIENT_SECRET &&
-      user?.googleRefreshToken
-    ) {
-      const auth = new google.auth.OAuth2(
-        process.env.GOOGLE_CALENDAR_CLIENT_ID,
-        process.env.GOOGLE_CALENDAR_CLIENT_SECRET
-      );
-      
-      auth.setCredentials({ refresh_token: user.googleRefreshToken });
-      
-      const calendar = google.calendar({ version: 'v3', auth });
-      
-      const response = await calendar.events.list({
-        calendarId: 'primary',
-        timeMin: new Date().toISOString(),
-        maxResults: 10,
-        singleEvents: true,
-        orderBy: 'startTime',
-      });
-      
-      const events = response.data.items;
-      const eventCount = events ? events.length : 0;
-      
-      logMessage = `Orbit Sync Complete: Successfully fetched ${eventCount} upcoming Google Calendar events!`;
-      
-      if (eventCount > 0 && events && events[0]) {
-        const nextEvent = events[0];
-        const startTime = nextEvent.start?.dateTime || nextEvent.start?.date || "";
-        if (startTime) {
-          logMessage += ` Next event: "${nextEvent.summary}" at ${new Date(startTime).toLocaleTimeString()}.`;
+      if (process.env.GOOGLE_CALENDAR_CLIENT_ID && process.env.GOOGLE_CALENDAR_CLIENT_SECRET && user?.googleRefreshToken) {
+        authClient = new google.auth.OAuth2(
+          process.env.GOOGLE_CALENDAR_CLIENT_ID,
+          process.env.GOOGLE_CALENDAR_CLIENT_SECRET
+        );
+        authClient.setCredentials({ refresh_token: user.googleRefreshToken });
+        calendar = google.calendar({ version: 'v3', auth: authClient });
+      }
+
+      let scheduledCount = 0;
+      let gcalCount = 0;
+
+      // 2. Schedule them across upcoming days
+      for (let i = 0; i < unscheduledTasks.length; i++) {
+        const task = unscheduledTasks[i];
+        
+        // Schedule starting tomorrow at 10 AM, adding 1 day per task
+        const scheduledTime = new Date();
+        scheduledTime.setDate(scheduledTime.getDate() + 1 + i);
+        scheduledTime.setHours(10, 0, 0, 0);
+        
+        await prisma.task.update({
+          where: { id: task.id },
+          data: { scheduledAt: scheduledTime }
+        });
+        scheduledCount++;
+
+        // 3. Sync to Google Calendar if configured
+        if (calendar) {
+          try {
+            await calendar.events.insert({
+              calendarId: 'primary',
+              requestBody: {
+                summary: `[Chronix Deep Work] ${task.title}`,
+                description: "Automatically scheduled by Chronix OS Orbit Agent.",
+                start: { dateTime: scheduledTime.toISOString() },
+                end: { dateTime: new Date(scheduledTime.getTime() + 60 * 60000).toISOString() }
+              },
+            });
+            gcalCount++;
+          } catch (e) {
+            console.error("Orbit GCal Error:", e);
+          }
         }
       }
-    } else if (process.env.GOOGLE_CALENDAR_CLIENT_ID) {
-      logMessage = "Orbit Sync Simulated (Missing Refresh Token). Setup OAuth Playground to get real events.";
+
+      if (calendar) {
+        logMessage = `Orbit dynamically scheduled ${scheduledCount} tasks in DB and successfully synced ${gcalCount} events to Google Calendar!`;
+      } else {
+        logMessage = `Orbit dynamically scheduled ${scheduledCount} tasks into your Chronix timeline (Google Auth missing).`;
+      }
     }
 
     await prisma.agentAction.create({
@@ -165,6 +191,8 @@ export async function triggerOrbitSync(userId: string) {
     });
 
     revalidatePath("/dashboard/agent-hub");
+    revalidatePath("/dashboard/tasks");
+    revalidatePath("/dashboard/future-self");
     return { success: true, message: logMessage };
   } catch (error) {
     console.error("Orbit Sync Error:", error);

@@ -42,6 +42,10 @@ export async function toggleTaskCompletion(taskId: string, isCompleted: boolean)
       });
     }
 
+    // Mathematically recalculate momentum score based on true task velocity
+    const { recalculatePulse } = await import("./pulse-actions");
+    await recalculatePulse(task.userId);
+
     revalidatePath("/dashboard");
     revalidatePath("/dashboard/tasks");
     return { success: true, task };

@@ -4,10 +4,16 @@ import { motion } from "framer-motion";
 
 export default function FutureSelfClient({ 
   optimizedProbability, 
-  currentProbability 
+  currentProbability,
+  velocity,
+  projectedDays,
+  remainingTasks
 }: { 
   optimizedProbability: number, 
-  currentProbability: number 
+  currentProbability: number,
+  velocity: number,
+  projectedDays: number,
+  remainingTasks: number
 }) {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -131,17 +137,24 @@ export default function FutureSelfClient({
               <div className="relative border-l border-outline ml-4 space-y-10 py-2">
                 <div className="relative pl-8">
                   <div className="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center border border-primary text-primary shadow-[0_0_10px_rgba(46,125,50,0.4)]">
-                    <span className="material-symbols-outlined text-[16px]">target</span>
+                    <span className="material-symbols-outlined text-[16px]">speed</span>
                   </div>
-                  <h4 className="font-sans font-bold text-[13px] uppercase tracking-widest text-foreground mb-1">Momentum Tracking</h4>
-                  <p className="font-sans text-[14px] text-muted-foreground">Your momentum score strongly influences your optimized path curve.</p>
+                  <h4 className="font-sans font-bold text-[13px] uppercase tracking-widest text-foreground mb-1">True Velocity</h4>
+                  <p className="font-sans text-[14px] text-muted-foreground"><span className="text-primary font-bold">{velocity.toFixed(2)}</span> tasks completed per day.</p>
                 </div>
                 <div className="relative pl-8">
                   <div className="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-surface flex items-center justify-center border border-outline text-muted-foreground">
                     <span className="material-symbols-outlined text-[16px]">task_alt</span>
                   </div>
-                  <h4 className="font-sans font-bold text-[13px] uppercase tracking-widest text-foreground mb-1">Execution Metrics</h4>
-                  <p className="font-sans text-[14px] text-muted-foreground">Your current path is calculated based on the ratio of completed vs pending tasks.</p>
+                  <h4 className="font-sans font-bold text-[13px] uppercase tracking-widest text-foreground mb-1">Remaining Workload</h4>
+                  <p className="font-sans text-[14px] text-muted-foreground"><span className="text-foreground font-bold">{remainingTasks}</span> tasks left across all active goals.</p>
+                </div>
+                <div className="relative pl-8">
+                  <div className="absolute -left-[17px] top-0 w-8 h-8 rounded-full bg-surface flex items-center justify-center border border-outline text-muted-foreground">
+                    <span className="material-symbols-outlined text-[16px]">calendar_month</span>
+                  </div>
+                  <h4 className="font-sans font-bold text-[13px] uppercase tracking-widest text-foreground mb-1">Projected Completion</h4>
+                  <p className="font-sans text-[14px] text-muted-foreground">Based on your velocity, it will take <span className="text-foreground font-bold">{projectedDays}</span> days to finish everything.</p>
                 </div>
               </div>
             </motion.div>
