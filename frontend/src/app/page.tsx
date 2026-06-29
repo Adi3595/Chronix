@@ -24,7 +24,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div ref={containerRef} className="text-foreground antialiased min-h-screen selection:bg-primary selection:text-background relative bg-cover bg-center bg-fixed bg-no-repeat" style={{ backgroundImage: "url('/bg.png')" }}>
+    <div ref={containerRef} className="text-foreground antialiased min-h-screen selection:bg-primary selection:text-background relative bg-background bg-cover bg-center bg-fixed bg-no-repeat dark:bg-[url('/bg.png')]">
       
       {/* No dark overlay - let bg.png shine through maximally */}
       <div className="absolute inset-0 pointer-events-none z-0"></div>
