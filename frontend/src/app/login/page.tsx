@@ -90,8 +90,8 @@ function LoginForm() {
       <div className="bg-surface p-10 border border-outline-variant w-full max-w-md relative z-10 shadow-[0_0_40px_rgba(0,0,0,0.5)]">
         <div className="flex justify-center mb-8">
           <Link href="/" className="font-sans text-[24px] font-bold tracking-widest uppercase flex items-center gap-4 hover:opacity-80 transition-opacity">
-            <img src="/icon.png" alt="Chronix OS Logo" className="w-16 h-16 object-contain mix-blend-screen [filter:invert(1)_hue-rotate(180deg)] cursor-pointer" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-primary">
+            <img src="/icon.png" alt="Chronix OS Logo" className="w-16 h-16 object-contain mix-blend-multiply opacity-90 dark:mix-blend-screen dark:opacity-100 dark:[filter:invert(1)_hue-rotate(180deg)] cursor-pointer" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-foreground to-surface-variant dark:to-primary">
               CHRONIX
             </span>
           </Link>
