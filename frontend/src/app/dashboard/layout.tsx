@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { prisma } from "@/lib/db";
 import { resolveUserPlan } from "@/lib/plans";
 import { PlanProvider } from "@/components/PlanProvider";
+import NotificationEngine from "@/components/NotificationEngine";
 
 export default async function DashboardLayout({
   children,
@@ -15,6 +16,7 @@ export default async function DashboardLayout({
   let dbPlan = "starter";
   let isAdmin = false;
   let email = "demo@chronix.os";
+  let userTasks: any[] = [];
 
   try {
     const user = await prisma.user.findUnique({ where: { id: userId } });
@@ -23,6 +25,7 @@ export default async function DashboardLayout({
       isAdmin = user.isAdmin;
       if (user.email) email = user.email;
     }
+    userTasks = await prisma.task.findMany({ where: { userId } });
   } catch (error) {
     console.error("[Layout] DB error:", error);
   }
@@ -38,6 +41,7 @@ export default async function DashboardLayout({
         <main className="flex-1 p-6 md:p-[60px] max-w-[1600px] mx-auto w-full relative z-10 pt-6 md:pt-[60px]">
           {children}
         </main>
+        <NotificationEngine tasks={userTasks} />
       </PlanProvider>
     </div>
   );

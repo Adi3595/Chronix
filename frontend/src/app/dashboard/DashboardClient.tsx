@@ -2,6 +2,9 @@
 
 import { motion } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toggleTaskCompletion } from "@/app/actions/task-actions";
 
 export default function DashboardClient({ 
   user, 
@@ -13,6 +16,17 @@ export default function DashboardClient({
   agentActions: any[] 
 }) {
   const momentumScore = user?.momentumScore || 87;
+  const router = useRouter();
+  const [optimisticTasks, setOptimisticTasks] = useState(tasks);
+
+  const handleToggle = async (taskId: string, currentStatus: boolean) => {
+    // Optimistic UI Update
+    setOptimisticTasks(prev => 
+      prev.map(t => t.id === taskId ? { ...t, isCompleted: !currentStatus } : t)
+    );
+    await toggleTaskCompletion(taskId, !currentStatus);
+    router.refresh();
+  };
 
   return (
     <>
@@ -87,19 +101,20 @@ export default function DashboardClient({
             <span className="material-symbols-outlined text-outline">tune</span>
           </div>
           <div className="space-y-4 flex-1">
-            {tasks.length === 0 ? (
+            {optimisticTasks.length === 0 ? (
               <p className="text-on-surface-variant text-sm">No tasks pending. Enjoy your day!</p>
             ) : (
-              tasks.slice(0, 4).map((task) => (
+              optimisticTasks.slice(0, 4).map((task) => (
                 <div
                   key={task.id}
+                  onClick={() => handleToggle(task.id, task.isCompleted)}
                   className="flex items-start gap-3 p-3 hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border border-transparent hover:border-outline-variant/30"
                 >
-                  <div className={`mt-1 w-5 h-5 rounded border flex items-center justify-center ${task.isCompleted ? 'bg-primary border-primary text-on-primary' : 'border-outline'}`}>
+                  <div className={`mt-1 w-5 h-5 rounded border flex items-center justify-center transition-colors ${task.isCompleted ? 'bg-primary border-primary text-on-primary' : 'border-outline hover:border-primary/50'}`}>
                     {task.isCompleted && <span className="material-symbols-outlined text-[14px]">check</span>}
                   </div>
                   <div>
-                    <p className={`font-body-md text-[15px] leading-tight ${task.isCompleted ? 'text-on-surface-variant line-through' : 'text-on-surface font-medium'}`}>
+                    <p className={`font-body-md text-[15px] leading-tight transition-all ${task.isCompleted ? 'text-on-surface-variant line-through opacity-70' : 'text-on-surface font-medium'}`}>
                       {task.title}
                     </p>
                     <p className="font-label-sm text-[12px] font-semibold tracking-wider text-on-surface-variant mt-1">

@@ -22,3 +22,31 @@ export async function createTaskAction(userId: string, title: string, descriptio
     return { success: false, error: "Failed to create task" };
   }
 }
+
+export async function toggleTaskCompletion(taskId: string, isCompleted: boolean) {
+  try {
+    const task = await prisma.task.update({
+      where: { id: taskId },
+      data: { isCompleted },
+    });
+    
+    // Log the completion as an agent synergy if completed
+    if (isCompleted) {
+      await prisma.agentAction.create({
+        data: {
+          userId: task.userId,
+          agentName: "Atlas",
+          actionType: "OPTIMIZATION",
+          logMessage: `Marked task "${task.title.substring(0,20)}..." as complete.`,
+        }
+      });
+    }
+
+    revalidatePath("/dashboard");
+    revalidatePath("/dashboard/tasks");
+    return { success: true, task };
+  } catch (error) {
+    console.error("Failed to toggle task:", error);
+    return { success: false, error: "Failed to toggle task" };
+  }
+}

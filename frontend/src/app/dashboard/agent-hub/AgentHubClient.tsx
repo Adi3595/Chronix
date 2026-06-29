@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";
+import { useState } from "react";
 
 export default function AgentHubClient({ agentActions }: { agentActions: any[] }) {
+  const [echoResponse, setEchoResponse] = useState<string | null>(null);
+  const [novaResponse, setNovaResponse] = useState<string | null>(null);
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -51,25 +54,34 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                   <span className="font-sans text-[13px] font-bold uppercase tracking-widest text-foreground">Ready</span>
                 </div>
               </div>
-              <div className="space-y-4 relative z-10 flex-1">
-                <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Query Second Brain</span>
-                <form 
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    const input = e.currentTarget.elements.namedItem('query') as HTMLInputElement;
-                    const query = input.value;
-                    if(!query) return;
-                    input.disabled = true;
-                    const { searchSecondBrain } = await import("@/app/actions/echo-actions");
-                    await searchSecondBrain("demo-user-123", query);
-                    input.value = "";
-                    input.disabled = false;
-                  }}
-                  className="flex gap-2"
-                >
-                  <input name="query" type="text" placeholder="Access Neural Link..." className="flex-1 bg-surface-variant border border-outline rounded-l-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
-                  <button type="submit" className="bg-primary text-background px-6 rounded-r-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Search</button>
-                </form>
+              <div className="space-y-4 relative z-10 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Query Second Brain</span>
+                  <form
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      const input = e.currentTarget.elements.namedItem('query') as HTMLInputElement;
+                      const query = input.value;
+                      if (!query) return;
+                      input.disabled = true;
+                      setEchoResponse("Accessing Neural Link...");
+                      const { searchSecondBrain } = await import("@/app/actions/echo-actions");
+                      const res = await searchSecondBrain("demo-user-123", query);
+                      setEchoResponse(res.response || "No response found.");
+                      input.value = "";
+                      input.disabled = false;
+                    }}
+                    className="flex gap-2"
+                  >
+                    <input name="query" type="text" placeholder="Access Neural Link..." className="flex-1 bg-surface-variant border border-outline rounded-l-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
+                    <button type="submit" className="bg-primary text-background px-6 rounded-r-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Search</button>
+                  </form>
+                </div>
+                {echoResponse && (
+                  <div className="mt-4 p-4 bg-background/50 border border-primary/20 rounded-lg text-[13px] font-mono text-primary/90 leading-relaxed shadow-[0_0_15px_rgba(46,125,50,0.1)]">
+                    <span className="text-primary font-bold">Echo:</span> {echoResponse}
+                  </div>
+                )}
               </div>
             </motion.div>
 
@@ -94,7 +106,7 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                   <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Current Mission</span>
                   <p className="font-sans font-bold text-[16px] uppercase text-foreground">Deep Work Enforcement</p>
                 </div>
-                <button 
+                <button
                   onClick={async () => {
                     const { enableDeepWorkMode } = await import("@/app/actions/nova-actions");
                     await enableDeepWorkMode("demo-user-123");
@@ -156,7 +168,7 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                   <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Current Mission</span>
                   <p className="font-sans font-bold text-[16px] uppercase text-muted-foreground">Awaiting Sync Cycle</p>
                 </div>
-                <button 
+                <button
                   onClick={async () => {
                     const { triggerOrbitSync } = await import("@/app/actions/orbit-actions");
                     await triggerOrbitSync("demo-user-123");
@@ -190,20 +202,29 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                   <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Current Mission</span>
                   <p className="font-sans font-bold text-[16px] uppercase text-muted-foreground">Awaiting Slack Channel</p>
                 </div>
-                <button 
-                  onClick={async (e) => {
-                    const btn = e.currentTarget;
-                    btn.disabled = true;
-                    btn.innerHTML = "Summarizing...";
+                <form 
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+                    const input = e.currentTarget.elements.namedItem('command') as HTMLInputElement;
+                    if(!input.value) return;
+                    input.disabled = true;
+                    setNovaResponse("Summarizing...");
                     const { summarizeCommunications } = await import("@/app/actions/nova-actions");
-                    await summarizeCommunications("demo-user-123");
-                    btn.innerHTML = "<span class='material-symbols-outlined text-[16px]'>summarize</span> Summarize Slack";
-                    btn.disabled = false;
+                    const res = await summarizeCommunications("demo-user-123");
+                    setNovaResponse(res.message || "Failed to get summary");
+                    input.value = "";
+                    input.disabled = false;
                   }}
-                  className="mt-4 text-primary font-sans text-[13px] uppercase tracking-widest font-bold flex items-center gap-2 hover:underline w-fit disabled:opacity-50"
+                  className="flex gap-2"
                 >
-                  <span className="material-symbols-outlined text-[16px]">summarize</span> Summarize Slack
-                </button>
+                  <input name="command" type="text" placeholder="Command Nova..." className="flex-1 bg-surface-variant border border-outline rounded-l-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
+                  <button type="submit" className="bg-primary text-background px-6 rounded-r-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Send</button>
+                </form>
+                {novaResponse && (
+                  <div className="mt-4 p-4 bg-background/50 border border-primary/20 rounded-lg text-[13px] font-mono text-primary/90 leading-relaxed shadow-[0_0_15px_rgba(46,125,50,0.1)]">
+                    <span className="text-primary font-bold">Nova:</span> {novaResponse}
+                  </div>
+                )}
               </div>
             </motion.div>
 
@@ -231,7 +252,7 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                   <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Current Mission</span>
                   <p className="font-sans font-bold text-[16px] uppercase text-muted-foreground">Awaiting Biometric Sync</p>
                 </div>
-                <button 
+                <button
                   onClick={async () => {
                     const { analyzeEnergyLevels } = await import("@/app/actions/aura-actions");
                     await analyzeEnergyLevels("demo-user-123");

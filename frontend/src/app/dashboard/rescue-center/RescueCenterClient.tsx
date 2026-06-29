@@ -5,7 +5,7 @@ import { useState } from "react";
 import { activateRescueMode } from "@/app/actions/rescue-actions";
 import { useRouter } from "next/navigation";
 
-export default function RescueCenterClient() {
+export default function RescueCenterClient({ tasks = [] }: { tasks?: any[] }) {
   const [isRescuing, setIsRescuing] = useState(false);
   const router = useRouter();
 
@@ -113,15 +113,21 @@ export default function RescueCenterClient() {
             </div>
             <p className="font-body-md text-[15px] text-on-surface-variant mb-6">Clicking "Commit Rescue Plan" will automatically push all non-essential Tasks 7 days into the future.</p>
             <div className="flex flex-col gap-4">
-              <div className="p-4 border border-outline-variant/40 rounded-lg flex gap-4 opacity-75">
-                <div className="mt-1">
-                  <span className="material-symbols-outlined text-[#D97706] text-[20px]">schedule</span>
-                </div>
-                <div>
-                  <h4 className="font-mono-label font-mono text-[14px] text-on-surface mb-1 line-through decoration-[#707a6c]">Weekly Sync: Design Team</h4>
-                  <p className="font-body-md text-[13px] text-outline">Deferred to next week.</p>
-                </div>
-              </div>
+              {tasks.length === 0 ? (
+                <p className="font-body-md text-[13px] text-outline">No non-essential tasks currently scheduled.</p>
+              ) : (
+                tasks.map((task) => (
+                  <div key={task.id} className="p-4 border border-outline-variant/40 rounded-lg flex gap-4 opacity-75">
+                    <div className="mt-1">
+                      <span className="material-symbols-outlined text-[#D97706] text-[20px]">schedule</span>
+                    </div>
+                    <div>
+                      <h4 className="font-mono-label font-mono text-[14px] text-on-surface mb-1 line-through decoration-[#707a6c]">{task.title}</h4>
+                      <p className="font-body-md text-[13px] text-outline">Deferred by 7 days.</p>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </section>
 
