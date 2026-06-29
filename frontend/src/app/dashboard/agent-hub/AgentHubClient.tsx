@@ -60,21 +60,31 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                   <form
                     onSubmit={async (e) => {
                       e.preventDefault();
-                      const input = e.currentTarget.elements.namedItem('query') as HTMLInputElement;
-                      const query = input.value;
-                      if (!query) return;
-                      input.disabled = true;
+                      const queryInput = e.currentTarget.elements.namedItem('query') as HTMLInputElement;
+                      const pageInput = e.currentTarget.elements.namedItem('pageId') as HTMLInputElement;
+                      const query = queryInput.value;
+                      
+                      if (!query && !pageInput.value) return;
+                      
+                      queryInput.disabled = true;
+                      pageInput.disabled = true;
                       setEchoResponse("Accessing Neural Link...");
+                      
                       const { searchSecondBrain } = await import("@/app/actions/echo-actions");
-                      const res = await searchSecondBrain("demo-user-123", query);
+                      const res = await searchSecondBrain("demo-user-123", query, pageInput.value || undefined);
                       setEchoResponse(res.response || "No response found.");
-                      input.value = "";
-                      input.disabled = false;
+                      
+                      queryInput.value = "";
+                      queryInput.disabled = false;
+                      pageInput.disabled = false;
                     }}
-                    className="flex gap-2"
+                    className="flex flex-col gap-2"
                   >
-                    <input name="query" type="text" placeholder="Access Neural Link..." className="flex-1 bg-surface-variant border border-outline rounded-l-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
-                    <button type="submit" className="bg-primary text-background px-6 rounded-r-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Search</button>
+                    <div className="flex gap-2">
+                      <input name="pageId" type="text" placeholder="Page ID (Optional)" className="w-1/3 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[13px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
+                      <input name="query" type="text" placeholder="Access Neural Link..." className="flex-1 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
+                    </div>
+                    <button type="submit" className="w-full bg-primary text-background px-6 py-3 rounded-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Search</button>
                   </form>
                 </div>
                 {echoResponse && (

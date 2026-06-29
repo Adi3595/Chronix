@@ -13,7 +13,7 @@ const ai = new GoogleGenAI({
 /**
  * Echo Agent: Second Brain Knowledge Retrieval (RAG)
  */
-export async function searchSecondBrain(userId: string, query: string) {
+export async function searchSecondBrain(userId: string, query: string, targetPageId?: string) {
   try {
     let responseText = "Simulated Echo: Based on your documents, the Q3 Roadmap requires aligning the engineering vectors before September 15th.";
 
@@ -25,7 +25,7 @@ export async function searchSecondBrain(userId: string, query: string) {
       // We will fetch the notion page content live to ensure we have data,
       // and then we will try to embed/upsert it to Pinecone for future retrieval.
       const notion = new Client({ auth: process.env.NOTION_API_KEY });
-      const pageId = process.env.NOTION_PAGE_ID || "";
+      const pageId = targetPageId || process.env.NOTION_PAGE_ID || "";
       
       let documentContext = "";
       
