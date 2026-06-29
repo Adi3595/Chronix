@@ -219,6 +219,179 @@ export default function LandingPage() {
       <ProblemSection />
       
       <AgentEcosystemSection />
+
+      {/* FEATURES SECTION */}
+      <section className="py-[120px] relative z-10" id="features">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px]">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
+            <p className="font-mono text-[12px] uppercase tracking-[0.3em] text-primary mb-4">What You Get</p>
+            <h2 className="font-serif text-[48px] md:text-[64px] text-foreground tracking-tight leading-[1]">Built for Builders<br/><span className="text-muted-foreground">Who Demand More</span></h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { icon: "psychology", title: "Goal Decomposition", desc: "Atlas AI breaks your high-level goals into step-by-step executable tasks — automatically, with strategic reasoning." },
+              { icon: "forum", title: "Slack Intelligence", desc: "Nova reads your Slack threads and delivers crisp executive summaries. Stop scrolling. Start deciding." },
+              { icon: "calendar_month", title: "Calendar Blocking", desc: "Orbit scans your Google Calendar for conflicts and automatically carves out deep work time blocks." },
+              { icon: "search_insights", title: "Second Brain RAG", desc: "Echo queries your Notion workspace using vector search to surface the exact insight you need in seconds." },
+              { icon: "self_improvement", title: "Focus Enforcement", desc: "Sentinel auto-engages Do Not Disturb mode on Slack and updates your status when deep work begins." },
+              { icon: "trending_up", title: "Momentum Score", desc: "Pulse dynamically calculates your real-time productivity velocity so you always know if you're on track." },
+              { icon: "warning", title: "Risk Interception", desc: "Rescue scans for stalled goals and deadlines and escalates before they become crises — not after." },
+              { icon: "person_raised_hand", title: "Future Self Engine", desc: "Visualize the butterfly effect of today's decisions on your long-term goals through AI-generated letters from your future self." },
+              { icon: "devices", title: "Cinematic Interface", desc: "A premium dark/light dual-theme system with glassmorphism, micro-animations, and a botanical design language." },
+            ].map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="bg-surface/40 border border-outline rounded-2xl p-8 hover:border-primary/40 hover:bg-surface/70 transition-all duration-300 group"
+              >
+                <span className="material-symbols-outlined text-primary text-[32px] mb-5 block group-hover:scale-110 transition-transform">{feature.icon}</span>
+                <h3 className="font-sans font-bold text-[16px] text-foreground tracking-tight mb-3">{feature.title}</h3>
+                <p className="font-sans text-[14px] text-muted-foreground leading-relaxed">{feature.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PRODUCT SECTION */}
+      <section className="py-[120px] relative z-10 bg-surface-variant/20" id="product">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px]">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
+            <p className="font-mono text-[12px] uppercase tracking-[0.3em] text-primary mb-4">The OS</p>
+            <h2 className="font-serif text-[48px] md:text-[64px] text-foreground tracking-tight">One Dashboard.<br/><span className="text-muted-foreground">Infinite Leverage.</span></h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              { icon: "hub", label: "Agent Hub", desc: "Your mission control. Run any agent, monitor live telemetry, and see exactly what your AI team is working on at all times.", tag: "Live Telemetry" },
+              { icon: "flag", label: "Goals & Tasks", desc: "Set ambitious goals and Atlas instantly decomposes them into a prioritized execution matrix with due dates, owners, and risk flags.", tag: "AI-Powered" },
+              { icon: "analytics", label: "Analytics", desc: "Track your momentum score, task velocity, and goal completion rates over time with beautiful, data-dense charts.", tag: "Real-Time" },
+              { icon: "calendar_month", label: "Calendar Intelligence", desc: "Orbit connects directly to Google Calendar to surface conflicts, suggest reschedules, and enforce your deep work sessions.", tag: "Google Calendar" },
+              { icon: "notifications_paused", label: "Rescue Center", desc: "A dedicated crisis board that surfaces overdue tasks and stalled goals so nothing slips through the cracks.", tag: "Risk Prevention" },
+              { icon: "bolt", label: "Future Self", desc: "Visualize your goals 90 days from now. An AI-generated letter from your future self adjusts in real-time as you update your tasks.", tag: "Unique" },
+            ].map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="flex gap-6 bg-surface/40 border border-outline rounded-2xl p-8 hover:border-primary/30 transition-all duration-300 group"
+              >
+                <div className="shrink-0">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <span className="material-symbols-outlined text-primary text-[28px]">{item.icon}</span>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="font-sans font-bold text-[17px] text-foreground">{item.label}</h3>
+                    <span className="text-[10px] font-mono uppercase tracking-widest bg-primary/10 text-primary px-2 py-0.5 rounded-full border border-primary/20">{item.tag}</span>
+                  </div>
+                  <p className="font-sans text-[14px] text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PRICING SECTION */}
+      <section className="py-[120px] relative z-10" id="pricing">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-[80px]">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
+            <p className="font-mono text-[12px] uppercase tracking-[0.3em] text-primary mb-4">Simple Pricing</p>
+            <h2 className="font-serif text-[48px] md:text-[64px] text-foreground tracking-tight">Start Free.<br/><span className="text-muted-foreground">Scale When Ready.</span></h2>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Starter */}
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0 }}
+              className="bg-surface/40 border border-outline rounded-3xl p-8 flex flex-col">
+              <div className="mb-8">
+                <p className="font-mono text-[12px] uppercase tracking-widest text-muted-foreground mb-2">Starter</p>
+                <div className="flex items-end gap-1 mb-4">
+                  <span className="font-serif text-[52px] leading-none text-foreground">$0</span>
+                  <span className="text-muted-foreground mb-2 font-sans text-[14px]">/forever</span>
+                </div>
+                <p className="text-muted-foreground font-sans text-[14px]">For solo builders exploring AI-powered execution.</p>
+              </div>
+              <ul className="space-y-3 mb-10 flex-1">
+                {["100 Tasks", "Goal Decomposition (Atlas)", "Google Calendar Sync", "Basic Dashboard"].map(f => (
+                  <li key={f} className="flex items-center gap-3 text-[14px] font-sans text-foreground">
+                    <span className="material-symbols-outlined text-primary text-[18px]">check_circle</span>{f}
+                  </li>
+                ))}
+                {["Analytics", "Agent Hub", "Nova & Echo", "Rescue Center"].map(f => (
+                  <li key={f} className="flex items-center gap-3 text-[14px] font-sans text-muted-foreground/50">
+                    <span className="material-symbols-outlined text-[18px]">remove</span>{f}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/signup">
+                <motion.div whileHover={{ scale: 1.03 }} className="w-full py-4 rounded-xl border border-outline text-center font-sans font-bold text-[14px] uppercase tracking-widest text-foreground hover:bg-surface transition-all cursor-pointer">
+                  Get Started Free
+                </motion.div>
+              </Link>
+            </motion.div>
+
+            {/* Executive — highlighted */}
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+              className="bg-primary/10 border-2 border-primary rounded-3xl p-8 flex flex-col relative shadow-[0_0_60px_rgba(169,198,50,0.15)]">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-background text-[11px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-full">Most Popular</div>
+              <div className="mb-8">
+                <p className="font-mono text-[12px] uppercase tracking-widest text-primary mb-2">Executive Suite</p>
+                <div className="flex items-end gap-1 mb-4">
+                  <span className="font-serif text-[52px] leading-none text-foreground">$12</span>
+                  <span className="text-muted-foreground mb-2 font-sans text-[14px]">/month</span>
+                </div>
+                <p className="text-muted-foreground font-sans text-[14px]">For founders and leaders who operate at maximum leverage.</p>
+              </div>
+              <ul className="space-y-3 mb-10 flex-1">
+                {["Unlimited Tasks", "All 8 AI Agents", "Nova (Slack Intelligence)", "Echo (Notion RAG)", "Rescue Center", "Future Self Engine", "Advanced Analytics", "Calendar Deep Blocking"].map(f => (
+                  <li key={f} className="flex items-center gap-3 text-[14px] font-sans text-foreground">
+                    <span className="material-symbols-outlined text-primary text-[18px]">check_circle</span>{f}
+                  </li>
+                ))}
+              </ul>
+              <Link href="/signup">
+                <motion.div whileHover={{ scale: 1.03 }} className="w-full py-4 rounded-xl bg-primary text-background text-center font-sans font-bold text-[14px] uppercase tracking-widest shadow-[0_0_30px_rgba(169,198,50,0.4)] transition-all cursor-pointer">
+                  Start Executive Trial
+                </motion.div>
+              </Link>
+            </motion.div>
+
+            {/* Enterprise */}
+            <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+              className="bg-surface/40 border border-outline rounded-3xl p-8 flex flex-col">
+              <div className="mb-8">
+                <p className="font-mono text-[12px] uppercase tracking-widest text-muted-foreground mb-2">Enterprise</p>
+                <div className="flex items-end gap-1 mb-4">
+                  <span className="font-serif text-[52px] leading-none text-foreground">$49</span>
+                  <span className="text-muted-foreground mb-2 font-sans text-[14px]">/user/mo</span>
+                </div>
+                <p className="text-muted-foreground font-sans text-[14px]">For organizations running multi-team execution at scale.</p>
+              </div>
+              <ul className="space-y-3 mb-10 flex-1">
+                {["Everything in Executive", "Team Workspaces", "SSO / SAML Login", "Custom Integrations", "Dedicated Support", "SLA Guarantee", "Audit Logs", "Custom Agent Training"].map(f => (
+                  <li key={f} className="flex items-center gap-3 text-[14px] font-sans text-foreground">
+                    <span className="material-symbols-outlined text-primary text-[18px]">check_circle</span>{f}
+                  </li>
+                ))}
+              </ul>
+              <a href="mailto:enterprise@chronix.os">
+                <motion.div whileHover={{ scale: 1.03 }} className="w-full py-4 rounded-xl border border-outline text-center font-sans font-bold text-[14px] uppercase tracking-widest text-foreground hover:bg-surface transition-all cursor-pointer">
+                  Contact Sales
+                </motion.div>
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </section>
       
       {/* FINAL CTA SECTION */}
       <section className="py-[120px] bg-surface-variant relative overflow-hidden border-t border-outline">
