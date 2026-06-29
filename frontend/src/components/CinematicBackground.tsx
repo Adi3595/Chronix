@@ -15,7 +15,7 @@ export function CinematicBackground() {
       {/* Animated SVG Glowing Paths */}
       <motion.svg 
         style={{ y }}
-        className="absolute w-[150vw] h-[150vh] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 mix-blend-screen"
+        className="absolute w-[150vw] h-[150vh] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-70 mix-blend-multiply dark:mix-blend-screen"
         viewBox="0 0 1000 1000"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMid slice"
@@ -26,9 +26,9 @@ export function CinematicBackground() {
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
           <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgba(46, 125, 50, 0)" />
-            <stop offset="50%" stopColor="#A7D7A9" />
-            <stop offset="100%" stopColor="rgba(46, 125, 50, 0)" />
+            <stop offset="0%" stopColor="transparent" />
+            <stop offset="50%" stopColor="var(--color-primary)" />
+            <stop offset="100%" stopColor="transparent" />
           </linearGradient>
         </defs>
 
@@ -78,7 +78,7 @@ export function CinematicBackground() {
               height: Math.random() * 4 + 2 + "px",
               left: Math.random() * 100 + "%",
               top: Math.random() * 100 + "%",
-              boxShadow: "0 0 15px 3px rgba(46, 125, 50, 0.8)",
+              boxShadow: "0 0 15px 3px var(--color-primary)",
             }}
             animate={{
               y: [0, -150, 0],

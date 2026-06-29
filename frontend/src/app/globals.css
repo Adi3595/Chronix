@@ -2,40 +2,40 @@
 
 @theme {
   /* Ultra-Premium Cinematic Palette */
-  --color-background: #050807; /* Cinematic Black-Green Base */
-  --color-foreground: #F4F5EF; /* Text Primary */
-  --color-on-background: #F4F5EF; 
+  --color-background: var(--color-background); 
+  --color-foreground: var(--color-foreground); 
+  --color-on-background: var(--color-on-background); 
   
-  --color-surface: #0B0F0D; /* Main Surface */
-  --color-on-surface: #F4F5EF; 
+  --color-surface: var(--color-surface); 
+  --color-on-surface: var(--color-on-surface); 
   
-  --color-surface-variant: rgba(255, 255, 255, 0.05); /* Cards Glassmorphism */
-  --color-on-surface-variant: rgba(244, 245, 239, 0.72); /* Text Secondary */
+  --color-surface-variant: var(--color-surface-variant); 
+  --color-on-surface-variant: var(--color-on-surface-variant); 
   
-  --color-muted: rgba(255, 255, 255, 0.03); 
-  --color-muted-foreground: rgba(244, 245, 239, 0.72); 
+  --color-muted: var(--color-muted); 
+  --color-muted-foreground: var(--color-muted-foreground); 
   
-  --color-surface-container-lowest: #020403; 
-  --color-surface-container-low: #050807; 
-  --color-surface-container: #0B0F0D; 
-  --color-surface-container-high: rgba(255, 255, 255, 0.05); 
-  --color-surface-container-highest: rgba(255, 255, 255, 0.08); 
+  --color-surface-container-lowest: var(--color-surface-container-lowest); 
+  --color-surface-container-low: var(--color-surface-container-low); 
+  --color-surface-container: var(--color-surface-container); 
+  --color-surface-container-high: var(--color-surface-container-high); 
+  --color-surface-container-highest: var(--color-surface-container-highest); 
   
-  --color-primary: #2E7D32; /* Primary Accent */
-  --color-on-primary: #F4F5EF; 
-  --color-primary-container: rgba(46, 125, 50, 0.2); 
-  --color-on-primary-container: #A7D7A9; 
+  --color-primary: var(--color-primary); 
+  --color-on-primary: var(--color-on-primary); 
+  --color-primary-container: var(--color-primary-container); 
+  --color-on-primary-container: var(--color-on-primary-container); 
   
-  --color-secondary: #A7D7A9; /* Secondary Accent */
-  --color-on-secondary: #050807; 
-  --color-secondary-container: rgba(167, 215, 169, 0.1); 
-  --color-on-secondary-container: #F4F5EF; 
+  --color-secondary: var(--color-secondary); 
+  --color-on-secondary: var(--color-on-secondary); 
+  --color-secondary-container: var(--color-secondary-container); 
+  --color-on-secondary-container: var(--color-on-secondary-container); 
   
-  --color-error: #FF6B4A; /* Danger */
-  --color-warning: #D97706; /* Warning */
+  --color-error: var(--color-error); 
+  --color-warning: var(--color-warning); 
   
-  --color-outline: rgba(255, 255, 255, 0.08); /* Borders */
-  --color-outline-variant: rgba(255, 255, 255, 0.04);
+  --color-outline: var(--color-outline); 
+  --color-outline-variant: var(--color-outline-variant);
 
   --font-sans: var(--font-inter), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
@@ -58,11 +58,45 @@
 }
 
 :root {
-  --background: var(--color-background);
-  --foreground: var(--color-on-background);
+  /* LIGHT MODE: Matcha Lime & Forest Brew */
+  --color-background: #E6D4A6; /* Bamboo Beige */
+  --color-foreground: #1D2E1B; /* Forest Brew */
+  --color-on-background: #1D2E1B;
+  
+  --color-surface: #F4E8CB; /* Slightly lighter beige for surface */
+  --color-on-surface: #1D2E1B;
+  
+  --color-surface-variant: rgba(29, 46, 27, 0.08);
+  --color-on-surface-variant: rgba(29, 46, 27, 0.72);
+  
+  --color-muted: rgba(29, 46, 27, 0.05);
+  --color-muted-foreground: rgba(29, 46, 27, 0.72);
+  
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #F9F1DF;
+  --color-surface-container: #E6D4A6;
+  --color-surface-container-high: rgba(29, 46, 27, 0.08);
+  --color-surface-container-highest: rgba(29, 46, 27, 0.12);
+  
+  --color-primary: #A9C632; /* Matcha Lime */
+  --color-on-primary: #1D2E1B;
+  --color-primary-container: rgba(169, 198, 50, 0.25);
+  --color-on-primary-container: #1D2E1B;
+  
+  --color-secondary: #C8D2A6; /* Tea Mist */
+  --color-on-secondary: #1D2E1B;
+  --color-secondary-container: rgba(200, 210, 166, 0.25);
+  --color-on-secondary-container: #1D2E1B;
+  
+  --color-error: #D32F2F; 
+  --color-warning: #F57C00;
+  
+  --color-outline: rgba(29, 46, 27, 0.2);
+  --color-outline-variant: rgba(29, 46, 27, 0.1);
 }
 
-:root.dark {
+.dark {
+  /* DARK MODE: Cinematic Black-Green */
   --color-background: #050807;
   --color-foreground: #F4F5EF;
   --color-on-background: #F4F5EF;

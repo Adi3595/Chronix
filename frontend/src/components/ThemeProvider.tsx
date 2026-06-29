@@ -33,7 +33,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const applyThemeClass = (t: Theme) => {
     const root = document.documentElement;
     root.classList.remove("dark");
-    root.style.colorScheme = "light";
+    
+    if (t === "dark") {
+      root.classList.add("dark");
+      root.style.colorScheme = "dark";
+    } else if (t === "light") {
+      root.style.colorScheme = "light";
+    } else {
+      // auto
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        root.classList.add("dark");
+        root.style.colorScheme = "dark";
+      } else {
+        root.style.colorScheme = "light";
+      }
+    }
   };
 
   const setTheme = (newTheme: Theme) => {

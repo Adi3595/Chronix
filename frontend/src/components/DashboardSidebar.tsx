@@ -5,9 +5,11 @@ import React, { useState } from "react";
 import SidebarNav from "@/components/SidebarNav";
 import LogoutButton from "@/components/LogoutButton";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "@/components/ThemeProvider";
 
 export default function DashboardSidebar({ resolvedPlan }: { resolvedPlan: string }) {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   const SidebarContent = (
     <>
@@ -67,6 +69,19 @@ export default function DashboardSidebar({ resolvedPlan }: { resolvedPlan: strin
               <span className="material-symbols-outlined text-[16px]">help_outline</span>
               Help
             </Link>
+          </li>
+          <li>
+            <button
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="w-full flex items-center justify-between px-4 py-3 text-muted-foreground font-mono text-[12px] uppercase tracking-widest hover:bg-surface hover:text-primary transition-colors border border-transparent hover:border-outline-variant rounded-xl"
+            >
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-[16px]">
+                  {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+                </span>
+                {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+              </div>
+            </button>
           </li>
           <li>
             <LogoutButton />
