@@ -9,7 +9,7 @@ export default function TermsPage() {
       <nav className="fixed top-0 w-full z-50 bg-background transition-all duration-200 border-b border-outline-variant">
         <div className="flex justify-between items-center px-4 md:px-[40px] py-4 max-w-[1440px] mx-auto">
           <Link href="/" className="font-sans font-black text-[20px] uppercase text-foreground tracking-tighter flex items-center gap-3">
-            <img src="/icon.svg" alt="Logo" className="w-6 h-6 brightness-0 invert" />
+            <img src="/icon.svg" alt="Logo" className="w-6 h-6 object-contain mix-blend-multiply opacity-90 dark:mix-blend-screen dark:opacity-100 dark:[filter:invert(1)_hue-rotate(180deg)]" />
             Chronix OS
           </Link>
           <div className="flex items-center gap-6">

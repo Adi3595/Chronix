@@ -22,7 +22,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="flex flex-col items-center gap-6"
         >
-          <img src="/icon.svg" alt="Chronix OS Loading" className="w-48 h-48 drop-shadow-2xl" />
+          <img src="/icon.svg" alt="Chronix OS Loading" className="w-48 h-48 drop-shadow-2xl mix-blend-multiply opacity-90 dark:mix-blend-screen dark:opacity-100 dark:[filter:invert(1)_hue-rotate(180deg)]" />
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
