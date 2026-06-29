@@ -1,11 +1,20 @@
+# Chronix OS — Node.js Dependencies
 
-fastapi
-uvicorn
-firebase-admin
-google-generativeai
-python-dotenv
-pydantic
-langchain
-langgraph
-requests
-python-multipart
+# This is a Next.js project. All dependencies are managed via npm.
+# Run `npm install` inside the `frontend/` directory.
+
+# Core Node packages used:
+# next@16                         - App framework
+# react, react-dom               - UI library
+# typescript                     - Type safety
+# @prisma/client, prisma         - ORM + PostgreSQL
+# @slack/web-api                 - Slack Bot + OAuth
+# @google/genai                  - Gemini AI SDK
+# @notionhq/client               - Notion API
+# @pinecone-database/pinecone    - Vector DB
+# firebase                       - Authentication
+# framer-motion                  - Animations
+# tailwindcss                    - Styling
+
+# To install, run:
+# cd frontend && npm install
