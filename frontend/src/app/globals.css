@@ -58,41 +58,41 @@
 }
 
 :root {
-  /* LIGHT MODE: Matcha Lime & Forest Brew */
+  /* LIGHT MODE: Original Botanical (Commit 5c3b37f0) */
   --sys-background: #E6D4A6; /* Bamboo Beige */
   --sys-foreground: #1D2E1B; /* Forest Brew */
-  --sys-on-background: #1D2E1B;
+  --sys-on-background: #1D2E1B; /* Forest Brew */
   
-  --sys-surface: #F4E8CB; /* Slightly lighter beige for surface */
-  --sys-on-surface: #1D2E1B;
+  --sys-surface: #C8D2A6; /* Tea Mist */
+  --sys-on-surface: #1D2E1B; /* Forest Brew */
   
-  --sys-surface-variant: rgba(29, 46, 27, 0.08);
-  --sys-on-surface-variant: rgba(29, 46, 27, 0.72);
+  --sys-surface-variant: #A9C632; /* Matcha Lime */
+  --sys-on-surface-variant: #1D2E1B; /* Forest Brew */
   
-  --sys-muted: rgba(29, 46, 27, 0.05);
-  --sys-muted-foreground: rgba(29, 46, 27, 0.72);
+  --sys-muted: #C8D2A6; /* Tea Mist */
+  --sys-muted-foreground: #1D2E1B; /* Forest Brew */
   
-  --sys-surface-container-lowest: #FFFFFF;
-  --sys-surface-container-low: #F9F1DF;
-  --sys-surface-container: #E6D4A6;
-  --sys-surface-container-high: rgba(29, 46, 27, 0.08);
-  --sys-surface-container-highest: rgba(29, 46, 27, 0.12);
+  --sys-surface-container-lowest: #E6D4A6; /* Bamboo Beige (Base) */
+  --sys-surface-container-low: #C8D2A6; /* Tea Mist (Cards) */
+  --sys-surface-container: #C8D2A6; /* Tea Mist */
+  --sys-surface-container-high: #A9C632; /* Matcha Lime */
+  --sys-surface-container-highest: #1D2E1B; /* Forest Brew */
   
-  --sys-primary: #A9C632; /* Matcha Lime */
-  --sys-on-primary: #1D2E1B;
-  --sys-primary-container: rgba(169, 198, 50, 0.25);
-  --sys-on-primary-container: #1D2E1B;
+  --sys-primary: #1D2E1B; /* Forest Brew */
+  --sys-on-primary: #A9C632; /* Matcha Lime */
+  --sys-primary-container: #A9C632; /* Matcha Lime */
+  --sys-on-primary-container: #1D2E1B; /* Forest Brew */
   
   --sys-secondary: #C8D2A6; /* Tea Mist */
-  --sys-on-secondary: #1D2E1B;
-  --sys-secondary-container: rgba(200, 210, 166, 0.25);
-  --sys-on-secondary-container: #1D2E1B;
+  --sys-on-secondary: #1D2E1B; /* Forest Brew */
+  --sys-secondary-container: #E6D4A6; /* Bamboo Beige */
+  --sys-on-secondary-container: #1D2E1B; /* Forest Brew */
   
-  --sys-error: #D32F2F; 
+  --sys-error: #ba1a1a; 
   --sys-warning: #F57C00;
   
-  --sys-outline: rgba(29, 46, 27, 0.2);
-  --sys-outline-variant: rgba(29, 46, 27, 0.1);
+  --sys-outline: #1D2E1B; /* Forest Brew */
+  --sys-outline-variant: #C8D2A6; /* Tea Mist */
 
   /* Next.js Body Background variables */
   --background: var(--sys-background);
