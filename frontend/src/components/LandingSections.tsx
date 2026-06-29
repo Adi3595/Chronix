@@ -66,7 +66,9 @@ export function AgentEcosystemSection() {
             { name: "Sentinel", role: "Risk Intelligence", desc: "Detects burnout and deadline failures proactively." },
             { name: "Pulse", role: "Performance Monitor", desc: "Tracks momentum, velocity, and execution consistency." },
             { name: "Rescue", role: "Emergency Execution", desc: "Generates recovery sprints when things go wrong." },
-            { name: "Echo", role: "Reflection & Insights", desc: "Provides analytical weekly growth reports." }
+            { name: "Echo", role: "Knowledge Retrieval", desc: "Deep searches your second brain to surface insights." },
+            { name: "Nova", role: "Communications Filter", desc: "Summarizes Slack channels and blocks distractions." },
+            { name: "Aura", role: "Energy Analytics", desc: "Reads biometric data to recommend optimal rest cycles." }
           ].map((agent, i) => (
             <motion.div 
               key={i}

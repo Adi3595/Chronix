@@ -38,8 +38,9 @@ export async function summarizeCommunications(userId: string, targetChannelId?: 
             logMessage = response.text || "Analyzed Slack API. Generated executive summary.";
           }
         }
-      } catch (slackErr) {
-        console.error("Slack API error, falling back to simulation.", slackErr);
+      } catch (slackErr: any) {
+        console.error("Slack API error:", slackErr);
+        logMessage = `Nova Slack Error: ${slackErr.message || "Failed to fetch messages. Check if bot is in channel."}`;
       }
     }
 

@@ -26,6 +26,8 @@ export default function SidebarNav({ onClick }: { onClick?: () => void }) {
     { icon: "emergency", label: "Rescue Center", href: "/dashboard/rescue-center", feature: "rescueCenter" },
     { icon: "insights", label: "Analytics", href: "/dashboard/analytics", feature: "analytics" },
     { icon: "smart_toy", label: "Agent Hub", href: "/dashboard/agent-hub", feature: "agentHub" },
+    { icon: "search_insights", label: "Echo", href: "/dashboard/echo", feature: "agentHub" },
+    { icon: "forum", label: "Nova", href: "/dashboard/nova", feature: "agentHub" },
     { icon: "settings", label: "Settings", href: "/dashboard/settings" },
   ];
 

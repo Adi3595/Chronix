@@ -5,8 +5,8 @@ import { formatDistanceToNow } from "date-fns";
 import { useState, useEffect } from "react";
 
 export default function AgentHubClient({ agentActions }: { agentActions: any[] }) {
-  const [echoResponse, setEchoResponse] = useState<string | null>(null);
-  const [novaResponse, setNovaResponse] = useState<string | null>(null);
+  const [echoHistory, setEchoHistory] = useState<{query: string, response: string}[]>([]);
+  const [novaHistory, setNovaHistory] = useState<{command: string, response: string}[]>([]);
   
   const [savedPageId, setSavedPageId] = useState("");
   const [savedChannelId, setSavedChannelId] = useState("");
@@ -64,48 +64,12 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
               </div>
               <div className="space-y-4 relative z-10 flex-1 flex flex-col justify-between">
                 <div>
-                  <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Query Second Brain</span>
-                  <form
-                    onSubmit={async (e) => {
-                      e.preventDefault();
-                      const queryInput = e.currentTarget.elements.namedItem('query') as HTMLInputElement;
-                      const pageInput = e.currentTarget.elements.namedItem('pageId') as HTMLInputElement;
-                      const query = queryInput.value;
-
-                      if (!query && !pageInput.value) return;
-
-                      // Save to localStorage
-                      if (pageInput.value) {
-                        localStorage.setItem("chronix-page-id", pageInput.value);
-                        setSavedPageId(pageInput.value);
-                      }
-                      
-                      queryInput.disabled = true;
-                      pageInput.disabled = true;
-                      setEchoResponse("Accessing Neural Link...");
-
-                      const { searchSecondBrain } = await import("@/app/actions/echo-actions");
-                      const res = await searchSecondBrain("demo-user-123", query, pageInput.value || undefined);
-                      setEchoResponse(res.response || "No response found.");
-
-                      queryInput.value = "";
-                      queryInput.disabled = false;
-                      pageInput.disabled = false;
-                    }}
-                    className="flex flex-col gap-2"
-                  >
-                    <div className="flex gap-2">
-                      <input name="pageId" type="text" value={savedPageId} onChange={(e) => setSavedPageId(e.target.value)} placeholder="Page ID (Optional)" className="w-1/3 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[13px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
-                      <input name="query" type="text" placeholder="Access Neural Link..." className="flex-1 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
-                    </div>
-                    <button type="submit" className="w-full bg-primary text-background px-6 py-3 rounded-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Search</button>
-                  </form>
+                  <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Current Mission</span>
+                  <p className="font-sans font-bold text-[16px] uppercase text-muted-foreground">Awaiting Query</p>
                 </div>
-                {echoResponse && (
-                  <div className="mt-4 p-4 bg-background/50 border border-primary/20 rounded-lg text-[13px] font-mono text-primary/90 leading-relaxed shadow-[0_0_15px_rgba(46,125,50,0.1)]">
-                    <span className="text-primary font-bold">Echo:</span> {echoResponse}
-                  </div>
-                )}
+                <a href="/dashboard/echo" className="w-full bg-primary text-background px-6 py-3 rounded-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)] block text-center mt-4">
+                  Launch Neural Link
+                </a>
               </div>
             </motion.div>
 
@@ -226,48 +190,11 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                   <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Current Mission</span>
                   <p className="font-sans font-bold text-[16px] uppercase text-muted-foreground">Awaiting Slack Channel</p>
                 </div>
-                <form
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    const cmdInput = e.currentTarget.elements.namedItem('command') as HTMLInputElement;
-                    const channelInput = e.currentTarget.elements.namedItem('channelId') as HTMLInputElement;
-                    if (!cmdInput.value && !channelInput.value) return;
-
-                    // Save to localStorage
-                    if (channelInput.value) {
-                      localStorage.setItem("chronix-channel-id", channelInput.value);
-                      setSavedChannelId(channelInput.value);
-                    }
-                    
-                    cmdInput.disabled = true;
-                    channelInput.disabled = true;
-                    setNovaResponse("Summarizing...");
-
-                    const { summarizeCommunications } = await import("@/app/actions/nova-actions");
-                    const res = await summarizeCommunications("demo-user-123", channelInput.value || undefined);
-                    setNovaResponse(res.message || "Failed to get summary");
-
-                    cmdInput.value = "";
-                    cmdInput.disabled = false;
-                    channelInput.disabled = false;
-                  }}
-                  className="flex flex-col gap-2"
-                >
-                  <div className="flex gap-2">
-                    <input name="channelId" type="text" value={savedChannelId} onChange={(e) => setSavedChannelId(e.target.value)} placeholder="Channel ID (Optional)" className="w-1/3 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[13px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
-                    <input name="command" type="text" placeholder="Command Nova..." className="flex-1 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
-                  </div>
-                  <button type="submit" className="w-full bg-primary text-background px-6 py-3 rounded-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Send Command</button>
-                </form>
-                {novaResponse && (
-                  <div className="mt-4 p-4 bg-background/50 border border-primary/20 rounded-lg text-[13px] font-mono text-primary/90 leading-relaxed shadow-[0_0_15px_rgba(46,125,50,0.1)]">
-                    <span className="text-primary font-bold">Nova:</span> {novaResponse}
-                  </div>
-                )}
+                <a href="/dashboard/nova" className="w-full bg-primary text-background px-6 py-3 rounded-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)] block text-center mt-4">
+                  Open Comms Terminal
+                </a>
               </div>
             </motion.div>
-
-
 
             {/* Agent: Aura */}
             <motion.div variants={itemVariants} className="bg-surface/40 backdrop-blur-xl p-8 flex flex-col group transition-all duration-300 relative border border-outline rounded-3xl hover:border-primary/40 shadow-none hover:shadow-[0_10px_40px_rgba(46,125,50,0.15)]">
