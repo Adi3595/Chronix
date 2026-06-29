@@ -2,11 +2,19 @@
 
 import { motion } from "framer-motion";
 import { formatDistanceToNow } from "date-fns";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AgentHubClient({ agentActions }: { agentActions: any[] }) {
   const [echoResponse, setEchoResponse] = useState<string | null>(null);
   const [novaResponse, setNovaResponse] = useState<string | null>(null);
+  
+  const [savedPageId, setSavedPageId] = useState("");
+  const [savedChannelId, setSavedChannelId] = useState("");
+
+  useEffect(() => {
+    setSavedPageId(localStorage.getItem("chronix-page-id") || "");
+    setSavedChannelId(localStorage.getItem("chronix-channel-id") || "");
+  }, []);
   const containerVariants = {
     hidden: { opacity: 0 },
     show: {
@@ -63,17 +71,23 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                       const queryInput = e.currentTarget.elements.namedItem('query') as HTMLInputElement;
                       const pageInput = e.currentTarget.elements.namedItem('pageId') as HTMLInputElement;
                       const query = queryInput.value;
-                      
+
                       if (!query && !pageInput.value) return;
+
+                      // Save to localStorage
+                      if (pageInput.value) {
+                        localStorage.setItem("chronix-page-id", pageInput.value);
+                        setSavedPageId(pageInput.value);
+                      }
                       
                       queryInput.disabled = true;
                       pageInput.disabled = true;
                       setEchoResponse("Accessing Neural Link...");
-                      
+
                       const { searchSecondBrain } = await import("@/app/actions/echo-actions");
                       const res = await searchSecondBrain("demo-user-123", query, pageInput.value || undefined);
                       setEchoResponse(res.response || "No response found.");
-                      
+
                       queryInput.value = "";
                       queryInput.disabled = false;
                       pageInput.disabled = false;
@@ -81,7 +95,7 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                     className="flex flex-col gap-2"
                   >
                     <div className="flex gap-2">
-                      <input name="pageId" type="text" placeholder="Page ID (Optional)" className="w-1/3 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[13px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
+                      <input name="pageId" type="text" value={savedPageId} onChange={(e) => setSavedPageId(e.target.value)} placeholder="Page ID (Optional)" className="w-1/3 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[13px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
                       <input name="query" type="text" placeholder="Access Neural Link..." className="flex-1 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
                     </div>
                     <button type="submit" className="w-full bg-primary text-background px-6 py-3 rounded-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Search</button>
@@ -212,21 +226,27 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                   <span className="font-sans text-[12px] uppercase tracking-widest text-muted-foreground border-b border-outline-variant/30 pb-2 mb-2 block">Current Mission</span>
                   <p className="font-sans font-bold text-[16px] uppercase text-muted-foreground">Awaiting Slack Channel</p>
                 </div>
-                <form 
+                <form
                   onSubmit={async (e) => {
                     e.preventDefault();
                     const cmdInput = e.currentTarget.elements.namedItem('command') as HTMLInputElement;
                     const channelInput = e.currentTarget.elements.namedItem('channelId') as HTMLInputElement;
-                    if(!cmdInput.value && !channelInput.value) return;
+                    if (!cmdInput.value && !channelInput.value) return;
+
+                    // Save to localStorage
+                    if (channelInput.value) {
+                      localStorage.setItem("chronix-channel-id", channelInput.value);
+                      setSavedChannelId(channelInput.value);
+                    }
                     
                     cmdInput.disabled = true;
                     channelInput.disabled = true;
                     setNovaResponse("Summarizing...");
-                    
+
                     const { summarizeCommunications } = await import("@/app/actions/nova-actions");
                     const res = await summarizeCommunications("demo-user-123", channelInput.value || undefined);
                     setNovaResponse(res.message || "Failed to get summary");
-                    
+
                     cmdInput.value = "";
                     cmdInput.disabled = false;
                     channelInput.disabled = false;
@@ -234,7 +254,7 @@ export default function AgentHubClient({ agentActions }: { agentActions: any[] }
                   className="flex flex-col gap-2"
                 >
                   <div className="flex gap-2">
-                    <input name="channelId" type="text" placeholder="Channel ID (Optional)" className="w-1/3 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[13px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
+                    <input name="channelId" type="text" value={savedChannelId} onChange={(e) => setSavedChannelId(e.target.value)} placeholder="Channel ID (Optional)" className="w-1/3 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[13px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
                     <input name="command" type="text" placeholder="Command Nova..." className="flex-1 bg-surface-variant border border-outline rounded-xl px-4 py-3 text-[14px] font-sans text-foreground focus:outline-none focus:border-primary/50 transition-colors" />
                   </div>
                   <button type="submit" className="w-full bg-primary text-background px-6 py-3 rounded-xl font-sans text-[13px] font-bold uppercase tracking-widest hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(46,125,50,0.4)]">Send Command</button>
